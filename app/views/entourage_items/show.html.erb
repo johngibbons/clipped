@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag @entourage_item.image.url %>
+
+<p>
+  <strong>Tags:</strong>
+  <%= @entourage_item.tags %>
+</p>
+
+<%= link_to 'Edit', edit_entourage_item_path(@entourage_item) %> |
+<%= link_to 'Back', entourage_items_path %>

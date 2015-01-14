@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Entourage Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Tags</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @entourage_items.each do |entourage_item| %>
+      <tr>
+        <td><%= image_tag entourage_item.url(:thumb) %></td>
+        <td><%= entourage_item.tags %></td>
+        <td><%= link_to 'Show', entourage_item %></td>
+        <td><%= link_to 'Edit', edit_entourage_item_path(entourage_item) %></td>
+        <td><%= link_to 'Destroy', entourage_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Entourage item', new_entourage_item_path %>
