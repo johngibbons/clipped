@@ -69,6 +69,6 @@ class EntourageItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entourage_item_params
-      params.require(:entourage_item).permit(:image, :tag_list)
+      params.require(:entourage_item).permit(:image, :tag_list, :perspective)
     end
 end

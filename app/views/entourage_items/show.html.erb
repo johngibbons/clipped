@@ -4,7 +4,12 @@
 
 <p>
   <strong>Tags:</strong>
-  <%= @entourage_item.tags %>
+  <%= @entourage_item.tag_list %>
+</p>
+
+<p>
+  <strong>Perspective:</strong>
+  <%= @entourage_item.perspective %>
 </p>
 
 <%= link_to 'Edit', edit_entourage_item_path(@entourage_item) %> |
