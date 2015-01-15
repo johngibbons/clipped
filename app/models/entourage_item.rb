@@ -2,6 +2,8 @@ class EntourageItem < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :tags
 
+  is_impressionable
+
   has_attached_file :image,
     :styles => {:thumb => "120x120",
     :small => "240x240",
@@ -13,6 +15,7 @@ class EntourageItem < ActiveRecord::Base
       :secret_access_key => ENV['s3_secret_key']
     },
     :path => "/:style/:filename"
+
   validates_attachment :image, :presence => true,
   :content_type => { :content_type => /\Aimage/ },
   :size => { :less_than => 64.megabytes }

@@ -1,5 +1,6 @@
 class EntourageItemsController < ApplicationController
   before_action :set_entourage_item, only: [:show, :edit, :update, :destroy]
+  impressionist actions: [:show]
 
   # GET /entourage_items
   # GET /entourage_items.json
@@ -10,6 +11,7 @@ class EntourageItemsController < ApplicationController
   # GET /entourage_items/1
   # GET /entourage_items/1.json
   def show
+
   end
 
   # GET /entourage_items/new
@@ -69,6 +71,6 @@ class EntourageItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entourage_item_params
-      params.require(:entourage_item).permit(:image, :tag_list, :perspective)
+      params.require(:entourage_item).permit(:image, :tag_list, :perspective, :views, :downloads)
     end
 end

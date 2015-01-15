@@ -15,7 +15,7 @@
     <% @entourage_items.each do |entourage_item| %>
       <tr>
         <td><%= image_tag entourage_item.image.url(:thumb) %></td>
-        <td><%= entourage_item.tags %></td>
+        <td><%= entourage_item.tag_list %></td>
         <td><%= link_to 'Show', entourage_item %></td>
         <td><%= link_to 'Edit', edit_entourage_item_path(entourage_item) %></td>
         <td><%= link_to 'Destroy', entourage_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
