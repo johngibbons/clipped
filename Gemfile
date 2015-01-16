@@ -32,6 +32,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'normalize-rails'
+
+gem 'bourbon'
+
+gem 'neat'
+
+gem 'refills'
+
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 gem 'aws-sdk', '~> 1.5.7'

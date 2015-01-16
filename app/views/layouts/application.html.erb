@@ -4,6 +4,8 @@
   <title>Entourageapp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag("//use.typekit.com/fut5bbc.js") %>
+  <%= javascript_tag("try{Typekit.load()}catch(e){}") %>
   <%= csrf_meta_tags %>
 </head>
 <body>
