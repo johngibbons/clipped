@@ -2,28 +2,10 @@
 
 <h1>Listing Entourage Items</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Tags</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @entourage_items.each do |entourage_item| %>
-      <tr>
-        <td><%= image_tag entourage_item.image.url(:thumb) %></td>
-        <td><%= entourage_item.tag_list %></td>
-        <td><%= link_to 'Show', entourage_item %></td>
-        <td><%= link_to 'Edit', edit_entourage_item_path(entourage_item) %></td>
-        <td><%= link_to 'Destroy', entourage_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<ul>
+  <% @entourage_items.each do |entourage_item| %>
+      <%= render entourage_item %>
+  <% end %>
+</ul>
 
 <%= link_to 'New Entourage item', new_entourage_item_path %>
