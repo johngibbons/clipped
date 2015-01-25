@@ -11,7 +11,6 @@ class EntourageItemsController < ApplicationController
   # GET /entourage_items/1
   # GET /entourage_items/1.json
   def show
-
   end
 
   # GET /entourage_items/new
