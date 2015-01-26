@@ -42,7 +42,7 @@ gem 'refills'
 
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
-gem 'aws-sdk', '~> 1.5.7'
+gem 'aws-sdk'
 
 gem 'figaro'
 
