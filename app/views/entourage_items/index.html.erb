@@ -1,12 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Entourage Items</h1>
-
-<ul>
+<div class="grid-items">
   <% @entourage_items.each do |entourage_item| %>
       <%= render entourage_item %>
   <% end %>
-</ul>
+</div>
 
 <div>
 <%= link_to 'New Entourage item', new_entourage_item_path %>
