@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag @entourage_item.image.url %>
 
+<div class="item-image">
+	<%= image_tag @entourage_item.image.url %>
+</div>
+
+<div class="item-info">
 <p>
   <strong>Tags:</strong>
   <%= @entourage_item.tag_list %>
@@ -13,10 +17,16 @@
 </p>
 
 <p>
-  <strong>Views:</strong>
-  <%= "#{@entourage_item.impressionist_count} views so far!" %>
-</p>
 
+  
+  <div class="stats">
+  <ul>
+    <li><%= "#{@entourage_item.impressionist_count}" %><span>Views</span></li>
+    <li>298<span>Downloads</span></li>
+  </ul>
+</div>
+</p>
 
 <%= link_to 'Edit', edit_entourage_item_path(@entourage_item) %> |
 <%= link_to 'Back', entourage_items_path %>
+</div>

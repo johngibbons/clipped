@@ -2,8 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// li.block {
-//   @include span-columns(3);
-//   @include omega(4n);
-//   margin-bottom: $gutter;
-// }
+.item-image {
+	@include span-columns(8);
+}
+
+.item-info {
+	@include span-columns(4);
+}
