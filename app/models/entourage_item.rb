@@ -9,11 +9,7 @@ class EntourageItem < ActiveRecord::Base
     :small => "240x240",
     :large => "640x480"},
     :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['s3_bucket'],
-      :access_key_id => ENV['s3_access_id'],
-      :secret_access_key => ENV['s3_secret_key']
-    },
+    :s3_credentials => S3_CREDENTIALS,
     :path => "/:style/:filename"
 
   validates_attachment :image, :presence => true,
