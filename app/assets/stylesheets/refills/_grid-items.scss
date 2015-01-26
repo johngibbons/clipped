@@ -17,11 +17,12 @@
   $grid-item-columns: 3;
   $grid-item-big-columns: 6;
   $grid-item-color: white;
-  $grid-item-height: auto;
+  $grid-item-height: 175px;
 
   @include clearfix;
     
   .grid-item {
+    position: relative;
     @include transition (all 0.2s ease-in-out);
     height: $grid-item-height;
     width: 100%;
@@ -47,10 +48,22 @@
   }
 
   .grid-item img {
+      position: absolute;
       display: block;
-      margin: auto;
-      width: 100%;
-    }
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      max-width: none;
+  }
+
+  .portrait {
+    width: 100%;
+  }
+
+  .landscape {
+    height: 100%;
+  }
 
   .grid-item h1 {
       color: $grid-item-color;
