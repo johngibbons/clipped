@@ -5,7 +5,7 @@ class EntourageItem < ActiveRecord::Base
   is_impressionable
 
   has_attached_file :image,
-    :styles => {:thumb => "120x120",
+    :styles => {:thumb => "350x250#",
     :small => "240x240",
     :large => "640x480"},
     :storage => :s3,
