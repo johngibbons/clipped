@@ -65,7 +65,7 @@ class EntourageItemsController < ApplicationController
 
   def download
     impressionist(@entourage_item, "download")
-    data = open(@entourage_item.image.url)
+    data = open(@entourage_item.image_file_name)
     send_data data.read, :type => data.content_type, :x_sendfile => true
   end
 
