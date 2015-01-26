@@ -1,6 +1,5 @@
 class EntourageItemsController < ApplicationController
-  before_action :set_entourage_item, only: [:show, :edit, :update, :destroy]
-  impressionist actions: [:show]
+  before_action :set_entourage_item, only: [:show, :edit, :update, :destroy, :download]
 
   # GET /entourage_items
   # GET /entourage_items.json
@@ -11,6 +10,7 @@ class EntourageItemsController < ApplicationController
   # GET /entourage_items/1
   # GET /entourage_items/1.json
   def show
+    impressionist(@entourage_item, "view")
   end
 
   # GET /entourage_items/new
@@ -60,6 +60,12 @@ class EntourageItemsController < ApplicationController
       format.html { redirect_to entourage_items_url, notice: 'Entourage item was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def download
+    impressionist(@entourage_item, "download")
+    data = open(@entourage_item.image.url)
+    send_data data.read, :type => data.content_type, :x_sendfile => true
   end
 
   private

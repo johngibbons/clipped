@@ -17,15 +17,15 @@
 </p>
 
 <p>
-
-  
   <div class="stats">
   <ul>
-    <li><%= "#{@entourage_item.impressionist_count}" %><span>Views</span></li>
-    <li>298<span>Downloads</span></li>
+    <li><%= @entourage_item.impressionist_count(:message=>"view") %><span>Views</span></li>
+    <li><%= @entourage_item.impressionist_count(:message=>"download", :filter=>:session_hash) %><span>Downloads</span></li>
   </ul>
 </div>
 </p>
+
+<%= link_to 'Download', download_entourage_item_path(@entourage_item), class: "btn btn-info" %>
 
 <%= link_to 'Edit', edit_entourage_item_path(@entourage_item) %> |
 <%= link_to 'Back', entourage_items_path %>

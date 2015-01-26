@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   get 'users/new'
 
+  #download images
+  resources :entourage_items do
+    member { get :download }
+  end
   get 'help'    => 'static_pages#help'
   get 'about'   => 'static_pages#about'
   get 'home'    => 'static_pages#home'
