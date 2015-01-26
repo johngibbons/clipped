@@ -1,4 +1,4 @@
-<%= form_for @entourage_item, :html => { :multipart => true } do |f| %>
+<%= form_for @entourage_item, :html => { class: "directUpload", :multipart => true } do |f| %>
   <% if @entourage_item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@entourage_item.errors.count, "error") %> prohibited this entourage_item from being saved:</h2>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
+    <%= f.label :image_file_name %><br>
+    <%= f.file_field :image_file_name %>
   </div>
   <div class="field">
     <%= f.label :tags %><br>

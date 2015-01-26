@@ -4,17 +4,17 @@ class EntourageItem < ActiveRecord::Base
 
   is_impressionable
 
-  has_attached_file :image,
-    :styles => {:thumb => "350x250#",
-    :small => "240x240",
-    :large => "640x480"},
-    :storage => :s3,
-    :s3_credentials => S3_CREDENTIALS,
-    :path => "/:style/:filename"
+  # has_attached_file :image,
+  #   :styles => {:thumb => "350x250#",
+  #   :small => "240x240",
+  #   :large => "640x480"},
+  #   :storage => :s3,
+  #   :s3_credentials => S3_CREDENTIALS,
+  #   :path => "/:style/:filename"
 
-  validates_attachment :image, :presence => true,
-  :content_type => { :content_type => /\Aimage/ },
-  :size => { :less_than => 64.megabytes }
+  # validates_attachment :image, :presence => true,
+  # :content_type => { :content_type => /\Aimage/ },
+  # :size => { :less_than => 64.megabytes }
 
   validates :tag_list, presence: true
 

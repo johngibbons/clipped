@@ -15,6 +15,7 @@ class EntourageItemsController < ApplicationController
 
   # GET /entourage_items/new
   def new
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201, acl: :public_read)
     @entourage_item = EntourageItem.new
   end
 
@@ -76,6 +77,6 @@ class EntourageItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entourage_item_params
-      params.require(:entourage_item).permit(:image, :tag_list, :perspective, :views, :downloads)
+      params.require(:entourage_item).permit(:image_file_name, :tag_list, :perspective, :views, :downloads)
     end
 end
