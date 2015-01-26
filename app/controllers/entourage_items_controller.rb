@@ -63,12 +63,6 @@ class EntourageItemsController < ApplicationController
     end
   end
 
-  def download
-    impressionist(@entourage_item, "download")
-    data = open(@entourage_item.image_file_name)
-    send_data data.read, :type => data.content_type, :x_sendfile => true
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_entourage_item

@@ -25,7 +25,7 @@
 </div>
 </p>
 
-<%= link_to 'Download', download_entourage_item_path(@entourage_item), class: "btn btn-info" %>
+<%= link_to 'Download', @entourage_item.image_file_name, class: "btn btn-info" %>
 
 <%= link_to 'Edit', edit_entourage_item_path(@entourage_item) %> |
 <%= link_to 'Back', entourage_items_path %>
