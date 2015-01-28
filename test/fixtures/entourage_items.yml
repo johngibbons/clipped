@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  image: 
-  tags: MyText
+  image_file_name: 
+  
 
 two:
-  image: 
-  tags: MyText
+  image_file_name: 
+  
