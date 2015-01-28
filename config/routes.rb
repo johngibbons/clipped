@@ -2,20 +2,20 @@ Rails.application.routes.draw do
   get 'users/new'
 
   #download images
-  resources :entourage_items do
+  resources :uploads do
     member { get :download }
   end
   get 'help'    => 'static_pages#help'
   get 'about'   => 'static_pages#about'
   get 'home'    => 'static_pages#home'
 
-  resources :entourage_items
+  resources :uploads
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'entourage_items#index'
+   root 'uploads#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

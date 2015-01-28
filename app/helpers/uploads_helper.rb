@@ -1,3 +1,3 @@
-module EntourageItemsHelper
+module UploadsHelper
   include ActsAsTaggableOn::TagsHelper
 end

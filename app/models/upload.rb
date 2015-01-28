@@ -1,4 +1,4 @@
-class EntourageItem < ActiveRecord::Base
+class Upload < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :tags
 

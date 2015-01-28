@@ -1,10 +1,10 @@
-<%= form_for @entourage_item, :html => { class: "directUpload", :multipart => true } do |f| %>
-  <% if @entourage_item.errors.any? %>
+<%= form_for @upload, :html => { class: "directUpload", :multipart => true } do |f| %>
+  <% if @upload.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@entourage_item.errors.count, "error") %> prohibited this entourage_item from being saved:</h2>
+      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h2>
 
       <ul>
-      <% @entourage_item.errors.full_messages.each do |message| %>
+      <% @upload.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :perspective %><br>
-    <%= f.select :perspective, options_for_select(EntourageItem.perspectives.map {|k, v| [k, k]}) %>
+    <%= f.select :perspective, options_for_select(Upload.perspectives.map {|k, v| [k, k]}) %>
   </div>
   <div class="actions">
     <%= f.submit %>

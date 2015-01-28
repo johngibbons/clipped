@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<div class="grid-items">
+  <% @uploads.each do |upload| %>
+      <%= render upload %>
+  <% end %>
+</div>
+
+<div>
+<%= link_to 'New Upload', new_upload_path %>
+</div>
