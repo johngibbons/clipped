@@ -33,24 +33,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'normalize-rails'
-
 gem 'bourbon'
-
 gem 'neat'
-
 gem 'refills'
-
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-
 gem 'aws-sdk'
-
 gem 'figaro'
-
 gem 'acts-as-taggable-on', '~> 3.4'
-
 gem 'impressionist'
-
 gem 'devise'
+gem 's3_direct_upload'
+gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -61,7 +56,7 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
+  
 end
 
 group :test do

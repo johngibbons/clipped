@@ -16,7 +16,8 @@
 /config/application.yml
 
 # Ignore S3 configuration info
-/config/s3.yml
+/config/aws.yml
 
 # Ignore Spring files.
 /spring/*.pid
+

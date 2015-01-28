@@ -23,21 +23,12 @@ class UploadsController < ApplicationController
   def edit
   end
 
-  # POST /uploads
-  # POST /uploads.json
+  # @http_method XHR POST
+  # @url /documents
   def create
-    @upload = Upload.new(upload_params)
-
-    respond_to do |format|
-      if @upload.save
-        format.html { redirect_to @upload, notice: 'Entourage item was successfully created.' }
-        format.json { render :show, status: :created, location: @upload }
-      else
-        format.html { render :new }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
-      end
-    end
+    @upload = current_user.uploads.create(params[:upload])
   end
+
 
   # PATCH/PUT /uploads/1
   # PATCH/PUT /uploads/1.json
@@ -71,6 +62,6 @@ class UploadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def upload_params
-      params.require(:upload).permit(:image_file_name, :tag_list, :perspective, :views, :downloads)
+      params.require(:upload).permit(:tag_list, :perspective, :views, :downloads, :direct_upload_url)
     end
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Entourageapp</title>
+  <title>Clipped</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag("//use.typekit.com/fut5bbc.js") %>
@@ -9,9 +9,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render 'refills/navigation' %>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
-<%= render 'refills/navigation' %>
 <div class="main-container">
 <%= yield %>
 </div>
