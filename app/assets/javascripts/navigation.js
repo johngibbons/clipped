@@ -1,6 +1,13 @@
-$(document).ready(function(){
-  $('.js-menu-trigger,.js-menu-screen').on('click touchstart',function (e) {
-    $('.js-menu,.js-menu-screen').toggleClass('is-visible');
+$(document).ready(function() {
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+
+  menuToggle.on('click', function(e) {
     e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
   });
 });

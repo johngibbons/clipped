@@ -1,13 +1,48 @@
-<button type="button" class="js-menu-trigger sliding-menu-button">
-  <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/menu-white.png" alt="Menu Icon">
-</button>
-
-<nav class="js-menu sliding-menu-content">
-  <ul>
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "About", about_path %></li>
-    <li><%= link_to "Help", help_path %></li>
-  </ul>
-</nav>
+<header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="javascript:void(0)" class="logo">
+	    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">
+	  </a>
+		<a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+		<nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+		    <li class="nav-link"><%= link_to "Home", root_path %></li>
+		    <li class="nav-link"><%= link_to "About", about_path %></li>
+		    <li class="nav-link"><%= link_to "Help", help_path %></li>
+		    <li class="nav-link more"><a href="javascript:void(0)">More</a>
+          <ul class="submenu">
+            <li><a href="javascript:void(0)">Submenu Item</a></li>
+            <li><a href="javascript:void(0)">Another Item</a></li>
+            <li class="more"><a href="javascript:void(0)">Item with submenu</a>
+              <ul class="submenu">
+                <li><a href="javascript:void(0)">Sub-submenu Item</a></li>
+                <li><a href="javascript:void(0)">Another Item</a></li>
+              </ul>
+            </li>
+            <li class="more"><a href="javascript:void(0)">Another submenu</a>
+              <ul class="submenu">
+                <li><a href="javascript:void(0)">Sub-submenu</a></li>
+                <li><a href="javascript:void(0)">An Item</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+		  </ul>
+		</nav>
+		<div class="navigation-tools">
+      <div class="search-bar">
+        <form role="search">
+          <input type="search" placeholder="Enter Search" />
+          <button type="submit">
+            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+          </button>
+        </form>
+      </div>
+      <a href="javascript:void(0)" class="sign-up">Sign Up</a>
+    </div>
+  </div>
+</header>
 
 <div class="js-menu-screen sliding-menu-fade-screen"></div>
+
+    
