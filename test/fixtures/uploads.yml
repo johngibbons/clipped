@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  image_file_name: 
-  
+  image_file_name:
+  user_id: 1
+  direct_upload_url: image/location.jpg
 
-two:
-  image_file_name: 
+
   

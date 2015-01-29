@@ -1,4 +1,4 @@
-<% if @document.persisted? %>
+<% if @upload.persisted? %>
   $('#upload_<%=params[:unique_id]%>').hide();
 <% else %>
   $('#upload_<%=params[:unique_id]%> div.progress').removeClass('active progress-striped').addClass('progress-danger');

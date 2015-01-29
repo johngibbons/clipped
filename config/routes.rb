@@ -1,22 +1,23 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'users/new'
-
-  #download images
-  resources :uploads do
-    member { get :download }
+  get 'users/new' 
+    #download images
+  resources :users do
+    resources :uploads do
+      member { get :download }
+    end
   end
+
+
   get 'help'    => 'static_pages#help'
   get 'about'   => 'static_pages#about'
   get 'home'    => 'static_pages#home'
-
-  resources :uploads
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'uploads#index'
+   root 'uploads#index_all_users'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

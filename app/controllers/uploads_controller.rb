@@ -7,6 +7,13 @@ class UploadsController < ApplicationController
     @uploads = Upload.all
   end
 
+  def index_all_users
+    @users = User.all
+    @users.each do |user|
+      @uploads = user.uploads.all
+    end
+  end
+
   # GET /uploads/1
   # GET /uploads/1.json
   def show
