@@ -36,6 +36,7 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '~> 1.5.7'
 gem 'figaro'
 gem 'normalize-rails'
+gem 'bourbon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
