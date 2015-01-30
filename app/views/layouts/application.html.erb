@@ -7,10 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="wrapper-for-content-outside-of-footer">
+	<%= render 'layouts/header' %>
 
-<%= render 'layouts/header' %>
-
-<%= yield %>
-
+	<%= yield %>
+</div>
+	<%= render 'layouts/footer' %>
 </body>
 </html>
