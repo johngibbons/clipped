@@ -16,4 +16,9 @@
 
 .container {
 	@include outer-container;
+	margin-top: 50px;
+}
+
+aside {
+	@include span-columns(4);
 }
