@@ -1,0 +1,53 @@
+$alert-color: #fff6bf !default;
+$error-color: #fbe3e4 !default;
+$notice-color: #e5edf8 !default;
+$success-color: #e6efc2 !default;
+
+@mixin flash($color) {
+  background-color: $color;
+  color: darken($color, 60%);
+  display: block;
+  font-weight: 600;
+  margin-bottom: $base-spacing / 2;
+  padding: $base-spacing / 2;
+  text-align: center;
+
+  a {
+    color: darken($color, 70%);
+
+    &:focus,
+    &:hover {
+      color: darken($color, 90%);
+    }
+  }
+}
+
+.flash {
+  margin-top: 10px;
+}
+
+.flash-alert {
+  @include flash($alert-color);
+}
+
+.flash-error {
+  @include flash($error-color);
+}
+
+.flash-notice {
+  @include flash($notice-color);
+}
+
+.flash-success {
+  @include flash($success-color);
+}
+
+.individual-error {
+  color: darken($error-color, 60%);
+  font-size: $base-font-size * .75;
+  margin-left: 25px;
+}
+
+#error_explanation {
+  margin-bottom: 10px;
+}
