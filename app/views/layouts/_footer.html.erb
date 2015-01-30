@@ -1,7 +1,10 @@
 <footer class="footer-2" role="contentinfo">
-  <div class="footer-logo">
-    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
-  </div>
+  <div class="footer-wrapper">
+    <div class="footer-logo">
+      <%= link_to root_path, class: "logo" do %>
+        <%= image_tag "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png", alt: 'Logo Image' %>
+      <% end %>
+    </div>
     <ul>
       <li><%= link_to "About", about_path %></li>
       <li><%= link_to "Contact", contact_path %></li>
@@ -26,4 +29,5 @@
         </a></li>
       </ul>
     </div>
+  </div>
 </footer>

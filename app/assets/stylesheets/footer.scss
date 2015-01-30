@@ -28,8 +28,10 @@ html, body {
   ///////////////////////////////////////////////////////////////////////////////////
   $base-spacing: 1.5em !default;
   $base-accent-color: #477DCA !default;
-  $medium-screen: em(640) !default;
-  $large-screen: em(860) !default;
+
+  .footer-wrapper {
+    @include outer-container;
+  }  
   
   ul {
     margin: 0;
