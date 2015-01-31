@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
   validates :name, length: {maximum: 50}
-  validates :password, length: {minimum: 8}
+  #allow blank allows for profile update without changing password, password presence is ensured by 'has_secure_password' when signing up
+  validates :password, length: {minimum: 8}, allow_blank: true
 
   has_secure_password
 
