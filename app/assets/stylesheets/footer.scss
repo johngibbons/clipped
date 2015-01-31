@@ -82,7 +82,7 @@ html, body {
   }
 
   ul li {
-    font-weight: 800;
+    font-weight: 300;
     padding-right: 1em;
 
     @include media($large-screen) {

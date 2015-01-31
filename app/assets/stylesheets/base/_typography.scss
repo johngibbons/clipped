@@ -7,6 +7,11 @@ body {
   line-height: $base-line-height;
 }
 
+.wf-loading {
+  font-family: $helvetica;
+  visibility: hidden;
+}
+
 h1,
 h2,
 h3,
@@ -17,10 +22,13 @@ h6 {
   font-size: $base-font-size;
   line-height: $heading-line-height;
   margin: 0 0 $small-spacing;
+  font-weight: 700;
 }
 
 h1 {
   font-size: $base-font-size * 2.25;
+  color: $action-color;
+  font-weight: 300;
 }
 
 h2 {
@@ -33,10 +41,12 @@ h3 {
 
 h4 {
   font-size: $base-font-size * 1.5;
+  text-transform: uppercase;
 }
 
 h5 {
   font-size: $base-font-size * 1.25;
+  text-transform: uppercase;
 }
 
 h6 {

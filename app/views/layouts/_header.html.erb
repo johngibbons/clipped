@@ -9,24 +9,18 @@
 		    <li class="nav-link"><%= link_to "About", about_path %></li>
 		    <li class="nav-link"><%= link_to "Help", help_path %></li>
 		    <li class="nav-link"><%= link_to "Contact", contact_path %></li>
-		    <li class="nav-link more"><a href="javascript:void(0)">More</a>
+      <% if logged_in? %>
+        <li class="nav-link more"><a href="javascript:void(0)">Account</a>
           <ul class="submenu">
-            <li><a href="javascript:void(0)">Submenu Item</a></li>
-            <li><a href="javascript:void(0)">Another Item</a></li>
-            <li class="more"><a href="javascript:void(0)">Item with submenu</a>
-              <ul class="submenu">
-                <li><a href="javascript:void(0)">Sub-submenu Item</a></li>
-                <li><a href="javascript:void(0)">Another Item</a></li>
-              </ul>
-            </li>
-            <li class="more"><a href="javascript:void(0)">Another submenu</a>
-              <ul class="submenu">
-                <li><a href="javascript:void(0)">Sub-submenu</a></li>
-                <li><a href="javascript:void(0)">An Item</a></li>
-              </ul>
-            </li>
+            <li class="nav-link"><%= link_to "Profile", current_user %></li>
+            <li class="nav-link"><%= link_to "Settings", "#" %></li>
+            <li class="nav-link"><%= link_to "Log out", logout_path, method: "delete" %></li>
           </ul>
         </li>
+      <% else %>
+        <%= link_to "Sign Up", signup_path, class: "sign-up" %>
+        <li class="nav-link"><%= link_to "Log In", login_path, class: "login" %></li>
+      <% end %>
 		  </ul>
 		</nav>
 		<div class="navigation-tools">
@@ -38,7 +32,6 @@
           </button>
         </form>
       </div>
-      <%= link_to "Sign Up", signup_path, class: "sign-up" %>
     </div>
   </div>
 </header>
