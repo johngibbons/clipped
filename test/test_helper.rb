@@ -12,7 +12,24 @@ class ActiveSupport::TestCase
   def is_logged_in?
     !session[:user_id].nil?
   end
-  
+
+  def log_in_as(user, options = {})
+    password = options[:password] || 'password'
+
+    if integration_test?
+      post login_path, session: { email: user.email,
+                                  password: user.password }
+    else
+      session[:user_id] = user.id
+    end
+  end
+
   include ApplicationHelper
   # Add more helper methods to be used by all tests here...
+
+  private
+    # Returns true inside an integration test
+    def integration_test?
+      defined?(post_via_redirect)
+    end
 end
