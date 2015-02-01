@@ -16,7 +16,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template "users/edit"
   end
 
-  test "successful edit with friendly forwarding" do
+  test "successful edit with friendly forwarding only on first login" do
     get edit_user_path(@user)
     log_in_as(@user)
     assert_redirected_to edit_user_path(@user)
@@ -28,5 +28,10 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_redirected_to @user
     @user.reload
     assert_equal @user.email, email
+    delete logout_path
+    assert_not is_logged_in?
+    assert_redirected_to root_url
+    log_in_as(@user)
+    assert_redirected_to @user
   end
 end
