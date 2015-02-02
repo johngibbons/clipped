@@ -5,5 +5,9 @@
 	<%= form_for(@user) do |f| %>
 		<%= render 'fields', f: f %>
 		<%= f.submit "Create Profile" %>
+
+		<h5>Or login using another account:</h5>
+		<%= link_to "facebook", '/auth/facebook' %>
+		<%= link_to "google", '/auth/google_oauth2' %>
 	<% end %>
 </div>

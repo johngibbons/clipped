@@ -65,4 +65,18 @@ class UserTest < ActiveSupport::TestCase
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?('')
   end
+
+  test "user from omniauth" do
+    num_of_users = User.count
+    auth = OmniAuth.config.mock_auth[:identity]
+    User.from_omniauth(auth)
+    assert_equal num_of_users+1, User.count, "number of users is #{num_of_users}"
+
+    user = User.last
+    username = ""
+    auth.slice(:provider, :uid).try do
+      username = auth.info.name
+    end
+    assert_equal username, user.name, "Username"
+  end
 end

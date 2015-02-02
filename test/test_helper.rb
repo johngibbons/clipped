@@ -25,6 +25,12 @@ class ActiveSupport::TestCase
     end
   end
 
+  OmniAuth.config.add_mock(:identity, {
+    :uid => '12345', :info => {
+      :email => 'sample@example.com',
+      :name => 'Sample User'
+    }})
+
   private
 
     # Returns true inside an integration test.
