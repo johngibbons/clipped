@@ -35,8 +35,21 @@ class User < ActiveRecord::Base
         user.name = auth["info"]["name"]
         user.email = auth["info"]["email"]
         user.password = user.password_confirmation = SecureRandom.urlsafe_base64(n=6)
+        user.activated = true
+        user.activated_at = Time.zone.now
       end
     end
+  end
+
+  # Activates an account.
+  def activate
+    update_attribute(:activated, true)
+    update_attribute(:activated_at, Time.zone.now)
+  end
+
+  # Sends activation email.
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
   end
 
   # Remembers a user in the database for use in persistent sessions.
@@ -46,9 +59,10 @@ class User < ActiveRecord::Base
   end
 
   # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # Forgets a user.
