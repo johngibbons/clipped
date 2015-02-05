@@ -1,12 +1,18 @@
 <% provide(:title, @user.name) %>
 <div class="user_profile">
   <aside>
-    <section class="user_info">
+    <section class="user-info">
       <%= gravatar_for @user %>
       <h2><%= @user.name %></h2>
     </section>
   </aside>
 </div>
-<div class="user_uploads">
-	user's uploads will go here.
+<div class="user-uploads">
+  <% if @user.uploads.any? %>
+    <h3>Uploads: (<%= @user.uploads.count %>)</h3>
+    <div class="uploads-profile">
+      <%= render @uploads %>
+    </div>
+    <%= will_paginate @uploads%>
+  <% end %>
 </div>

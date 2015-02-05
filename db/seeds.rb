@@ -24,3 +24,16 @@ User.create!(name:  "Example User",
                activated: true,
                activated_at: Time.zone.now)
 end
+
+users = User.order(:created_at).take(6)
+50.times do
+  image =     Faker::Avatar.image
+  views =     Faker::Number.number(4)
+  downloads = Faker::Number.number(3)
+  likes =     Faker::Number.number(3)
+
+  users.each { |user| user.uploads.create!( image: image, 
+                                            views: views, 
+                                            downloads: downloads,
+                                            likes: likes ) }
+end

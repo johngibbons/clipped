@@ -3,15 +3,41 @@
 orange:
   image: "orange.jpg"
   created_at: <%= 10.minutes.ago %>
+  views: 25000
+  downloads: 1000
+  likes: 1000
+  user: michael
 
 walking_man:
   image: "walking_man.gif"
   created_at: <%= 3.years.ago %>
+  views: 25000
+  downloads: 1000
+  likes: 1000
+  user: michael
 
 sitting_woman:
   image: "sitting_woman.png"
   created_at: <%= 2.hours.ago %>
+  views: 25000
+  downloads: 1000
+  likes: 1000
+  user: michael
 
 most_recent:
   image: "most_recent.jpeg"
   created_at: <%= Time.zone.now %>
+  views: 25000
+  downloads: 1000
+  likes: 1000
+  user: michael
+
+<% 30.times do |n| %>
+upload_<%= n %>:
+  image: <%= Faker::Avatar.image %>
+  created_at: <%= 42.days.ago %>
+  views: <%= Faker::Number.number(4) %>
+  downloads: <%= Faker::Number.number(3) %>
+  likes: <%= Faker::Number.number(3) %>
+  user: michael
+<% end %>
