@@ -79,4 +79,12 @@ class UserTest < ActiveSupport::TestCase
     end
     assert_equal username, user.name, "Username"
   end
+
+  test "associated uploads should be destroyed" do
+    @user.save
+    @user.uploads.create!(image: "image.jpg")
+    assert_difference 'Upload.count', -1 do
+      @user.destroy
+    end
+  end
 end

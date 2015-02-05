@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203182909) do
+ActiveRecord::Schema.define(version: 20150205162449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "uploads", force: :cascade do |t|
+    t.string   "image"
+    t.text     "tags"
+    t.integer  "user_id"
+    t.integer  "views"
+    t.integer  "downloads"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "uploads", ["created_at"], name: "index_uploads_on_created_at", using: :btree
+  add_index "uploads", ["downloads", "created_at"], name: "index_uploads_on_downloads_and_created_at", using: :btree
+  add_index "uploads", ["tags"], name: "index_uploads_on_tags", using: :btree
+  add_index "uploads", ["user_id", "created_at"], name: "index_uploads_on_user_id_and_created_at", using: :btree
+  add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
+  add_index "uploads", ["views", "created_at"], name: "index_uploads_on_views_and_created_at", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -35,4 +52,5 @@ ActiveRecord::Schema.define(version: 20150203182909) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "uploads", "users"
 end
