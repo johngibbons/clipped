@@ -5,11 +5,16 @@
       <%= gravatar_for @user %>
       <h2><%= @user.name %></h2>
     </section>
+    <% if current_user?(@user) %>
+	   <%= link_to new_upload_path do %>
+       <button>Upload</button>
+     <% end %>
+    <% end %>
   </aside>
 </div>
 <div class="user-uploads">
   <% if @user.uploads.any? %>
-    <h3>Uploads: (<%= @user.uploads.count %>)</h3>
+    <h5>Uploads: (<%= @user.uploads.count %>)</h5>
     <div class="uploads-profile">
       <%= render @uploads %>
     </div>

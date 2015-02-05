@@ -1,4 +1,4 @@
-<%= link_to upload.user, class: "upload-thumb", id: "upload-#{upload.id}" do %>
+<%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
 	<div class="upload-stats">
 		<span class="upload-views">Views: <%= upload.views %></span>
 		<span class="upload-downloads">Downloads: <%= upload.downloads %></span>
@@ -7,4 +7,8 @@
 	<div class="upload-tags">
 		Tags: <%= upload.tags %>
 	</div>
+	<% if current_user?(upload.user) %>
+		<%= link_to "delete", upload, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+  <% end %>
 <% end %>

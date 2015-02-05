@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
+    @recent_uploads = Upload.take(30)
   end
 
   def help

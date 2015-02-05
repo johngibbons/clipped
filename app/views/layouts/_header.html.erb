@@ -12,7 +12,7 @@
       <% if logged_in? %>
         <li class="nav-link more"><a href="javascript:void(0)">Account</a>
           <ul class="submenu">
-            <li class="nav-link"><%= link_to "Profile", current_user %></li>
+            <li class="nav-link"><%= link_to "My Images", current_user %></li>
             <li class="nav-link"><%= link_to "Settings", edit_user_path(current_user) %></li>
             <li class="nav-link"><%= link_to "Log out", logout_path, method: "delete" %></li>
             <li><%= link_to "All Users", users_path %></li>
