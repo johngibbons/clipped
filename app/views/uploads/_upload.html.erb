@@ -1,4 +1,5 @@
 <%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
+	<%= image_tag(upload.image(:thumb), class: 'thumb')  %>
 	<div class="upload-stats">
 		<span class="upload-views">Views: <%= upload.views %></span>
 		<span class="upload-downloads">Downloads: <%= upload.downloads %></span>
