@@ -2,6 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.dropzone {
+	background-color: $light-gray;
+	height: 500px;
+
+	.dz-message {
+		text-align: center;
+		height: 100%;
+		span {
+			position: relative;
+			top: 50%;
+			@include transform(translateY(-50%));
+		}
+	}
+}
+
 .upload-thumb {
 	width: auto;
 }

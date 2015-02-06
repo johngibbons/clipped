@@ -13,10 +13,9 @@ class UploadsController < ApplicationController
   def create
     @upload = current_user.uploads.build(upload_params)
     if @upload.save
-      flash[:success] = "Image successfully uploaded"
-      redirect_to current_user
+      render json: { message: "success", fileID: @upload.id }, :status => 200
     else
-      render "new"
+      render json: { error: @image.errors.join(',')}, :status => 400
     end
   end
 

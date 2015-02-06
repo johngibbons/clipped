@@ -11,20 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205181446) do
+ActiveRecord::Schema.define(version: 20150206050656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "uploads", force: :cascade do |t|
-    t.string   "image"
     t.text     "tags"
     t.integer  "user_id"
     t.integer  "views"
     t.integer  "downloads"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "likes"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "uploads", ["created_at"], name: "index_uploads_on_created_at", using: :btree
