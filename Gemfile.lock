@@ -81,8 +81,23 @@ GEM
     columnize (0.9.0)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
+<<<<<<< Updated upstream
     dropzonejs-rails (0.7.0)
       rails (> 3.1)
+=======
+<<<<<<< HEAD
+    delayed_job (4.0.6)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.0.3)
+      activerecord (>= 3.0, < 5.0)
+      delayed_job (>= 3.0, < 4.1)
+    delayed_paperclip (2.9.0)
+      paperclip (>= 3.3)
+=======
+    dropzonejs-rails (0.7.0)
+      rails (> 3.1)
+>>>>>>> image-uploads-dropzone
+>>>>>>> Stashed changes
     erubis (2.7.0)
     execjs (2.2.2)
     faker (1.4.3)
@@ -277,7 +292,16 @@ DEPENDENCIES
   bourbon
   byebug
   coffee-rails (~> 4.1.0)
+<<<<<<< Updated upstream
   dropzonejs-rails
+=======
+<<<<<<< HEAD
+  delayed_job_active_record
+  delayed_paperclip
+=======
+  dropzonejs-rails
+>>>>>>> image-uploads-dropzone
+>>>>>>> Stashed changes
   faker
   figaro
   guard-minitest (= 2.3.1)
