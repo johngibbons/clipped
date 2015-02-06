@@ -3,7 +3,7 @@ require 'test_helper'
 class UploadTest < ActiveSupport::TestCase
   def setup
     @user = users(:michael)
-    @upload = @user.uploads.build(image: "some_image.jpg", user_id: @user.id)
+    @upload = @user.uploads.build(image_file_name: "some_image.jpg", user_id: @user.id)
   end
 
   test "should be valid" do

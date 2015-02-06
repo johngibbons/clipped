@@ -8,7 +8,7 @@ class UploadsControllerTest < ActionController::TestCase
 
   test "should redirect create when not logged in" do
     assert_no_difference 'Upload.count' do
-      post :create, upload: { image: "image.jpg" }
+      post :create, upload: { image_file_name: "image.jpg" }
     end
     assert_redirected_to login_url
   end
