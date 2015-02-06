@@ -15,7 +15,7 @@ class UploadsController < ApplicationController
     if @upload.save
       render json: { message: "success", fileID: @upload.id }, :status => 200
     else
-      render json: { error: @image.errors.full_messages.join(',')}, :status => 400
+      render json: { error: @image.errors.join(',')}, :status => 400
     end
   end
 
