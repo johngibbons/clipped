@@ -14,7 +14,7 @@ walking_man:
   views: 25000
   downloads: 1000
   likes: 1000
-  user: michael
+  user: archer
 
 sitting_woman:
   image: "sitting_woman.png"
@@ -22,7 +22,7 @@ sitting_woman:
   views: 25000
   downloads: 1000
   likes: 1000
-  user: michael
+  user: lana
 
 most_recent:
   image: "most_recent.jpeg"
@@ -31,6 +31,7 @@ most_recent:
   downloads: 1000
   likes: 1000
   user: michael
+
 
 <% 30.times do |n| %>
 upload_<%= n %>:

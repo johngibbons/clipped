@@ -19,4 +19,14 @@ class UploadsControllerTest < ActionController::TestCase
     end
     assert_redirected_to login_url
   end
+
+  test "should redirect destroy for wrong upload" do
+    current = users(:michael)
+    log_in_as(current)
+    not_current_upload = uploads(:sitting_woman)
+    assert_no_difference "Upload.count" do
+      delete :destroy, id: not_current_upload
+    end
+    assert_redirected_to user_path(current)
+  end
 end
