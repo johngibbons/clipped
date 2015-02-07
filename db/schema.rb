@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207013918) do
+ActiveRecord::Schema.define(version: 20150207030806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "liked_id"
+    t.integer  "liker_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "relationships", ["liked_id"], name: "index_relationships_on_liked_id", using: :btree
+  add_index "relationships", ["liker_id", "liked_id"], name: "index_relationships_on_liker_id_and_liked_id", unique: true, using: :btree
+  add_index "relationships", ["liker_id"], name: "index_relationships_on_liker_id", using: :btree
 
   create_table "uploads", force: :cascade do |t|
     t.text     "tags"
@@ -23,7 +34,6 @@ ActiveRecord::Schema.define(version: 20150207013918) do
     t.integer  "downloads",          default: 0
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.integer  "likes",              default: 0
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -32,7 +42,6 @@ ActiveRecord::Schema.define(version: 20150207013918) do
 
   add_index "uploads", ["created_at"], name: "index_uploads_on_created_at", using: :btree
   add_index "uploads", ["downloads", "created_at"], name: "index_uploads_on_downloads_and_created_at", using: :btree
-  add_index "uploads", ["likes"], name: "index_uploads_on_likes", using: :btree
   add_index "uploads", ["tags"], name: "index_uploads_on_tags", using: :btree
   add_index "uploads", ["user_id", "created_at"], name: "index_uploads_on_user_id_and_created_at", using: :btree
   add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree

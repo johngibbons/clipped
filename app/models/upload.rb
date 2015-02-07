@@ -1,5 +1,9 @@
 class Upload < ActiveRecord::Base
   belongs_to :user
+  has_many :liked_relationships, class_name:  "Relationship",
+                                 foreign_key: "liked_id",
+                                 dependent:   :destroy
+  has_many :likers, through: :liked_relationships
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   has_attached_file :image, 

@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
   has_many :uploads, dependent: :destroy
+  has_many :liker_relationships, class_name:  "Relationship",
+                                 foreign_key: "liker_id",
+                                 dependent:   :destroy
+  has_many :liking, through: :liker_relationships, source: :liked
+
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -86,6 +91,19 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end
 
+  # Likes an upload.
+  def like(upload)
+    liker_relationships.create(liked_id: upload.id)
+  end
+
+  def unlike(upload)
+    liker_relationships.find_by(liked_id: upload.id).destroy
+  end
+
+  def liking?(upload)
+    liking.include?(upload)
+  end
+  
   private
     #converts email to all lower-case.
     def downcase_email

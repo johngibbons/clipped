@@ -87,4 +87,15 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "should like and unlike an upload" do
+    michael = users(:michael)
+    upload = uploads(:orange)
+    assert_not michael.liking?(upload)
+    michael.like(upload)
+    assert michael.liking?(upload)
+    assert upload.likers.include?(michael)
+    michael.unlike(upload)
+    assert_not michael.liking?(upload)
+  end
 end
