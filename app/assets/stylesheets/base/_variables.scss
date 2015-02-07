@@ -15,25 +15,23 @@ $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 3px;
+$base-border-radius: 0;
 $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
 $blue: #477dca;
-$dark-gray: #333;
+$dark-gray: #404040;
 $medium-gray: #999;
-$light-gray: #ddd;
-$clipped-green: #39BF9F;
-$clipped-red: #B2F059;
-$clipped-orange: #F0DE50;
+$light-gray: #e9e9e9;
+$clipped-pink: #ed145b;
 
 // Font Colors
 $base-background-color: #fff;
 $base-font-color: $dark-gray;
-$base-accent-color: #2f445e;
-$action-color: #62c7c0;
+$base-accent-color: $clipped-pink;
+$action-color: $clipped-pink;
 
 // Border
 $base-border-color: $light-gray;

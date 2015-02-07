@@ -57,6 +57,7 @@ textarea {
 
 input[type="search"] {
   @include appearance(none);
+  background-color: $light-gray;
 }
 
 input[type="checkbox"],

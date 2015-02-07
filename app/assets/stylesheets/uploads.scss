@@ -18,5 +18,13 @@
 }
 
 .upload-thumb {
+	height: 300px;
 	width: auto;
+	float: left;
+	margin-right: 50px;
+	margin-bottom: 100px;
+
+	img {
+		height: 100%;
+	}
 }

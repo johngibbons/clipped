@@ -1,24 +1,17 @@
-<h1>Most Liked Images</h1>
-
-<div class="most-liked-uploads">
-  <% if @most_liked.any? %>
-    <%= render @most_liked %>
-  <% end %>
+<div id="home-search">
+  <h1>What are you looking for?</h1>
+  <form role="search">
+    <input type="search" placeholder="e.g. man looking up..." />
+    <button type="submit">
+      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+    </button>
+  </form>
 </div>
 
+<h1>Most Popular Images</h1>
 
-<h1>Most Viewed Images</h1>
-
-<div class="most-viewed-uploads">
-  <% if @most_viewed.any? %>
-    <%= render @most_viewed %>
-  <% end %>
-</div>
-
-<h1>Recent Clipped Images</h1>
-
-<div class="recent-uploads">
-  <% if @most_recent.any? %>
-      <%= render @most_recent %>
+<div class="most-popular-uploads">
+  <% if @most_popular.any? %>
+    <%= render @most_popular %>
   <% end %>
 </div>

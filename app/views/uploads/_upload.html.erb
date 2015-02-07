@@ -1,13 +1,14 @@
 <%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
 	<%= image_tag(upload.image(:thumb), class: 'thumb')  %>
-	<div class="upload-stats">
+<!-- 	<div class="upload-stats">
 		<span class="upload-views">Views: <%= upload.views %></span>
 		<span class="upload-downloads">Downloads: <%= upload.downloads %></span>
 		<span class="upload-likes">Likes: <%= upload.likers.count %></span>
+		<span class="upload-score">Score: <%= upload.weighted_score %></span>
 	</div>
 	<div class="upload-tags">
 		Tags: <%= upload.tags %>
-	</div>
+	</div> -->
 	<% if current_user?(upload.user) %>
 		<%= link_to "delete", upload, method: :delete,
                                        data: { confirm: "You sure?" } %>

@@ -7,7 +7,7 @@ class Upload < ActiveRecord::Base
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   has_attached_file :image, 
-                    styles: { original: "4000x4000>", large: "1500x1500>", medium: "750x750>", thumb: "250x250>" },
+                    styles: { original: "4000x4000>", large: "1500x1500>", medium: "750x750>", thumb: "300x300>" },
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
                     :s3_protocol => 'https',
@@ -22,4 +22,44 @@ class Upload < ActiveRecord::Base
       :access_key_id => ENV['S3_ACCESS_KEY'], 
       :secret_access_key => ENV['S3_SECRET_KEY'] }
   end
+
+  def weighted_score
+      total_views = Upload.total_views.to_f
+      total_downloads = Upload.total_downloads.to_f
+      total_likes = Upload.total_likes.to_f
+      score = BigDecimal(0.2 * (views/total_views) * 100 + 0.5 * (downloads/total_downloads) * 100 + 0.3 * (likes_count/total_likes) * 100, 10)
+  end
+
+  class << self
+
+    def sorted_by_likes
+      Upload.all.reorder(likes_count: :desc, created_at: :desc)
+    end
+
+    def sorted_by_views
+      Upload.all.reorder(views: :desc, created_at: :desc)
+    end
+
+    def sorted_by_downloads
+      Upload.all.reorder(downloads: :desc, created_at: :desc)
+    end
+
+    def sorted_by_weighted_score
+      Upload.all.sort_by(&:weighted_score).reverse!
+    end
+
+    def total_views
+      Upload.sum(:views)
+    end
+
+    def total_downloads
+      Upload.sum(:downloads)
+    end
+
+    def total_likes
+      Upload.sum(:likes_count)
+    end
+
+  end
+
 end

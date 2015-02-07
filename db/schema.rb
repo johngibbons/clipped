@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207075023) do
+ActiveRecord::Schema.define(version: 20150207180028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20150207075023) do
 
   add_index "uploads", ["created_at"], name: "index_uploads_on_created_at", using: :btree
   add_index "uploads", ["downloads", "created_at"], name: "index_uploads_on_downloads_and_created_at", using: :btree
+  add_index "uploads", ["likes_count", "created_at", "views", "downloads"], name: "weighted_score", using: :btree
+  add_index "uploads", ["likes_count"], name: "index_uploads_on_likes_count", using: :btree
   add_index "uploads", ["tags"], name: "index_uploads_on_tags", using: :btree
   add_index "uploads", ["user_id", "created_at"], name: "index_uploads_on_user_id_and_created_at", using: :btree
   add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree

@@ -14,12 +14,4 @@ class ApplicationController < ActionController::Base
         redirect_to login_url
       end
     end
-
-  def sort_by_likes(uploads)
-    uploads.reorder(likes_count: :desc, created_at: :desc).limit(30)
-  end
-
-  def sort_by_views(uploads)
-    uploads.reorder(views: :desc, created_at: :desc).limit(30)
-  end
 end
