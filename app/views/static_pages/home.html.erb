@@ -1,3 +1,11 @@
+<h1>Most Viewed Images</h1>
+
+<div class="most-viewed-uploads">
+  <% if @most_viewed.any? %>
+    <%= render @most_viewed %>
+  <% end %>
+</div>
+
 <h1>Recent Clipped Images</h1>
 
 <div class="recent-uploads">

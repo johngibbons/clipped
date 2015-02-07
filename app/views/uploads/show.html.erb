@@ -2,5 +2,7 @@
 
 <p>Views: <%= @upload.views %></p>
 <p>Downloads: <%= @upload.downloads %></p>
-<p>Likes: <%= @upload.likes %></p>
+<p>Likes: <span id="likes"><%= @upload.likers.count %></span></p>
+
+<%= render 'like_form' if logged_in? %>
 

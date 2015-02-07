@@ -1,0 +1,2 @@
+$("#like_form").html("<%= escape_javascript(render('uploads/unlike')) %>")
+$("#likes").html("<%= @upload.likers.count %>")

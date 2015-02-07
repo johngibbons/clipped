@@ -7,7 +7,7 @@ class UploadsInterfaceTest < ActionDispatch::IntegrationTest
     @other_user = users(:archer)
   end
 
-  test "micropost interface" do
+  test "upload interface" do
     log_in_as(@user)
     get root_path
     assert_select '.recent-uploads'

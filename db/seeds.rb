@@ -26,14 +26,23 @@ User.create!(name:  "Example User",
 end
 
 users = User.order(:created_at).take(6)
-50.times do
-  image_file_name =     Faker::Avatar.image
+5.times do
+  image =     Faker::Avatar.image
   views =     Faker::Number.number(4)
   downloads = Faker::Number.number(3)
   likes =     Faker::Number.number(3)
 
   users.each { |user| user.uploads.create!( image: image, 
                                             views: views, 
-                                            downloads: downloads,
-                                            likes: likes ) }
+                                            downloads: downloads ) }
+end
+
+# Liking relationships
+users = User.all
+uploads = Upload.all
+user = users.first
+liked = uploads[2..50]
+likers = users[3..40]
+likers.product(liked).collect do |liker, likee|
+  liker.like(likee)
 end

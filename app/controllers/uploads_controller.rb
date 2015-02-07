@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :destroy]
   before_action :correct_user, only: :destroy
-  after_action  :increment_views, only: :show
+  before_action :increment_views, only: :show
 
   def index
     @uploads = Upload.all
@@ -21,7 +21,7 @@ class UploadsController < ApplicationController
   end
 
   def show
-    @upload = Upload.find_by(id: params[:id])
+    
   end
 
   def destroy
@@ -42,6 +42,7 @@ class UploadsController < ApplicationController
     end
 
     def increment_views
+      @upload = Upload.find_by(id: params[:id])
       @upload.views += 1
       @upload.save
     end

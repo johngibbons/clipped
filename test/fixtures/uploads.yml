@@ -5,7 +5,6 @@ orange:
   created_at: <%= 10.minutes.ago %>
   views: 25000
   downloads: 1000
-  likes: 1000
   user: michael
 
 walking_man:
@@ -13,7 +12,6 @@ walking_man:
   created_at: <%= 3.years.ago %>
   views: 25000
   downloads: 1000
-  likes: 1000
   user: archer
 
 sitting_woman:
@@ -21,7 +19,6 @@ sitting_woman:
   created_at: <%= 2.hours.ago %>
   views: 25000
   downloads: 1000
-  likes: 1000
   user: lana
 
 most_recent:
@@ -29,7 +26,6 @@ most_recent:
   created_at: <%= Time.zone.now %>
   views: 25000
   downloads: 1000
-  likes: 1000
   user: michael
 
 
@@ -39,6 +35,5 @@ upload_<%= n %>:
   created_at: <%= 42.days.ago %>
   views: <%= Faker::Number.number(4) %>
   downloads: <%= Faker::Number.number(3) %>
-  likes: <%= Faker::Number.number(3) %>
   user: michael
 <% end %>
