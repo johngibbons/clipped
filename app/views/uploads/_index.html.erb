@@ -1,5 +1,5 @@
 <% unless @uploads.nil? %>
 	<% @uploads.each do |upload| %>
-		<div class="img-thumbnail"><%= image_tag upload.avatar.url(:thumb), alt: upload.image.url(:thumb) %></div>
+		<div class="img-thumbnail"><%= image_tag upload.image.url(:thumb), alt: upload.image.url(:thumb) %></div>
 	<% end %>
 <% end %>

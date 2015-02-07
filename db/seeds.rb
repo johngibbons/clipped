@@ -27,7 +27,7 @@ end
 
 users = User.order(:created_at).take(6)
 50.times do
-  image =     Faker::Avatar.image
+  image_file_name =     Faker::Avatar.image
   views =     Faker::Number.number(4)
   downloads = Faker::Number.number(3)
   likes =     Faker::Number.number(3)
