@@ -1,3 +1,12 @@
+<h1>Most Liked Images</h1>
+
+<div class="most-liked-uploads">
+  <% if @most_liked.any? %>
+    <%= render @most_liked %>
+  <% end %>
+</div>
+
+
 <h1>Most Viewed Images</h1>
 
 <div class="most-viewed-uploads">
@@ -9,7 +18,7 @@
 <h1>Recent Clipped Images</h1>
 
 <div class="recent-uploads">
-  <% if @recent_uploads.any? %>
-      <%= render @recent_uploads %>
+  <% if @most_recent.any? %>
+      <%= render @most_recent %>
   <% end %>
 </div>

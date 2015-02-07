@@ -3,6 +3,9 @@ require 'test_helper'
 class StaticPagesControllerTest < ActionController::TestCase
   def setup
     @base_title = "Clipped"
+    @upload_first = uploads(:orange)
+    @upload_second = uploads(:sitting_woman)
+    @upload_third = uploads(:walking_man)
   end
 
   test "should get home" do
@@ -27,6 +30,11 @@ class StaticPagesControllerTest < ActionController::TestCase
     get :contact
     assert_response :success
     assert_select "title", full_title("Contact")
+  end
+
+  test "newest posts should sort by created_at" do
+    get :home
+    assert_equal @most_recent.first, @upload_first
   end
 
 end

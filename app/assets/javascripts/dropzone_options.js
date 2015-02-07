@@ -1,5 +1,7 @@
-$(document).on("ready page:load", (function(){
-	// disable auto discover
+var ready;
+ready = function() {
+
+ 	// disable auto discover
 	Dropzone.autoDiscover = false;
 
 	$('.dropzone').hover(function() {
@@ -19,4 +21,8 @@ $(document).on("ready page:load", (function(){
 		this.removeFile(file)
 		$.getScript("/uploads")
 	})
-});
+
+};
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

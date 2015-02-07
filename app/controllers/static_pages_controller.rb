@@ -1,8 +1,10 @@
 class StaticPagesController < ApplicationController
   def home
-    @recent_uploads = Upload.take(30)
     uploads = Upload.all
-    @most_viewed = uploads.reorder(views: :desc).limit(30)
+    @most_recent = Upload.take(30)
+    @most_viewed = sort_by_views(uploads)
+    @most_liked = sort_by_likes(uploads)
+    
   end
 
   def help
