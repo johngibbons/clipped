@@ -4,7 +4,6 @@
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -4em;
 }
 
 html, body {
@@ -52,7 +51,7 @@ html, body {
   background: $footer-background;
   padding: $base-spacing;
   width: 100%;
-  display: inline-block;
+  line-height: 0;
 
   .footer-logo {
     margin-right: 1em;
