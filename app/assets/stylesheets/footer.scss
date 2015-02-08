@@ -17,10 +17,8 @@ html, body {
 }
 
 .footer-2, .wrapper-for-content-outside-of-footer:after {
-  height: 17em;
 
   @include media($large-screen) {
-    height: 4em;
   }
 }
 
@@ -47,7 +45,7 @@ html, body {
   //////////////////////////////////////////////////////////////////////////////////
 
   $footer-background: $base-accent-color;
-  $footer-color: white;
+  $footer-color: $light-gray;
   $footer-link-color: transparentize($footer-color, 0.4);
   $footer-disclaimer-color: transparentize($footer-color, 0.4);
 
