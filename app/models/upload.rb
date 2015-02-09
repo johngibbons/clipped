@@ -27,7 +27,11 @@ class Upload < ActiveRecord::Base
       total_views = Upload.total_views.to_f
       total_downloads = Upload.total_downloads.to_f
       total_likes = Upload.total_likes.to_f
-      score = BigDecimal(0.2 * (views/total_views) * 100 + 0.5 * (downloads/total_downloads) * 100 + 0.3 * (likes_count/total_likes) * 100, 10)
+      if total_views > 0 && total_downloads > 0 && total_likes > 0
+        score = BigDecimal(0.2 * (views/total_views) * 100 + 0.5 * (downloads/total_downloads) * 100 + 0.3 * (likes_count/total_likes) * 100, 10)
+      else
+        score = 0
+      end
   end
 
   class << self
