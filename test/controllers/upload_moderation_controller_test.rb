@@ -25,7 +25,7 @@ class UploadModerationControllerTest < ActionController::TestCase
 
   test "should redirect update when not logged in" do
     patch :update, id: @unapproved, upload: { approved: true }
-    assert_redirected_to root_url
+    assert_redirected_to login_url
   end
 
 end

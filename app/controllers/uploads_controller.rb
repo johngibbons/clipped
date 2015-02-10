@@ -39,8 +39,7 @@ class UploadsController < ApplicationController
     end
 
     def correct_user
-      @upload = current_user.uploads.find_by(id: params[:id])
-      redirect_to current_user if @upload.nil?
+      redirect_to current_user if !own_uploads?
     end
 
     def increment_views

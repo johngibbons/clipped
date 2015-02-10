@@ -25,15 +25,15 @@ class ApplicationController < ActionController::Base
     end
 
     def approved?
-      #upload is one of the current users'
-      unless current_user.nil?
-        user_uploads = current_user.uploads.find_by(id: params[:id])
-      end
-
       #upload is one of the current users' or is approved
-      unless @upload.approved? || !user_uploads.nil?
+      unless @upload.approved? || own_uploads?
         flash[:error] = "You don't have access to that image"
         redirect_to request.referrer || root_url
       end
+    end
+
+    # Returns true if uploads belong to user
+    def own_uploads?
+      !current_user.uploads.find_by(id: params[:id]).nil?
     end
 end

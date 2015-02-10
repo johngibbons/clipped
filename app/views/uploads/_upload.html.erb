@@ -5,7 +5,6 @@
 <% else %>
 	<%= image_tag(upload.image(:thumb), class: 'thumb unapproved')  %>
 <% end %>
-<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
 
 <!-- 	<div class="upload-stats">
 		<span class="upload-views">Views: <%= upload.views %></span>
