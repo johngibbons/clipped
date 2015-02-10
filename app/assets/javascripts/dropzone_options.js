@@ -22,6 +22,11 @@ ready = function() {
 		$.getScript("/uploads")
 	})
 
+	// Update the total progress bar
+	dropzone.on("totaluploadprogress", function(progress) {
+	  $('.dz-upload').width = progress + "%";
+	});
+
 };
 
 $(document).ready(ready)

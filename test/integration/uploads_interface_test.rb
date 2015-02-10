@@ -25,10 +25,10 @@ class UploadsInterfaceTest < ActionDispatch::IntegrationTest
     # assert_select '#error_explanation'
     # assert_template 'uploads/new'
     #valid submission
-    # upload_tags = "some, sample, tags"
-    # assert_difference 'Upload.count', 1 do
-    #   post uploads_path, upload: { image_file_name: "image.png", tags: upload_tags }
-    # end
+    upload_tags = "some, sample, tags"
+    assert_difference 'Upload.count', 1 do
+      post uploads_path, upload: { image: "image.png", tags: upload_tags, user_id: 1 }
+    end
     # assert_redirected_to user_url(@user)
     # follow_redirect!
     # assert_match upload_tags, response.body

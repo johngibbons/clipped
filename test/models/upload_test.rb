@@ -24,14 +24,14 @@ class UploadTest < ActiveSupport::TestCase
     assert_equal Upload.first, uploads(:most_recent)
   end
 
-  # test "image should not be invalid file types" do
-  #   invalid_files = %w[something.xml anything.mp4 sample.doc
-  #         something.rvt something.html anything.css]
-  #   invalid_files.each do |invalid_file|
-  #     @upload.image = invalid_file
-  #     assert_not @upload.valid?
-  #   end
-  # end
+  test "image should not be invalid file types" do
+     invalid_files = %w[something.xml anything.mp4 sample.doc
+           something.rvt something.html anything.css]
+     invalid_files.each do |invalid_file|
+       @upload.image_file_name = invalid_file
+       assert_not @upload.valid?
+     end
+   end
 
   # test "image should be valid image file types" do
   #   valid_files = %w[something.jpg anything.jpeg sample.JPG
