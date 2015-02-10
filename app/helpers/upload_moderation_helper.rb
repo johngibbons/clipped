@@ -1,0 +1,2 @@
+module UploadModerationHelper
+end

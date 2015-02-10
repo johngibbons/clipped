@@ -10,7 +10,7 @@ class UploadsInterfaceTest < ActionDispatch::IntegrationTest
   test "upload interface" do
     log_in_as(@user)
     get root_path
-    assert_select '.recent-uploads'
+    assert_select '.most-popular-uploads'
     get user_path(@other_user)
     #don't show upload button for other users
     assert_select "a[href=?]", '/uploads/new', count: 0

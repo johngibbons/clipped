@@ -2,9 +2,11 @@ class UploadsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :destroy]
   before_action :correct_user, only: :destroy
   before_action :increment_views, only: :show
+  before_action :approved_uploads, only: :index
+  before_action :approved?, only: :show
 
   def index
-    @uploads = Upload.all
+
   end
 
   def new

@@ -103,6 +103,18 @@ class User < ActiveRecord::Base
   def liking?(upload)
     liking.include?(upload)
   end
+
+  # Approve an upload
+  def approve(upload)
+    upload.approved = true
+    upload.save
+  end
+
+  # Disapprove an upload
+  def disapprove(upload)
+    upload.approved = false
+    upload.save
+  end
   
   private
     #converts email to all lower-case.

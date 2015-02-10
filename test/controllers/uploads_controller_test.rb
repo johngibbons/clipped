@@ -3,7 +3,7 @@ require 'test_helper'
 class UploadsControllerTest < ActionController::TestCase
   
   def setup
-    @upload = uploads(:orange)
+    @upload   = uploads(:orange)
   end
 
   test "should redirect create when not logged in" do

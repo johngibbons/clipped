@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150209033138) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "likes_count",        default: 0
-    t.boolean  "approved",           default: false
+    t.boolean  "approved",           default: false, null: false
   end
 
   add_index "uploads", ["created_at"], name: "index_uploads_on_created_at", using: :btree

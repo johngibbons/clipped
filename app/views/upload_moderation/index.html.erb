@@ -1,0 +1,6 @@
+<% if @uploads.any? %>
+  <div class="uploads-moderation">
+    <%= render @uploads %>
+  </div>
+  <%= will_paginate @uploads%>
+<% end %>

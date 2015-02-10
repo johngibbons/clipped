@@ -1,0 +1,7 @@
+<div id="moderation_form">
+<% if @upload.approved? %>
+  <%= render 'upload_moderation/disapprove' %>
+<% else %>
+  <%= render 'upload_moderation/approve' %>
+<% end %>
+</div>

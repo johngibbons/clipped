@@ -14,4 +14,26 @@ class ApplicationController < ActionController::Base
         redirect_to login_url
       end
     end
+
+    # Confirms an admin user.
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
+    def approved_uploads
+      @uploads = Upload.where(approved: true)
+    end
+
+    def approved?
+      #upload is one of the current users'
+      unless current_user.nil?
+        user_uploads = current_user.uploads.find_by(id: params[:id])
+      end
+
+      #upload is one of the current users' or is approved
+      unless @upload.approved? || !user_uploads.nil?
+        flash[:error] = "You don't have access to that image"
+        redirect_to request.referrer || root_url
+      end
+    end
 end

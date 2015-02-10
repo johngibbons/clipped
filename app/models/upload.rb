@@ -7,7 +7,7 @@ class Upload < ActiveRecord::Base
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   has_attached_file :image, 
-                    styles: { original: "4000x4000>", large: "1500x1500>", medium: "750x750>", thumb: "300x300>" },
+                    styles: { original: "4000x4000>", large: "1500x1500>", medium: "750x750>", thumb: "x300>" },
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
                     :s3_protocol => 'https',
@@ -27,11 +27,25 @@ class Upload < ActiveRecord::Base
       total_views = Upload.total_views.to_f
       total_downloads = Upload.total_downloads.to_f
       total_likes = Upload.total_likes.to_f
-      if total_views > 0 && total_downloads > 0 && total_likes > 0
-        score = BigDecimal(0.2 * (views/total_views) * 100 + 0.5 * (downloads/total_downloads) * 100 + 0.3 * (likes_count/total_likes) * 100, 10)
-      else
-        score = 0
+
+      views_percent     = views/total_views
+      downloads_percent = downloads/total_downloads
+      likes_percent     = likes_count/total_likes
+
+      if total_views == 0
+        views_percent = 0
       end
+
+      if total_downloads == 0
+        downloads_percent = 0
+      end
+
+      if total_likes == 0
+        likes_percent = 0
+      end
+
+      score = BigDecimal(0.2 * (views_percent) * 100 + 0.5 * (downloads_percent) * 100 + 0.3 * (likes_percent) * 100, 10)
+
   end
 
   class << self

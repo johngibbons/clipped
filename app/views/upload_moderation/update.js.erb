@@ -1,0 +1,8 @@
+<% if @upload.approved? %>
+	$("#moderation_form").html("<%= escape_javascript(render('upload_moderation/disapprove')) %>");
+<% else %>
+	$("#moderation_form").html("<%= escape_javascript(render('upload_moderation/approve')) %>");
+<% end %>
+	$(".img-show img").toggleClass("unapproved");
+
+

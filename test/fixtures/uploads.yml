@@ -6,6 +6,7 @@ orange:
   views: 25000
   downloads: 1000
   user: michael
+  approved: false
 
 walking_man:
   image_file_name: "walking_man.gif"
@@ -13,6 +14,8 @@ walking_man:
   views: 25000
   downloads: 1000
   user: archer
+  approved: true
+
 
 sitting_woman:
   image_file_name: "sitting_woman.png"
@@ -20,6 +23,7 @@ sitting_woman:
   views: 25000
   downloads: 1000
   user: lana
+  approved: true
 
 most_recent:
   image_file_name: "most_recent.jpeg"
@@ -27,6 +31,7 @@ most_recent:
   views: 25000
   downloads: 1000
   user: michael
+  approved: true
 
 
 <% 30.times do |n| %>
@@ -36,4 +41,5 @@ upload_<%= n %>:
   views: <%= Faker::Number.number(4) %>
   downloads: <%= Faker::Number.number(3) %>
   user: michael
+  approved: true
 <% end %>
