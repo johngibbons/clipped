@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
   before_action :increment_views, only: :show
   before_action :approved_uploads, only: :index
   before_action :approved?, only: :show
-
+  
   def index
 
   end

@@ -9,18 +9,17 @@ ready = function() {
     });
  
 
-	var dropzone = new Dropzone (".dropzone", {
-		maxFilesize: 50, // Set the maximum file size to 256 MB
+	var dropzone = new Dropzone(document.body, {
+		maxFilesize: 50, // Set the maximum file size to 50 MB
 		paramName: "upload[image]", // Rails expects the file upload to be something like model[field_name]
-		addRemoveLinks: false, // Don't show remove links on dropzone itself.
+		addRemoveLinks: true, // Don't show remove links on dropzone itself.
 		acceptedFiles: 'image/*',
-		dictDefaultMessage: "Drag Images or Click Here to Upload"
-	});	
-
-	dropzone.on("success", function(file) {
-		this.removeFile(file)
-		$.getScript("/uploads")
-	})
+		dictDefaultMessage: "Drag Images or Click Here to Upload",
+		previewsContainer: null,
+		clickable: "#upload-btn",
+		thumbnail-height: 210,
+		previewTemplate: document.querySelector('preview-template').innerHTML,
+	});
 
 	// Update the total progress bar
 	dropzone.on("totaluploadprogress", function(progress) {

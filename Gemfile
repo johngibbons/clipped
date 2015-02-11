@@ -43,6 +43,7 @@ gem 'normalize-rails'
 gem 'bourbon'
 gem 'neat'
 gem 'refills'
+gem "font-awesome-rails"
 gem 'will_paginate'
 
 group :development, :test do
