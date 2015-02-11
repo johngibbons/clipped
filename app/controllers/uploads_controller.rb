@@ -4,7 +4,8 @@ class UploadsController < ApplicationController
   before_action :increment_views, only: :show
   before_action :approved_uploads, only: :index
   before_action :approved?, only: :show
-  
+  layout "dropzone_uploader", only: :new
+
   def index
 
   end
@@ -27,6 +28,7 @@ class UploadsController < ApplicationController
   end
 
   def destroy
+    @upload = current_user.uploads.find(params[:id])
     @upload.destroy
     flash[:success] = "Image successfully deleted"
     redirect_to request.referrer || current_user

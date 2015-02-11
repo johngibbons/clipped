@@ -4,21 +4,17 @@ ready = function() {
  	// disable auto discover
 	Dropzone.autoDiscover = false;
 
-	$('.dropzone').hover(function() {
-        $(this).css('cursor','pointer');
-    });
- 
-
-	var dropzone = new Dropzone(document.body, {
+ 	var dropzone = new Dropzone( ".dropzone", {
 		maxFilesize: 50, // Set the maximum file size to 50 MB
 		paramName: "upload[image]", // Rails expects the file upload to be something like model[field_name]
-		addRemoveLinks: true, // Don't show remove links on dropzone itself.
+		addRemoveLinks: false, // Don't show remove links on dropzone itself.
 		acceptedFiles: 'image/*',
 		dictDefaultMessage: "Drag Images or Click Here to Upload",
-		previewsContainer: null,
-		clickable: "#upload-btn",
-		thumbnail-height: 210,
-		previewTemplate: document.querySelector('preview-template').innerHTML,
+		clickable: "#clickable",
+		thumbnailHeight: 210,
+		thumbnailWidth: 250,
+		previewTemplate: document.querySelector('#preview-template').innerHTML,
+		previewsContainer: "#upload-previews"
 	});
 
 	// Update the total progress bar

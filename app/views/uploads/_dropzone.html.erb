@@ -2,13 +2,15 @@
 	<div class="fallback">
   	<%= f.label :image %>
     <%= f.file_field :image %>
-  <%= f.submit "Upload" %>
+  	<%= f.submit "Upload" %>
   </div>
-<% end %>
+<div id="clickable" class="btn">Select Files</div>
 
-<div id="preview-template" style="display: none;">
+<div id="upload-previews"></div>
+
+<div id="preview-template" class="dropzone-previews" style = "display: none;">
 	<div class="dz-preview dz-file-preview">
-	<img src="removebutton.png" alt="Click me to remove the file." data-dz-remove />
+		<i class="fa fa-times-circle" data-dz-remove></i>
 	  <div class="dz-details">
 	    <div class="dz-filename"><span data-dz-name></span></div>
 	    <div class="dz-size" data-dz-size></div>
@@ -20,3 +22,5 @@
 	  <div class="dz-error-message"><span data-dz-errormessage></span></div>
 	</div>
 </div>
+
+<% end %>

@@ -1,23 +1,17 @@
-<%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
-	
-<% if upload.approved? %>
-	<%= image_tag(upload.image(:thumb), class: 'thumb approved')  %>
-<% else %>
-	<%= image_tag(upload.image(:thumb), class: 'thumb unapproved')  %>
-<% end %>
-
-<!-- 	<div class="upload-stats">
-		<span class="upload-views">Views: <%= upload.views %></span>
-		<span class="upload-downloads">Downloads: <%= upload.downloads %></span>
-		<span class="upload-likes">Likes: <%= upload.likers.count %></span>
-		<span class="upload-score">Score: <%= upload.weighted_score %></span>
-	</div>
-	<div class="upload-tags">
-		Tags: <%= upload.tags %>
-	</div> -->
+<div class="upload">
 	<% if current_user?(upload.user) %>
-		<%= link_to "delete", upload, method: :delete,
-                                       data: { confirm: "You sure?" } %>
-  <% end %>
+		<%= link_to upload, method: :delete, class: "delete-icon", data: { confirm: "Delete?" } do%> 
+			<i class="fa fa-times-circle"></i>
+		<% end %>
+	<% end %>
 
-<% end %>
+	<%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
+		
+		<% if upload.approved? %>
+			<%= image_tag(upload.image(:thumb), class: 'thumb approved')  %>
+		<% else %>
+			<%= image_tag(upload.image(:thumb), class: 'thumb unapproved')  %>
+		<% end %>
+
+	<% end %>
+</div>

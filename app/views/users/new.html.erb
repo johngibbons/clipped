@@ -6,13 +6,13 @@
 		<%= render 'fields', f: f %>
 		<%= f.submit "Create Profile" %>
 
-		<h5>Or login using another account:</h5>
+		<h5>Or sign up using another account:</h5>
 	<%= link_to '/auth/google_oauth2' do %>
-	  <button class="google">Log In With Google</button>
+	  <button class="google">Sign Up With Google</button>
   <% end %>
 
 	<%= link_to '/auth/facebook' do %>
-  	<button class="facebook">Log In With Facebook</button>
+  	<button class="facebook">Sign Up With Facebook</button>
   <% end %>
 	<% end %>
 </div>

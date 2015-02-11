@@ -1,6 +1,14 @@
 <% provide(:title, 'Edit profile') %>
 <h1>Update Your Profile</h1>
 
+
+<%= link_to 'http://gravatar.com/emails', target: "blank" do %>
+	<div class="gravatar_edit">
+	  <%= gravatar_for @user %>
+	</div>
+<% end %>
+
+
 <div class="edit_form">
 	<%= form_for(@user) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
@@ -16,8 +24,4 @@
 		<%= f.submit "Save Changes" %>
 	<% end %>
 
-	<div class="gravatar_edit">
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails" target=_blank>change</a>
-  </div>
 </div>

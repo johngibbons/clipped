@@ -1,5 +1,5 @@
 #{$all-button-inputs},
-button {
+button, .btn {
   @include appearance(none);
   -webkit-font-smoothing: antialiased;
   background-color: $action-color;
@@ -9,8 +9,10 @@ button {
   cursor: pointer;
   display: inline-block;
   font-family: $base-font-family;
-  font-size: $base-font-size;
+  font-size: $base-font-size * 0.8;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   line-height: 1;
   padding: 0.75em 1em;
   text-decoration: none;
