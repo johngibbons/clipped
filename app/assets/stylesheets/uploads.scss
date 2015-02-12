@@ -91,7 +91,7 @@
   }
 }
 
-  #upload-previews {
+  #uploader-container {
     @include outer-container;
     margin-top: 25px;
   }
@@ -105,9 +105,9 @@
   }
 
   .dz-preview {
+    @include omega(4n);
     @include transition(all, 1s, ease);
     @include span-columns(3);
-    @include omega(4n);
     margin-bottom: $gutter;
     position: relative;
     padding: 20px;
