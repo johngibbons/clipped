@@ -10,12 +10,12 @@
 	.dz-progress {
   $progress-border-color: $base-border-color;
   $progress-border: 1px solid $progress-border-color;
-  $progress-meter-border-color: $base-accent-color;
+  $progress-meter-border-color: $action-color;
   $progress-meter-border: 1px solid darken($progress-meter-border-color, 15%);
   $progress-meter-color: $progress-meter-border-color;
-  $progress-background: darken($action-color, 5);
+  $progress-background: darken($light-gray, 5);
   $progress-animation-duration: 0.7s;
-  $progress-height: 30px;
+  $progress-height: 25px;
 
   background-color: $progress-background;
   border: $progress-border;
@@ -99,6 +99,59 @@
   .dz-preview {
     @include span-columns(3);
     @include omega(4n);
+    position: relative;
+  }
+
+  .dz-image-container {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 25px;
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  .dz-success-mark {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+    color: $clipped-green;
+  }
+
+  .dz-success {
+    .dz-success-mark {
+      display: block;
+    }
+    .dz-progress {
+      display: none;
+    }
+  }
+
+  .dz-error-mark {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+    color: $clipped-red;
+  }
+
+  .dz-error {
+    .dz-error-mark {
+      display: block;
+    }
+    .dz-progress {
+      display: none;
+    }
+  }
+
+  .dz-remove {
+    color: $clipped-red;
   }
 
 	.dz-message {

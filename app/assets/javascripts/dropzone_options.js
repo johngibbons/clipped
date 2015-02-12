@@ -12,7 +12,7 @@ ready = function() {
 		dictDefaultMessage: "Drag Images or Click Here to Upload",
 		clickable: "#clickable",
 		thumbnailHeight: 210,
-		thumbnailWidth: 250,
+		thumbnailWidth: null,
 		previewTemplate: document.querySelector('#preview-template').innerHTML,
 		previewsContainer: "#upload-previews"
 	});
@@ -20,6 +20,10 @@ ready = function() {
 	// Update the total progress bar
 	dropzone.on("totaluploadprogress", function(progress) {
 	  $('.dz-upload').width = progress + "%";
+	});
+
+	dropzone.on("removedfile", function(file) {
+		
 	});
 
 };

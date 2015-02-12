@@ -10,15 +10,19 @@
 
 <div id="preview-template" class="dropzone-previews" style = "display: none;">
 	<div class="dz-preview dz-file-preview">
-		<i class="fa fa-times-circle" data-dz-remove></i>
-	  <div class="dz-details">
-	    <div class="dz-filename"><span data-dz-name></span></div>
-	    <div class="dz-size" data-dz-size></div>
+		<%= link_to @upload, method: :delete, class: "delete-icon", data: { confirm: "Delete?" } do%> <i class="dz-remove fa fa-minus-circle" data-dz-remove></i> <% end %>
+		<div class="dz-image-container">	  
+			<div class="dz-success-mark"><i class="fa fa-check-circle-o fa-3x"></i></div>
+		  <div class="dz-error-mark"><i class="fa fa-exclamation-circle fa-3x"></i></div>
 	    <img data-dz-thumbnail />
+    </div>
+
+	  <div class="dz-details">
+  	  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+	    <!-- <div class="dz-filename"><span data-dz-name></span></div>-->	
+	    <div class="dz-size" data-dz-size></div>
 	  </div>
-	  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-	  <div class="dz-success-mark"><span>✔</span></div>
-	  <div class="dz-error-mark"><span>✘</span></div>
+
 	  <div class="dz-error-message"><span data-dz-errormessage></span></div>
 	</div>
 </div>
