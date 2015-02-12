@@ -5,7 +5,23 @@ class Upload < ActiveRecord::Base
                                  dependent:   :destroy
   has_many :likers, through: :liked_relationships
   default_scope -> { order(created_at: :desc) }
+
+  # Environment-specific direct upload url verifier screens for malicious posted upload locations.
+  # DIRECT_UPLOAD_URL_FORMAT = %r{\Ahttps:\/\/s3\.amazonaws\.com\/myapp#{!Rails.env.production? ? "\\-#{Rails.env}" : ''}\/(?<path>uploads\/.+\/(?<filename>.+))\z}.freeze
+  
   validates :user_id, presence: true
+  validates :direct_upload_url, presence: true
+
+  before_create :set_upload_attributes
+  after_create :queue_processing
+
+  # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
+  def direct_upload_url=(escaped_url)
+    write_attribute(:direct_upload_url, (CGI.unescape(escaped_url) rescue nil))
+  end
+
+
+
   has_attached_file :image, 
                     styles: { original: "4000x4000>", large: "1500x1500>", medium: "750x750>", thumb: "x300>" },
                     :storage => :s3,
@@ -13,8 +29,8 @@ class Upload < ActiveRecord::Base
                     :s3_protocol => 'https',
                     :s3_host_name => "s3-us-west-2.amazonaws.com" 
 
-  validates_attachment  :image, :presence => true,
-                        :content_type => { :content_type => /\Aimage\/.*\Z/ },
+  validates_attachment  :image,
+                        :file_name => { :matches => [/png\Z/, /jpe?g\Z/] },
                         :size => { :less_than => 50.megabytes }
 
   def s3_credentials
@@ -50,6 +66,26 @@ class Upload < ActiveRecord::Base
 
   class << self
 
+    # Final upload processing step
+    def transfer_and_cleanup(id)
+      upload = Upload.find(id)
+      direct_upload_url_data = %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(upload.direct_upload_url)
+      s3 = AWS::S3.new
+
+      puts URI.parse(URI.escape(upload.direct_upload_url))
+      
+      upload.image = URI.parse(URI.escape(upload.direct_upload_url))
+
+      puts upload.image
+
+      # upload.update_columns(processed: true, image: URI.parse(URI.escape(upload.direct_upload_url)))
+
+      puts "MADE IT HERE"
+      upload.save!
+      
+      s3.buckets[ENV["S3_BUCKET"]].objects[direct_upload_url_data[:path]].delete
+    end
+
     def sorted_by_likes
       Upload.all.reorder(likes_count: :desc, created_at: :desc)
     end
@@ -79,5 +115,36 @@ class Upload < ActiveRecord::Base
     end
 
   end
+
+  protected
+  
+    # Set attachment attributes from the direct upload
+    # @note Retry logic handles S3 "eventual consistency" lag.
+    def set_upload_attributes
+      tries ||= 5
+      direct_upload_url_data = %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(direct_upload_url)
+      s3 = AWS::S3.new
+
+      direct_upload_head = s3.buckets[ENV["S3_BUCKET"]].objects[direct_upload_url_data[:path]].head
+   
+      self.image_file_name     = direct_upload_url_data[:filename]
+      self.image_file_size     = direct_upload_head.content_length
+      self.image_content_type  = direct_upload_head.content_type
+      self.image_updated_at    = direct_upload_head.last_modified
+
+    rescue AWS::S3::Errors::NoSuchKey => e
+      tries -= 1
+      if tries > 0
+        sleep(3)
+        retry
+      else
+        false
+      end
+    end
+    
+    # Queue file processing
+    def queue_processing
+      Upload.delay.transfer_and_cleanup(id)
+    end
 
 end

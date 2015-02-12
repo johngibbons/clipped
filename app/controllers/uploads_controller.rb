@@ -37,7 +37,7 @@ class UploadsController < ApplicationController
   private
 
     def upload_params
-      params.require(:upload).permit(:image, :tags)
+      params.require(:upload).permit(:image, :tags, :direct_upload_url)
     end
 
     def correct_user

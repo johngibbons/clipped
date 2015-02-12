@@ -36,9 +36,11 @@ gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'figaro'
+gem 'delayed_job_active_record'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '~> 1.5.7'
-gem 'figaro'
+gem 's3_direct_upload' # direct upload form helper and assets
 gem 'normalize-rails'
 gem 'bourbon'
 gem 'neat'

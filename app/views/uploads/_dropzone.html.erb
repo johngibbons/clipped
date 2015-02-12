@@ -1,9 +1,8 @@
-<%= form_for @upload, html: {class: "dropzone"} do |f| %>
+<%= s3_uploader_form callback_url: uploads_url, id: "s3-uploader", class: "dropzone", callback_param: "upload[direct_upload_url]", expiration: 24.hours.from_now.utc.iso8601, max_file_size: 50.megabytes do %>
+	 <%= hidden_field_tag  "Content-type", "" %>
 	<div class="fallback">
-  	<%= f.label :image %>
-    <%= f.file_field :image %>
-  	<%= f.submit "Upload" %>
-  </div>
+		 <%= file_field_tag 'file', multiple: true %>
+	</div>
 
 <div id="uploader-container">
 	<div class="dz-message"><h1>Drag files here or</h1></div>

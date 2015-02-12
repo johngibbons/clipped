@@ -7,7 +7,7 @@ ready = function() {
  	var dropzone = new Dropzone( ".dropzone", {
 		maxFilesize: 50, // Set the maximum file size to 50 MB
 		maxThumbnailFilesize: 50,
-		paramName: "upload[image]", // Rails expects the file upload to be something like model[field_name]
+		paramName: "file", // Rails expects the file upload to be something like model[field_name]
 		addRemoveLinks: false, // Don't show remove links on dropzone itself.
 		acceptedFiles: 'image/*',
 		dictDefaultMessage: "Drag Images or Click Here to Upload",
@@ -29,7 +29,24 @@ ready = function() {
 
 	dropzone.on("addedfile", function() {
 		$(".dz-message, #clickable").hide();
-	})
+	});
+
+	dropzone.on("sending", function(file, xhr, formData) {
+	  // Will send the content type along with the file as POST data.
+	  console.log(file.type);
+	  formData.append("Content-Type", file.type);
+	});
+
+  return dropzone.on("success", function(file, responseText) {
+  	var direct_url = $(responseText).find("location")[0];
+  	url_location = $(direct_url).text();
+
+    $.post( "/uploads", { upload: {direct_upload_url: url_location} });
+  });
+
+
+
+
 
 };
 
