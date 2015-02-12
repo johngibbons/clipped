@@ -75,12 +75,8 @@ class Upload < ActiveRecord::Base
       puts URI.parse(URI.escape(upload.direct_upload_url))
       
       upload.image = URI.parse(URI.escape(upload.direct_upload_url))
+      upload.processed = true
 
-      puts upload.image
-
-      # upload.update_columns(processed: true, image: URI.parse(URI.escape(upload.direct_upload_url)))
-
-      puts "MADE IT HERE"
       upload.save!
       
       s3.buckets[ENV["S3_BUCKET"]].objects[direct_upload_url_data[:path]].delete
