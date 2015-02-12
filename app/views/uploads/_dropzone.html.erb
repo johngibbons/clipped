@@ -4,21 +4,23 @@
     <%= f.file_field :image %>
   	<%= f.submit "Upload" %>
   </div>
-<div id="clickable" class="btn">Select Files</div>
 
-<div id="upload-previews"></div>
+<div id="upload-previews">
+	<div class="dz-message"><h1>Drag files here or</h1></div>
+	<div id="clickable" class="btn">Click here to select files</div>
+</div>
 
 <div id="preview-template" class="dropzone-previews" style = "display: none;">
 	<div class="dz-preview dz-file-preview">
 		<%= link_to @upload, method: :delete, class: "delete-icon", data: { confirm: "Delete?" } do%> <i class="dz-remove fa fa-minus-circle" data-dz-remove></i> <% end %>
 		<div class="dz-image-container">	  
-			<div class="dz-success-mark"><i class="fa fa-check-circle-o fa-3x"></i></div>
-		  <div class="dz-error-mark"><i class="fa fa-exclamation-circle fa-3x"></i></div>
+			<div class="dz-success-mark animated fadeInDown"><i class="fa fa-check-circle-o fa-3x"></i></div>
+		  <div class="dz-error-mark animated shake"><i class="fa fa-exclamation-circle fa-3x"></i></div>
 	    <img data-dz-thumbnail />
     </div>
 
 	  <div class="dz-details">
-  	  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+  	  <div class="dz-progress fadeOut"><span class="dz-upload" data-dz-uploadprogress></span></div>
 	    <!-- <div class="dz-filename"><span data-dz-name></span></div>-->	
 	    <div class="dz-size" data-dz-size></div>
 	  </div>

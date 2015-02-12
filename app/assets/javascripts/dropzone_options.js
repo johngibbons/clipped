@@ -6,6 +6,7 @@ ready = function() {
 
  	var dropzone = new Dropzone( ".dropzone", {
 		maxFilesize: 50, // Set the maximum file size to 50 MB
+		maxThumbnailFilesize: 50,
 		paramName: "upload[image]", // Rails expects the file upload to be something like model[field_name]
 		addRemoveLinks: false, // Don't show remove links on dropzone itself.
 		acceptedFiles: 'image/*',
@@ -23,8 +24,12 @@ ready = function() {
 	});
 
 	dropzone.on("removedfile", function(file) {
-		
+
 	});
+
+	dropzone.on("addedfile", function() {
+		$(".dz-message, #clickable").hide();
+	})
 
 };
 
