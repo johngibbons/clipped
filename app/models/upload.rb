@@ -40,9 +40,9 @@ class Upload < ActiveRecord::Base
   end
 
   def weighted_score
-      total_views = Upload.total_views.to_f
-      total_downloads = Upload.total_downloads.to_f
-      total_likes = Upload.total_likes.to_f
+      total_views = Upload.sum(views).to_f
+      total_downloads = Upload.sum(downloads).to_f
+      total_likes = Upload.sum(likes_count).to_f
 
       views_percent     = views/total_views
       downloads_percent = downloads/total_downloads
@@ -82,32 +82,18 @@ class Upload < ActiveRecord::Base
       s3.buckets[ENV["S3_BUCKET"]].objects[direct_upload_url_data[:path]].delete
     end
 
-    def sorted_by_likes
-      Upload.all.reorder(likes_count: :desc, created_at: :desc)
-    end
+    def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
 
-    def sorted_by_views
-      Upload.all.reorder(views: :desc, created_at: :desc)
-    end
-
-    def sorted_by_downloads
-      Upload.all.reorder(downloads: :desc, created_at: :desc)
+    def sorted_by(attribute)
+      Upload.all.reorder("#{attribute} DESC")
     end
 
     def sorted_by_weighted_score
       Upload.all.sort_by(&:weighted_score).reverse!
-    end
-
-    def total_views
-      Upload.sum(:views)
-    end
-
-    def total_downloads
-      Upload.sum(:downloads)
-    end
-
-    def total_likes
-      Upload.sum(:likes_count)
     end
 
   end

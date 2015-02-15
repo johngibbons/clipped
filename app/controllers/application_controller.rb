@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
     def approved?
       #upload is one of the current users' or is approved
-      unless @upload.approved? || own_uploads?
+      unless @upload.approved? || own_uploads? || current_user.admin?
         flash[:error] = "You don't have access to that image"
         redirect_to request.referrer || root_url
       end
