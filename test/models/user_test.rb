@@ -82,7 +82,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "associated uploads should be destroyed" do
     @user.save
-    @user.uploads.create!(image_file_name: "image.jpg")
+    @user.uploads.create!(image_file_name: "image.jpg", direct_upload_url: "http://s3.amazon.com/image.jpg")
     assert_difference 'Upload.count', -1 do
       @user.destroy
     end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :show]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
@@ -16,7 +16,6 @@ class UsersController < ApplicationController
     if(current_user?(@user) || current_user.admin?)
       @uploads = @user.uploads.paginate(page: params[:page])
     else
-      puts "HERE"
       @uploads = @user.uploads.where(approved: true).paginate(page: params[:page])
     end
     redirect_to root_url and return unless @user.activated?
