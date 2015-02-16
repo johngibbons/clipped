@@ -69,6 +69,7 @@ group :test do
   gem 'guard-minitest',     '2.3.1'
   gem 'shoulda-matchers', require: false
   gem 'capybara'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :development do
