@@ -70,6 +70,10 @@ group :test do
   gem 'shoulda-matchers', require: false
 end
 
+group :development do
+  gem 'guard-rspec', require: false  
+end
+
 gem 'rails_12factor', group: :production
 
 ruby "2.2.0"
