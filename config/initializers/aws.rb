@@ -1,5 +1,5 @@
 # config/initializers/aws.rb
-require 'aws-sdk-v1'
+require 'aws-sdk'
 
 # S3.new will now use the credentials specified in AWS.config
 AWS.config( logger:            Rails.logger,
