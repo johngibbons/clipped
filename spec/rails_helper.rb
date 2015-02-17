@@ -7,6 +7,22 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'capybara/rails'
 require 'database_cleaner'
+
+#Do not delay jobs for tests
+Delayed::Worker.delay_jobs = false
+
+# AWS.stub!
+ 
+# s3 = AWS::S3.new
+# s3.client.stub_for(:describe_instances)[:content_length] = 30
+# direct_upload_head = s3.client.describe_instances
+# # direct_upload_head.data[:content_length] = [30]
+# # direct_upload_head.data[:content_type] = 'image/jpeg'
+# # direct_upload_head.data[:last_modified] = Time.now
+ 
+# # now calling ec2.describe_instances will return my fake data
+# direct_upload_head.content_length
+#=> { :reservation_set => [...] } 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

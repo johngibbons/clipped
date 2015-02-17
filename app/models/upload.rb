@@ -30,7 +30,7 @@ class Upload < ActiveRecord::Base
                     :s3_host_name => "s3-us-west-2.amazonaws.com" 
 
   validates_attachment  :image,
-                        :file_name => { :matches => [/png\Z/, /jpe?g\Z/] },
+                        :file_name => { :matches => /\.(gif|jpg|jpeg|tiff|png)$/i },
                         :size => { :less_than => 50.megabytes }
 
   def s3_credentials
