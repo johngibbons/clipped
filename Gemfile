@@ -39,7 +39,7 @@ gem 'unicorn'
 gem 'figaro'
 gem 'delayed_job_active_record'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-gem 'aws-sdk', '~> 1.5.7'
+gem 'aws-sdk-v1'
 gem 's3_direct_upload' # direct upload form helper and assets
 gem 'normalize-rails'
 gem 'bourbon'

@@ -34,9 +34,9 @@ class Upload < ActiveRecord::Base
                         :size => { :less_than => 50.megabytes }
 
   def s3_credentials
-    { :bucket => ENV['S3_BUCKET'], 
-      :access_key_id => ENV['S3_ACCESS_KEY'], 
-      :secret_access_key => ENV['S3_SECRET_KEY'] }
+    { :bucket => ENV['AWS_BUCKET'], 
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'], 
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] }
   end
 
   def weighted_score
@@ -79,7 +79,7 @@ class Upload < ActiveRecord::Base
 
       upload.save!
       
-      s3.buckets[ENV["S3_BUCKET"]].objects[direct_upload_url_data[:path]].delete
+      s3.buckets[ENV["AWS_BUCKET"]].objects[direct_upload_url_data[:path]].delete
     end
 
     def authenticated?(attribute, token)
@@ -107,7 +107,7 @@ class Upload < ActiveRecord::Base
       direct_upload_url_data = %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(direct_upload_url)
       s3 = AWS::S3.new
 
-      direct_upload_head = s3.buckets[ENV["S3_BUCKET"]].objects[direct_upload_url_data[:path]].head
+      direct_upload_head = s3.buckets[ENV["AWS_BUCKET"]].objects[direct_upload_url_data[:path]].head
    
       self.image_file_name     = direct_upload_url_data[:filename]
       self.image_file_size     = direct_upload_head.content_length
