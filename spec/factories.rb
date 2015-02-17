@@ -16,7 +16,12 @@ FactoryGirl.define do
     direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/%7Btimestamp%7D-%7Bunique_id%7D-04a790b7c2a227a34b7f00643ed9a7d5/mountains3.jpg"
     image_file_name "image.jpg"
     image_content_type "image/jpg"
-    image_file_size "30000"
+    image_file_size "3"
     image_updated_at Time.now
+  end
+
+  factory :relationship do
+    liker_id 1
+    liked_id 2
   end
 end 

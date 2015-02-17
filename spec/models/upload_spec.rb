@@ -20,4 +20,31 @@ RSpec.describe Upload, type: :model do
     newer_upload = create(:upload, created_at: Time.now)
     expect(Upload.all).to eq [newer_upload, upload]
   end
+
+  it "is rejects invalid file type" do
+    invalid_files = %w[ something.xml anything.mp4 sample.doc
+                        something.rvt something.html anything.css ]
+    invalid_files.each do |invalid_file|
+      upload.image_file_name = invalid_file
+      expect(upload).to be_invalid
+    end
+  end
+
+  it "accepts valid file type" do
+    valid_files = %w[ something.jpg anything.jpeg sample.JPG
+                      something.png anything.Png ]
+    valid_files.each do |valid_file|
+      upload.image_file_name = valid_file
+      expect(upload).to be_valid
+    end
+  end
+
+  # describe "#transfer_and_cleanup" do
+  #   it "makes upload processed" do
+  #     upload.processed = false
+  #     upload.save
+  #     Upload.transfer_and_cleanup(upload.id)
+  #     expect(upload).to be_processed 
+  #   end
+  # end
 end
