@@ -11,10 +11,10 @@ require 'database_cleaner'
 #Do not delay jobs for tests
 Delayed::Worker.delay_jobs = false
 
-# AWS.stub!
- 
-# s3 = AWS::S3.new
-# s3.client.stub_for(:describe_instances)[:content_length] = 30
+AWS.stub!
+
+# s3 = AWS::S3::Client.new
+# s3.stub_for(:describe_instances)
 # direct_upload_head = s3.client.describe_instances
 # # direct_upload_head.data[:content_length] = [30]
 # # direct_upload_head.data[:content_type] = 'image/jpeg'

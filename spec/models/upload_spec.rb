@@ -42,6 +42,7 @@ RSpec.describe Upload, type: :model do
   # describe "#transfer_and_cleanup" do
   #   it "makes upload processed" do
   #     upload.processed = false
+  #     upload.id = 1
   #     upload.save
   #     Upload.transfer_and_cleanup(upload.id)
   #     expect(upload).to be_processed 
