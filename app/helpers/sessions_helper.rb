@@ -27,13 +27,15 @@ module SessionsHelper
         log_in user
         @current_user = user
       end
+    else
+      @current_user = GuestUser.new
     end
   end
 
 
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
-    !current_user.nil?
+    !current_user.email.blank?
   end
 
   def forget(user)
