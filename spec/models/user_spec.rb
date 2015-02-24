@@ -57,7 +57,61 @@ RSpec.describe User, type: :model do
     expect(user).to be_invalid
   end
 
-  describe ".authenticated?" do
+  describe(".new_token") do
+    it "returns a random token" do
+      expect(User.new_token).to_not eq(User.new_token)
+    end
+  end
+
+  describe "#activate" do
+    it "activates user" do
+      user.activated = false
+      user.save
+      user.activate
+      expect(user).to be_activated
+    end
+  end
+
+  describe "#create_reset_digest" do
+    it "create reset token" do
+      user = create(:user)
+      expect(user.reset_token).to be_nil
+      expect(user.reset_digest).to be_nil
+      expect(user.reset_sent_at).to be_nil
+      user.create_reset_digest
+      expect(user.reset_token).to_not be_nil
+      expect(user.reset_digest).to_not be_nil
+      expect(user.reset_sent_at).to_not be_nil
+    end
+  end
+
+  describe "#password_reset_expired?" do
+    it "returns false when password reset token sent less than 2 hours ago" do
+      user = create(:user)
+      user.create_reset_digest
+      expect(user.password_reset_expired?).to eq(false)
+    end
+
+    it "returns true when password reset token sent 2 hours ago or more" do
+      user = create(:user)
+      user.create_reset_digest
+      user.reset_sent_at = 2.hours.ago
+      expect(user.password_reset_expired?).to eq(true)
+    end
+  end
+
+  describe "#remember" do
+    it "creates remember token for persistent sessions" do
+      user = create(:user)
+      expect(user.remember_token).to be_nil
+      expect(user.remember_digest).to be_nil
+      user.remember
+      expect(user.remember_token).to_not be_nil
+      expect(user.remember_digest).to_not be_nil
+    end
+  end
+
+  describe "#authenticated?" do
     it "is true when digest matches given token" do
       expect(user.authenticated?(:password, user.password)).to eq true
     end
@@ -71,14 +125,14 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe ".activate" do
-    it "activates user" do
-      user.activated = false
-      user.save
-      user.activate
-      expect(user).to be_activated
+  describe "#forget" do
+    it "deletes remember token to forget user session" do
+      user = create(:user)
+      user.remember
+      expect(user.remember_digest).to_not be_nil
+      user.forget
+      expect(user.remember_digest).to be_nil
     end
   end
-
 
 end

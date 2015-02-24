@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    name "Test User"
+    name Faker::Name.first_name
     sequence :email do |n|
       "person#{n}@example.com"
     end
@@ -19,5 +19,9 @@ FactoryGirl.define do
   factory :relationship do
     liker_id 1
     liked_id 2
+  end
+
+  factory :guest_user do
+    
   end
 end 

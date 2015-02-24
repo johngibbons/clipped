@@ -26,7 +26,6 @@ gem 'dropzonejs-rails'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'faker'
 gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 
@@ -71,6 +70,8 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'capybara'
   gem "factory_girl_rails", "~> 4.0"
+  gem 'launchy', '~> 2.4.3'
+  gem 'faker'
 end
 
 group :development do

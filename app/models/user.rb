@@ -104,16 +104,32 @@ class User < ActiveRecord::Base
     liking.include?(upload)
   end
 
+  def total_user_likes
+    count = 0
+    self.uploads.each do |upload|
+      count += upload.total_likes
+    end
+    count
+  end
+
+  def totatl_user_views
+    count = 0
+    self.uploads.each do |upload|
+      count += upload.views
+    end
+    count
+  end
+
   # Approve an upload
   def approve(upload)
     upload.approved = true
-    upload.save
+    upload.save!
   end
 
   # Disapprove an upload
   def disapprove(upload)
     upload.approved = false
-    upload.save
+    upload.save!
   end
   
   private

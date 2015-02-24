@@ -8,7 +8,7 @@
 
 <p>Views: <%= @upload.views %></p>
 <p>Downloads: <%= @upload.downloads %></p>
-<p>Likes: <span id="likes"><%= @upload.likers.count %></span></p>
+<p>Likes: <span id="likes"><%= @upload.total_likes %></span></p>
 
 <%= render 'relationships/like_form' if logged_in? %>
 <%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>

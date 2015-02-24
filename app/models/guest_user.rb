@@ -40,11 +40,11 @@ class GuestUser
   end
 
   def like(upload)
-    false
+    liker_relationships.none
   end
 
   def unlike(upload)
-    false
+    liker_relationships.none
   end
 
   def liking?(upload)

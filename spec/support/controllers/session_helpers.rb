@@ -5,7 +5,7 @@ module Controllers
     end
 
     def log_in_as(user)
-      request.session[:user_id] = user.id
+      session[:user_id] = user.id
     end
 
     def current_user

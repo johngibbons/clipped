@@ -64,13 +64,15 @@ class Upload < ActiveRecord::Base
 
   end
 
+  def total_likes
+    self.likers.count
+  end
+
   class << self
 
     # Final upload processing step
     def transfer_and_cleanup(id)
       upload = Upload.find(id)
-      direct_upload_url_data = %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(upload.direct_upload_url)
-      s3 = AWS::S3.new
 
       puts URI.parse(URI.escape(upload.direct_upload_url))
       
@@ -99,13 +101,19 @@ class Upload < ActiveRecord::Base
   end
 
   protected
+
+    def s3
+      AWS::S3.new
+    end
+
+    def direct_upload_url_data
+      %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(direct_upload_url)
+    end
   
     # Set attachment attributes from the direct upload
     # @note Retry logic handles S3 "eventual consistency" lag.
     def set_upload_attributes
       tries ||= 5
-      direct_upload_url_data = %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(direct_upload_url)
-      s3 = AWS::S3.new
 
       direct_upload_head = s3.buckets[ENV["AWS_BUCKET"]].objects[direct_upload_url_data[:path]].head
    
