@@ -48,7 +48,11 @@ class User < ActiveRecord::Base
   end
 
   # Activates an account.
-  def activate
+  def activate(token)
+    if !self || self.activated? || !self.authenticated?(:activation, token)
+      return false
+    end
+
     update_columns(activated: true, activated_at: Time.zone.now)
   end
 
@@ -107,12 +111,12 @@ class User < ActiveRecord::Base
   def total_user_likes
     count = 0
     self.uploads.each do |upload|
-      count += upload.total_likes
+      count += upload.likes_count
     end
     count
   end
 
-  def totatl_user_views
+  def total_user_views
     count = 0
     self.uploads.each do |upload|
       count += upload.views

@@ -3,5 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 img.unapproved {
-	border: 5px solid $action-color;
+	border: 1px solid transparentize($action-color, .7);
+	background-color: transparentize($action-color, .9);
 }

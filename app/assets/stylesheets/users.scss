@@ -3,10 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .gravatar {
-	display: block;
-	border-radius: 50%;
-	border: 5px solid $action-color;
-	margin-bottom: 25px;
+	border-radius: 100%;
 }
 
 .user_profile {
@@ -16,8 +13,11 @@
 	padding-bottom: 50px;
 
 	.gravatar {
+		display: block;
 		margin-left: auto;
 		margin-right: auto;
+		border: 5px solid $light-gray;
+		margin-bottom: 25px;
 	}
 
 .user-stats {

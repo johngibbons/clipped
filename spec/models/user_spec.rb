@@ -67,7 +67,7 @@ RSpec.describe User, type: :model do
     it "activates user" do
       user.activated = false
       user.save
-      user.activate
+      user.activate(user.activation_token)
       expect(user).to be_activated
     end
   end

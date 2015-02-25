@@ -54,7 +54,34 @@ RSpec.describe UsersController, type: :controller do
 
   it "allows guest users to view other users" do
     expect(session[:user_id]).to eq(nil)
-    expect(current_user).to eq(nil)
+    expect(current_user).to eq(:guest_user)
+  end
+
+  describe "showing user profile" do
+    subject(:upload_approved) { build(:upload, user_id: user, approved: true) }
+    subject(:upload_unapproved) { build(:upload, user_id: user, approved: false) }
+
+    context "viewing own profile" do
+      before :example do
+        log_in_as(user)
+        get :show, id: user
+        user.stub(:upload) do |arg|
+          if arg == :approved
+            
+          elsif arg == :that
+            "got that"
+          end
+        end
+    
+    object.foo(:this).should eq("got this")
+    object.foo(:that).should eq("got that")
+      end
+
+      it "shows all uploads" do
+        expect(Upload.all.count).to eq(2)
+        expect(response.body).to have_css(".unapproved")
+      end
+    end
   end
 
   describe "handles deleting users correctly" do
@@ -82,8 +109,13 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "allows destroy when admin" do
-
-
+      admin = create(:admin)
+      log_in_as(admin)
+      expect do
+        delete :destroy, id: @user
+      end.to change{ User.count }.by(-1)
+      expect(flash).to_not be_empty
+      expect(response).to redirect_to(users_url)
     end
   end
 end

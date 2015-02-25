@@ -64,10 +64,6 @@ class Upload < ActiveRecord::Base
 
   end
 
-  def total_likes
-    self.likers.count
-  end
-
   class << self
 
     # Final upload processing step

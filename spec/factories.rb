@@ -9,6 +9,7 @@ FactoryGirl.define do
     factory :admin do
       admin true
     end
+
   end
 
   factory :upload do
@@ -22,6 +23,6 @@ FactoryGirl.define do
   end
 
   factory :guest_user do
-    
+
   end
 end 
