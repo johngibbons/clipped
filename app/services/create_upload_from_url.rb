@@ -22,7 +22,6 @@ class CreateUploadFromURL
 
       def direct_upload_url_data
         return %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(@direct_upload_url)
-        byebug
       end
 
       def direct_upload_attributes

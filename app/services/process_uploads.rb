@@ -8,7 +8,7 @@ class ProcessUploads
 
   # Queue file processing
   def queue_processing
-    handle_asynchronously(transfer_and_cleanup(@upload))
+    transfer_and_cleanup(@upload)
   end
 
   private
@@ -31,4 +31,5 @@ class ProcessUploads
       
       cloud_storage_service.buckets[ENV["AWS_BUCKET"]].objects[direct_upload_url_data[:path]].delete
     end
+    handle_asynchronously :transfer_and_cleanup
 end

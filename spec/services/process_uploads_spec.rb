@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe ProcessUploads do
   before(:example) do
-    @upload = build(:upload, direct_upload_url: "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads%2F%7Btimestamp%7D-%7Bunique_id%7D-f5a2a3ba653b28f441fbdb96c7a06473%2Fjohn.jpg")
+    @upload = build(:upload, direct_upload_url: "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/9a51da779b300880800edc0666e51401/amanda.jpg")
     @service = ProcessUploads.new(@upload)
   end
 
