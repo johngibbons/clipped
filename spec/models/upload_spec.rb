@@ -11,15 +11,18 @@ RSpec.describe Upload, type: :model do
   end
 
   it "has associated image" do
-    upload.direct_upload_url = nil
+    upload.image = nil
     expect(upload).to be_invalid
   end
 
-  # it "is ordered by newest first" do
-  #   upload.created_at = 3.seconds.ago
-  #   newer_upload = create(:upload, created_at: Time.now)
-  #   expect(Upload.all).to eq [newer_upload, upload]
-  # end
+  it "is ordered by newest first" do
+    upload.created_at = 3.seconds.ago
+    newer_upload = create(:upload, created_at: Time.now)
+    expect(Upload.all.first).to eq newer_upload
+    upload.created_at = Time.now.advance(hours: 1)
+    upload.save
+    expect(Upload.all.first).to eq upload
+  end
 
   it "is rejects invalid file type" do
     invalid_files = %w[ something.xml anything.mp4 sample.doc

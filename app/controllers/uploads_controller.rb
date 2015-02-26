@@ -11,13 +11,16 @@ class UploadsController < ApplicationController
   end
 
   def new
-    @upload = current_user.uploads.build if logged_in?
+    @upload = current_user.uploads.new if logged_in?
   end
 
   def create
-    @upload = current_user.uploads.build(upload_params)
+    @upload = current_user.uploads.new(upload_params)
+    processed_upload = CreateUploadFromURL.new(@upload)
+    processed_upload.create!
     if @upload.save
       render json: { message: "success", fileID: @upload.id }, :status => 200
+      processed_upload.queue_processing
     else
       render json: { error: @upload.errors.full_messages.join(',')}, :status => 400
     end

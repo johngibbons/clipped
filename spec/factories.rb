@@ -1,3 +1,5 @@
+include ActionDispatch::TestProcess
+
 FactoryGirl.define do
   factory :user do
     name Faker::Name.first_name
@@ -14,7 +16,8 @@ FactoryGirl.define do
 
   factory :upload do
     user
-    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/%7Btimestamp%7D-%7Bunique_id%7D-04a790b7c2a227a34b7f00643ed9a7d5/mountains3.jpg"
+    image { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
+    direct_upload_url "https://amazon.s3.com/upload/test.png"
   end
 
   factory :relationship do
