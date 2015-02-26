@@ -44,10 +44,6 @@ ready = function() {
     $.post( "/uploads", { upload: {direct_upload_url: url_location} });
   });
 
-
-
-
-
 };
 
 $(document).ready(ready);

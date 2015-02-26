@@ -8,7 +8,7 @@ class ProcessUploads
 
   # Queue file processing
   def queue_processing
-    self.delay.transfer_and_cleanup(@upload)
+    handle_asynchronously(transfer_and_cleanup(@upload))
   end
 
   private

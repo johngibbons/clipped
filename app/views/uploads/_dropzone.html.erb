@@ -1,4 +1,4 @@
-<%= s3_uploader_form callback_url: uploads_url, id: "s3-uploader", class: "dropzone", callback_param: "upload[direct_upload_url]", expiration: 24.hours.from_now.utc.iso8601, max_file_size: 50.megabytes do %>
+<%= s3_uploader_form callback_url: uploads_url, id: "s3-uploader", class: "dropzone", callback_param: "upload[direct_upload_url]", expiration: 24.hours.from_now.utc.iso8601, max_file_size: 50.megabytes, key: "uploads/#{SecureRandom.hex}/${filename}" do %>
 	 <%= hidden_field_tag  "Content-type", "" %>
 	<div class="fallback">
 		 <%= file_field_tag 'file', multiple: true %>

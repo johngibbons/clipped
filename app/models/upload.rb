@@ -5,10 +5,13 @@ class Upload < ActiveRecord::Base
                                  dependent:   :destroy
   has_many :likers, through: :liked_relationships
   default_scope -> { order(created_at: :desc) }
-
-  attr_accessor :image_file_name, :image_updated_at, :image_content_type, :image_file_size
   
   validates :user_id, presence: true
+
+  # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
+  def direct_upload_url=(escaped_url)
+    write_attribute(:direct_upload_url, (CGI.unescape(escaped_url) rescue nil))
+  end
 
   has_attached_file :image, 
                     styles: { original: "4000x4000>", large: "1500x1500>", medium: "750x750>", thumb: "x300>" },
@@ -19,8 +22,7 @@ class Upload < ActiveRecord::Base
 
   validates_attachment  :image,
                         :file_name => { :matches => /\.(gif|jpg|jpeg|tiff|png)$/i },
-                        :size => { :less_than => 50.megabytes },
-                        :presence => true
+                        :size => { :less_than => 50.megabytes }
 
   def s3_credentials
     { :bucket => ENV['AWS_BUCKET'], 
