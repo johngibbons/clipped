@@ -11,8 +11,6 @@ require 'database_cleaner'
 #Do not delay jobs for tests
 Delayed::Worker.delay_jobs = false
 
-AWS.stub!
-
 # s3 = AWS::S3::Client.new
 # s3.stub_for(:describe_instances)
 # direct_upload_head = s3.client.describe_instances
@@ -44,7 +42,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include ActionDispatch::TestProcess
 
 

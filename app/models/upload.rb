@@ -5,6 +5,8 @@ class Upload < ActiveRecord::Base
                                  dependent:   :destroy
   has_many :likers, through: :liked_relationships
   default_scope -> { order(created_at: :desc) }
+
+  attr_accessor :image_file_name, :image_updated_at, :image_content_type, :image_file_size
   
   validates :user_id, presence: true
 

@@ -65,13 +65,6 @@ RSpec.describe UsersController, type: :controller do
       before :example do
         log_in_as(user)
         get :show, id: user
-        user.stub(:upload) do |arg|
-          if arg == :approved
-            
-          elsif arg == :that
-            "got that"
-          end
-        end
     
     object.foo(:this).should eq("got this")
     object.foo(:that).should eq("got that")
