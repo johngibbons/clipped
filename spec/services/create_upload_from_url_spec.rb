@@ -7,10 +7,6 @@ describe CreateUploadFromURL do
     @service = CreateUploadFromURL.new(@upload)
   end
 
-  it "has valid upload" do
-    expect(@upload).to be_valid
-  end
-
   describe "#set_upload_attributes" do
     it "sets proper upload attributes" do
       @service.set_upload_attributes
@@ -18,6 +14,7 @@ describe CreateUploadFromURL do
       expect(@upload.image_file_size).to_not be_nil
       expect(@upload.image_content_type).to eq("image/jpeg,")
       expect(@upload.image_updated_at).to be_a(Time)
+      expect(@upload).to be_valid
     end
   end
 

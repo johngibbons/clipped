@@ -19,6 +19,7 @@ RSpec.describe "User signs up", :type => :request do
     expect(user).to_not be_activated
     expect(response).to redirect_to(root_url)
     log_in_as(user)
-    get edit_account_activation_path("invalid token")
+    get edit_account_activation_url(user.activation_token, email: user.email)
+    expect(user.reload).to be_activated
   end
 end

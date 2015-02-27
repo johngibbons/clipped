@@ -39,9 +39,19 @@ RSpec.configure do |config|
   config.include ActionDispatch::TestProcess
 
   config.around(:each) do |example|
-    VCR.use_cassette(example.metadata[:full_description]) do
+    VCR.use_cassette(example.metadata[:full_description], :match_requests_on => [:host]) do
       example.run
     end
+  end
+
+  config.around(:each, :delayed_job) do |example|
+    old_value = Delayed::Worker.delay_jobs
+    Delayed::Worker.delay_jobs = true
+    Delayed::Job.destroy_all
+ 
+    example.run
+ 
+    Delayed::Worker.delay_jobs = old_value
   end
 
 

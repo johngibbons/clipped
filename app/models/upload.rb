@@ -22,7 +22,8 @@ class Upload < ActiveRecord::Base
 
   validates_attachment  :image,
                         :file_name => { :matches => /\.(gif|jpg|jpeg|tiff|png)$/i },
-                        :size => { :less_than => 50.megabytes }
+                        :size => { :less_than => 50.megabytes },
+                        :presence => true
 
   def s3_credentials
     { :bucket => ENV['AWS_BUCKET'], 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AccountActivationsController, type: :controller do
-  subject(:user) { create(:user) }
+  subject(:user) { create(:user, activated: false) }
   subject(:other_user) { create(:user) }
 
   it "activates authenticated user" do
