@@ -69,9 +69,12 @@ group :test do
   gem 'guard-minitest',     '2.3.1'
   gem 'shoulda-matchers', require: false
   gem 'capybara'
+  gem "capybara-webkit"
   gem "factory_girl_rails", "~> 4.0"
   gem 'launchy', '~> 2.4.3'
   gem 'faker'
+  gem 'vcr', '~> 2.9.3'
+  gem 'webmock'
 end
 
 group :development do

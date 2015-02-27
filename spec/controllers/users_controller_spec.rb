@@ -57,26 +57,6 @@ RSpec.describe UsersController, type: :controller do
     expect(current_user).to eq(:guest_user)
   end
 
-  describe "showing user profile" do
-    subject(:upload_approved) { build(:upload, user_id: user, approved: true) }
-    subject(:upload_unapproved) { build(:upload, user_id: user, approved: false) }
-
-    context "viewing own profile" do
-      before :example do
-        log_in_as(user)
-        get :show, id: user
-    
-    object.foo(:this).should eq("got this")
-    object.foo(:that).should eq("got that")
-      end
-
-      it "shows all uploads" do
-        expect(Upload.all.count).to eq(2)
-        expect(response.body).to have_css(".unapproved")
-      end
-    end
-  end
-
   describe "handles deleting users correctly" do
     before :example do
       @user = user

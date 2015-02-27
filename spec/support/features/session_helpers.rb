@@ -8,8 +8,7 @@ module Features
       click_button 'Create Profile'
     end
 
-    def sign_in
-      user = create(:user)
+    def log_in(user)
       visit login_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password

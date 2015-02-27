@@ -1,0 +1,159 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images//original/test.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
+      Date:
+      - Thu, 26 Feb 2015 11:31:21 -0700
+      Authorization:
+      - AWS AKIAIZV74X35AK7DB6CQ:kaZvayEv7HLkQKoKmyol5qVwLMo=
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      X-Amz-Request-Id:
+      - 14D99B854B28512C
+      X-Amz-Id-2:
+      - vFpcLKWLG+fDEt3RFcZDBjQImUnUbETsHO0P23LLWF6CrTOdDz0LjZWzbqqpp4j4xkmvTd9qvLM=
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 26 Feb 2015 18:31:21 GMT
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 26 Feb 2015 18:31:22 GMT
+- request:
+    method: head
+    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images//large/test.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
+      Date:
+      - Thu, 26 Feb 2015 11:31:22 -0700
+      Authorization:
+      - AWS AKIAIZV74X35AK7DB6CQ:XAuCHV2V/YV618Pujtdemd0H9Sw=
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      X-Amz-Request-Id:
+      - 872E33AF42AD5ED0
+      X-Amz-Id-2:
+      - PXykKymUae1soE02uoxpCiYddy2fwPWl6Ji8i2Jp86Tz5amU8gREpPHVwE2V43qMjeUTxCq8Vy8=
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 26 Feb 2015 18:31:22 GMT
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 26 Feb 2015 18:31:23 GMT
+- request:
+    method: head
+    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images//medium/test.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
+      Date:
+      - Thu, 26 Feb 2015 11:31:23 -0700
+      Authorization:
+      - AWS AKIAIZV74X35AK7DB6CQ:MSPsHCZGD4fU9SO0wwTGkAlR+Cw=
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      X-Amz-Request-Id:
+      - 29AE678758A89E1F
+      X-Amz-Id-2:
+      - btIVBfafjN6v4wz3eAT7/8AJBqiuvoUbjTHmp9JLpm9o7pGIX2A+D1Jts7mqaCkDg8Lz0VsK2hk=
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 26 Feb 2015 18:31:22 GMT
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 26 Feb 2015 18:31:23 GMT
+- request:
+    method: head
+    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images//thumb/test.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
+      Date:
+      - Thu, 26 Feb 2015 11:31:23 -0700
+      Authorization:
+      - AWS AKIAIZV74X35AK7DB6CQ:s6AK2Sq9VI5hn7wpQ7bXBL8u3hc=
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      X-Amz-Request-Id:
+      - 5C0ECC346CEB804F
+      X-Amz-Id-2:
+      - ccwr81/rsfs9diDOJZrxnjyxdvwcYMIbXMWkEDfFTTaDL9W3xVRNoDwK35uWhIbs21NKRQO3wyo=
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 26 Feb 2015 18:31:22 GMT
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 26 Feb 2015 18:31:23 GMT
+recorded_with: VCR 2.9.3

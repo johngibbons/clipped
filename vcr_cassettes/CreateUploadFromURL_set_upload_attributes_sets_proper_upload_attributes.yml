@@ -1,0 +1,138 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://entourageappdev.s3.amazonaws.com/uploads/9a51da779b300880800edc0666e51401/john.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
+      Date:
+      - Thu, 26 Feb 2015 15:05:59 -0700
+      Authorization:
+      - AWS AKIAIZV74X35AK7DB6CQ:xjOSmxqPJhkePI358Ilvbm8ugy0=
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - 0ClJjKgJ/lJG1j0tYZytACe2XjxtHG/vZMeV/LsE/mE51YD19cU6JhZFS+JFmj/Z
+      X-Amz-Request-Id:
+      - 4207887AA4FE0F8B
+      Date:
+      - Thu, 26 Feb 2015 22:06:00 GMT
+      Last-Modified:
+      - Thu, 26 Feb 2015 16:29:34 GMT
+      Etag:
+      - '"5c2cd837d9a25e089a9866fb1e80429e"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - image/jpeg,
+      Content-Length:
+      - '633808'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 26 Feb 2015 22:05:59 GMT
+- request:
+    method: head
+    uri: https://entourageappdev.s3.amazonaws.com/uploads/9a51da779b300880800edc0666e51401/john.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
+      Date:
+      - Thu, 26 Feb 2015 15:05:59 -0700
+      Authorization:
+      - AWS AKIAIZV74X35AK7DB6CQ:xjOSmxqPJhkePI358Ilvbm8ugy0=
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - r/wHsMu2TpGc5ibpv0ilENy8bQUChhqhDknpoqJhNETpk/vdzVfH9FZ4uAPEXocK
+      X-Amz-Request-Id:
+      - AE6617B82286243C
+      Date:
+      - Thu, 26 Feb 2015 22:06:00 GMT
+      Last-Modified:
+      - Thu, 26 Feb 2015 16:29:34 GMT
+      Etag:
+      - '"5c2cd837d9a25e089a9866fb1e80429e"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - image/jpeg,
+      Content-Length:
+      - '633808'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 26 Feb 2015 22:05:59 GMT
+- request:
+    method: head
+    uri: https://entourageappdev.s3.amazonaws.com/uploads/9a51da779b300880800edc0666e51401/john.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
+      Date:
+      - Thu, 26 Feb 2015 15:05:59 -0700
+      Authorization:
+      - AWS AKIAIZV74X35AK7DB6CQ:xjOSmxqPJhkePI358Ilvbm8ugy0=
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - siLZ4dQTHmt33OHy4zfrDzIywylO2BBkY+5PlhdwIQ1OLd8ouFwOJaCG0W1Sbcx+
+      X-Amz-Request-Id:
+      - D6D1079F5453974C
+      Date:
+      - Thu, 26 Feb 2015 22:06:00 GMT
+      Last-Modified:
+      - Thu, 26 Feb 2015 16:29:34 GMT
+      Etag:
+      - '"5c2cd837d9a25e089a9866fb1e80429e"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - image/jpeg,
+      Content-Length:
+      - '633808'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 26 Feb 2015 22:05:59 GMT
+recorded_with: VCR 2.9.3

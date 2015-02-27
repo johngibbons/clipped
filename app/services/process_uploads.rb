@@ -31,5 +31,5 @@ class ProcessUploads
       
       cloud_storage_service.buckets[ENV["AWS_BUCKET"]].objects[direct_upload_url_data[:path]].delete
     end
-    handle_asynchronously :transfer_and_cleanup
+    handle_asynchronously :transfer_and_cleanup, :queue => 'image_processing'
 end

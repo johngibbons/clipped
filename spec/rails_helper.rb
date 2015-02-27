@@ -7,19 +7,12 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'capybara/rails'
 require 'database_cleaner'
+require 'aws-sdk'
+require 'vcr'
 
 #Do not delay jobs for tests
-Delayed::Worker.delay_jobs = false
+# Delayed::Worker.delay_jobs = false
 
-# s3 = AWS::S3::Client.new
-# s3.stub_for(:describe_instances)
-# direct_upload_head = s3.client.describe_instances
-# # direct_upload_head.data[:content_length] = [30]
-# # direct_upload_head.data[:content_type] = 'image/jpeg'
-# # direct_upload_head.data[:last_modified] = Time.now
- 
-# # now calling ec2.describe_instances will return my fake data
-# direct_upload_head.content_length
 #=> { :reservation_set => [...] } 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -44,6 +37,12 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include ActionDispatch::TestProcess
+
+  config.around(:each) do |example|
+    VCR.use_cassette(example.metadata[:full_description]) do
+      example.run
+    end
+  end
 
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

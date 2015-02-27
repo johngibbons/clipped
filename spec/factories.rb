@@ -7,9 +7,14 @@ FactoryGirl.define do
       "person#{n}@example.com"
     end
     password "password"
+    activated true
 
     factory :admin do
       admin true
+    end
+
+    factory :not_activated do
+      activated false
     end
 
   end
@@ -17,7 +22,7 @@ FactoryGirl.define do
   factory :upload do
     user
     image { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
-    direct_upload_url "https://amazon.s3.com/upload/test.png"
+    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/9a51da779b300880800edc0666e51401/john.jpg"
   end
 
   factory :relationship do
