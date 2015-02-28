@@ -13,4 +13,12 @@ RSpec.feature "Image processing", :type => :feature do
     expect(page).to_not have_image "thumb"
     expect(@upload.processed?).to eq(false)
   end
+
+  scenario "shows processed image after processing" do
+    @upload.processed = true
+    @upload.save
+    visit user_path(@user)
+    expect(page).to have_image "thumb"
+    expect(@upload.processed?).to eq(true)
+  end
 end
