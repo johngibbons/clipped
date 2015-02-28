@@ -1,17 +1,7 @@
 <div class="upload">
-	<% if current_user?(upload.user) %>
-		<%= link_to upload, method: :delete, class: "delete-icon", data: { confirm: "Delete?" } do%> 
-			<i class="fa fa-times-circle"></i>
-		<% end %>
-	<% end %>
-
 	<%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
-		
-		<% if upload.approved? %>
-			<%= image_tag(upload.image(:thumb), class: 'thumb approved')  %>
-		<% else %>
-			<%= image_tag(upload.image(:thumb), class: 'thumb unapproved')  %>
+		<%= present(upload) do |upload| %>
+				<%= image_tag upload.src(:thumb), class: upload.classes %>
 		<% end %>
-
-	<% end %>
+	<% end %>	
 </div>
