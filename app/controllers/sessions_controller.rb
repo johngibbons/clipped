@@ -3,12 +3,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if auth_hash.nil?
-      @user = User.find_by(email: params[:session][:email].downcase)
-    else
-      @user = User.from_omniauth(auth_hash)
-    end
-    if params[:session].nil? || @user && @user.authenticate(params[:session][:password])
+    @service = LogInUsers.new(auth_hash, session_params)
+    @user = @service.get_user
+
+    if @service.login(@user)
       if @user.activated?
         log_in @user
         remember @user
@@ -34,5 +32,11 @@ class SessionsController < ApplicationController
 
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  def session_params
+    @guest = GuestUser.new
+    params[:session] ||= { password: @guest.password, email: @guest.email }
+    params
   end
 end

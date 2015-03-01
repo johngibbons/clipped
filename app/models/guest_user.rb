@@ -19,6 +19,10 @@ class GuestUser
     ""
   end
 
+  def password
+    ""
+  end
+
   def name
     "Guest"
   end
@@ -32,6 +36,10 @@ class GuestUser
   end
 
   def authenticated?(attribute, token)
+    false
+  end
+
+  def authenticate(password)
     false
   end
 

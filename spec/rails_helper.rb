@@ -44,6 +44,8 @@ RSpec.configure do |config|
     end
   end
 
+  config.include(Omniauth)
+
   config.around(:each, :delayed_job) do |example|
     old_value = Delayed::Worker.delay_jobs
     Delayed::Worker.delay_jobs = true
@@ -53,6 +55,8 @@ RSpec.configure do |config|
  
     Delayed::Worker.delay_jobs = old_value
   end
+  
+  OmniAuth.config.test_mode = true
 
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

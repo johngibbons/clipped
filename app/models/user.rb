@@ -30,21 +30,6 @@ class User < ActiveRecord::Base
       SecureRandom.urlsafe_base64
     end
 
-    def from_omniauth(auth)
-      find_by_email(auth["info"]["email"]) || create_with_omniauth(auth)
-    end
-
-    def create_with_omniauth(auth)
-      create! do |user|
-        user.provider = auth["provider"]
-        user.uid  = auth["uid"]
-        user.name = auth["info"]["name"]
-        user.email = auth["info"]["email"]
-        user.password = user.password_confirmation = SecureRandom.urlsafe_base64(n=6)
-        user.activated = true
-        user.activated_at = Time.zone.now
-      end
-    end
   end
 
   # Activates an account.
