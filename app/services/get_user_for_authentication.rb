@@ -1,30 +1,25 @@
-class LogInUsers
-
+class GetUserForAuthentication
   def initialize(auth_hash, params)
     @auth_hash = auth_hash
     @params = params
   end
 
   def get_user
-    if @auth_hash.nil?
-      User.find_by(email: @params[:session][:email].downcase)
-    else
+    if @auth_hash
       from_omniauth
-    end
-  end
-
-  def login(user)
-    if user.email == ""
-      false
     else
-      user.authenticate(@params[:session][:password]) || user.provider
+      User.find_by(email: @params[:session][:email].downcase) || GuestUser.new
     end
   end
 
-    private
+  def set_params(user)
+    @params[:session] ||= { email: user.email, password: user.password }
+  end
+
+  private
 
     def from_omniauth
-      if @auth_hash["info"]
+      if valid_auth_hash
         User.find_by(email: @auth_hash["info"]["email"]) || create_with_omniauth
       else
         GuestUser.new
@@ -43,4 +38,7 @@ class LogInUsers
       end
     end
 
+    def valid_auth_hash
+      @auth_hash["provider"] && @auth_hash["uid"] && @auth_hash["info"] && @auth_hash["info"]["email"] && @auth_hash["info"]["name"]
+    end
 end
