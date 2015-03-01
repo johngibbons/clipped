@@ -6,7 +6,9 @@ FactoryGirl.define do
     sequence :email do |n|
       "person#{n}@example.com"
     end
-    password "password"
+    sequence :password do |n|
+      "password#{n}"
+    end
     activated true
 
     factory :admin do
