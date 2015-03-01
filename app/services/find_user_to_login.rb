@@ -1,19 +1,16 @@
-class GetUserForAuthentication
-  def initialize(auth_hash, params)
-    @auth_hash = auth_hash
-    @params = params
-  end
+class FindUserToLogin
+  include ServiceHelper
+  include Virtus.model
 
-  def get_user
+  attribute :auth_hash, Hash
+  attribute :params, Hash
+
+  def call
     if @auth_hash
       from_omniauth
     else
-      User.find_by(email: @params[:session][:email].downcase) || GuestUser.new
+      User.find_by(email: @params["session"]["email"].downcase) || GuestUser.new
     end
-  end
-
-  def set_params(user)
-    @params[:session] ||= { email: user.email, password: user.password }
   end
 
   private

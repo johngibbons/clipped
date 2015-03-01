@@ -1,13 +1,12 @@
 class ProcessUploads
 
-  def initialize(upload)
-    @upload = upload
-    @id = upload.id
-    @direct_upload_url = upload.direct_upload_url
-  end
+  include ServiceHelper
+  include Virtus.model
+
+  attribute :upload, Upload
 
   # Queue file processing
-  def queue_processing
+  def call
     transfer_and_cleanup(@upload)
   end
 
@@ -18,13 +17,13 @@ class ProcessUploads
     end
 
     def direct_upload_url_data
-      %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(@direct_upload_url)
+      %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(@upload.direct_upload_url)
     end
 
     # Final upload processing step
     def transfer_and_cleanup(upload)
             
-      upload.image = URI.parse(URI.escape(@direct_upload_url))
+      upload.image = URI.parse(URI.escape(@upload.direct_upload_url))
       upload.processed = true
 
       upload.save!

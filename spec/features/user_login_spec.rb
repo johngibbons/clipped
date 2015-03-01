@@ -50,7 +50,7 @@ RSpec.feature "User logs in", :type => :feature do
     user.save!
     log_in(user)
     expect(page).to have_content "Account not activated."
-    expect(page).to have_content "What are you looking for?"
+    expect(page).to have_content "Log In With"
   end
   
 end

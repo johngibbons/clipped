@@ -3,24 +3,16 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @fetch = GetUserForAuthentication.new(auth_hash, params)
-    @user = @fetch.get_user
-    @fetch.set_params(@user)
-    @auth = LogInUser.new(@user, params)
+    @user = FindUserToLogin.call(auth_hash: auth_hash, params: params)
+    SetLoginParams.call(@user, params)
+    login = LogInUser.new(user: @user, params: params)
 
-    if @auth.login(@user)
-      if @user.activated?
-        log_in @user
-        remember @user
-        redirect_back_or @user
-      else
-        message = "Account not activated."
-        message += "Check your email for the activation link."
-        flash[:error] = message
-        redirect_to root_url
-      end
+    if login.success?
+      log_in @user
+      remember @user
+      redirect_back_or @user
     else
-      flash.now[:error] = 'Invalid email/password combination'
+      flash.now[:error] = login.error
       render 'new'
     end
   end

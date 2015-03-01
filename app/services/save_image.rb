@@ -1,13 +1,12 @@
-class CreateUploadFromURL
+class SaveImage
+  include ServiceHelper
+  include Virtus.model
 
-  def initialize(upload)
-    @upload = upload
-    @direct_upload_url = upload.direct_upload_url
-  end
+  attribute :upload, Upload
 
   # Set attachment attributes from the direct upload
   # @note Retry logic handles S3 "eventual consistency" lag.
-  def set_upload_attributes
+  def call
       @upload.image_file_name     = direct_upload_url_data[:filename]
       @upload.image_file_size     = direct_upload_attributes.content_length
       @upload.image_content_type  = direct_upload_attributes.content_type
@@ -21,7 +20,7 @@ class CreateUploadFromURL
     end
 
     def direct_upload_url_data
-      return %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(@direct_upload_url)
+      return %r{\/(?<path>uploads\/.+\/(?<filename>.+))\z}.match(@upload.direct_upload_url)
     end
 
     def direct_upload_attributes

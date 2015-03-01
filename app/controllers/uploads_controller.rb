@@ -16,11 +16,10 @@ class UploadsController < ApplicationController
 
   def create
     @upload = current_user.uploads.new(upload_params)
-    @service = CreateUploadFromURL.new(@upload)
-    @service.set_upload_attributes
+    SaveImage.call(upload: @upload)
     if @upload.save
       render json: { message: "success", fileID: @upload.id }, :status => 200
-      ProcessUploads.new(@upload).queue_processing
+      ProcessUploads.call(upload: @upload)
     else
       render json: { error: @upload.errors.full_messages.join(',')}, :status => 400
     end
