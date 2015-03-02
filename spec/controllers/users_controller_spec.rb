@@ -27,19 +27,14 @@ RSpec.describe UsersController, type: :controller do
     log_in_as(user)
     expect(current_user).to eq(user)
     get :edit, id: other_user.id
-    expect(flash).to be_empty
-    expect(response).to redirect_to(root_url)
+    expect(flash).to_not be_empty
+    expect(response).to redirect_to(login_url)
   end
 
   it "redirects update when logged in as wrong user" do
     log_in_as(user)
     get :update, id: other_user.id, user: { email: other_user.email }
-    expect(flash).to be_empty
-    expect(response).to redirect_to(root_url)
-  end
-
-  it "redirects index when not logged in" do
-    get :index
+    expect(flash).to_not be_empty
     expect(response).to redirect_to(login_url)
   end
 
@@ -77,8 +72,8 @@ RSpec.describe UsersController, type: :controller do
       expect do
         delete :destroy, id: @user
       end.to_not change{ User.count }
-      expect(flash).to be_empty
-      expect(response).to redirect_to(root_url)
+      expect(flash).to_not be_empty
+      expect(response).to redirect_to(login_url)
     end
 
     it "allows destroy when admin" do

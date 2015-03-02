@@ -1,24 +1,17 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
 
   def new
     @user = User.new
   end
 
   def index
-    @users = User.where(activated: true).paginate(page: params[:page])
+    @users = policy_scope(User).paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
-    if(current_user?(@user) || current_user.admin?)
-      @uploads = @user.uploads.paginate(page: params[:page])
-    else
-      @uploads = @user.uploads.where(approved: true).paginate(page: params[:page])
-    end
-    redirect_to root_url and return unless @user.activated?
+    @uploads = UploadPolicy::Scope.new(current_user, @user.uploads).resolve.paginate(page: params[:page])
+    authorize @user
   end
 
   def create
@@ -34,10 +27,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    authorize @user
   end
 
   def update
     @user = User.find(params[:id])
+    authorize @user
     if @user.update_attributes(user_params)
       flash[:success] = "Profile successfully updated"
       redirect_to @user
@@ -47,7 +42,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    @user = User.find(params[:id])
+    authorize @user
+    @user.destroy
     flash[:success] = "User deleted"
     redirect_to users_url
   end
@@ -57,12 +54,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
-    end
-
-    #confirms that user is the current_user
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
     end
 
 end

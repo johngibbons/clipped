@@ -32,7 +32,7 @@ class UploadPolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.admin? || user.upload_owner?(@upload)
+      if user.admin? || user.upload_owner?(scope.first)
         scope.all
       else
         scope.where(:approved => true)

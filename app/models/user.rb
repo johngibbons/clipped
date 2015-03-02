@@ -110,7 +110,9 @@ class User < ActiveRecord::Base
   end
 
   def upload_owner?(upload)
-    self.uploads.exists?(upload.id)
+    if upload
+      self.uploads.exists?(upload.id)
+    end
   end
 
   # Approve an upload
