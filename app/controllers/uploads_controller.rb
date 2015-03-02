@@ -1,21 +1,18 @@
 class UploadsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :destroy]
-  before_action :correct_user, only: :destroy
   before_action :increment_views, only: :show
-  before_action :approved_uploads, only: :index
-  before_action :approved?, only: :show
   layout "dropzone_uploader", only: :new
 
   def index
-
+    @uploads = policy_scope(Upload)
   end
 
   def new
-    @upload = current_user.uploads.new if logged_in?
+    @upload = current_user.uploads.new
   end
 
   def create
     @upload = current_user.uploads.new(upload_params)
+    authorize @upload
     SaveImage.call(upload: @upload)
     if @upload.save
       render json: { message: "success", fileID: @upload.id }, :status => 200
@@ -26,11 +23,12 @@ class UploadsController < ApplicationController
   end
 
   def show
-    
+    authorize @upload
   end
 
   def destroy
-    @upload = current_user.uploads.find(params[:id])
+    @upload = Upload.find(params[:id])
+    authorize @upload
     @upload.destroy
     flash[:success] = "Image successfully deleted"
     redirect_to request.referrer || current_user
@@ -42,13 +40,14 @@ class UploadsController < ApplicationController
       params.require(:upload).permit(:image, :tags, :direct_upload_url)
     end
 
-    def correct_user
-      redirect_to current_user if !own_uploads?
-    end
-
     def increment_views
       @upload = Upload.find_by(id: params[:id])
       @upload.views += 1
       @upload.save
+    end
+
+    def user_not_authorized
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || login_path)
     end
 end

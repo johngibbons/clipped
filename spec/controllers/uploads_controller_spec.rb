@@ -36,7 +36,6 @@ RSpec.describe UploadsController, type: :controller do
       expect do
         delete :destroy, id: upload
       end.to_not change{ Upload.count }
-      expect(response).to redirect_to user_path(current)
     end
 
     it "creates own upload" do

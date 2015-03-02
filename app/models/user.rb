@@ -109,6 +109,10 @@ class User < ActiveRecord::Base
     count
   end
 
+  def upload_owner?(upload)
+    self.uploads.exists?(upload.id)
+  end
+
   # Approve an upload
   def approve(upload)
     upload.approved = true

@@ -135,4 +135,23 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#upload_owner?" do
+    it "returns true when upload belongs to user" do
+      user.save!
+      upload = create(:upload)
+      upload.user = user
+      upload.save!
+      expect(user.upload_owner?(upload)).to eq(true)
+    end
+
+    it "returns false when upload doesn't belong to user" do
+      user.save!
+      other_user = create(:user)
+      upload = create(:upload)
+      upload.user = user
+      upload.save!
+      expect(other_user.upload_owner?(upload)).to eq(false)
+    end
+  end
+
 end

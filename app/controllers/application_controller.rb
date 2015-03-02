@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include Pundit
 
-  private
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     #determines whether user is logged in and if not directs them to login page
     def logged_in_user
@@ -16,25 +16,16 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # Confirms an admin user.
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
+  # Confirms an admin user.
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+  end
+
+  private
+
+    def user_not_authorized
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || root_path)
     end
 
-    def approved_uploads
-      @uploads = Upload.where(approved: true)
-    end
-
-    def approved?
-      #upload is one of the current users' or is approved
-      unless @upload.approved? || own_uploads? || current_user.admin?
-        flash[:error] = "You don't have access to that image"
-        redirect_to request.referrer || root_url
-      end
-    end
-
-    # Returns true if uploads belong to user
-    def own_uploads?
-      !current_user.uploads.find_by(id: params[:id]).nil?
-    end
 end

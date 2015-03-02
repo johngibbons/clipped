@@ -59,4 +59,8 @@ class GuestUser
     false
   end
 
+  def upload_owner?(upload)
+    false
+  end
+
 end
