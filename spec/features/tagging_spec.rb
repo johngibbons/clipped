@@ -12,10 +12,10 @@ RSpec.feature "Image tagging", :type => :feature do
   scenario "upload owner updates upload tags" do
    visit upload_path(upload)
    expect(page).to have_content "Edit Tags"
-   click_link "Edit Tags"
+   page.find("#edit-tags-link").click
    expect(page).to have_field "Tags"
    fill_in "Tags", with: "sample tag, another, a third"
-   click_button "Update"
+   click_button "Update Tags"
    expect(upload.reload.tags.count).to eq(3)
   end
 

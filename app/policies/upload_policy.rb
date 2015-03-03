@@ -19,6 +19,10 @@ class UploadPolicy < ApplicationPolicy
     logged_in?
   end
 
+  def update?
+    admin_or_owner?
+  end
+
   def show?
     user.admin? || owner? || upload.approved?
   end

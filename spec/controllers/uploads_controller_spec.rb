@@ -22,6 +22,14 @@ RSpec.describe UploadsController, type: :controller do
       expect(response).to redirect_to login_url
     end
 
+    it "redirects update" do
+      upload.save!
+      expect(upload.tags.count).to eq(0)
+      expect do
+        patch :update, id: upload.id, upload: { tag_list: "some tag, another tag, a third" }
+      end.to_not change{ upload.reload.tags.count }
+      expect(response).to redirect_to login_url
+    end
   end
 
   context "logged in" do
@@ -45,6 +53,17 @@ RSpec.describe UploadsController, type: :controller do
       expect do
         post :create, upload: { direct_upload_url: upload.direct_upload_url }
       end.to change{ Upload.count }.by(1)
+    end
+
+    it "updates when owner" do
+      upload.user = current
+      upload.save!
+      log_in_as(current)
+      expect do
+        patch :update, id: upload, upload: { tag_list: "some tag, another tag, a third" }
+        byebug
+      end.to change{ upload.reload.tags.count }.by(3)
+      expect(response).to render_template "uploads/show"
     end
 
     it "destroys when owner" do

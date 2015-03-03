@@ -22,6 +22,18 @@ class UploadsController < ApplicationController
     end
   end
 
+  def update
+    @upload = Upload.find(params[:id])
+    authorize @upload
+    if @upload.update(upload_params)
+      flash.now[:success] = "Upload successfully updated"
+      render "show"
+    else
+      flash.now[:error] = "There was an issue updating your upload"
+      render "show"
+    end
+  end
+
   def show
     authorize @upload
   end
@@ -37,7 +49,7 @@ class UploadsController < ApplicationController
   private
 
     def upload_params
-      params.require(:upload).permit(:image, :direct_upload_url, :tag_list => [])
+      params.require(:upload).permit(:image, :direct_upload_url, :tag_list)
     end
 
     def increment_views
