@@ -50,8 +50,4 @@ class UploadPolicy < ApplicationPolicy
       user.upload_owner?(upload)
     end
 
-    def logged_in?
-      user.email != ""
-    end
-
 end

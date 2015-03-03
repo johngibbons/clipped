@@ -63,4 +63,8 @@ class GuestUser
     false
   end
 
+  def password_reset_expired?
+    true
+  end
+
 end

@@ -1,7 +1,7 @@
 class RelationshipsController < ApplicationController
-  before_action :logged_in_user
 
   def create
+    raise Pundit::NotAuthorizedError unless RelationshipPolicy.new(current_user).create?
     @upload = Upload.find(params[:liked_id])
     current_user.like(@upload)
     respond_to do |format|
@@ -11,6 +11,7 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
+    raise Pundit::NotAuthorizedError unless RelationshipPolicy.new(current_user).destroy?
     @upload = Relationship.find(params[:id]).liked
     current_user.unlike(@upload)
     respond_to do |format|

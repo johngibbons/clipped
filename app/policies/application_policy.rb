@@ -50,5 +50,11 @@ class ApplicationPolicy
       scope
     end
   end
+
+  private
+  
+    def logged_in?
+      user.email != ""
+    end
 end
 
