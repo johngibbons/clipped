@@ -16,6 +16,19 @@ RSpec.feature "User logs in", :type => :feature do
     expect(page).to have_content("mockuser")
   end
 
+  scenario "with regular account and then with Omniauth" do
+    OmniAuth.config.mock_auth[:facebook] = {
+      'provider' => 'facebook',
+      'uid' => '123545',
+      'info' => {
+        'email' => user.email,
+        'name' => user.name      
+      }
+    }
+    click_link "Log In With Facebook"
+    expect(page).to have_content(user.name)
+  end
+
   scenario "with valid user and email" do
     log_in(user)
     expect(page).to have_content(user.name)

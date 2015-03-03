@@ -28,4 +28,13 @@ RSpec.feature "Image liking", :type => :feature do
       end.to change{upload.reload.likes_count}.by(-1)
     end
   end
+
+  context "user is not logged in" do
+    scenario "user tries to like an image" do
+      visit upload_path(upload)
+      expect(page).to have_content("Views")
+      expect(page).to_not have_button("Like")
+      expect(page).to_not have_button("Unlike")
+    end
+  end
 end

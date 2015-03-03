@@ -11,6 +11,10 @@ class GuestUser
   end
   alias_method :admin?, :admin
 
+  def id
+    ""
+  end
+
   def tags
     ""
   end
@@ -65,6 +69,14 @@ class GuestUser
 
   def password_reset_expired?
     true
+  end
+
+  def password_digest
+    ""
+  end
+
+  def remember_token
+    ""
   end
 
 end
