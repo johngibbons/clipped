@@ -1,0 +1,5 @@
+<%= form_for @upload, html: { class: "hidden tags-form" } do |f| %>
+	<%= f.label :tag_list, "Tags (separated by commas)" %><br />
+	<%= f.text_field :tag_list %>
+  <%= f.submit "Update Tags", class: "update-tags-btn" %>
+<% end %>

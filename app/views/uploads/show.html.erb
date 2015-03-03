@@ -9,6 +9,8 @@
 	<p>Likes: <span id="likes"><%= upload.likes_count %></span></p>
 
 	<%= render 'relationships/like_form' if logged_in? %>
+	<p class="js-link" id="edit-tags-link">Edit Tags</p>
+	<%= render 'tags/update_form' if logged_in? %>
 	<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
 
 <% end %>

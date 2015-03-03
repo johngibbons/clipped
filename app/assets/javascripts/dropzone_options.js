@@ -1,5 +1,4 @@
-var ready;
-ready = function() {
+$('.uploads.new').ready(function () {
 
  	// disable auto discover
 	Dropzone.autoDiscover = false;
@@ -44,7 +43,4 @@ ready = function() {
     $.post( "/uploads", { upload: {direct_upload_url: url_location} });
   });
 
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
+});

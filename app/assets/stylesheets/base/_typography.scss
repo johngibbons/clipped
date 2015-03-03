@@ -56,10 +56,11 @@ p {
   margin: 0 0 $small-spacing;
 }
 
-a {
+a, .js-link {
   color: $action-color;
   text-decoration: none;
   transition: color 0.1s linear;
+  cursor: pointer;
 
   &:active,
   &:focus,
