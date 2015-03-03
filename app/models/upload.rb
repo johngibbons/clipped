@@ -5,6 +5,7 @@ class Upload < ActiveRecord::Base
                                  dependent:   :destroy
   has_many :likers, through: :liked_relationships
   default_scope -> { order(created_at: :desc) }
+  acts_as_taggable
   
   validates :user_id, presence: true
 
