@@ -14,6 +14,12 @@ class UploadPresenter < BasePresenter
     end
   end
 
+  def tag_presenter
+    if Pundit.policy!(current_user, @model)
+      
+    end
+  end
+
   private
 
   def approval_classes(class_list)

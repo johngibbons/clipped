@@ -26,8 +26,10 @@ class UploadsController < ApplicationController
     @upload = Upload.find(params[:id])
     authorize @upload
     if @upload.update(upload_params)
-      flash.now[:success] = "Upload successfully updated"
-      render "show"
+      respond_to do |format|
+        format.html { redirect_to @upload }
+        format.js
+      end
     else
       flash.now[:error] = "There was an issue updating your upload"
       render "show"

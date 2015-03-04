@@ -1,7 +1,7 @@
 <div class="upload">
 	<%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
 		<%= present(upload) do |upload| %>
-				<%= image_tag upload.src(:thumb), class: upload.classes %>
+				<%= image_tag upload.src(:thumb), class: "upload-approval-container #{upload.classes.join(' ')}" %>
 		<% end %>
 	<% end %>	
 </div>

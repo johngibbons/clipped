@@ -61,7 +61,6 @@ RSpec.describe UploadsController, type: :controller do
       log_in_as(current)
       expect do
         patch :update, id: upload, upload: { tag_list: "some tag, another tag, a third" }
-        byebug
       end.to change{ upload.reload.tags.count }.by(3)
       expect(response).to render_template "uploads/show"
     end

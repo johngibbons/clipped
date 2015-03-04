@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Image tagging", :type => :feature do
 
   subject(:user) { create(:user) }
-  subject(:upload) { create(:upload, user: user) }
+  subject(:upload) { create(:upload, user: user, approved: true) }
 
   before(:example) do
     log_in(user)
@@ -20,9 +20,22 @@ RSpec.feature "Image tagging", :type => :feature do
   end
 
   scenario "admin updates upload tags" do
+    admin = create(:user, admin: true)
+    log_in(admin)
+    visit upload_path(upload)
+    expect(page).to have_content "Edit Tags"
+    page.find("#edit-tags-link").click
+    expect(page).to have_field "Tags"
+    fill_in "Tags", with: "sample tag, another, a third"
+    click_button "Update Tags"
+    expect(upload.reload.tags.count).to eq(3)  
   end
 
   scenario "other user tries to update upload tags but can't" do
+    other_user = create(:user)
+    log_in(other_user)
+    visit upload_path(upload)
+    expect(page).to_not have_content "Edit Tags"
   end
 
   scenario "click on tag and see all uploads with that tag" do

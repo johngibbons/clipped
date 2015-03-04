@@ -1,16 +1,24 @@
 <% present(@upload) do |upload| %>
 
-	<div class="img-show">
-		<%= image_tag upload.src(:large), class: upload.classes %>
+	<%= content_tag :div, class: "upload-single upload-approval-container #{upload.classes.join(' ')}" do -%>
+		<%= image_tag upload.src(:large) %>
+	<% end -%>
+
+	<div class="upload-info">
+		<p>Views: <%= upload.views %></p>
+		<p>Downloads: <%= upload.downloads %></p>
+		<p>Likes: <span id="likes"><%= upload.likes_count %></span></p>
+
+		<div class="tags-list">
+			<% upload.tag_list.each do |tag| %>
+				<span class="tag"><%= tag %></span>
+			<% end %>
+			<%= render 'tags/update_form' if logged_in? %>
+		</div>
+		<button id="update-tags-btn" class="btn hidden">Update</button>
+		<p class="js-link" id="edit-tags-link">Add More</p>
+		<%= render 'relationships/like_form' if logged_in? %>
+		<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
 	</div>
-
-	<p>Views: <%= upload.views %></p>
-	<p>Downloads: <%= upload.downloads %></p>
-	<p>Likes: <span id="likes"><%= upload.likes_count %></span></p>
-
-	<%= render 'relationships/like_form' if logged_in? %>
-	<p class="js-link" id="edit-tags-link">Edit Tags</p>
-	<%= render 'tags/update_form' if logged_in? %>
-	<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
 
 <% end %>

@@ -194,6 +194,30 @@
 	}
 }
 
+.upload-single {
+  @include span-columns(8);
+  height: 700px;
+  position: relative;
+  background: $light-gray;
+  border-radius: 1px;
+  border: 1px solid darken($light-gray, 10%);
+  img {
+    with: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    padding: 25px;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+  }
+}
+
+.upload-info {
+  @include span-columns(4);
+}
+
 .upload {
   position: relative;
   height: 200px;
