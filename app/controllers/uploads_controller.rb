@@ -15,7 +15,7 @@ class UploadsController < ApplicationController
     authorize @upload
     SaveImage.call(upload: @upload)
     if @upload.save
-      render json: { message: "success", fileID: @upload.id }, :status => 200
+      render js: "window.location.href='"+user_path(current_user)+"'"
       ProcessUploads.call(upload: @upload)
     else
       render json: { error: @upload.errors.full_messages.join(',')}, :status => 400

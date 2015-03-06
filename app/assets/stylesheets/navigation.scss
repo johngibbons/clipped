@@ -11,7 +11,7 @@ header.navigation {
 //////////////////////////////////////////////////////////////////////////////////
 
   $navigation-padding: 1em;
-  $navigation-background: $light-gray;
+  $navigation-background: $lightest-gray;
   $navigation-color: $dark-gray;
   $navigation-color-hover: transparentize($dark-gray, 0.3);
   $navigation-nav-button-background: $action-color;
@@ -26,7 +26,7 @@ header.navigation {
 
   background-color: $navigation-background;
   border-bottom: 1px solid darken($navigation-background, 5);
-  min-height: $navigation-height;
+  height: $navigation-height;
   width: 100%;
   z-index: 999;
 
@@ -311,7 +311,7 @@ header.navigation {
       input[type=search] {
         @include box-sizing(border-box);
         background: $navigation-search-background;
-        border-radius: $base-border-radius * 2;
+        border-radius: $base-border-radius;
         border: $navigation-search-border;
         color: $navigation-color;
         font-size: 0.9em;

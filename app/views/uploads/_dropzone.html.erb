@@ -1,18 +1,28 @@
-<%= s3_uploader_form callback_url: uploads_url, id: "s3-uploader", class: "dropzone", callback_param: "upload[direct_upload_url]", expiration: 24.hours.from_now.utc.iso8601, max_file_size: 50.megabytes, key: "uploads/#{SecureRandom.hex}/${filename}" do %>
+<%= s3_uploader_form callback_url: uploads_url, id: "s3-uploader", class: "dropzone", 
+		callback_param: "upload[direct_upload_url]", 
+		expiration: 24.hours.from_now.utc.iso8601, 
+		max_file_size: 50.megabytes, 
+		key: "uploads/direct/#{SecureRandom.hex}/${filename}" do %>
+
 	 <%= hidden_field_tag  "Content-type", "" %>
 	<div class="fallback">
 		 <%= file_field_tag 'file', multiple: true %>
 	</div>
 
 <div id="uploader-container">
+	<div id="uploader-controls" class="hidden card">
+		<div id="save-uploads" class="btn hidden">save</div>
+		<div id="remove-all-uploads" class="btn secondary hidden">remove all</div>
+	</div>
+
 	<div class="dz-message"><h1>Drag files here or</h1></div>
 	<div id="clickable" class="btn">Click here to select files</div>
 	<div id="upload-previews"></div>
 </div>
 
 <div id="preview-template" class="dropzone-previews" style = "display: none;">
-	<div class="dz-preview dz-file-preview">
-		<%= link_to @upload, method: :delete, class: "delete-icon", data: { confirm: "Delete?" } do%> <i class="dz-remove fa fa-minus-circle" data-dz-remove></i> <% end %>
+	<div class="dz-preview dz-file-preview card">
+		<a href="#" class="delete-icon" onclick="return confirm('Remove?')"> <i class="dz-remove fa fa-minus-circle" data-dz-remove></i></a>
 		<div class="dz-image-container">	  
 			<div class="dz-success-mark animated fadeInDown"><i class="fa fa-check-circle-o fa-3x"></i></div>
 		  <div class="dz-error-mark animated shake"><i class="fa fa-exclamation-circle fa-3x"></i></div>
@@ -24,6 +34,11 @@
 	    <!-- <div class="dz-filename"><span data-dz-name></span></div>-->	
 	    <div class="dz-size" data-dz-size></div>
 	  </div>
+	  <div class="dropzone-upload-tags">
+		  <h6>Tags:</h6>
+		  <%= text_field_tag "x-ignore-tags", nil, placeholder: "e.g. boy, walking, beach, etc.", id: "upload_tag_list" %>
+	  </div>
+
 
 	  <div class="dz-error-message"><span data-dz-errormessage></span></div>
 	</div>

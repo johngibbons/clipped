@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .dropzone {
+
   height: 100%;
   min-height: 100vh;
   padding-top: $navigation-height;
@@ -93,7 +94,23 @@
 
   #uploader-container {
     @include outer-container;
-    margin-top: 25px;
+  }
+
+  #uploader-controls {
+    padding: 10px 20px;
+    margin: 20px 0;
+    min-height: 54px;
+
+    .btn {
+      margin-right: 10px;
+    }
+
+    #save-uploads {
+
+      &:hover {
+        cursor: pointer;
+      }
+    }  
   }
 
   #clickable {
@@ -110,19 +127,49 @@
     @include span-columns(3);
     margin-bottom: $gutter;
     position: relative;
-    padding: 20px;
-    border-radius: 10px;
+
+    .delete-icon {
+      position: absolute;
+      line-height: 0;
+      top: -9px;
+      left: -8px;
+      z-index: 1;
+      .fa {
+      }
+    }  
+  }
+
+  .dz-size {
+    font-size: .8em;
+    margin-bottom: 1.5em;
   }
 
   .dz-image-container {
     position: relative;
     display: block;
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
 
     img {
       display: block;
       margin: 0 auto;
+    }
+  }
+
+  .dropzone-upload-tags {
+    h6 {
+      margin-bottom: 5px;
+      font-weight: 700;
+      font-size: .8em;
+      text-transform: lowercase;
+    }
+
+    input {
+      margin-bottom: 0;
+      color: $dark-gray;
+      font-size: 0.8em;
+      background-color: $white;
+      box-shadow: none;
     }
   }
 
@@ -198,9 +245,6 @@
   @include span-columns(8);
   height: 700px;
   position: relative;
-  background: $light-gray;
-  border-radius: 1px;
-  border: 1px solid darken($light-gray, 10%);
   img {
     with: auto;
     height: auto;
@@ -216,6 +260,10 @@
 
 .upload-info {
   @include span-columns(4);
+
+  .card {
+    margin-bottom: $gutter;
+  }
 }
 
 .upload {

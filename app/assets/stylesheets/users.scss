@@ -11,6 +11,9 @@
 	width: 100%;
 	text-align: center;
 	padding-bottom: 50px;
+  background-color: $white;
+  border-bottom: 1px solid $light-gray;
+  margin-top: 100px;
 
 	.gravatar {
 		display: block;
@@ -68,7 +71,15 @@
 
 }
 
+.user-uploads-section {
+  background-color: $lightest-gray;
+
+  .container {
+    margin-top:0;
+    padding-top: 50px;
+  }
+}
+
 .user-uploads {
-	background-color: $light-gray;
 }
 

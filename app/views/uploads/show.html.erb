@@ -1,26 +1,35 @@
 <% present(@upload) do |upload| %>
 
-	<%= content_tag :div, class: "upload-single upload-approval-container #{upload.classes.join(' ')}" do -%>
+	<%= content_tag :div, class: "upload-single upload-approval-container card #{upload.classes.join(' ')}" do -%>
 		<%= image_tag upload.src(:large) %>
 	<% end -%>
 
 	<div class="upload-info">
-		<p>Views: <%= upload.views %></p>
-		<p>Downloads: <%= upload.downloads %></p>
-		<p>Likes: <span id="likes"><%= upload.likes_count %></span></p>
-
-		<div class="tags-list">
-			<div class="tag-items">
-				<%= render upload.tags %>
-			</div>
-				<%= render 'acts_as_taggable_on/tags/update_form' %>
+		<div class="upload-stats card">
+			<h6 class="title">Stats</h6>
+			<p>Views: <%= upload.views %></p>
+			<p>Downloads: <%= upload.downloads %></p>
+			<p>Likes: <span id="likes"><%= upload.likes_count %></span></p>
 		</div>
-		<% if policy(upload).update? %>
-			<button id="update-tags-btn" class="hidden btn">Update</button>		
-		<%= link_to 'Edit Tags', edit_upload_path(upload), class: "js-link", id: "edit-tags-link", remote: true %>
-		<% end %>
-		<%= render 'relationships/like_form' if logged_in? %>
-		<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
+
+		<div class="upload-tags card">
+			<h6 class="title">Tags</h6>
+			<div class="tags-list">
+				<div class="tag-items">
+					<%= render upload.tags %>
+				</div>
+					<%= render 'acts_as_taggable_on/tags/update_form' %>
+			</div>
+			<% if policy(upload).update? %>
+				<button id="update-tags-btn" class="hidden btn">Update</button>		
+				<%= link_to 'Edit Tags', edit_upload_path(upload), class: "js-link", id: "edit-tags-link", remote: true %>
+			<% end %>
+		</div>
+
+		<div class="upload-interaction card">
+			<%= render 'relationships/like_form' if logged_in? %>
+			<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
+		</div>
 	</div>
 
 <% end %>

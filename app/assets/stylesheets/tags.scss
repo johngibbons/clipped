@@ -1,5 +1,4 @@
 .tags-list {
-	background: #FFF;
 	padding: 5px;
 	min-height: 50px;
 	overflow: hidden;
@@ -24,8 +23,9 @@
 }
 
 .tags-list.update {
-	border: 1px solid lighten($light-gray, 1%);
-	background-color: $lightest-gray;
+	border: 1px solid $light-gray;
+	background-color: lighten($lightest-gray, 2%);
+	margin-bottom: 10px;
 }
 
 .tags-form {
@@ -47,4 +47,8 @@
 	&:hover {
 		cursor: pointer;
 	}
+}
+
+#edit-tags-link {
+	font-size: .8em;
 }

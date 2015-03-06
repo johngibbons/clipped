@@ -1,9 +1,9 @@
 <% provide(:title, @user.name) %>
-<div class="user_profile">
-  <section class="user-info">
+<section class="user_profile">
+  <div class="user-info">
     <%= gravatar_for @user, size: 150 %>
     <h3 class="user-name"><%= @user.name %></h3>
-  </section>
+  </div>
   <div class="user-stats">
     <ul>
       <li><%= @user.uploads.count %><span>Uploads</span></li>
@@ -16,15 +16,19 @@
      <button class="upload-btn">Upload</button>
    <% end %>
   <% end %>
-</div>
-<div class="user-uploads">
-  <% if @user.uploads.any? %>
-    <h5>Uploads: (<%= @user.uploads.count %>)</h5>
-    <div class="uploads-profile">
-      <%= render @uploads %>
+</section>
+<section class="user-uploads-section">
+  <div class="container">
+    <div class="user-uploads">
+      <% if @user.uploads.any? %>
+        <h5>Uploads: (<%= @user.uploads.count %>)</h5>
+        <div class="uploads-profile">
+          <%= render @uploads %>
+        </div>
+        <div class="pagination">
+          <%= will_paginate @uploads%>
+        </div>
+      <% end %>
     </div>
-    <div class="pagination">
-      <%= will_paginate @uploads%>
-    </div>
-  <% end %>
-</div>
+  </div>
+</section>
