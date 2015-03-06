@@ -9,29 +9,33 @@ RSpec.feature "Image tagging", :type => :feature do
     log_in(user)
   end 
 
-  scenario "upload owner updates upload tags" do
+  scenario "upload owner updates upload tags", :js => true do
    visit upload_path(upload)
    expect(page).to have_content "Edit Tags"
    page.find("#edit-tags-link").click
-   expect(page).to have_field "Tags"
-   fill_in "Tags", with: "sample tag, another, a third"
-   click_button "Update Tags"
-   expect(upload.reload.tags.count).to eq(3)
+   expect(page).to have_field "upload_tag_list"
+   fill_in "upload_tag_list", with: "sample tag, another, a third"
+   click_button "Update"
+   expect(page).to have_selector(".tag", count: 3)
+   expect(page).to have_content "sample tag"
+   expect(page).to_not have_content("Update")
   end
 
-  scenario "admin updates upload tags" do
+  scenario "admin updates upload tags", :js => true do
     admin = create(:user, admin: true)
     log_in(admin)
     visit upload_path(upload)
     expect(page).to have_content "Edit Tags"
     page.find("#edit-tags-link").click
-    expect(page).to have_field "Tags"
-    fill_in "Tags", with: "sample tag, another, a third"
-    click_button "Update Tags"
-    expect(upload.reload.tags.count).to eq(3)  
+    expect(page).to have_field "upload_tag_list"
+    fill_in "upload_tag_list", with: "sample tag, another, a third"
+    click_button "Update"
+    expect(page).to have_selector(".tag", count: 3)
+    expect(page).to have_content "sample tag"
+    expect(page).to_not have_content("Update")
   end
 
-  scenario "other user tries to update upload tags but can't" do
+  scenario "other user tries to update upload tags but can't", :js => true do
     other_user = create(:user)
     log_in(other_user)
     visit upload_path(upload)

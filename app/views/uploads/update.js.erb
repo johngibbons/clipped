@@ -1,2 +1,6 @@
+$(".tags-form").addClass("hidden");
+$(".js-link").removeClass("hidden");
+$(".tags-list").removeClass("update");
+$("#update-tags-btn").addClass("hidden");
 
-
+$('.tag-items').html("<%= j (render @upload.tags) %>");

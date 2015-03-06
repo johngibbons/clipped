@@ -1,0 +1,5 @@
+<%= form_for @upload, method: :patch, html: { class: "hidden tags-form", id: "update-tags-form" }, remote: true do |f| %>
+	<div class="update">
+		<%= f.text_field :tag_list %>
+	</div>
+<% end %>

@@ -26,6 +26,8 @@ module SessionsHelper
       if user && user.authenticated?(:remember, cookies[:remember_token])
         log_in user
         @current_user = user
+      else
+        @current_user = GuestUser.new
       end
     else
       @current_user = GuestUser.new
@@ -48,7 +50,7 @@ module SessionsHelper
   def log_out
     forget(current_user)
     session.delete(:user_id)
-    @current_user = nil
+    @current_user = GuestUser.new
   end
 
   # Redirects to stored location (or to the default).

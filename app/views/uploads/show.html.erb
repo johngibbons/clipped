@@ -10,13 +10,15 @@
 		<p>Likes: <span id="likes"><%= upload.likes_count %></span></p>
 
 		<div class="tags-list">
-			<% upload.tag_list.each do |tag| %>
-				<span class="tag"><%= tag %></span>
-			<% end %>
-			<%= render 'tags/update_form' if logged_in? %>
+			<div class="tag-items">
+				<%= render upload.tags %>
+			</div>
+				<%= render 'acts_as_taggable_on/tags/update_form' %>
 		</div>
-		<button id="update-tags-btn" class="btn hidden">Update</button>
-		<p class="js-link" id="edit-tags-link">Add More</p>
+		<% if policy(upload).update? %>
+			<button id="update-tags-btn" class="hidden btn">Update</button>		
+		<%= link_to 'Edit Tags', edit_upload_path(upload), class: "js-link", id: "edit-tags-link", remote: true %>
+		<% end %>
 		<%= render 'relationships/like_form' if logged_in? %>
 		<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
 	</div>

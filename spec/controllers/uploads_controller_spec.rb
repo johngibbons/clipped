@@ -62,7 +62,6 @@ RSpec.describe UploadsController, type: :controller do
       expect do
         patch :update, id: upload, upload: { tag_list: "some tag, another tag, a third" }
       end.to change{ upload.reload.tags.count }.by(3)
-      expect(response).to render_template "uploads/show"
     end
 
     it "destroys when owner" do
