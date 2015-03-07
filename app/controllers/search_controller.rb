@@ -1,12 +1,11 @@
 class SearchController < ApplicationController
 
   def index
-    @viewable_uploads = StaticPagesPolicy::Scope.new(current_user, Upload).resolve
-
-    @search = @viewable_uploads.search do
+    @search = Upload.search do
       fulltext params[:search] do
         minimum_match 1
       end
+      with :approved, true
       paginate page: params[:page], per_page: 30
     end
       @uploads = @search.results

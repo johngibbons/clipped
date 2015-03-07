@@ -9,10 +9,11 @@ class Upload < ActiveRecord::Base
 
   searchable do
     text :tag_list
+    boolean :approved
   end
   handle_asynchronously :solr_index
   handle_asynchronously :remove_from_index
-  
+
   validates :user_id, presence: true
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
