@@ -1,0 +1,6 @@
+<% unless @uploads.nil? %>
+	<% if @tag_name %>
+		<h6>Images tagged with: <%= @tag_name %></h6>
+	<% end %>
+	<%= render @uploads %>
+<% end %>

@@ -3,7 +3,13 @@ class UploadsController < ApplicationController
   layout "dropzone_uploader", only: :new
 
   def index
-    @uploads = policy_scope(Upload)
+    @viewable_uploads = policy_scope(Upload)
+    if params[:tag]
+      @uploads = @viewable_uploads.tagged_with(params[:tag])
+      @tag_name = params[:tag]
+    else
+      @uploads = @viewable_uploads
+    end
   end
 
   def new
