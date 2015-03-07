@@ -41,9 +41,9 @@ $('.uploads.new').ready(function () {
   	var direct_url = $(responseText).find("location")[0];
   	var url_location = $(direct_url).text();
   	$("#save-uploads").removeClass("hidden");
-  	tags = getTags($(".tag-data").get());
 
 	  $("#save-uploads").click(function() {
+	  	var tags = getTags($(".tag-data").get());
 	    $.post( "/uploads", { upload: {direct_upload_url: url_location, tag_list: tags} });
 	  });
 
