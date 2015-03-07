@@ -28,31 +28,23 @@ function formatTags(tag_input_field) {
       }
       this.value="";
       }).on('keyup',function( e ){
-      // if: comma,enter (delimit more keyCodes with | pipe)
-      if(/^188$/.test(e.which)) {
-        if(e.keyCode == 13) {
-          e.preventDefault;
-          return false;
-        }
-        $(this).focusout(); 
-      }
+      	checkEnter(e);
+	      // if: comma,enter (delimit more keyCodes with | pipe)
+	      if(/(188|13)/.test(e.which)) {
+	        $(this).focusout();
+	      }
+	      else if(/^8$/.test(e.which)) {
+	        if(deleteNextIteration) {
+	          $('.tag').last().remove();
+	        }
+	      }
 
-      else if((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-        $('button[type=submit] .default').click();
-        return false;
-      }
-      else if(/^8$/.test(e.which)) {
-        if(deleteNextIteration) {
-          $('.tag').last().remove();
-        }
-      }
-
-      if($(this).val().length == 0 ) {
-        deleteNextIteration = true;
-      }
-      else {
-        deleteNextIteration = false;
-      }
+	      if($(this).val().length == 0 ) {
+	        deleteNextIteration = true;
+	      }
+	      else {
+	        deleteNextIteration = false;
+	      }
     });
   };
 
@@ -63,3 +55,9 @@ function formatTags(tag_input_field) {
     }
     return a.join();
   }
+
+  function checkEnter(e){
+		 e = e || event;
+		 var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
+		 return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
+		}
