@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   resources :upload_moderation,   only: [:edit, :update, :destroy, :index]
 
+  resources :search,              only: [:index]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
