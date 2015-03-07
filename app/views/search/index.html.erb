@@ -1,5 +1,12 @@
 <% if @uploads %>
 
+	<h6>Images matching: <%= @query %></h6>
+
 	<%= render @uploads %>
+	<%= will_paginate @uploads%>
+
+<% else %>
+
+	<h6>No results for: <%= @query %></h6>
 
 <% end %>
