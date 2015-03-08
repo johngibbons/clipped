@@ -104,13 +104,6 @@
     .btn {
       margin-right: 10px;
     }
-
-    #save-uploads {
-
-      &:hover {
-        cursor: pointer;
-      }
-    }  
   }
 
   #clickable {
@@ -219,7 +212,12 @@
 
   .dz-remove {
     color: $clipped-red;
-  }
+    position: absolute;
+    top: -9px;
+    left: -7px;
+    z-index: 1;
+    cursor: pointer;
+    }
 
 	.dz-message {
 		text-align: center;
@@ -274,11 +272,4 @@
   margin-right: 25px;
   margin-bottom: 25px;
 
-  .delete-icon {
-    .fa {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-    }
-  }
 }

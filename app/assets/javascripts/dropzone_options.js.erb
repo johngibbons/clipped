@@ -1,6 +1,32 @@
 $('.uploads.new').ready(function () {
-	id = 1;
 
+	// bind click functionality to future save button
+	$(".dropzone").on("click.save", "#save-uploads", function() {
+		$.each( url_location, function( key, url ) {
+			var preview = file_preview[key];
+			n = preview[0];
+			var taglist = $(n).find(".tag-data");
+			getTags(taglist);
+		  tags = getTags(taglist.get());
+	    $.post( "/uploads", { upload: {direct_upload_url: url, tag_list: tags} });		
+	  });
+	});
+
+	//bind remove all functionality to future remove all button
+  $(".dropzone").on("click", "#remove-all-uploads", function() {
+  	dropzone.removeAllFiles(true);
+  	url_location = {};
+  	$("#save-uploads").prop("disabled", true);
+  	$("#remove-all-uploads").prop("disabled", true);
+  });
+
+  $(".dropzone").on("click", ".remove", function() {
+  	console.log("delete");
+	});
+
+  var i = 0;
+	var url_location = {};
+	var file_preview = {};
  	// disable auto discover
 	Dropzone.autoDiscover = false;
 
@@ -18,18 +44,27 @@ $('.uploads.new').ready(function () {
 		previewsContainer: "#upload-previews"
 	});
 
+	dropzone.on("removedfile", function(file) {
+		delete url_location[file.id]
+	});
+
 	// Update the total progress bar
 	dropzone.on("totaluploadprogress", function(progress) {
 	  $('.dz-upload').width = progress + "%";
 	});
 
-	dropzone.on("addedfile", function() {
-		id++;
+	dropzone.on("addedfile", function(file) {
 		$(".dz-message, #clickable").hide();
-  	$("#uploader-controls").removeClass("hidden");
-  	$("#remove-all-uploads").removeClass("hidden");
-  	$("#upload_tag_list").attr('id', "upload-" + id);
-		formatTags("#upload-" + id);
+  	$("#uploader-controls").show();
+  	$("#save-uploads").prop("disabled", true);
+  	$("#remove-all-uploads").prop("disabled", false);
+		file.id = i;
+		file_preview[file.id] = $(file.previewElement);
+  	file_preview[file.id].find(".dz-remove").attr("id", file.id);
+		var file_tag_field = file_preview[file.id].find("#upload_tag_list");
+		file_tag_field.attr("tabindex", file.id+1);
+		formatTags(file_tag_field);
+		i++;
 	});
 
 	dropzone.on("sending", function(file, xhr, formData) {
@@ -37,21 +72,13 @@ $('.uploads.new').ready(function () {
 	  formData.append("Content-Type", file.type);
 	});
 
-  return dropzone.on("success", function(file, responseText) {
+	dropzone.on("queuecomplete", function() {
+  	$("#save-uploads").prop("disabled", false);
+	});
+
+  dropzone.on("success", function(file, responseText) {
   	var direct_url = $(responseText).find("location")[0];
-  	var url_location = $(direct_url).text();
-  	$("#save-uploads").removeClass("hidden");
-
-	  $("#save-uploads").click(function() {
-	  	var tags = getTags($(".tag-data").get());
-	    $.post( "/uploads", { upload: {direct_upload_url: url_location, tag_list: tags} });
-	  });
-
-	  $("#remove-all-uploads").click(function() {
-	  	dropzone.removeAllFiles(true);
-	  });
-  });
-
-  
-
+  	var url = $(direct_url).text();
+  	url_location[file.id] = url;
+	});
 });

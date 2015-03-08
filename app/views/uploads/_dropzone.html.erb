@@ -10,9 +10,9 @@
 	</div>
 
 <div id="uploader-container">
-	<div id="uploader-controls" class="hidden card">
-		<div id="save-uploads" class="btn hidden">save</div>
-		<div id="remove-all-uploads" class="btn secondary hidden">remove all</div>
+	<div id="uploader-controls" class="card" style="display: none;">
+		<button type="button" id="save-uploads" name="x-ignore-save" disabled>save</button>
+		<button type="button" id="remove-all-uploads" name="x-ignore-remove-all" class="secondary">remove all</button>
 	</div>
 
 	<div class="dz-message"><h1>Drag files here or</h1></div>
@@ -20,9 +20,9 @@
 	<div id="upload-previews"></div>
 </div>
 
-<div id="preview-template" class="dropzone-previews" style = "display: none;">
+<div id="preview-template" class="dropzone-previews" style="display: none;">
 	<div class="dz-preview dz-file-preview card">
-		<a href="#" class="delete-icon" onclick="return confirm('Remove?')"> <i class="dz-remove fa fa-minus-circle" data-dz-remove></i></a>
+		<i class="dz-remove fa fa-minus-circle" data-dz-remove></i>
 		<div class="dz-image-container">	  
 			<div class="dz-success-mark animated fadeInDown"><i class="fa fa-check-circle-o fa-3x"></i></div>
 		  <div class="dz-error-mark animated shake"><i class="fa fa-exclamation-circle fa-3x"></i></div>
