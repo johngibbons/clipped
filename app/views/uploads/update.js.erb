@@ -5,4 +5,5 @@ $("#update-tags-btn").addClass("hidden");
 
 $('.tag-items').html("<%= j (render @upload.tags) %>");
 $('#update-perspective-form').addClass('hidden');
+$('#selected-perspective').html("<%= j (link_to @upload.perspective.humanize, uploads_path(perspective: Upload.perspectives[@upload.perspective]), class: 'perspective') %>");
 $('#selected-perspective').removeClass('hidden');

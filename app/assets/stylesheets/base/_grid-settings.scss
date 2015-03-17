@@ -6,9 +6,19 @@
 // $grid-columns: 12;
 // $max-width: em(1088);
 
-// Neat Breakpoints
-$medium-screen: em(680);
-$large-screen: em(860);
+$visual-grid: true;
 
-$medium-screen-up: new-breakpoint(min-width $medium-screen 4);
-$large-screen-up: new-breakpoint(min-width $large-screen 8);
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}

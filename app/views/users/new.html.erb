@@ -1,18 +1,16 @@
 <% provide(:title, 'Sign up') %>
 <h1>Sign up</h1>
 
-<div class="signup_form">
-	<%= form_for @user do |f| %>
-		<%= render 'fields', f: f %>
-		<%= f.submit "Create Profile" %>
+<%= form_for @user, html: {class: "signup-form", id: "login-form"} do |f| %>
+	<%= render 'fields', f: f %>
+	<%= f.submit "Create Profile" %>
+<% end %>
 
-		<h5>Or sign up using another account:</h5>
-	<%= link_to '/auth/google_oauth2' do %>
-	  <button class="google">Sign Up With Google</button>
-  <% end %>
+<h5>Or sign up using another account:</h5>
+<%= link_to '/auth/google_oauth2' do %>
+  <button class="google">Sign Up With Google</button>
+<% end %>
 
-	<%= link_to '/auth/facebook' do %>
-  	<button class="facebook">Sign Up With Facebook</button>
-  <% end %>
-	<% end %>
-</div>
+<%= link_to '/auth/facebook' do %>
+	<button class="facebook">Sign Up With Facebook</button>
+<% end %>

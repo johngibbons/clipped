@@ -5,10 +5,12 @@ class UploadsController < ApplicationController
   def index
     @viewable_uploads = policy_scope(Upload)
     if params[:tag]
-      @uploads = @viewable_uploads.tagged_with(params[:tag])
+      @uploads = @viewable_uploads.tagged_with(params[:tag]).paginate(page: params[:page])
       @tag_name = params[:tag]
+    elsif params[:perspective]
+      @uploads = @viewable_uploads.where(perspective: params[:perspective]).paginate(page: params[:page])
     else
-      @uploads = @viewable_uploads
+      @uploads = @viewable_uploads.paginate(page: params[:page])
     end
   end
 
@@ -51,7 +53,7 @@ class UploadsController < ApplicationController
     authorize @upload
     @upload.destroy
     flash[:success] = "Image successfully deleted"
-    redirect_to request.referrer || current_user
+    redirect_to current_user
   end
 
   private

@@ -21,7 +21,11 @@ body {
 
 .container {
 	@include outer-container;
-	margin-top: 110px;
+	margin-top: 144px;
+
+	@include tablet {
+		margin-top: 110px;
+	}
 }
 
 aside {

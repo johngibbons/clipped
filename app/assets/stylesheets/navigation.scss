@@ -22,7 +22,6 @@ header.navigation {
   $navigation-active-link-color: transparentize($dark-gray, 0.5);
   $navigation-submenu-padding: 1em;
   $navigation-submenu-width: 12em;
-  $horizontal-bar-mode: $large-screen;
 
   background-color: $navigation-background;
   border-bottom: 1px solid darken($navigation-background, 5);
@@ -63,7 +62,7 @@ header.navigation {
     padding-right: 1em;
     text-transform: uppercase;
 
-    @include media ($horizontal-bar-mode) {
+    @include tablet {
       display: none;
     }
 
@@ -81,7 +80,7 @@ header.navigation {
     min-height: $navigation-height;
     z-index: 9999999;
 
-    @include media ($horizontal-bar-mode) {
+    @include tablet {
       float: left;
     }
   }
@@ -101,7 +100,7 @@ header.navigation {
       display: block;
     }
 
-    @include media ($horizontal-bar-mode) {
+    @include tablet {
       display: inline;
       margin: 0;
       padding: 0;
@@ -121,7 +120,7 @@ header.navigation {
     width: 100%;
     z-index: 9999;
 
-    @include media ($horizontal-bar-mode) {
+    @include tablet {
       background: transparent;
       display: inline;
       line-height: $navigation-height;
@@ -134,7 +133,7 @@ header.navigation {
       display: inline-block;
       font-weight: 300;
 
-      @include media ($horizontal-bar-mode) {
+      @include tablet {
         padding-right: 1em;
       }
 
@@ -156,7 +155,7 @@ header.navigation {
   li.more.nav-link {
     padding-right: 0;
 
-    @include media($large-screen) {
+    @include tablet {
       padding-right: $navigation-submenu-padding;
     }
 
@@ -191,7 +190,7 @@ header.navigation {
       padding-right: 1.6em;
       position: relative;
 
-      @include media($large-screen) {
+      @include tablet {
         margin-right: $navigation-submenu-padding;
       }
 
@@ -208,7 +207,7 @@ header.navigation {
       display: block;
     }
 
-    @include media($horizontal-bar-mode) {
+    @include tablet {
       padding-right: 0.8em;
       position: relative;
     }
@@ -218,14 +217,14 @@ header.navigation {
     display: none;
     padding-left: 0;
 
-    @include media($horizontal-bar-mode) {
+    @include tablet {
       left: -$navigation-submenu-padding;
       position: absolute;
       top: 1.5em;
     }
 
     .submenu {
-      @include media($horizontal-bar-mode) {
+      @include tablet {
         left: $navigation-submenu-width - 0.2em;
         top: 0;
       }
@@ -235,7 +234,7 @@ header.navigation {
       display: block;
       padding-right: 0;
 
-      @include media($horizontal-bar-mode) {
+      @include tablet {
         line-height: $navigation-height / 1.3;
 
         &:first-child > a {
@@ -256,7 +255,7 @@ header.navigation {
         text-align: right;
         width: 100%;
 
-        @include media($horizontal-bar-mode) {
+        @include tablet {
           background-color: $navigation-background;
           padding-left: $navigation-submenu-padding;
           text-align: left;
@@ -277,7 +276,7 @@ header.navigation {
     padding-left: $navigation-padding / 2;
     padding-right: $navigation-padding;
 
-    @include media($large-screen) {
+    @include tablet {
       background: transparent;
       clear: none;
       float: right;
@@ -326,7 +325,7 @@ header.navigation {
           width: 100%;
         }
 
-        @include media($large-screen) {
+       @include tablet {
           width: 90%;
           @include transition(all 0.1s ease-in-out);
 
@@ -356,7 +355,7 @@ header.navigation {
       }
     }
 
-    @include media($horizontal-bar-mode) {
+    @include tablet {
       display: inline-block;
       position: relative;
       width: 16em;

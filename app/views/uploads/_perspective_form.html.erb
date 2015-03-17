@@ -1,7 +1,7 @@
 <%= form_for @upload, method: :patch, html: { class: "perspective hidden", id: "update-perspective-form" }, remote: true do |f| %>
 	<% Upload.perspectives.map do |k, v| %>
-	<%=	f.radio_button :perspective, k %>
-	<%=	f.label :perspective, k.humanize, value: k %>
+		<%=	f.radio_button :perspective, k %>
+		<%=	f.label :perspective, k.humanize, value: k %>
 	<% end %>
 	<%= f.submit %>
 <% end %>

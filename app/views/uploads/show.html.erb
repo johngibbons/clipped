@@ -33,12 +33,12 @@
 		<div class="upload-perspective card">
 			<h6 class="title">Perspective</h6>
 			<div class="perspective" id="selected-perspective">
-				<p><%= upload.selected_perspective.humanize %></p>
+				<%= link_to upload.perspective.humanize, uploads_path(perspective: Upload.perspectives[upload.perspective]), class: "perspective" %>
 			</div>
 			<%= render 'perspective_form' %>
 			<% if policy(upload).update? %>
 				<button id="update-perspective-btn" class="hidden btn">Update</button>		
-				<%= link_to 'Choose Perspective', edit_upload_path(upload), class: "js-link", id: "edit-perspective-link", remote: true %>
+				<%= link_to 'Edit Perspective', edit_upload_path(upload), class: "js-link", id: "edit-perspective-link", remote: true %>
 			<% end %>
 		</div>
 

@@ -20,10 +20,6 @@ class UploadPresenter < BasePresenter
     end
   end
 
-  def selected_perspective
-    @model.perspective || "N/A"
-  end
-
   private
 
   def approval_classes(class_list)

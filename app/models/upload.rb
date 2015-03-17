@@ -12,11 +12,11 @@ class Upload < ActiveRecord::Base
     boolean :approved
   end
   handle_asynchronously :solr_index
-  handle_asynchronously :remove_from_index
+  # handle_asynchronously :remove_from_index
 
   validates :user_id, presence: true
 
-  enum perspective: [ :front, :side_front, :side, :side_back, :back, :above, :below ]
+  enum perspective: [ :not_applicable, :front, :side_front, :side, :side_back, :back, :above, :below ]
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)

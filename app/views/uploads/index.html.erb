@@ -2,5 +2,7 @@
 	<% if @tag_name %>
 		<h6>Images tagged with: <%= @tag_name %></h6>
 	<% end %>
+  <%= will_paginate @uploads%>
 	<%= render @uploads %>
+  <%= will_paginate @uploads%>
 <% end %>
