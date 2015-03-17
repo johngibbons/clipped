@@ -1,0 +1,21 @@
+//remove any temporary tags leftover from previous edit
+$('.temporary').remove();
+
+//add delete capabiliity while editing
+$('.tag').each(function(index, element) {
+	tagName = element.textContent;
+	element.innerHTML = '<span class="tag-data">'+ tagName + '</span>' + '<span class="delete-tag fa fa-remove"></span>';
+});
+
+//deleting functionality
+$('.delete-tag').click(function() {
+  console.log("click");
+   $(this).parent().remove();
+ });
+
+$(".tags-form").removeClass("hidden");
+$(".js-link").addClass("hidden");
+$(".tags-list").addClass("update");
+$("#update-tags-btn").removeClass("hidden");
+$("#upload_tag_list").val("");
+$("#upload_tag_list").focus();

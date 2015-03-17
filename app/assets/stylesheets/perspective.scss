@@ -1,0 +1,24 @@
+.upload-perspective {
+  input[type=radio] {
+    display: none;
+
+    &:checked + label{
+      border-bottom: 3px solid $action-color;
+    }
+  }
+
+  label {
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: .8em;
+    text-transform: uppercase;
+    padding: 5px;
+    border-bottom: 3px solid transparent;
+    transition: border 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      border-bottom: 3px solid $medium-gray;
+    }
+  }
+}

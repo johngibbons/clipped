@@ -18,9 +18,9 @@ RSpec.feature "Image approvals", :type => :feature do
     log_in(@admin)
     visit user_path(@user)
     click_link("upload-#{Upload.first.id}")
-    expect(page).to have_css(".approve-btn")
+    expect(page).to have_button("approve")
     expect(page).to have_css(".unapproved")
-    click_button("Approve")
+    click_button("approve")
     visit user_path(@user)
     expect(page).to have_css(".approved", count: 1)
     visit root_path

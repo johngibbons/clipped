@@ -173,7 +173,9 @@
     top: 50%;
     margin-left: -20.5px;
     margin-top: -24px;
-    color: darken($clipped-green, 15%);
+    .fa {
+      color: darken($clipped-green, 15%);
+    }
   }
 
   .dz-success {
@@ -195,7 +197,10 @@
     top: 50%;
     margin-left: -21px;
     margin-top: -24px;
-    color: darken($clipped-red, 15%);
+    
+    .fa {
+      color: darken($clipped-red, 15%);
+    }
   }
 
   .dz-error {
@@ -264,6 +269,10 @@
   }
 }
 
+.upload-stats {
+  text-align: center;
+}
+
 .upload {
   position: relative;
   height: 200px;
@@ -271,5 +280,8 @@
   float: left;
   margin-right: 25px;
   margin-bottom: 25px;
+}
 
+.upload-interaction {
+  display: inline-block;
 }

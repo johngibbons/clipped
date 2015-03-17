@@ -85,3 +85,20 @@ picture {
   margin: 0;
   max-width: 100%;
 }
+
+.fa {
+  vertical-align: middle;
+  color: $action-color;
+}
+
+
+.off {
+  color: transparentize($action-color, 0.7);
+
+  // &:hover {
+  //   color: transparentize($action-color, 0.3);
+  // }
+}
+
+.on {
+}

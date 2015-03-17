@@ -16,6 +16,8 @@ class Upload < ActiveRecord::Base
 
   validates :user_id, presence: true
 
+  enum perspective: [ :front, :side_front, :side, :side_back, :back, :above, :below ]
+
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
     write_attribute(:direct_upload_url, (CGI.unescape(escaped_url) rescue nil))

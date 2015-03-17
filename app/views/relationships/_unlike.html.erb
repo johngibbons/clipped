@@ -1,3 +1,5 @@
 <%= form_for(current_user.liker_relationships.find_by(liked_id: @upload.id), html: { method: :delete }, remote: true) do |f| %>
-	<%= f.submit "Unlike", class: "unlike-btn" %>
+	<%= f.button id: "unlike", class: "icon" do %>
+		<i class="fa fa-heart fa-lg on"></i>
+	<% end %>
 <% end %>

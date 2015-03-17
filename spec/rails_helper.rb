@@ -14,7 +14,7 @@ DEFAULT_HOST = "testhost.com"
 DEFAULT_PORT = 7171  
 
 #Do not delay jobs for tests
-# Delayed::Worker.delay_jobs = false
+Delayed::Worker.delay_jobs = false
 
 #=> { :reservation_set => [...] } 
 # Requires supporting ruby files with custom matchers and macros, etc, in

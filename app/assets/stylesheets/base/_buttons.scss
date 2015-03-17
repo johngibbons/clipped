@@ -22,6 +22,10 @@ button, .btn {
   vertical-align: middle;
   white-space: nowrap;
 
+  a {
+    color: $white;
+  }
+
   &:hover,
   &:focus {
     background-color: lighten($action-color, 15%);
@@ -57,4 +61,12 @@ button.secondary, .btn.secondary {
     background-color: lighten($medium-gray, 15%);
     color: #fff;
   }
+}
+
+button.icon {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin-right: 10px;
 }

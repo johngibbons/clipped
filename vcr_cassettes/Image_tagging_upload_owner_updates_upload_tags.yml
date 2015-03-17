@@ -1,48 +1,17 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: http://127.0.0.1:7171/__identify__
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: 'OK '
-    headers:
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.0/2014-12-25)
-      Date:
-      - Fri, 06 Mar 2015 01:37:08 GMT
-      Content-Length:
-      - '14'
-      Connection:
-      - Keep-Alive
-    body:
-      encoding: UTF-8
-      string: '70247560902760'
-    http_version: 
-  recorded_at: Fri, 06 Mar 2015 01:37:08 GMT
-- request:
     method: put
-    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images/1/original/test.png
+    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images/22/original/test.png
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAABGdBTUEAALGP
         C/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3Cc
-        ulE8AAAAAmJLR0QAAd2KE6QAAAAHdElNRQffAwUSJQnRT5HlAAAACklEQVQI
-        12NoAAAAggCB3UNq9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMy0wNVQx
-        ODozNzowOS0wNzowMIrbIqQAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDMt
-        MDVUMTg6Mzc6MDktMDc6MDD7hpoYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+        ulE8AAAAAmJLR0QAAd2KE6QAAAAHdElNRQffAw0PES2HLJ4PAAAACklEQVQI
+        12NoAAAAggCB3UNq9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMy0xM1Qx
+        NToxNzo0NS0wNjowMLr6WlcAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDMt
+        MTNUMTU6MTc6NDUtMDY6MDDLp+LrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
         bWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==
     headers:
       Content-Type:
@@ -54,9 +23,9 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
       Date:
-      - Thu, 05 Mar 2015 18:37:09 -0700
+      - Fri, 13 Mar 2015 15:17:45 -0600
       Authorization:
-      - AWS AKIAIZV74X35AK7DB6CQ:cQw4V/fnUd/xR+Ux4Z+s71+Fkpc=
+      - AWS AKIAIZV74X35AK7DB6CQ:jLwQOoV2tXTfbZJp5G+DNBQpY/w=
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -67,13 +36,13 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - 0TvYiRalmb9nvpSLlsPlgcDueuIXGWb+F8B1R6pduTCSxLiVPyfWGnzDDXg4zD8mr6I/phhx6Ew=
+      - mBZTmVacrD9i7DDOncdg+mb0zQcaAR7oWphrqJKGInnMmfp0+EFE9XxqwNGM4gfpTzH5iligcDc=
       X-Amz-Request-Id:
-      - 6FA6237373102A03
+      - 88FA9F89F55E3F13
       Date:
-      - Fri, 06 Mar 2015 01:37:10 GMT
+      - Fri, 13 Mar 2015 21:17:47 GMT
       Etag:
-      - '"58f1fa3f0d053baa97a9e76a18ef36c0"'
+      - '"d91ce5c732eb6f523192231104a55639"'
       Content-Length:
       - '0'
       Server:
@@ -82,19 +51,19 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 06 Mar 2015 01:37:09 GMT
+  recorded_at: Fri, 13 Mar 2015 21:17:46 GMT
 - request:
     method: put
-    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images/1/large/test.png
+    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images/22/large/test.png
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAABGdBTUEAALGP
         C/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3Cc
-        ulE8AAAAAmJLR0QAAd2KE6QAAAAHdElNRQffAwUSJQnRT5HlAAAACklEQVQI
-        12NoAAAAggCB3UNq9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMy0wNVQx
-        ODozNzowOS0wNzowMIrbIqQAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDMt
-        MDVUMTg6Mzc6MDktMDc6MDD7hpoYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+        ulE8AAAAAmJLR0QAAd2KE6QAAAAHdElNRQffAw0PES2HLJ4PAAAACklEQVQI
+        12NoAAAAggCB3UNq9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMy0xM1Qx
+        NToxNzo0NS0wNjowMLr6WlcAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDMt
+        MTNUMTU6MTc6NDUtMDY6MDDLp+LrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
         bWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==
     headers:
       Content-Type:
@@ -106,9 +75,9 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
       Date:
-      - Thu, 05 Mar 2015 18:37:09 -0700
+      - Fri, 13 Mar 2015 15:17:46 -0600
       Authorization:
-      - AWS AKIAIZV74X35AK7DB6CQ:LkSc1yEsnFV62QH/Yu7C+1HzVCw=
+      - AWS AKIAIZV74X35AK7DB6CQ:Gdjs6/XCIoyJDOf2ZHolnxYvTko=
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -119,13 +88,13 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - 92o+nRIggXj69mYJ6oTcDIqtkCO4Q9q4yUVF+yKwT2sBFTooZI9fxobOwcoQnEdhqf+p6Y+FDWQ=
+      - vB3BXYYZ83jZwXn1PDZwuUVHa1Jyd+IcrFdAnU51BoSyA+WE/uRAbMb/4LqhdclpqB9bA5Cq1Ic=
       X-Amz-Request-Id:
-      - C4E40B787188449E
+      - 39658B8F2E40C2F4
       Date:
-      - Fri, 06 Mar 2015 01:37:10 GMT
+      - Fri, 13 Mar 2015 21:17:47 GMT
       Etag:
-      - '"58f1fa3f0d053baa97a9e76a18ef36c0"'
+      - '"d91ce5c732eb6f523192231104a55639"'
       Content-Length:
       - '0'
       Server:
@@ -134,19 +103,19 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 06 Mar 2015 01:37:10 GMT
+  recorded_at: Fri, 13 Mar 2015 21:17:46 GMT
 - request:
     method: put
-    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images/1/medium/test.png
+    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images/22/medium/test.png
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAABGdBTUEAALGP
         C/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3Cc
-        ulE8AAAAAmJLR0QAAd2KE6QAAAAHdElNRQffAwUSJQnRT5HlAAAACklEQVQI
-        12NoAAAAggCB3UNq9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMy0wNVQx
-        ODozNzowOS0wNzowMIrbIqQAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDMt
-        MDVUMTg6Mzc6MDktMDc6MDD7hpoYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+        ulE8AAAAAmJLR0QAAd2KE6QAAAAHdElNRQffAw0PES2HLJ4PAAAACklEQVQI
+        12NoAAAAggCB3UNq9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMy0xM1Qx
+        NToxNzo0NS0wNjowMLr6WlcAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDMt
+        MTNUMTU6MTc6NDUtMDY6MDDLp+LrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
         bWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==
     headers:
       Content-Type:
@@ -158,9 +127,9 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
       Date:
-      - Thu, 05 Mar 2015 18:37:10 -0700
+      - Fri, 13 Mar 2015 15:17:46 -0600
       Authorization:
-      - AWS AKIAIZV74X35AK7DB6CQ:HVN3V0NQAJ/QZ82idSUY3XKRJ+8=
+      - AWS AKIAIZV74X35AK7DB6CQ:HY2Uc2CHXlfECP3+GdQUjUp2r48=
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -171,13 +140,13 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - a3WpnsNxVsIghrgXiWBme20duPMIKzsxCGEQZTREX/iLNaNv1gN8o5rYUV+2t9alYTTcfgN1JZI=
+      - q9QDl4LCHi6iyNqtYuRpWfLCcmcbHXOegFfzPjLpjHxkEqKGX2xG2Fc0JpvCB6hnKXIlktfEXfg=
       X-Amz-Request-Id:
-      - 3CB3FE78FE84F075
+      - CAD741F64B9B7A75
       Date:
-      - Fri, 06 Mar 2015 01:37:11 GMT
+      - Fri, 13 Mar 2015 21:17:47 GMT
       Etag:
-      - '"58f1fa3f0d053baa97a9e76a18ef36c0"'
+      - '"d91ce5c732eb6f523192231104a55639"'
       Content-Length:
       - '0'
       Server:
@@ -186,19 +155,19 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 06 Mar 2015 01:37:10 GMT
+  recorded_at: Fri, 13 Mar 2015 21:17:46 GMT
 - request:
     method: put
-    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images/1/thumb/test.png
+    uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images/22/thumb/test.png
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAABGdBTUEAALGP
         C/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3Cc
-        ulE8AAAAAmJLR0QAAd2KE6QAAAAHdElNRQffAwUSJQnRT5HlAAAACklEQVQI
-        12NoAAAAggCB3UNq9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMy0wNVQx
-        ODozNzowOS0wNzowMIrbIqQAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDMt
-        MDVUMTg6Mzc6MDktMDc6MDD7hpoYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+        ulE8AAAAAmJLR0QAAd2KE6QAAAAHdElNRQffAw0PES2HLJ4PAAAACklEQVQI
+        12NoAAAAggCB3UNq9AAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0wMy0xM1Qx
+        NToxNzo0NS0wNjowMLr6WlcAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMDMt
+        MTNUMTU6MTc6NDUtMDY6MDDLp+LrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
         bWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==
     headers:
       Content-Type:
@@ -210,9 +179,9 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
       Date:
-      - Thu, 05 Mar 2015 18:37:10 -0700
+      - Fri, 13 Mar 2015 15:17:46 -0600
       Authorization:
-      - AWS AKIAIZV74X35AK7DB6CQ:snqXpoUKY5vbcjer4cVF8viQxPs=
+      - AWS AKIAIZV74X35AK7DB6CQ:Kk6g6Rnjiz6pK/iGrkS1OGSyzJ4=
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -223,13 +192,13 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - "/ehSkgK7u7pXycIour3hd0MmYKy4GlvZXQ7CsuZzrMr/YAw4oqpWdnI/a1Jg8ZHwwofyaYhC6Iw="
+      - zD1k8OMhO2JzMfmbbUWJmtx5hwbRfaurhboHLvMWB3og+wMeaITDMkJxyR/tT+iJj/7LLBsQivs=
       X-Amz-Request-Id:
-      - AF554757476EFF0E
+      - 9587168A21DB28AB
       Date:
-      - Fri, 06 Mar 2015 01:37:11 GMT
+      - Fri, 13 Mar 2015 21:17:48 GMT
       Etag:
-      - '"58f1fa3f0d053baa97a9e76a18ef36c0"'
+      - '"d91ce5c732eb6f523192231104a55639"'
       Content-Length:
       - '0'
       Server:
@@ -238,5 +207,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 06 Mar 2015 01:37:10 GMT
+  recorded_at: Fri, 13 Mar 2015 21:17:47 GMT
 recorded_with: VCR 2.9.3

@@ -4,7 +4,7 @@
     <%= gravatar_for @user, size: 150 %>
     <h3 class="user-name"><%= @user.name %></h3>
   </div>
-  <div class="user-stats">
+  <div class="user-stats stats">
     <ul>
       <li><%= @user.uploads.count %><span>Uploads</span></li>
       <li><%= @user.total_user_likes %><span>Likes</span></li>

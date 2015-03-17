@@ -39,6 +39,10 @@
 		  <%= text_field_tag "x-ignore-tags", nil, placeholder: "e.g. boy, walking, beach, etc.", id: "upload_tag_list", onkeypress: "return event.keyCode!=13" %>
 	  </div>
 
+		<div class="dropzone-upload-perspective dropdown">
+			<%= select_tag "x-ignore-perspective", options_for_select(Upload.perspectives.map {|k, v| [k.humanize, k]}) %>
+		</div>
+
 
 	  <div class="dz-error-message"><span data-dz-errormessage></span></div>
 	</div>

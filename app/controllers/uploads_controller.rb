@@ -57,7 +57,7 @@ class UploadsController < ApplicationController
   private
 
     def upload_params
-      params.require(:upload).permit(:image, :direct_upload_url, :tag_list)
+      params.require(:upload).permit(:image, :direct_upload_url, :tag_list, :perspective)
     end
 
     def increment_views

@@ -16,7 +16,7 @@ RSpec.feature "Image liking", :type => :feature do
       visit upload_path(upload)
       expect(page).to have_content("Views")
       expect do
-        click_button "Like"
+        click_button "like"
       end.to change{upload.reload.likes_count}.by(1)
     end
 
@@ -24,7 +24,7 @@ RSpec.feature "Image liking", :type => :feature do
       user.like(upload)
       visit upload_path(upload)
       expect do
-        click_button "Unlike"
+        click_button "unlike"
       end.to change{upload.reload.likes_count}.by(-1)
     end
   end

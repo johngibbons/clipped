@@ -19,7 +19,7 @@
 /spring/*.pid
 
 # Ignore VCR Cassettes
-/vcr_cassettes/*
+/vcr_cassettes/
 
 # Ignore solr development data
 /solr/data/development

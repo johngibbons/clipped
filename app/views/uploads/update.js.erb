@@ -4,3 +4,5 @@ $(".tags-list").removeClass("update");
 $("#update-tags-btn").addClass("hidden");
 
 $('.tag-items').html("<%= j (render @upload.tags) %>");
+$('#update-perspective-form').addClass('hidden');
+$('#selected-perspective').removeClass('hidden');

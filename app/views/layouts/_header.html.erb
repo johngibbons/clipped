@@ -21,6 +21,9 @@
             <% end %>
           </ul>
         </li>
+          <%= link_to new_upload_path do %>
+            <button>Upload</button>
+          <% end %>
       <% else %>
         <li class="nav-link"><%= link_to "Log In", login_path, class: "login" %></li>
         <%= link_to signup_path do %>
@@ -33,7 +36,9 @@
       <div class="search-bar">
         <%= form_tag search_index_path, :method => :get do %>
           <%= search_field_tag :search, params[:search], placeholder: "e.g. man looking up..." %>
-          <%= image_submit_tag "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png"%>
+          <%= button_tag do %>
+            <i class="fa fa-search"></i>
+          <% end %>
         <% end %>
       </div>
     </div>

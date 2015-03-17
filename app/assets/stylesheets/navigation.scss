@@ -303,7 +303,7 @@ header.navigation {
 
     float: left;
     padding: 0.85em 0.6em 0.7em 0.6em;
-    width: 80%;
+    width: 90%;
 
     form {
       position: relative;
@@ -327,7 +327,7 @@ header.navigation {
         }
 
         @include media($large-screen) {
-          width: 80%;
+          width: 90%;
           @include transition(all 0.1s ease-in-out);
 
         }
@@ -343,6 +343,10 @@ header.navigation {
         top: 0.3em;
         height: 23px;
         width: 30px;
+
+        .fa {
+          color: $white;
+        }
 
         img {
           height: 12px;

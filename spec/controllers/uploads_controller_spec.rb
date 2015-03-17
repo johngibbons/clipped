@@ -77,6 +77,7 @@ RSpec.describe UploadsController, type: :controller do
       current.admin = true
       current.save!
       log_in_as(current)
+      upload.save!
       expect do
         delete :destroy, id: upload
       end.to change{ Upload.count }.by(-1)    

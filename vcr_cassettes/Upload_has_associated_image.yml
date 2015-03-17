@@ -12,9 +12,9 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
       Date:
-      - Thu, 26 Feb 2015 11:31:21 -0700
+      - Fri, 13 Mar 2015 15:18:08 -0600
       Authorization:
-      - AWS AKIAIZV74X35AK7DB6CQ:kaZvayEv7HLkQKoKmyol5qVwLMo=
+      - AWS AKIAIZV74X35AK7DB6CQ:IcYrczDaVlRSMZPryROrZ+QBqS4=
       Accept:
       - "*/*"
   response:
@@ -23,22 +23,22 @@ http_interactions:
       message: Not Found
     headers:
       X-Amz-Request-Id:
-      - 14D99B854B28512C
+      - 4C3D18DCEAF5C52C
       X-Amz-Id-2:
-      - vFpcLKWLG+fDEt3RFcZDBjQImUnUbETsHO0P23LLWF6CrTOdDz0LjZWzbqqpp4j4xkmvTd9qvLM=
+      - GcOuUp6rEkJrsBtBSNsZSPH+sqZvZ9CrasGIWVEit+odh62rgr8zwLRmxuPxTn8Cn6KGRjLKtNQ=
       Content-Type:
       - application/xml
       Transfer-Encoding:
       - chunked
       Date:
-      - Thu, 26 Feb 2015 18:31:21 GMT
+      - Fri, 13 Mar 2015 21:18:08 GMT
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 26 Feb 2015 18:31:22 GMT
+  recorded_at: Fri, 13 Mar 2015 21:18:09 GMT
 - request:
     method: head
     uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images//large/test.png
@@ -51,9 +51,9 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
       Date:
-      - Thu, 26 Feb 2015 11:31:22 -0700
+      - Fri, 13 Mar 2015 15:18:09 -0600
       Authorization:
-      - AWS AKIAIZV74X35AK7DB6CQ:XAuCHV2V/YV618Pujtdemd0H9Sw=
+      - AWS AKIAIZV74X35AK7DB6CQ:tG5qAbEJfDo1TtivpFyd+m4STL8=
       Accept:
       - "*/*"
   response:
@@ -62,22 +62,22 @@ http_interactions:
       message: Not Found
     headers:
       X-Amz-Request-Id:
-      - 872E33AF42AD5ED0
+      - 589C26A84560968D
       X-Amz-Id-2:
-      - PXykKymUae1soE02uoxpCiYddy2fwPWl6Ji8i2Jp86Tz5amU8gREpPHVwE2V43qMjeUTxCq8Vy8=
+      - nGTX20X7fg93F22lIemCqQ+dRUqRz+7EaY+5pN7ejgYikp0ZiChG/DwaeBCkULTl1YIwq9FR5es=
       Content-Type:
       - application/xml
       Transfer-Encoding:
       - chunked
       Date:
-      - Thu, 26 Feb 2015 18:31:22 GMT
+      - Fri, 13 Mar 2015 21:18:08 GMT
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 26 Feb 2015 18:31:23 GMT
+  recorded_at: Fri, 13 Mar 2015 21:18:09 GMT
 - request:
     method: head
     uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images//medium/test.png
@@ -90,9 +90,9 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
       Date:
-      - Thu, 26 Feb 2015 11:31:23 -0700
+      - Fri, 13 Mar 2015 15:18:09 -0600
       Authorization:
-      - AWS AKIAIZV74X35AK7DB6CQ:MSPsHCZGD4fU9SO0wwTGkAlR+Cw=
+      - AWS AKIAIZV74X35AK7DB6CQ:LXsxaFY9Z0riBlrlqmTzq/xjMP0=
       Accept:
       - "*/*"
   response:
@@ -101,22 +101,22 @@ http_interactions:
       message: Not Found
     headers:
       X-Amz-Request-Id:
-      - 29AE678758A89E1F
+      - 11B64CCF18F45B1F
       X-Amz-Id-2:
-      - btIVBfafjN6v4wz3eAT7/8AJBqiuvoUbjTHmp9JLpm9o7pGIX2A+D1Jts7mqaCkDg8Lz0VsK2hk=
+      - dGYLgVLz3zB0bOshksa0a9bUpGSKAkY3gFaTOCK8I9Fx1aYPxF24Y2/kxDCm7fRrKVhpZkg879o=
       Content-Type:
       - application/xml
       Transfer-Encoding:
       - chunked
       Date:
-      - Thu, 26 Feb 2015 18:31:22 GMT
+      - Fri, 13 Mar 2015 21:18:09 GMT
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 26 Feb 2015 18:31:23 GMT
+  recorded_at: Fri, 13 Mar 2015 21:18:09 GMT
 - request:
     method: head
     uri: https://entourageappdev.s3-us-west-2.amazonaws.com/uploads/images//thumb/test.png
@@ -129,9 +129,9 @@ http_interactions:
       User-Agent:
       - aws-sdk-ruby/1.6.9 ruby/2.2.0 x86_64-darwin14
       Date:
-      - Thu, 26 Feb 2015 11:31:23 -0700
+      - Fri, 13 Mar 2015 15:18:09 -0600
       Authorization:
-      - AWS AKIAIZV74X35AK7DB6CQ:s6AK2Sq9VI5hn7wpQ7bXBL8u3hc=
+      - AWS AKIAIZV74X35AK7DB6CQ:+4KRDZd4VqoNcYdu5N7yAMuBP3w=
       Accept:
       - "*/*"
   response:
@@ -140,20 +140,20 @@ http_interactions:
       message: Not Found
     headers:
       X-Amz-Request-Id:
-      - 5C0ECC346CEB804F
+      - 20E78BEB487528E5
       X-Amz-Id-2:
-      - ccwr81/rsfs9diDOJZrxnjyxdvwcYMIbXMWkEDfFTTaDL9W3xVRNoDwK35uWhIbs21NKRQO3wyo=
+      - DYvGFAx9K3qrr8/NnY92f98q001+0NxDmpOYBba7jtqESjvOMpnjDFuEbdIp8L7STvUwOakj2kA=
       Content-Type:
       - application/xml
       Transfer-Encoding:
       - chunked
       Date:
-      - Thu, 26 Feb 2015 18:31:22 GMT
+      - Fri, 13 Mar 2015 21:18:09 GMT
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 26 Feb 2015 18:31:23 GMT
+  recorded_at: Fri, 13 Mar 2015 21:18:10 GMT
 recorded_with: VCR 2.9.3

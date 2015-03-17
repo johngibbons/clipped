@@ -7,10 +7,14 @@
 	<div class="upload-info">
 		<div class="upload-stats card">
 			<h6 class="title">Stats</h6>
-			<p>Views: <%= upload.views %></p>
-			<p>Downloads: <%= upload.downloads %></p>
-			<p>Likes: <span id="likes"><%= upload.likes_count %></span></p>
-		</div>
+			<div class="single-upload-stats stats">
+		    <ul>
+					<li><%= upload.views %><span>Views</span></li>
+					<li><span id="downloads"><%= upload.downloads %></span><span>Downloads</span></li>
+					<li><span id="likes"><%= upload.likes_count %></span><span>Likes</span></li>
+		    </ul>
+		  </div>
+	  </div>
 
 		<div class="upload-tags card">
 			<h6 class="title">Tags</h6>
@@ -26,10 +30,30 @@
 			<% end %>
 		</div>
 
+		<div class="upload-perspective card">
+			<h6 class="title">Perspective</h6>
+			<div class="perspective" id="selected-perspective">
+				<p><%= upload.selected_perspective.humanize %></p>
+			</div>
+			<%= render 'perspective_form' %>
+			<% if policy(upload).update? %>
+				<button id="update-perspective-btn" class="hidden btn">Update</button>		
+				<%= link_to 'Choose Perspective', edit_upload_path(upload), class: "js-link", id: "edit-perspective-link", remote: true %>
+			<% end %>
+		</div>
+
 		<div class="upload-interaction card">
 			<%= render 'relationships/like_form' if logged_in? %>
 			<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
-		</div>
+			<% if current_user.admin? %>
+				<%= form_for upload, method: :delete, html: {class: "upload-interaction", data: { confirm: "You sure?" }} do |f| %>
+				  <%= hidden_field_tag :approved, true %>
+					<%= f.button class: "icon" do %>
+						<i class="fa fa-ban fa-lg"></i>
+					<% end %>
+				<% end %>			  
+		  <% end %>
+  		</div>
 	</div>
 
 <% end %>
