@@ -54,7 +54,7 @@ $('.uploads.new').ready(function () {
 	});
 
 	dropzone.on("addedfile", function(file) {
-		$(".dz-message, #clickable").hide();
+		$("#dropzone-upload-text").hide();
   	$("#uploader-controls").show();
   	$("#save-uploads").prop("disabled", true);
   	$("#remove-all-uploads").prop("disabled", false);

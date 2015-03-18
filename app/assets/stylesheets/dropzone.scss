@@ -1,0 +1,242 @@
+.dropzone {
+  flex: 1;
+  display: flex;
+
+	.dz-progress {
+  $progress-border-color: $base-border-color;
+  $progress-border: 1px solid $progress-border-color;
+  $progress-meter-border-color: $action-color;
+  $progress-meter-border: 1px solid darken($progress-meter-border-color, 15%);
+  $progress-meter-color: $progress-meter-border-color;
+  $progress-background: darken($light-gray, 5%);
+  $progress-animation-duration: 0.7s;
+  $progress-height: 25px;
+
+  background-color: $progress-background;
+  border: $progress-border;
+  box-shadow: inset 0 0 3px 0 rgba(darken($progress-background, 50%), 0.15);
+  border-radius: $base-border-radius;
+  height: $progress-height;
+  margin: 0 auto;
+  padding: 2px;
+  width: 100%;
+
+  > span.dz-upload {
+    @include animation(progress $progress-animation-duration linear infinite);
+    box-sizing: border-box;
+    background-color: $progress-meter-color;
+    background-image: linear-gradient(-45deg, rgba(255,255,255, 0.15) 25%,
+                                                      transparent 25%,
+                                                      transparent 50%,
+                                                      rgba(255,255,255, 0.15) 50%,
+                                                      rgba(255,255,255, 0.15) 75%,
+                                                      transparent 75%);
+    background-size: 40px 40px;
+    background-repeat: repeat-x;
+    border: $progress-meter-border;
+    border-radius: $base-border-radius / 1.5;
+    display: block;
+    height: 100%;
+    width: 0%;
+  }
+}
+
+@-webkit-keyframes progress {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 0px;
+  }
+}
+
+@-moz-keyframes progress {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 0px;
+  }
+}
+
+@-ms-keyframes progress {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 0px;
+  }
+}
+
+@-o-keyframes progress {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 0px;
+  }
+}
+
+@keyframes progress {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 0px;
+  }
+}
+
+  #uploader-container {
+    align-items: center;
+    @include outer-container;
+    margin-top: 125px;
+
+    @include media($tablet) {
+      margin-top: 65px;
+    }
+
+    @include media($desktop) {
+      @include outer-container(95%);
+    }
+  }
+
+  #uploader-controls {
+    padding: 10px 20px;
+    margin: 20px 0;
+    min-height: 54px;
+
+    .btn {
+      margin-right: 10px;
+    }
+  }
+
+  #upload-previews {
+    display: flex;
+
+  }
+
+  #clickable {
+
+    button {
+      @include media($tablet) {
+        margin: 0 auto;
+        padding: 25px;
+        width: 300px;
+      }
+    }
+  }
+
+  .dz-preview {
+    flex: 1 1 200px;
+    transition: all, 1s, ease;
+    position: relative;
+
+    h6 {
+      font-size: 0.8em;
+      margin: 1.5em 0 0.5em 0;
+    }  
+  }
+
+  .dz-size {
+    font-size: .8em;
+    margin-bottom: 1.5em;
+  }
+
+  .dz-image-container {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  .dropzone-upload-tags {
+    input {
+      margin-bottom: 0;
+      color: $dark-gray;
+      font-size: 0.8em;
+      background-color: $white;
+      box-shadow: none;
+    }
+  }
+
+  .dz-success-mark {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -20.5px;
+    margin-top: -24px;
+    .fa {
+      color: darken($clipped-green, 15%);
+    }
+  }
+
+  .dz-success {
+    background-color: lighten($clipped-green, 25%);
+    border: 1px solid lighten($clipped-green, 15%);
+
+    .dz-success-mark {
+      display: block;
+    }
+    .dz-progress {
+      display: none;
+    }
+  }
+
+  .dz-error-mark {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -21px;
+    margin-top: -24px;
+    
+    .fa {
+      color: darken($clipped-red, 15%);
+    }
+  }
+
+  .dz-error {
+    background-color: lighten($clipped-red, 25%);
+    border: 1px solid lighten($clipped-red, 15%);
+
+    .dz-error-mark {
+      display: block;
+    }
+    .dz-progress {
+      display: none;
+    }
+  }
+
+  .dz-remove {
+    color: $clipped-red;
+    position: absolute;
+    top: -9px;
+    left: -7px;
+    z-index: 1;
+    cursor: pointer;
+    font-size: 2em;
+
+    @include media($tablet) {
+      font-size: 1em;
+    }
+  }
+
+  #dropzone-upload-text {
+    flex: 1;
+  }
+
+	.dz-message {
+    display: none;
+
+    @include media($tablet) {
+      display: block;
+      text-align: center;
+    }
+	}
+}

@@ -50,3 +50,8 @@ aside {
 .hidden {
 	display: none;
 }
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+}

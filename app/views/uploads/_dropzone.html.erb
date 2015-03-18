@@ -9,7 +9,7 @@
 		 <%= file_field_tag 'file', multiple: true %>
 	</div>
 
-<div id="uploader-container">
+<div id="uploader-container" class="flex-container">
 	<div id="uploader-controls" class="card" style="display: none;">
 		<button type="button" id="save-uploads" name="x-ignore-save" disabled>save</button>
 		<button type="button" id="remove-all-uploads" name="x-ignore-remove-all" class="secondary">remove all</button>
@@ -21,7 +21,7 @@
 			<button name="x-ignore-tags">Click here to select files</button>
 		</div>
 	</div>
-	<div id="upload-previews"></div>
+	<div id="upload-previews" class="flex-container"></div>
 </div>
 
 <div id="preview-template" class="dropzone-previews" style="display: none;">

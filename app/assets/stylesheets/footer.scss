@@ -3,6 +3,10 @@
 
   .footer-wrapper {
     @include outer-container;
+
+    @include media($desktop) {
+      @include outer-container(em(1088));
+    }
   }  
   
   ul {
