@@ -1,5 +1,5 @@
-<%= present(upload) do |upload| %>
-	<%= content_tag :div, class: "upload #{upload.approval_class}" do -%>
+<% present(upload) do |upload| %>
+	<%= content_tag :div, class: "upload #{upload.approval_class}" do %>
 		<%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
 				<%= image_tag upload.src(:thumb), class: "#{upload.processed_class}" %>
 		<% end %>
