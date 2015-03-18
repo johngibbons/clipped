@@ -12,6 +12,7 @@
  *
  */
 
+@import "normalize-rails";
 @import "bourbon";
 @import "base/grid-settings";
 @import "neat";
@@ -26,6 +27,7 @@
 @import "uploads";
 @import "relationships";
 @import "upload_moderation";
+@import "stats";
 @import "static_pages";
 @import "font-awesome";
 @import "tags";

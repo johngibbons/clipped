@@ -236,18 +236,12 @@
 	}
 }
 
-.upload-thumb {
-
-	img {
-		height: 100%;
-    padding: 5px;
-	}
-}
-
 .upload-single {
-  @include span-columns(8);
+  @include span-columns(4);
   height: 700px;
   position: relative;
+  margin-bottom: $gutter;
+
   img {
     with: auto;
     height: auto;
@@ -259,6 +253,14 @@
     top: 50%;
     @include transform(translate(-50%, -50%));
   }
+
+  @include media($tablet) {
+    @include span-columns(5);
+  }
+
+  @include media($desktop) {
+    @include span-columns(8);
+  }
 }
 
 .upload-info {
@@ -267,6 +269,14 @@
   .card {
     margin-bottom: $gutter;
   }
+
+  @include media($tablet) {
+    @include span-columns(3);
+  }
+
+  @include media($desktop) {
+    @include span-columns(4);
+  }
 }
 
 .upload-stats {
@@ -274,14 +284,23 @@
 }
 
 .upload {
+  @include span-columns(2);
+  @include omega(2n);
   position: relative;
-  height: 200px;
-  width: auto;
-  float: left;
-  margin-right: 25px;
-  margin-bottom: 25px;
+  height: auto;
+  margin-bottom: $gutter;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 .upload-interaction {
   display: inline-block;
+  text-align: center;
+}
+
+.js-link {
+  font-size: 0.8em;
 }

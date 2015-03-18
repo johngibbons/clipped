@@ -21,6 +21,14 @@ button, .btn {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  width: 100%;
+  height: 4em;
+  margin: 1em 0;
+
+  @include media($tablet) {
+    width: auto;
+    height: auto;
+  }
 
   a {
     color: $white;
@@ -43,11 +51,25 @@ button, .btn {
 }
 
 button.google {
-  background-color: #dd4b39;
+  background-color: $google-red;
+  border: 1px solid darken($google-red, 20%);
+  box-shadow: 0 1px 2px 0 lighten($google-red, 30%);
+
+  &:hover,
+  &:focus {
+    background-color: lighten($google-red, 15%);
+  }
 }
 
 button.facebook {
-  background-color: #4e69a2;
+  background-color: $facebook-blue;
+  border: 1px solid darken($facebook-blue, 20%);
+  box-shadow: 0 1px 2px 0 lighten($facebook-blue, 30%);
+
+  &:hover,
+  &:focus {
+    background-color: lighten($facebook-blue, 15%);
+  }
 }
 
 button.secondary, .btn.secondary {

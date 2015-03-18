@@ -13,7 +13,11 @@
 	padding-bottom: 50px;
   background-color: $white;
   border-bottom: 1px solid $light-gray;
-  margin-top: 100px;
+  margin-top: 144px;
+
+  @include media($tablet) {
+  	margin-top: 100px;
+  }
 
 	.gravatar {
 		display: block;
@@ -35,11 +39,11 @@
 }
 
 .user-uploads-section {
+	padding-top: $gutter;
   background-color: $lightest-gray;
 
   .container {
     margin-top:0;
-    padding-top: 50px;
   }
 }
 

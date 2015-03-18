@@ -56,6 +56,13 @@ class UploadsController < ApplicationController
     redirect_to current_user
   end
 
+  def download
+    @upload = Upload.find(params[:id])
+    redirect_to @upload.download_url
+    @upload.downloads += 1
+    @upload.save
+  end
+
   private
 
     def upload_params

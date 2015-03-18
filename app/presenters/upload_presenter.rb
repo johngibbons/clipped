@@ -1,9 +1,19 @@
 class UploadPresenter < BasePresenter
 
-  def classes
-    class_list = []
-    approval_classes(class_list)
-    processed_classes(class_list)
+  def processed_class
+    if @model.processed?
+      "processed"
+    else
+      "unprocessed"
+    end
+  end
+
+  def approval_class
+    if @model.approved?
+      "approved"
+    else
+      "unapproved"
+    end
   end
 
   def src(size)
@@ -17,24 +27,6 @@ class UploadPresenter < BasePresenter
   def tag_presenter
     if Pundit.policy!(current_user, @model)
       
-    end
-  end
-
-  private
-
-  def approval_classes(class_list)
-    if @model.approved?
-      class_list << "approved"
-    else
-      class_list << "unapproved"
-    end
-  end
-
-  def processed_classes(class_list)
-    if @model.processed?
-      class_list << "processed"
-    else
-      class_list << "unprocessed"
     end
   end
 

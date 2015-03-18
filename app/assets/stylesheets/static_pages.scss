@@ -4,7 +4,7 @@
 
 #home-search {
 	text-align: center;
-	@include span-columns(6);
+	@include span-columns(3);
 	margin: 0 auto 100px;
 	float: none;
 
@@ -38,5 +38,12 @@
 			}
 		}
 	}
-}
 
+	@include media($tablet) {
+		@include span-columns(4);
+	}
+
+	@include media($desktop) {
+		@include span-columns(6);
+	}
+}

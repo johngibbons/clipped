@@ -3,22 +3,13 @@
 // Neat Overrides
 // $column: 90px;
 // $gutter: 30px;
-// $grid-columns: 12;
-// $max-width: em(1088);
+$grid-columns: 4;
+$max-width: 90%;
 
-$visual-grid: true;
+// $visual-grid: true;
 
 $tablet-width: 768px;
 $desktop-width: 1024px;
 
-@mixin tablet {
-  @media (min-width: #{$tablet-width}) {
-    @content;
-  }
-}
-
-@mixin desktop {
-  @media (min-width: #{$desktop-width}) {
-    @content;
-  }
-}
+$tablet: new-breakpoint(min-device-width $tablet-width 8);
+$desktop: new-breakpoint(min-device-width $desktop-width 12);

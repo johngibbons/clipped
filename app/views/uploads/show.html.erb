@@ -1,6 +1,6 @@
 <% present(@upload) do |upload| %>
 
-	<%= content_tag :div, class: "upload-single upload-approval-container card #{upload.classes.join(' ')}" do -%>
+	<%= content_tag :div, class: "upload-single card #{upload.approval_class}" do -%>
 		<%= image_tag upload.src(:large) %>
 	<% end -%>
 
@@ -43,6 +43,8 @@
 		</div>
 
 		<div class="upload-interaction card">
+			<h6 class="title">Download</h6>
+			<%= render partial: "download", locals: {upload: @upload} %>
 			<%= render 'relationships/like_form' if logged_in? %>
 			<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
 			<% if current_user.admin? %>

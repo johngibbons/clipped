@@ -5,6 +5,10 @@ body {
   font-family: $base-font-family;
   font-size: $base-font-size;
   line-height: $base-line-height;
+
+  @include media($tablet) {
+
+  }
 }
 
 .wf-loading {
@@ -93,7 +97,7 @@ picture {
 
 
 .off {
-  color: transparentize($action-color, 0.7);
+  color: transparentize($base-font-color, 0.7);
 
   // &:hover {
   //   color: transparentize($action-color, 0.3);

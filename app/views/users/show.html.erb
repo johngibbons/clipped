@@ -7,8 +7,9 @@
   <div class="user-stats stats">
     <ul>
       <li><%= @user.uploads.count %><span>Uploads</span></li>
-      <li><%= @user.total_user_likes %><span>Likes</span></li>
       <li><%= @user.total_user_views %><span>Views</span></li>
+      <li><%= @user.total_user_downloads %><span>Downloads</span></li>
+      <li><%= @user.total_user_likes %><span>Likes</span></li>
     </ul>
   </div>
   <% if current_user?(@user) %>
@@ -21,13 +22,10 @@
   <div class="container">
     <div class="user-uploads">
       <% if @user.uploads.any? %>
-        <h5>Uploads: (<%= @user.uploads.count %>)</h5>
         <div class="uploads-profile">
           <%= render @uploads %>
         </div>
-        <div class="pagination">
-          <%= will_paginate @uploads%>
-        </div>
+        <%= will_paginate @uploads%>
       <% end %>
     </div>
   </div>

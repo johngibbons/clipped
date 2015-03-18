@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get 'tags/:tag', to: 'uploads#index', as: :tag
 
+  get 'uploads/:id/download'         =>  'uploads#download'
+
   resources :users
 
   resources :account_activations, only: [:edit]

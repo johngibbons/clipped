@@ -63,7 +63,16 @@ class Upload < ActiveRecord::Base
       end
 
       score = BigDecimal(0.2 * (views_percent) * 100 + 0.5 * (downloads_percent) * 100 + 0.3 * (likes_percent) * 100, 10)
+  end
 
+  def download_url
+    s3 = AWS::S3.new
+    bucket = s3.buckets[image.bucket_name]
+    object = bucket.objects[image.s3_object(:original).key]
+    object.url_for(:get,
+      expires: 10.minutes,
+      response_content_disposition: 'attachment'
+    ).to_s
   end
 
   class << self

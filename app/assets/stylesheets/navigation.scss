@@ -25,7 +25,6 @@ header.navigation {
 
   background-color: $navigation-background;
   border-bottom: 1px solid darken($navigation-background, 5);
-  height: $navigation-height;
   width: 100%;
   z-index: 999;
 
@@ -62,7 +61,7 @@ header.navigation {
     padding-right: 1em;
     text-transform: uppercase;
 
-    @include tablet {
+    @include media($tablet) {
       display: none;
     }
 
@@ -80,7 +79,7 @@ header.navigation {
     min-height: $navigation-height;
     z-index: 9999999;
 
-    @include tablet {
+    @include media($tablet) {
       float: left;
     }
   }
@@ -100,7 +99,7 @@ header.navigation {
       display: block;
     }
 
-    @include tablet {
+    @include media($tablet) {
       display: inline;
       margin: 0;
       padding: 0;
@@ -115,25 +114,30 @@ header.navigation {
     display: block;
     line-height: $navigation-height;
     overflow: hidden;
-    padding-right: 0.8em;
-    text-align: right;
+    text-align: center;
     width: 100%;
     z-index: 9999;
+    border-bottom: 1px solid $light-gray;
 
-    @include tablet {
+    @include media($tablet) {
       background: transparent;
       display: inline;
       line-height: $navigation-height;
       text-decoration: none;
       width: auto;
+      border: none;
     }
 
     a {
       color: $navigation-color;
       display: inline-block;
       font-weight: 300;
+      width: 100%;
+      height: 100%;
 
-      @include tablet {
+      @include media($tablet) {
+        width: auto;
+        height: auto;
         padding-right: 1em;
       }
 
@@ -155,7 +159,7 @@ header.navigation {
   li.more.nav-link {
     padding-right: 0;
 
-    @include tablet {
+    @include media($tablet) {
       padding-right: $navigation-submenu-padding;
     }
 
@@ -190,7 +194,7 @@ header.navigation {
       padding-right: 1.6em;
       position: relative;
 
-      @include tablet {
+      @include media($tablet) {
         margin-right: $navigation-submenu-padding;
       }
 
@@ -207,7 +211,7 @@ header.navigation {
       display: block;
     }
 
-    @include tablet {
+    @include media($tablet) {
       padding-right: 0.8em;
       position: relative;
     }
@@ -217,14 +221,14 @@ header.navigation {
     display: none;
     padding-left: 0;
 
-    @include tablet {
+    @include media($tablet) {
       left: -$navigation-submenu-padding;
       position: absolute;
       top: 1.5em;
     }
 
     .submenu {
-      @include tablet {
+      @include media($tablet) {
         left: $navigation-submenu-width - 0.2em;
         top: 0;
       }
@@ -234,7 +238,7 @@ header.navigation {
       display: block;
       padding-right: 0;
 
-      @include tablet {
+      @include media($tablet) {
         line-height: $navigation-height / 1.3;
 
         &:first-child > a {
@@ -252,10 +256,9 @@ header.navigation {
       a {
         background-color: darken($navigation-background, 3%);
         display: inline-block;
-        text-align: right;
         width: 100%;
 
-        @include tablet {
+        @include media($tablet) {
           background-color: $navigation-background;
           padding-left: $navigation-submenu-padding;
           text-align: left;
@@ -269,15 +272,13 @@ header.navigation {
 // Elements on the far right
 
   .navigation-tools {
-    background: #505050;
     clear: both;
     display: block;
     height: $navigation-height;
     padding-left: $navigation-padding / 2;
     padding-right: $navigation-padding;
 
-    @include tablet {
-      background: transparent;
+    @include media($tablet) {
       clear: none;
       float: right;
     }
@@ -302,7 +303,7 @@ header.navigation {
 
     float: left;
     padding: 0.85em 0.6em 0.7em 0.6em;
-    width: 90%;
+    width: 100%;
 
     form {
       position: relative;
@@ -325,7 +326,7 @@ header.navigation {
           width: 100%;
         }
 
-       @include tablet {
+       @include media($tablet) {
           width: 90%;
           @include transition(all 0.1s ease-in-out);
 
@@ -342,6 +343,7 @@ header.navigation {
         top: 0.3em;
         height: 23px;
         width: 30px;
+        margin: 0;
 
         .fa {
           color: $white;
@@ -355,7 +357,7 @@ header.navigation {
       }
     }
 
-    @include tablet {
+    @include media($tablet) {
       display: inline-block;
       position: relative;
       width: 16em;

@@ -109,6 +109,14 @@ class User < ActiveRecord::Base
     count
   end
 
+  def total_user_downloads
+    count = 0
+    self.uploads.each do |upload|
+      count += upload.downloads
+    end
+    count
+  end
+
   def upload_owner?(upload)
     if upload
       self.uploads.exists?(upload.id)

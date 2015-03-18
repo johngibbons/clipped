@@ -15,6 +15,10 @@
 @import "typography";
 @import "cards";
 
+html, body {
+	font-size: 100%;
+}
+
 body {
 	margin: 0;
 }
@@ -23,7 +27,7 @@ body {
 	@include outer-container;
 	margin-top: 144px;
 
-	@include tablet {
+	@include media($tablet) {
 		margin-top: 110px;
 	}
 }
