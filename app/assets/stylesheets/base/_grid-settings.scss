@@ -6,10 +6,15 @@
 $grid-columns: 4;
 $max-width: 90%;
 
-// $visual-grid: true;
+$visual-grid: true;
 
 $tablet-width: 768px;
 $desktop-width: 1024px;
 
 $tablet: new-breakpoint(min-device-width $tablet-width 8);
 $desktop: new-breakpoint(min-device-width $desktop-width 12);
+
+@mixin omega-reset($nth) {
+  &:nth-child(#{$nth}) { margin-right: flex-gutter($grid-columns, $gutter); }
+  &:nth-child(#{$nth}+1) { clear: none }
+}
