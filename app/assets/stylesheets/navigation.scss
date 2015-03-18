@@ -33,6 +33,10 @@ header.navigation {
     @include outer-container;
     position: relative;
     z-index: 9999;
+
+    @include media($desktop) {
+      @include outer-container(em(1088));
+    }
   }
 
   .logo {

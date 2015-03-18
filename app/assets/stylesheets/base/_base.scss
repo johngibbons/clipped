@@ -30,6 +30,10 @@ body {
 	@include media($tablet) {
 		margin-top: 110px;
 	}
+
+	@include media($desktop) {
+		@include outer-container(em(1088));
+	}
 }
 
 aside {

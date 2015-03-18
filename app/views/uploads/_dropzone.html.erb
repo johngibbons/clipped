@@ -15,8 +15,12 @@
 		<button type="button" id="remove-all-uploads" name="x-ignore-remove-all" class="secondary">remove all</button>
 	</div>
 
-	<div class="dz-message"><h1>Drag files here or</h1></div>
-	<div id="clickable" class="btn">Click here to select files</div>
+	<div id="dropzone-upload-text">
+		<div class="dz-message"><h1>Drag files here or</h1></div>
+		<div id="clickable">
+			<button name="x-ignore-tags">Click here to select files</button>
+		</div>
+	</div>
 	<div id="upload-previews"></div>
 </div>
 
@@ -39,6 +43,7 @@
 		  <%= text_field_tag "x-ignore-tags", nil, placeholder: "e.g. boy, walking, beach, etc.", id: "upload_tag_list", onkeypress: "return event.keyCode!=13" %>
 	  </div>
 
+	  <h6>Perspective:</h6>
 		<div class="dropzone-upload-perspective dropdown">
 			<%= select_tag "x-ignore-perspective", options_for_select(Upload.perspectives.map {|k, v| [k.humanize, k]}) %>
 		</div>

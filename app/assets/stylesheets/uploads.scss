@@ -6,7 +6,11 @@
 
   height: 100%;
   min-height: 100vh;
-  padding-top: $navigation-height;
+  padding-top: 125px;
+
+  @include media($tablet) {
+    padding-top: 60px;
+  }
 
 	.dz-progress {
   $progress-border-color: $base-border-color;
@@ -94,6 +98,10 @@
 
   #uploader-container {
     @include outer-container;
+
+    @include media($desktop) {
+      @include outer-container(95%);
+    }
   }
 
   #uploader-controls {
@@ -107,28 +115,36 @@
   }
 
   #clickable {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    padding: 25px;
-    width: 300px;
+
+    button {
+      @include media($tablet) {
+        margin: 0 auto;
+        padding: 25px;
+        width: 300px;
+      }
+    }
   }
 
   .dz-preview {
-    @include omega(4n);
+    @include span-columns(4);
     @include transition(all, 1s, ease);
-    @include span-columns(3);
     margin-bottom: $gutter;
     position: relative;
 
-    .delete-icon {
-      position: absolute;
-      line-height: 0;
-      top: -9px;
-      left: -8px;
-      z-index: 1;
-      .fa {
-      }
+    @include media($tablet) {
+      @include span-columns(4);
+      @include omega(2n);
+    }
+
+    @include media($desktop) {
+      @include omega-reset(2n);
+      @include span-columns(2);
+      @include omega(6n);
+    }
+
+    h6 {
+      font-size: 0.8em;
+      margin: 1.5em 0 0.5em 0;
     }  
   }
 
@@ -150,13 +166,6 @@
   }
 
   .dropzone-upload-tags {
-    h6 {
-      margin-bottom: 5px;
-      font-weight: 700;
-      font-size: .8em;
-      text-transform: lowercase;
-    }
-
     input {
       margin-bottom: 0;
       color: $dark-gray;
@@ -222,17 +231,27 @@
     left: -7px;
     z-index: 1;
     cursor: pointer;
+    font-size: 2em;
+
+    @include media($tablet) {
+      font-size: 1em;
     }
+  }
+
+  #dropzone-upload-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+  }
 
 	.dz-message {
-		text-align: center;
-    margin-top: 300px;
-    margin-bottom: 50px;
-		span {
-			position: relative;
-			top: 50%;
-			@include transform(translateY(-50%));
-		}
+    display: none;
+
+    @include media($tablet) {
+      display: block;
+      text-align: center;
+    }
 	}
 }
 
