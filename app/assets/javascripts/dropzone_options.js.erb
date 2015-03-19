@@ -8,7 +8,8 @@ $('.uploads.new').ready(function () {
 			var taglist = $(n).find(".tag-data");
 			getTags(taglist);
 		  tags = getTags(taglist.get());
-	    $.post( "/uploads", { upload: {direct_upload_url: url, tag_list: tags} });		
+		  perspective_val = $(n).find( "#x-ignore-perspective" ).val();
+	    $.post( "/uploads", { upload: {direct_upload_url: url, tag_list: tags, perspective: perspective_val} });		
 	  });
 	});
 
@@ -58,6 +59,7 @@ $('.uploads.new').ready(function () {
   	$("#uploader-controls").show();
   	$("#save-uploads").prop("disabled", true);
   	$("#remove-all-uploads").prop("disabled", false);
+  	$("#uploader-container").removeClass("flex-container");
 		file.id = i;
 		file_preview[file.id] = $(file.previewElement);
   	file_preview[file.id].find(".dz-remove").attr("id", file.id);

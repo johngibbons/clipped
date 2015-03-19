@@ -112,7 +112,7 @@
 
   #upload-previews {
     display: flex;
-
+    margin: -20px 0 0 -20px;
   }
 
   #clickable {
@@ -130,6 +130,7 @@
     flex: 1 1 200px;
     transition: all, 1s, ease;
     position: relative;
+    margin: 20px 0 0 20px;
 
     h6 {
       font-size: 0.8em;
