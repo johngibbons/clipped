@@ -56,6 +56,7 @@ gem 'sunspot_solr'
 gem "rack-timeout"
 gem 'newrelic_rpm'
 gem "sunspot-queue"
+gem "autoprefixer-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

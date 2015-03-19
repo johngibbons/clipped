@@ -1,26 +1,3 @@
-// Uncomment this for a sticky footer.
-
-.wrapper-for-content-outside-of-footer {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-}
-
-html, body {
- height: 100%;
-}
-
-.wrapper-for-content-outside-of-footer:after {
-  content: "";
-  display: block;
-}
-
-.footer-2, .wrapper-for-content-outside-of-footer:after {
-
-  @include media($tablet) {
-  }
-}
-
 .footer-2 {
   ///////////////////////////////////////////////////////////////////////////////////
 

@@ -313,7 +313,7 @@ header.navigation {
       position: relative;
 
       input[type=search] {
-        @include box-sizing(border-box);
+        box-sizing: border-box;
         background: $navigation-search-background;
         border-radius: $base-border-radius;
         border: $navigation-search-border;
@@ -332,7 +332,7 @@ header.navigation {
 
        @include media($tablet) {
           width: 90%;
-          @include transition(all 0.1s ease-in-out);
+          transition: all 0.1s ease-in-out;
 
         }
       }
@@ -367,7 +367,7 @@ header.navigation {
       width: 16em;
 
       input {
-        @include box-sizing(border-box);
+        box-sizing: border-box;
         display: block;
       }
     }

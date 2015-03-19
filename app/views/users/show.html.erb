@@ -20,13 +20,11 @@
 </section>
 <section class="user-uploads-section">
   <div class="container">
-    <div class="user-uploads">
+    <div class="user-uploads flex-container">
       <% if @user.uploads.any? %>
-        <div class="uploads-profile">
           <%= render @uploads %>
-        </div>
-        <%= will_paginate @uploads%>
       <% end %>
     </div>
+  <%= will_paginate @uploads%>
   </div>
 </section>

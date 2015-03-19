@@ -18,7 +18,7 @@
 			position: relative;
 		  height: 52px;
 		  margin: 0 auto;
-      @include transition(all 0.1s ease-in-out);
+      transition: all 0.1s ease-in-out;
 
     	@include media($tablet) {
 				width: ($column + (2 * $gutter - $gutter)) * 4;

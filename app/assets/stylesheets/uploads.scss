@@ -33,14 +33,14 @@
 
   > span.dz-upload {
     @include animation(progress $progress-animation-duration linear infinite);
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     background-color: $progress-meter-color;
-    @include background-image(linear-gradient(-45deg, rgba(255,255,255, 0.15) 25%,
+    background-image: linear-gradient(-45deg, rgba(255,255,255, 0.15) 25%,
                                                       transparent 25%,
                                                       transparent 50%,
                                                       rgba(255,255,255, 0.15) 50%,
                                                       rgba(255,255,255, 0.15) 75%,
-                                                      transparent 75%));
+                                                      transparent 75%);
     background-size: 40px 40px;
     background-repeat: repeat-x;
     border: $progress-meter-border;
@@ -127,7 +127,7 @@
 
   .dz-preview {
     @include span-columns(4);
-    @include transition(all, 1s, ease);
+    transition: all, 1s, ease;
     margin-bottom: $gutter;
     position: relative;
 
@@ -242,7 +242,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    @include transform(translate(-50%, -50%));
+    transoform: translate(-50%, -50%);
   }
 
 	.dz-message {
@@ -270,7 +270,7 @@
     padding: 25px;
     left: 50%;
     top: 50%;
-    @include transform(translate(-50%, -50%));
+    transform: translate(-50%, -50%);
   }
 
   @include media($tablet) {
@@ -302,25 +302,18 @@
   text-align: center;
 }
 
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  padding: 10px;
+}
+
 .upload {
-  @include span-columns(2);
-  @include omega(2n);
+  flex: 1 1 200px;
+  margin: 10px;
   position: relative;
   height: auto;
-  margin-bottom: $gutter;
-
-  @include media($tablet) {
-    @include omega-reset(2n);
-    @include span-columns(2);
-    @include omega(4n);
-  }
-
-  @include media($desktop) {
-    @include omega-reset(2n);
-    @include omega-reset(4n);
-    @include span-columns(2);
-    @include omega(6n);
-  }
 
   img {
     display: block;

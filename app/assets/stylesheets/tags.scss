@@ -41,7 +41,7 @@
 .delete-tag {
 	font-size: 80%;
 	display: inline-block;
-	@include transform(translateY(-1px));
+	transform: translateY(-1px);
 	margin-left: 5px;
 
 	&:hover {
