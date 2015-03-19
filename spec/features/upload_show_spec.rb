@@ -152,6 +152,12 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
+    scenario "guest user downloads image" do
+      visit upload_path(upload)
+      expect(page).to have_content "Download"
+      click_link "Download"
+    end
+
   end
 
   scenario "search for uploads by tag and return all images related to tag" do
