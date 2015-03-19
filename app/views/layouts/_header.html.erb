@@ -6,6 +6,12 @@
 		<a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
 		<nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
+        <li class="nav-link more"><a href="javascript:void(0)">Browse</a>
+          <ul class="submenu">
+            <li class="nav-link"><%= link_to "Most Popular", uploads_path(Upload.sorted_by_weighted_score) %></li>
+            <li class="nav-link"><%= link_to "Newest", uploads_path %></li>
+          </ul>
+        </li>
 		    <li class="nav-link"><%= link_to "About", about_path %></li>
 		    <li class="nav-link"><%= link_to "Help", help_path %></li>
 		    <li class="nav-link"><%= link_to "Contact", contact_path %></li>

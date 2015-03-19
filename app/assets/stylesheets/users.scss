@@ -38,6 +38,11 @@
 
 }
 
+.user-name {
+	font-size: $base-font-size * 2;
+	padding: 0.5em 0;
+}
+
 .user-uploads-section {
 	padding-top: $gutter;
   background-color: $lightest-gray;

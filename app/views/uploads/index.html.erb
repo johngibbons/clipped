@@ -1,10 +1,19 @@
 <% unless @uploads.nil? %>
-	<% if @tag_name %>
-		<h6>Images tagged with: <%= @tag_name %></h6>
+<div class="uploads-index-header">
+	<% if @tag_name || @query%>
+		<h1>Images matching: <span class="query"><%= @tag_name || @query %></span></h1>
 	<% end %>
+</div>
   <%= will_paginate @uploads%>
   <div class="uploads-index flex-container">
 		<%= render @uploads %>
 	</div>
   <%= will_paginate @uploads%>
+
+<% else %>
+	<div class="uploads-index-header">
+	<% if @tag_name || @query%>
+		<h1>Sorry, no images matching: <span class="query"><%= @tag_name || @query %></span> were found.</h1>
+	<% end %>
+</div>
 <% end %>

@@ -10,6 +10,7 @@ class Upload < ActiveRecord::Base
   searchable do
     text :tag_list
     boolean :approved
+    integer :perspective
   end
   handle_asynchronously :solr_index
   # handle_asynchronously :remove_from_index
