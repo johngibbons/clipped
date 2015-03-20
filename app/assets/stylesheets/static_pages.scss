@@ -4,14 +4,30 @@
 
 header.home {
 	text-align: center;
-	padding: 7em 0 1em 0;
+	padding: 5em 0 1em 0;
+
+	p {
+		line-height: 1;
+		padding: 1em 0 1em 0;
+
+		@include media($tablet) {
+			padding: 0 0 1.5em;
+		}
+	}
 }
 
 #home-search {
-	display: block;
-	text-align: center;
-	margin: 0 auto 7em;
+	display: inline-block;
+	margin: 0 auto 2em;
 	float: none;
+	@include span-columns(4);
+	text-align: center;
+
+	@include media($desktop) {
+		@include span-columns(6);
+		text-align: left;
+		margin: 0 auto 7em;
+	}
 
 	form{
 		position: relative;
@@ -22,18 +38,19 @@ header.home {
 			width: 80%;
 			position: relative;
 		  height: 52px;
-		  margin: 0 auto;
       transition: all 0.1s ease-in-out;
+      margin: 0 auto;
 
     	@include media($tablet) {
-				width: ($column + (2 * $gutter - $gutter)) * 4;
+    		margin: 0;
+				width: ($column + (2 * $gutter - $gutter)) * 5;
 			}
 
 		  &:focus {
 	      width: 100%;
 
 	    	@include media($tablet) {
-					width: ($column + (2 * $gutter - $gutter)) * 6;
+					width: ($column + (2 * $gutter - $gutter)) * 6 - $gutter;
 				}
       }
 		}
@@ -51,4 +68,19 @@ header.home {
 			}
 		}
 	}
+}
+
+#home-tags {
+	@include span-columns(4);
+	text-align: center;
+
+	@include media($desktop) {
+		@include span-columns(6);
+		@include omega;
+		text-align: left;
+	}
+}
+
+#home-uploads {
+	@include span-columns(4);
 }

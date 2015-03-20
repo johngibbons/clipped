@@ -9,7 +9,9 @@
   <%= form_tag search_index_path, :method => :get do %>
     <%= search_field_tag :search, params[:search], placeholder: "e.g. man looking up..." %>
 	<% end %>
+</div>
 
+<div id="home-tags">
 	<h2>Most Popular Tags:</h2>
 	<div class="tag-items most-popular-home">
 		<% @most_used_tags.each do |tag| %>
@@ -18,10 +20,12 @@
 	</div>
 </div>
 
-<h2>Most Popular Images</h2>
+<div id="home-uploads">
+	<h2>Most Popular Images</h2>
 
-<div class="most-popular-uploads flex-container">
-  <% if @most_popular.any? %>
-    <%= render @most_popular %>
-  <% end %>
+	<div class="most-popular-uploads flex-container">
+	<% if @most_popular.any? %>
+	  <%= render @most_popular %>
+	<% end %>
+	</div>
 </div>

@@ -33,6 +33,7 @@ main {
 .container {
 	@include outer-container;
 	margin-top: 125px;
+	padding-bottom: 6em;
 
 	@include media($tablet) {
 		margin-top: 65px;
