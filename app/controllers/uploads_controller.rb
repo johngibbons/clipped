@@ -4,14 +4,7 @@ class UploadsController < ApplicationController
 
   def index
     @viewable_uploads = policy_scope(Upload)
-    if params[:tag]
-      @uploads = @viewable_uploads.tagged_with(params[:tag]).paginate(page: params[:page])
-      @tag_name = params[:tag]
-    elsif params[:perspective]
-      @uploads = @viewable_uploads.where(perspective: params[:perspective]).paginate(page: params[:page])
-    else
-      @uploads = @viewable_uploads.paginate(page: params[:page])
-    end
+    @uploads ||= @viewable_uploads
   end
 
   def new

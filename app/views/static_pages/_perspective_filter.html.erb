@@ -1,0 +1,7 @@
+<%= form_tag "/uploads", method: :get, html: { class: "perspective home-perspective-filter" } do %>
+	<% Upload.perspectives.map do |k, v| %>
+		<%=	check_box_tag "perspective[]", v %>
+		<%=	label_tag :perspective, k.humanize, value: k %>
+	<% end %>
+	<%= submit_tag 'Filter' %>
+<% end %>

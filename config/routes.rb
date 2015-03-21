@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   post    'login'                    =>  'sessions#create'
   delete  'logout'                   =>  'sessions#destroy'
 
-  get 'tags/:tag', to: 'uploads#index', as: :tag
+  get 'tags/:tag', to: 'search#index', as: :tag
 
   resources :users
 

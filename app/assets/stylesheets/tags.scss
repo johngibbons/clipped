@@ -48,3 +48,13 @@
 		cursor: pointer;
 	}
 }
+
+.tag-items {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+
+	@include media($tablet) {
+		justify-content: flex-start;
+	}
+}

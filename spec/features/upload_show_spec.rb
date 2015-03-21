@@ -34,7 +34,7 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_selector(".tag", count: 3)
       expect(page).to have_content "second"
       click_link "second"
-      expect(page).to have_selector(".upload-thumb", count: 2)
+      expect(page).to_not have_selector(".upload-thumb")
     end
 
     scenario "other user tries to update upload tags but can't", :js => true do

@@ -6,11 +6,16 @@ class Upload < ActiveRecord::Base
   has_many :likers, through: :liked_relationships
   default_scope -> { order(created_at: :desc) }
   acts_as_ordered_taggable
+  include Filterable
 
   searchable do
     text :tag_list
+    # text :perspective do
+    #   perspectives.map { |k, v| k }
+    # end
     boolean :approved
     integer :perspective
+    time :created_at
   end
   handle_asynchronously :solr_index
   # handle_asynchronously :remove_from_index
@@ -86,6 +91,10 @@ class Upload < ActiveRecord::Base
 
     def sorted_by_weighted_score
       Upload.all.sort_by(&:weighted_score).reverse!
+    end
+
+    def perspective(perspectives = [])
+      Upload.where(perspective: perspectives)
     end
 
   end

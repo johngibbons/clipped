@@ -32,6 +32,11 @@ h1 {
   font-size: $base-font-size * 3;
   text-transform: uppercase;
   padding: 1em 0;
+  text-align: center;
+
+  @include media($tablet) {
+    text-align: left;
+  }
 }
 
 h2 {
