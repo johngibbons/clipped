@@ -1,0 +1,6 @@
+<%= form_for(:account_activation, url: account_activations_path, html: {class: "user-form", id: "activation-form"}) do |f| %>
+	<%= f.label :email %>
+	<%= f.email_field :email %>
+
+	<%= f.submit "Resend" %>
+<% end %>

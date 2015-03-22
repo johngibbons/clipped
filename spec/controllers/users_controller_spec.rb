@@ -85,5 +85,14 @@ RSpec.describe UsersController, type: :controller do
       expect(flash).to_not be_empty
       expect(response).to redirect_to(users_url)
     end
+
+    it "allows destroy when self" do
+      log_in_as(@user)
+      expect do
+        delete :destroy, id: @user
+      end.to change { User.count }.by(-1)
+      expect(flash).to_not be_empty
+      expect(response).to redirect_to(users_url)
+    end
   end
 end

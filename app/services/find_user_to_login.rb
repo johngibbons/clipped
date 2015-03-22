@@ -32,6 +32,7 @@ class FindUserToLogin
         user.password = user.password_confirmation = SecureRandom.urlsafe_base64(n=6)
         user.activated = true
         user.activated_at = Time.zone.now
+        user.avatar_from_url(@auth_hash["info"]["image"])
       end
     end
 

@@ -54,8 +54,8 @@ gem 'acts-as-taggable-on', '~> 3.4'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem "rack-timeout"
-gem 'newrelic_rpm'
 gem "autoprefixer-rails"
+gem 'jcrop-rails-v2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -90,7 +90,11 @@ group :development do
   gem 'guard-rspec', require: false  
 end
 
-gem 'rails_12factor', group: :production
+group :production do
+  gem 'newrelic_rpm'
+  gem 'rails_12factor'
+end
+
 
 ruby "2.2.0"
 

@@ -3,8 +3,8 @@ class UploadsController < ApplicationController
   layout "dropzone_uploader", only: :new
 
   def index
-    @viewable_uploads = policy_scope(Upload)
-    @uploads ||= @viewable_uploads
+    @viewable_uploads = policy_scope(Upload).paginate(page: params[:page])
+    @uploads = @viewable_uploads
   end
 
   def new

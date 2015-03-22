@@ -16,6 +16,7 @@
 //= require jquery.readyselector.js
 //= require turbolinks
 //= require dropzone
+//= require jquery.Jcrop
 //= require_tree .
 
 function formatTags(tag_input_field) {

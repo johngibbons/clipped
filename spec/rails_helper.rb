@@ -10,11 +10,22 @@ require 'database_cleaner'
 require 'aws-sdk'
 require 'vcr'
 
-DEFAULT_HOST = "testhost.com"
-DEFAULT_PORT = 7171  
+# DEFAULT_HOST = "testhost.com"
+# DEFAULT_PORT = 7171 
 
 #Do not delay jobs for tests
 Delayed::Worker.delay_jobs = false
+
+module Paperclip
+  def self.run cmd, arguments = "", interpolation_values = {}, local_options = {}
+    cmd == 'convert' ? nil : super
+  end
+end
+ 
+class Paperclip::Attachment
+  def post_process
+  end
+end
 
 #=> { :reservation_set => [...] } 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -59,12 +70,21 @@ RSpec.configure do |config|
     Delayed::Worker.delay_jobs = old_value
   end
 
-    config.include Capybara::DSL  
-    Capybara.javascript_driver = :webkit
+  config.before :each, :js, type: :feature do |example|
+    # page.driver.block_unknown_urls
+    page.driver.browser.block_url("http://use.typekit.net")
+    page.driver.allow_url("testhost.com")
+    page.driver.allow_url("s3-us-west-2.amazonaws.com")
+    page.driver.allow_url("secure.gravatar.com")
+    page.driver.allow_url("raw.githubusercontent.com")
+  end
 
-    Capybara.default_host = "http://#{DEFAULT_HOST}"
-    Capybara.server_port = DEFAULT_PORT
-    Capybara.app_host = "http://#{DEFAULT_HOST}:#{Capybara.server_port}"
+    config.include Capybara::DSL  
+    Capybara.javascript_driver = :webkit_debug
+
+    # Capybara.default_host = "http://#{DEFAULT_HOST}"
+    # Capybara.server_port = DEFAULT_PORT
+    # Capybara.app_host = "http://#{DEFAULT_HOST}:#{Capybara.server_port}"
 
     #fixes issues with capybara not detecting db changes made during tests
     config.use_transactional_fixtures = false

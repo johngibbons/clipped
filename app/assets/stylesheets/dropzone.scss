@@ -119,6 +119,7 @@
 
     button {
       @include media($tablet) {
+        display: block;
         margin: 0 auto;
         padding: 25px;
         width: 300px;
@@ -238,6 +239,11 @@
     @include media($tablet) {
       display: block;
       text-align: center;
+    }
+
+    h1 {
+      padding:0;
+      margin:-1em 0 1em;
     }
 	}
 }

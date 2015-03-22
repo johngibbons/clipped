@@ -1,17 +1,22 @@
 <% provide(:title, 'Edit profile') %>
+
 <h1>Update Your Profile</h1>
-
-
-<%= link_to 'http://gravatar.com/emails', target: "blank" do %>
-	<div class="gravatar_edit">
-	  <%= gravatar_for @user %>
-	</div>
-<% end %>
-
 
 <div class="edit_form">
 	<%= form_for @user, html: {class: "signup-form", id: "edit-user-form"} do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
+
+  	<%= render "crop" %>
+  	<div id="profile-preview" style="width: 150px; height: 150px; overflow: hidden;">
+	  	<%= image_tag @user.avatar.url(:profile), id: "previewHolder", class: "avatar", style: "width: 150px;" %>
+  	</div>
+  	<%= link_to "Edit Crop", "#", id: "edit-crop" %>
+  	<%= link_to "Crop", "#", id: "submit-crop", style: "display:none;" %>
+    <%= f.file_field :avatar %>
+    <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+	    <%= f.text_field attribute, :id => attribute %>
+	  <% end %>
+
 		<%= f.label :email %>
 		<%= f.email_field :email %>
 

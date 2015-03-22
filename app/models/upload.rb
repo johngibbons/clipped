@@ -34,7 +34,8 @@ class Upload < ActiveRecord::Base
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
                     :s3_protocol => 'https',
-                    :s3_host_name => "s3-us-west-2.amazonaws.com" 
+                    :s3_host_name => "s3-us-west-2.amazonaws.com",
+                    :bucket => ENV['AWS_BUCKET']
 
   validates_attachment  :image,
                         :file_name => { :matches => /\.(gif|jpg|jpeg|tiff|png)$/i },

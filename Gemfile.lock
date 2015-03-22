@@ -165,6 +165,7 @@ GEM
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jcrop-rails-v2 (0.9.12.3)
     jquery-fileupload-rails (0.4.4)
       actionpack (>= 3.1)
       railties (>= 3.1)
@@ -400,6 +401,7 @@ DEPENDENCIES
   guard-minitest (= 2.3.1)
   guard-rspec
   jbuilder (~> 2.0)
+  jcrop-rails-v2
   jquery-rails
   jquery-turbolinks
   launchy (~> 2.4.3)

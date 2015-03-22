@@ -17,6 +17,33 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  has_attached_file :avatar, 
+                    styles: { profile: { geometry: '300x300#', processors: [:cropper] }, large: '500x500>' },
+                    :default_url => "profile.png",
+                    :default_style => :profile,
+                    :storage => :s3,
+                    :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
+                    :s3_protocol => 'https',
+                    :s3_host_name => "s3-us-west-2.amazonaws.com",
+                    :bucket => ENV['AWS_BUCKET']
+
+  validates_attachment  :avatar,
+                        :size => { :less_than => 50.megabytes },
+                        :content_type => { :content_type => /\Aimage/ }
+
+  def s3_credentials
+    { :bucket => ENV['AWS_BUCKET'], 
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'], 
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] }
+  end
+
+  def avatar_from_url(url)
+    avatar_url = URI.parse(url)
+    avatar_url.scheme = 'https'
+    avatar_url = avatar_url.to_s
+    self.avatar = URI.parse(avatar_url)
+  end
+
   class << self
     # Returns the hash digest of the given string.
     def digest(string)
@@ -30,6 +57,20 @@ class User < ActiveRecord::Base
       SecureRandom.urlsafe_base64
     end
 
+  end
+
+  def cropping?
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+
+  def avatar_geometry(style = :original)
+    @geometry ||= {}
+    avatar_path = (avatar.options[:storage] == :s3) ? avatar.url(style) : avatar.path(style)
+    @geometry[style] ||= Paperclip::Geometry.from_file(avatar_path)
+  end
+
+  def ratio
+    self.avatar_geometry(:original).width / self.avatar_geometry(:large).width
   end
 
   # Activates an account.
@@ -134,6 +175,16 @@ class User < ActiveRecord::Base
     upload.approved = false
     upload.save!
   end
+
+    #creates and assigns the activation token and digest.
+  def create_activation_digest
+    self.activation_token   =  User.new_token
+    self.activation_digest  =  User.digest(activation_token)
+  end
+
+  def reprocess_avatar
+    avatar.reprocess!
+  end
   
   private
     #converts email to all lower-case.
@@ -141,9 +192,4 @@ class User < ActiveRecord::Base
       self.email = email.downcase
     end
 
-    #creates and assigns the activation token and digest.
-    def create_activation_digest
-      self.activation_token   =  User.new_token
-      self.activation_digest  =  User.digest(activation_token)
-    end
 end

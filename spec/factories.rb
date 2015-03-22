@@ -3,6 +3,7 @@ include ActionDispatch::TestProcess
 FactoryGirl.define do
   factory :user do
     name Faker::Name.first_name
+    avatar { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
     sequence :email do |n|
       "person#{n}@example.com"
     end

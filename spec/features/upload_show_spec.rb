@@ -93,6 +93,7 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_selector(".tag", count: 3)
       expect(page).to have_content "second"
       click_link "second"
+      expect(page).to have_selector(".uploads.index")
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 

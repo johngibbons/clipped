@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
   def create
     @user = FindUserToLogin.call(auth_hash: auth_hash, params: params)
     login = AuthenticateUser.new(user: @user, params: params, auth_hash: auth_hash)
-
     if login.success?
       log_in @user
       remember @user

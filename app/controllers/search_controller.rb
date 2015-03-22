@@ -3,7 +3,6 @@ class SearchController < ApplicationController
   def index
     #if no perspective, set to empty hash so solr skips
     params[:perspective] ||= []
-    @uploads = 
     @search = Upload.search do
       with :approved, true
       with :perspective, params[:perspective]
@@ -15,7 +14,6 @@ class SearchController < ApplicationController
     end
       @uploads = @search.results
       @query = (params[:search].to_s || "") + (params[:perspective].to_a.join(",")) + (params[:tag].to_s || "")
-      render 'uploads/index'
   end
 
 end

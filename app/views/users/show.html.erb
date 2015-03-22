@@ -1,7 +1,7 @@
 <% provide(:title, @user.name) %>
 <section class="user_profile">
   <div class="user-info">
-    <%= gravatar_for @user, size: 150 %>
+    <%= image_tag @user.avatar.url(:profile), class: "avatar" %>
     <h1 class="user-name"><%= @user.name %></h3>
   </div>
   <div class="user-stats stats">
