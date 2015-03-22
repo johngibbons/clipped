@@ -14,7 +14,7 @@
   	<%= link_to "Crop", "#", id: "submit-crop", style: "display:none;" %>
     <%= f.file_field :avatar %>
     <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
-	    <%= f.text_field attribute, :id => attribute %>
+	    <%= f.hidden_field attribute, :id => attribute %>
 	  <% end %>
 
 		<%= f.label :email %>
