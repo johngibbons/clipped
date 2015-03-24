@@ -25,7 +25,7 @@ FactoryGirl.define do
   factory :upload do
     user
     image { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
-    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/08965dcd7d15b3c3148294090ee49b75/1.jpg"
+    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/04705c9923fa853c22eb418c8d2773a7/1.jpg"
   end
   
   factory :relationship do

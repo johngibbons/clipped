@@ -37,7 +37,7 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to_not have_selector(".upload-thumb")
     end
 
-    scenario "other user tries to update upload tags but can't", :js => true do
+    scenario "other user tries to update upload tags but can't" do
       other_user = create(:user)
       log_in(other_user)
       visit upload_path(upload)
@@ -171,6 +171,5 @@ RSpec.feature "Upload show page", :type => :feature do
 
   scenario "show the most needed tags" do
   end
-
 
 end
