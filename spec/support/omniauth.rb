@@ -9,7 +9,7 @@ module Omniauth
       'info' => {
         'email' => 'mockemail@sample.com',
         'name' => 'mockuser',
-        'image' => 'mock_user_thumbnail_url'
+        'image' => 'https://s3-us-west-2.amazonaws.com/entourageappdev/thumb/amanda.jpg'
       },
       'credentials' => {
         'token' => 'mock_token',

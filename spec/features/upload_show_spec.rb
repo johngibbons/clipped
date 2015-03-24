@@ -4,12 +4,12 @@ RSpec.feature "Upload show page", :type => :feature do
 
   subject(:user) { create(:user) }
   subject(:upload) { create(:upload, approved: true) }
+  subject(:admin) { create(:user, admin: true) }
 
   context "user is logged in as admin" do
 
     before(:each) do
-      @admin = create(:user, admin: true)
-      log_in(@admin)
+      log_in(admin)
     end
 
     scenario "admin updates upload tags", :js => true do
@@ -65,10 +65,10 @@ RSpec.feature "Upload show page", :type => :feature do
   context "upload owner is logged in" do
 
     before(:each) do
-      @owner = user
-      upload.user = @owner
+      owner = user
+      upload.user = owner
       upload.save!
-      log_in(@owner)
+      log_in(owner)
     end
 
     scenario "upload owner updates upload tags", :js => true do
@@ -83,7 +83,7 @@ RSpec.feature "Upload show page", :type => :feature do
      expect(page).to_not have_content("Update")
     end
 
-    scenario "click on tag and see all uploads with that tag" do
+    scenario "click on tag and see all uploads with that tag", :solr => true do
       second_upload = create(:upload, approved: false)
       upload.tag_list = "first, second, third"
       second_upload.tag_list = "second"
@@ -92,8 +92,9 @@ RSpec.feature "Upload show page", :type => :feature do
       visit upload_path(upload)
       expect(page).to have_selector(".tag", count: 3)
       expect(page).to have_content "second"
+      Sunspot.commit
       click_link "second"
-      expect(page).to have_selector(".uploads.index")
+      expect(page).to have_selector(".search.index")
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
@@ -133,21 +134,22 @@ RSpec.feature "Upload show page", :type => :feature do
      expect(page).to_not have_content("Update")
     end
 
-    scenario "click on tag and see all uploads with that tag" do
+    scenario "click on tag and see all uploads with that tag", :solr => true do
       visit upload_path(upload)
       expect(page).to have_selector(".tag", count: 3)
       expect(page).to have_content "second"
+      Sunspot.commit
       click_link "second"
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
-    scenario "guest user can't upload perspective", :js => true do
+    scenario "guest user can't upload perspective" do
       upload.perspective = :above
       upload.save!
       visit upload_path(upload)
-      expect(page).to have_content "ABOVE"
+      expect(page).to have_content "Above"
       expect(page).to_not have_content "Edit Perspective"
-      expect(page).to_not have_content "SIDE FRONT"
+      expect(page).to_not have_content "Side Front"
       second_upload = create(:upload, approved: false, perspective: :above)
       click_link "Above"
       expect(page).to have_selector(".upload-thumb", count: 1)
@@ -156,7 +158,7 @@ RSpec.feature "Upload show page", :type => :feature do
     scenario "guest user downloads image" do
       visit upload_path(upload)
       expect(page).to have_content "Download"
-      click_link "Download"
+      # click_link "Download"
     end
 
   end

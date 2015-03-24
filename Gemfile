@@ -53,6 +53,7 @@ gem "pundit"
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'sunspot-rails-tester'
 gem "rack-timeout"
 gem "autoprefixer-rails"
 gem 'jcrop-rails-v2'

@@ -10,6 +10,20 @@ require 'database_cleaner'
 require 'aws-sdk'
 require 'vcr'
 
+
+$original_sunspot_session = Sunspot.session
+
+RSpec.configure do |config|
+  config.before do
+    Sunspot.session = Sunspot::Rails::StubSessionProxy.new($original_sunspot_session)
+  end
+
+  config.before :each, :solr => true do
+    Sunspot::Rails::Tester.start_original_sunspot_session
+    Sunspot.session = $original_sunspot_session
+    Sunspot.remove_all!
+  end
+end
 # DEFAULT_HOST = "testhost.com"
 # DEFAULT_PORT = 7171 
 
@@ -70,17 +84,8 @@ RSpec.configure do |config|
     Delayed::Worker.delay_jobs = old_value
   end
 
-  config.before :each, :js, type: :feature do |example|
-    # page.driver.block_unknown_urls
-    page.driver.browser.block_url("http://use.typekit.net")
-    page.driver.allow_url("testhost.com")
-    page.driver.allow_url("s3-us-west-2.amazonaws.com")
-    page.driver.allow_url("secure.gravatar.com")
-    page.driver.allow_url("raw.githubusercontent.com")
-  end
-
     config.include Capybara::DSL  
-    Capybara.javascript_driver = :webkit_debug
+    Capybara.javascript_driver = :webkit
 
     # Capybara.default_host = "http://#{DEFAULT_HOST}"
     # Capybara.server_port = DEFAULT_PORT
@@ -101,6 +106,15 @@ RSpec.configure do |config|
     config.after do
       DatabaseCleaner.clean
     end  
+
+    config.before :each, :js, type: :feature do |example|
+      # page.driver.block_unknown_urls
+      page.driver.browser.block_url("http://use.typekit.net")
+      page.driver.allow_url("testhost.com")
+      page.driver.allow_url("s3-us-west-2.amazonaws.com")
+      page.driver.allow_url("secure.gravatar.com")
+      page.driver.allow_url("raw.githubusercontent.com")
+    end
   
   OmniAuth.config.test_mode = true
 
