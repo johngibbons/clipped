@@ -33,6 +33,7 @@ RSpec.feature "Upload show page", :type => :feature do
       visit upload_path(upload)
       expect(page).to have_selector(".tag", count: 3)
       expect(page).to have_content "second"
+      Sunspot.commit
       click_link "second"
       expect(page).to_not have_selector(".upload-thumb")
     end
@@ -143,7 +144,7 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
-    scenario "guest user can't upload perspective" do
+    scenario "guest user can't change upload perspective", :solr => true do
       upload.perspective = :above
       upload.save!
       visit upload_path(upload)
@@ -151,6 +152,7 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to_not have_content "Edit Perspective"
       expect(page).to_not have_content "Side Front"
       second_upload = create(:upload, approved: false, perspective: :above)
+      Sunspot.commit
       click_link "Above"
       expect(page).to have_selector(".upload-thumb", count: 1)
     end

@@ -33,7 +33,7 @@
 		<div class="upload-perspective card">
 			<h6 class="title">Perspective</h6>
 			<div class="perspective" id="selected-perspective">
-				<%= link_to upload.perspective.humanize, search_index_path(perspective: Upload.perspectives[upload.perspective]), class: "perspective" %>
+				<%= link_to upload.perspective.humanize, search_index_path(perspective_id: Upload.perspectives[upload.perspective], perspective: upload.perspective), class: "perspective" %>
 			</div>
 			<%= render 'perspective_form' %>
 			<% if policy(upload).update? %>

@@ -14,7 +14,6 @@
         </li>
 		    <li class="nav-link"><%= link_to "About", about_path %></li>
 		    <li class="nav-link"><%= link_to "Help", help_path %></li>
-		    <li class="nav-link"><%= link_to "Contact", contact_path %></li>
          <% if logged_in? %>
         <li class="nav-link more"><a href="javascript:void(0)">Account</a>
           <ul class="submenu">
@@ -31,6 +30,15 @@
 		  </ul>
 		</nav>
 		<div class="navigation-tools">
+      <% if logged_in? %>
+        <%= link_to new_upload_path do %>
+          <button>Upload</button>
+        <% end %>
+      <% else %>
+        <%= link_to signup_path do %>
+          <button>Login</button>
+        <% end %>
+      <% end %>
       <div class="search-bar">
         <%= form_tag search_index_path, :method => :get do %>
           <%= search_field_tag :search, params[:search] %>
@@ -39,15 +47,6 @@
           <% end %>
         <% end %>
       </div>
-      <% if logged_in? %>
-        <%= link_to new_upload_path do %>
-          <button>Upload</button>
-        <% end %>
-      <% else %>
-        <%= link_to signup_path do %>
-          <button>Log In</button>
-        <% end %>
-      <% end %>
     </div>
   </div>
 </header>

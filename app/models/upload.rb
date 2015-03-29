@@ -10,11 +10,8 @@ class Upload < ActiveRecord::Base
 
   searchable do
     text :tag_list
-    # text :perspective do
-    #   perspectives.map { |k, v| k }
-    # end
     boolean :approved
-    integer :perspective
+    integer :perspective_id
     time :created_at
   end
   handle_asynchronously :solr_index
@@ -46,6 +43,10 @@ class Upload < ActiveRecord::Base
     { :bucket => ENV['AWS_BUCKET'], 
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'], 
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] }
+  end
+
+  def perspective_id
+    Upload.perspectives[self.perspective]
   end
 
   def weighted_score

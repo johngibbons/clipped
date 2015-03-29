@@ -2,10 +2,10 @@ class SearchController < ApplicationController
 
   def index
     #if no perspective, set to empty hash so solr skips
-    params[:perspective] ||= []
+    params[:perspective_id] ||= []
     @search = Upload.search do
       with :approved, true
-      with :perspective, params[:perspective]
+      with :perspective_id, params[:perspective_id]
       fulltext params[:tag]
       fulltext params[:search] do
         minimum_match 1
@@ -13,7 +13,8 @@ class SearchController < ApplicationController
       paginate page: params[:page], per_page: 30
     end
       @uploads = @search.results
-      @query = (params[:search].to_s || "") + (params[:perspective].to_a.join(",")) + (params[:tag].to_s || "")
+      @total_results = @search.total
+      @query = (params[:search].to_s || "") + (params[:perspective].to_s || "") + (params[:tag].to_s || "")
   end
 
 end
