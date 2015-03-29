@@ -82,6 +82,12 @@ section#home-banner {
 	// background-size: cover;
 }
 
+.home {
+	section {
+		padding-top: 1em;
+	}
+}
+
 #home-uploads {
 	@include span-columns(4);
 	text-align: center;
@@ -89,4 +95,19 @@ section#home-banner {
 	@include media($tablet) {
 		text-align: left;
 	}
+
+	h2 {
+		display: inline-block;
+	}
+}
+
+#home-tags {
+	.container {
+		margin-top: 0;
+	}
+}
+
+.more-link {
+	display: inline;
+	font-size: 0.7em;
 }

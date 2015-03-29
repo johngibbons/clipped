@@ -18,7 +18,7 @@
 	<div class="container">
 		<div id="home-uploads">
 			<h2>Most Popular Images</h2>
-
+			<%= link_to "(browse all)", uploads_path, class: "more-link" %>
 			<div class="most-popular-uploads flex-container">
 			<% if @most_popular.any? %>
 			  <%= render @most_popular %>
@@ -27,6 +27,17 @@
 				<div class="upload"></div>
 			<% end %>
 			</div>
+		</div>
+	</div>
+</section>
+
+<section id="home-tags">
+	<div class="container">
+		<h2>Most Popular Tags</h2>
+		<div class="tag-items most-popular-home">
+			<% @most_used_tags.each do |tag| %>
+				<%= link_to tag.name, tag_path(tag.name), class: "tag" %>
+			<% end %>
 		</div>
 	</div>
 </section>
