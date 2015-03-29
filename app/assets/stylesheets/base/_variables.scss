@@ -8,8 +8,9 @@ $futura: "futura-pt", sans-serif;
 $facit: "jaf-facitweb", sans-serif;
 $vinyl: "vinyl", sans-serif;
 $museo-round: "museo-sans-rounded", sans-serif;
+$bebas: "bebas-neue",sans-serif;
 $base-font-family: $helvetica;
-$heading-font-family: $brandon;
+$heading-font-family: $helvetica;
 
 // Font Sizes
 $base-font-size: 1em;
@@ -32,6 +33,7 @@ $medium-gray: #aaa;
 $light-gray: #e9e9e9;
 $lightest-gray: #f3f3f3;
 $clipped-pink: #ed145b;
+$light-pink: lighten($clipped-pink, 20%);
 $clipped-orange: #fbb040;
 $clipped-green: #b8d988;
 $clipped-red:	#fb5555;
@@ -58,4 +60,4 @@ $card-shadow: $base-box-shadow;
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
 $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
 
-$navigation-height: 60px;
+$navigation-height: 40px;

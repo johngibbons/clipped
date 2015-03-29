@@ -32,11 +32,11 @@ main {
 
 .container {
 	@include outer-container;
-	margin-top: 125px;
+	margin-top: 100px;
 	padding-bottom: 6em;
 
 	@include media($tablet) {
-		margin-top: 65px;
+		margin-top: 47px;
 	}
 
 	@include media($desktop) {
@@ -46,6 +46,10 @@ main {
 	header {
 	  padding: 2em 0;
 	}
+}
+
+.container.no-pad {
+	padding-bottom: 0;
 }
 
 aside {

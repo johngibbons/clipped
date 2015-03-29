@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   delete  'logout'                   =>  'sessions#destroy'
 
   get 'tags/:tag', to: 'search#index', as: :tag
+  get 'download/:id', to: 'uploads#download', as: :download
 
   resources :users
 

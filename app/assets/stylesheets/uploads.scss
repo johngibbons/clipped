@@ -48,19 +48,16 @@
   text-align: center;
 }
 
-.uploads-index {
-  margin: -20px 0 0 -20px;
-}
-
 .upload {
   flex: 1 1 150px;
   margin: 20px 0 0 20px;
   position: relative;
-  height: auto;
+  height: 100%;
 
   img {
     display: block;
     margin: 0 auto;
+    max-height: 200px;
   }
 }
 
@@ -71,4 +68,20 @@
 
 .js-link {
   font-size: 0.8em;
+}
+
+.uploads.show {
+  .container {
+    padding-top: 2em;
+  }
+}
+
+.uploads-index {
+  padding-top: $gutter;
+  background-color: $lightest-gray;
+  border-top: 1px solid $light-gray;
+
+  .container {
+    margin-top:0;
+  }
 }

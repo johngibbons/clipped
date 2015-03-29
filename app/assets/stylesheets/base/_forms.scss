@@ -28,7 +28,7 @@ label {
 #{$all-text-inputs},
 select[multiple=multiple],
 textarea {
-  background-color: $light-gray;
+  background-color: $lightest-gray;
   border: $base-border;
   border-radius: $base-border-radius;
   box-shadow: $form-box-shadow;
@@ -58,7 +58,10 @@ textarea {
 
 input[type="search"] {
   @include appearance(none);
-  background-color: $light-gray;
+  background-color: $white;
+  box-shadow: none;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 input[type="checkbox"],

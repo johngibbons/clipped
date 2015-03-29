@@ -1,8 +1,12 @@
 <% if @uploads %>
 
 	<h6>Images matching: <%= @query %></h6>
-
-	<%= render @uploads %>
+	<div class="flex-container">
+		<%= render @uploads %>
+		<% 6.times do %>
+			<div class="upload"></div>
+		<% end %>
+	</div>
 	<%= will_paginate @uploads%>
 
 <% else %>

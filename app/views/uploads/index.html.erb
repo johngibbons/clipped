@@ -8,6 +8,9 @@
   <div class="uploads-index flex-container">
 		<%= render @uploads %>
 	</div>
+	<% 6.times do %>
+		<div class="upload"></div>
+	<% end %>
   <%= will_paginate @uploads%>
 
 <% else %>

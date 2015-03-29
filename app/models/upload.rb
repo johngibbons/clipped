@@ -73,8 +73,6 @@ class Upload < ActiveRecord::Base
   end
 
   def download_url
-    self.downloads += 1
-    self.save!
     s3 = AWS::S3.new
     bucket = s3.buckets[image.bucket_name]
     object = bucket.objects[image.s3_object(:original).key]

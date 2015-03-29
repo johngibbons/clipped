@@ -3,6 +3,6 @@
 <% else %>
 	$("#moderation_form").html("<%= escape_javascript(render('upload_moderation/approve')) %>");
 <% end %>
-	$(".upload-approval-container").toggleClass("unapproved");
+	$(".upload-single").toggleClass("unapproved");
 
 

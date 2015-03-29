@@ -1,38 +1,32 @@
-<header class="home">
+<!-- <header class="home">
 	<h1>Free Cutout Images</h1>
 	<p>The best place to find and share background-free images.</p>
-</header>
-
-<div id="home-search">
-  <h2>Find a cutout image:</h2>
-
-  <%= form_tag search_index_path, :method => :get do %>
-    <%= search_field_tag :search, params[:search], placeholder: "e.g. man looking up..." %>
-	<% end %>
-</div>
-
-<div id="home-tags">
-	<h2>Most Popular Tags:</h2>
-	<div class="tag-items most-popular-home">
-		<% @most_used_tags.each do |tag| %>
-			<%= link_to tag.name, tag_path(tag.name), class: "tag" %>
-		<% end %>
+</header> -->
+<section id="home-banner">
+	<div class="container no-pad">
+		<div id="home-search">
+			<h2>Search for Cutout Images</h2>
+		  <%= form_tag search_index_path, :method => :get do %>
+		    <%= search_field_tag :search, params[:search], autofocus: true %>
+		    <%= submit_tag :search %>
+			<% end %>
+		</div>
 	</div>
-</div>
+</section>
 
-<div id="home-perspective">
-	<h2>Filter By Perspective</h2>
-	<div class="perspective perspective-filter-home">
-		<%= render 'perspective_filter' %>
+<section class="uploads-index">
+	<div class="container">
+		<div id="home-uploads">
+			<h2>Most Popular Images</h2>
+
+			<div class="most-popular-uploads flex-container">
+			<% if @most_popular.any? %>
+			  <%= render @most_popular %>
+			<% end %>
+			<% 6.times do %>
+				<div class="upload"></div>
+			<% end %>
+			</div>
+		</div>
 	</div>
-</div>
-
-<div id="home-uploads">
-	<h2>Most Popular Images</h2>
-
-	<div class="most-popular-uploads flex-container">
-	<% if @most_popular.any? %>
-	  <%= render @most_popular %>
-	<% end %>
-	</div>
-</div>
+</section>

@@ -18,11 +18,14 @@
    <% end %>
   <% end %>
 </section>
-<section class="user-uploads-section">
+<section class="uploads-index">
   <div class="container">
     <div class="user-uploads flex-container">
       <% if @user.uploads.any? %>
-          <%= render @uploads %>
+        <%= render @uploads %>
+      <% end %>
+      <% 6.times do %>
+        <div class="upload"></div>
       <% end %>
     </div>
   <%= will_paginate @uploads%>

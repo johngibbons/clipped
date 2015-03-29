@@ -1,14 +1,15 @@
 class UploadsController < ApplicationController
   before_action :increment_views, only: :show
-  layout "dropzone_uploader", only: :new
 
   def index
     @viewable_uploads = policy_scope(Upload).paginate(page: params[:page])
     @uploads = @viewable_uploads
+    render layout: "uploads_index"
   end
 
   def new
     @upload = current_user.uploads.new
+    render layout: "dropzone_uploader"
   end
 
   def create
@@ -47,6 +48,13 @@ class UploadsController < ApplicationController
     @upload.destroy
     flash[:success] = "Image successfully deleted"
     redirect_to current_user
+  end
+
+  def download
+     @upload = Upload.find(params[:id])
+     @upload.downloads += 1
+     @upload.save
+     redirect_to @upload.download_url
   end
 
   private

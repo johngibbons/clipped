@@ -22,41 +22,43 @@ header.home {
 }
 
 #home-search {
-	display: inline-block;
-	margin: 0 auto 2em;
+	padding: 4em 0;
 	float: none;
-	@include span-columns(4);
 	text-align: center;
+	@include span-columns(4);
+
+	@include media($tablet) {
+		@include span-columns(8);
+	}
 
 	@include media($desktop) {
-		@include span-columns(6);
-		text-align: left;
-		margin: 0 auto 7em;
+		@include span-columns(12);
 	}
 
 	form{
 		position: relative;
 
 		input[type=search] {
+			padding: 0.5em;
+      font-weight: 700;
+      color: $clipped-pink;
 			position: relative;
 			display: block;
-			width: 80%;
 			position: relative;
-		  height: 52px;
       transition: all 0.1s ease-in-out;
       margin: 0 auto;
+      box-shadow: none;
+      width: 100%;
+      height: auto;
 
-    	@include media($tablet) {
-    		margin: 0;
-				width: ($column + (2 * $gutter - $gutter)) * 5;
-			}
+      &:focus {
+      	@include media($tablet) {
+      		width: 60%;
+      	}
+      }
 
-		  &:focus {
-	      width: 100%;
-
-	    	@include media($tablet) {
-					width: ($column + (2 * $gutter - $gutter)) * 6 - $gutter;
-				}
+      @include media($tablet) {
+      	width: 50%;
       }
 		}
 
@@ -65,7 +67,7 @@ header.home {
 			right: 0.3em;
 			top: 0.3em;
 			height: 40px;
-			width: auto;
+			width: 100%;
 
 			img {
 				height: 100%;
@@ -75,16 +77,9 @@ header.home {
 	}
 }
 
-#home-tags {
-	@include span-columns(4);
-	text-align: center;
-	margin-bottom: 2em;
-
-	@include media($desktop) {
-		@include span-columns(6);
-		@include omega;
-		text-align: left;
-	}
+section#home-banner {
+	// background: url("entryRender-web.jpg") center center;
+	// background-size: cover;
 }
 
 #home-uploads {
