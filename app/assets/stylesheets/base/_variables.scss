@@ -9,18 +9,19 @@ $facit: "jaf-facitweb", sans-serif;
 $vinyl: "vinyl", sans-serif;
 $museo-round: "museo-sans-rounded", sans-serif;
 $bebas: "bebas-neue",sans-serif;
-$base-font-family: $helvetica;
-$heading-font-family: $helvetica;
+$azo: "azo-sans-web",sans-serif;
+$base-font-family: $proxima;
+$heading-font-family: $azo;
 
 // Font Sizes
-$base-font-size: 1em;
+$base-font-size: 0.8em;
 
 // Line height
 $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 3px;
+$base-border-radius: 0;
 $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
@@ -59,5 +60,6 @@ $card-shadow: $base-box-shadow;
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
 $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+$select-box-shadow: 0 1px 2px 0 #ccc;
 
 $navigation-height: 40px;

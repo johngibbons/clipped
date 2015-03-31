@@ -1,7 +1,9 @@
 header.navigation {
   position: fixed;
   top: 0;
-  
+  font-family: $proxima;
+  text-transform: uppercase;
+
 ///////////////////////////////////////////////////////////////////////////////////
   
   a {
@@ -85,6 +87,14 @@ header.navigation {
 
     @include media($tablet) {
       float: left;
+    }
+
+    button {
+      padding: 1.5em;
+
+      @include media($tablet) {
+        padding: 0.75em 2em;
+      }
     }
   }
 
@@ -287,27 +297,13 @@ header.navigation {
     clear: both;
     display: block;
     height: $navigation-height;
-    padding-left: $navigation-padding / 2;
-    padding-right: $navigation-padding;
 
     @include media($tablet) {
+      padding-left: $navigation-padding / 2;
+      padding-right: $navigation-padding;
       clear: none;
       float: right;
     }
-
-  button {
-    font-weight: 700;
-    margin-top: 0.5em;
-    width: auto;
-    height: auto;
-    float: right;
-
-    @include media($tablet) {
-      margin-left: 1em;
-      padding: .5em;
-      margin-top: 0.7em;
-    }
-  }
 
   }
 
@@ -321,11 +317,7 @@ header.navigation {
 
     float: left;
     padding: 0.5em;
-    width: 70%;
-
-    @include media($tablet) {
-      width: 100%;
-    }
+    width: 100%;
 
     form {
       position: relative;

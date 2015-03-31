@@ -5,11 +5,8 @@
 <section id="home-banner">
 	<div class="container no-pad">
 		<div id="home-search">
-			<h2>Search for Cutout Images</h2>
-		  <%= form_tag search_index_path, :method => :get do %>
-		    <%= search_field_tag :search, params[:search], autofocus: true %>
-		    <%= submit_tag :search %>
-			<% end %>
+			<h1>What are you looking for?</h1>
+			<%= render 'search/upload_search_form' %>
 		</div>
 	</div>
 </section>
@@ -17,7 +14,7 @@
 <section class="uploads-index">
 	<div class="container">
 		<div id="home-uploads">
-			<h2>Most Popular Images</h2>
+			<h2 class="section-head">Featured</h2>
 			<%= link_to "(browse all)", uploads_path, class: "more-link" %>
 			<div class="most-popular-uploads flex-container">
 			<% if @most_popular.any? %>
@@ -33,7 +30,7 @@
 
 <section id="home-tags">
 	<div class="container">
-		<h2>Most Popular Tags</h2>
+		<h2 class="section-head">Top Clippers</h2>
 		<div class="tag-items most-popular-home">
 			<% @most_used_tags.each do |tag| %>
 				<%= link_to tag.name, tag_path(tag.name), class: "tag" %>

@@ -66,8 +66,22 @@ input[type="search"] {
 
 input[type="checkbox"],
 input[type="radio"] {
-  display: inline;
-  margin-right: $small-spacing / 2;
+  opacity: 0;
+  position: absolute;
+  left: -9999px;
+
+  + label {
+    padding: 1em;
+    margin: 0.5em;
+    font-weight: 300;
+  }
+
+  &:checked {
+    + label {
+      color: $action-color;
+      font-weight: 600;
+    }
+  }
 }
 
 input[type="file"] {

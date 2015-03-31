@@ -22,7 +22,7 @@ header.home {
 }
 
 #home-search {
-	padding: 4em 0;
+	padding: 3em 0;
 	float: none;
 	text-align: center;
 	@include span-columns(4);
@@ -33,6 +33,12 @@ header.home {
 
 	@include media($desktop) {
 		@include span-columns(12);
+	}
+
+	h1 {
+		text-align: center;
+	  padding: 0;
+	  margin: 0 0 1em 0;
 	}
 
 	form{
@@ -62,6 +68,10 @@ header.home {
       }
 		}
 
+		input[type=submit] {
+      margin-bottom: 3em;
+		}
+
 		button[type=submit] {
 			position: absolute;
 			right: 0.3em;
@@ -84,7 +94,6 @@ section#home-banner {
 
 .home {
 	section {
-		padding-top: 1em;
 	}
 }
 
