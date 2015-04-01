@@ -29,6 +29,7 @@ header.home {
 
 	@include media($tablet) {
 		@include span-columns(8);
+		padding: 8em 0;
 	}
 
 	@include media($desktop) {
@@ -41,50 +42,6 @@ header.home {
 	  margin: 0 0 1em 0;
 	}
 
-	form{
-		position: relative;
-
-		input[type=search] {
-			padding: 0.5em;
-      font-weight: 700;
-      color: $clipped-pink;
-			position: relative;
-			display: block;
-			position: relative;
-      transition: all 0.1s ease-in-out;
-      margin: 0 auto;
-      box-shadow: none;
-      width: 100%;
-      height: auto;
-
-      &:focus {
-      	@include media($tablet) {
-      		width: 60%;
-      	}
-      }
-
-      @include media($tablet) {
-      	width: 50%;
-      }
-		}
-
-		input[type=submit] {
-      margin-bottom: 3em;
-		}
-
-		button[type=submit] {
-			position: absolute;
-			right: 0.3em;
-			top: 0.3em;
-			height: 40px;
-			width: 100%;
-
-			img {
-				height: 100%;
-				width: auto;
-			}
-		}
-	}
 }
 
 section#home-banner {
@@ -94,6 +51,19 @@ section#home-banner {
 
 .home {
 	section {
+	}
+
+	.filter {
+    margin-bottom: 1em;
+
+    @include media($tablet) {
+      @include span-columns(4);
+      margin-bottom: 0;
+    }
+
+    @include media($desktop) {
+    	@include span-columns(3 of 6);
+    }
 	}
 }
 
@@ -120,3 +90,4 @@ section#home-banner {
 	display: inline;
 	font-size: 0.7em;
 }
+

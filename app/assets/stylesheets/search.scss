@@ -20,10 +20,12 @@
 
 //filter
 .search-tools {
+  margin-top: 1em;
+
 	@include media($desktop) {
 		@include span-columns(6 of 12);
-		@include shift(3 of 12);
 		text-align: left;
+    margin-top: -24px;
 	}
 
   ol {
@@ -98,7 +100,17 @@
     }
 
     .dropdown {
-      box-shadow: $select-box-shadow;
+      border: $base-border;
+    	border-top: 1px solid $action-color;
+
+      @include media($tablet) {
+      	position: absolute;
+      	z-index: 1;
+      }
+
+      @include media($desktop) {
+      	@include span-columns(12 of 48);
+      }
     }
 
     .hide-options {
@@ -119,11 +131,15 @@
     	margin-right: 0;
     	padding-top: 0;
     	padding-bottom: 0;
+
+      &:before {
+        content: "#";
+      }
     }
   }
 
   .summary {
-  	padding: 0.75em 0;
+  	padding: 0.75em 3em;
   	font-weight: 300;
   	line-height: 1;
   	text-transform: uppercase;
@@ -134,3 +150,72 @@
   }
 
 }
+
+
+.container {
+  form {
+    position: relative;
+
+    input[type=search] {
+      padding: 0.5em;
+      font-weight: 700;
+      color: $clipped-pink;
+      position: relative;
+      display: block;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+      margin: 0 auto;
+      box-shadow: none;
+      width: 100%;
+      height: auto;
+
+      &:focus {
+        + button {
+          .fa {
+            color: $action-color;
+          }
+        }
+      }
+
+      @include media($tablet) {
+        width: 50%;
+      }
+
+      @include media($desktop) {
+        @include span-columns(12 of 24);
+        padding: 8px;
+      }
+    }
+
+    input[type=submit] {
+      margin-bottom: 3em;
+    }
+
+    button {
+      &.icon {
+        position: absolute;
+        top: -1.05em;
+        font-size: 1.25em;
+        width: auto;
+        right: 5px;
+        margin-right:0;
+
+        @include media($desktop) {
+          left: 510px;
+        }
+
+        .fa {
+          transition: all 0.2s ease-in-out;
+          color: $lightest-gray;
+        }
+      }
+    }
+
+    .mobile-submit {
+      @include media($tablet) {
+        display:none;
+      }
+    }
+  }
+}
+

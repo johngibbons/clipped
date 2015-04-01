@@ -46,9 +46,10 @@ header.navigation {
     min-height: $navigation-height;
     padding-left: $navigation-padding;
     padding-right: 2em;
+    line-height: 0;
 
     img {
-      max-height: $navigation-height;
+      max-height: 47px;
       max-width: 200px;
       padding: 0.7em 0;
     }
@@ -93,7 +94,8 @@ header.navigation {
       padding: 1.5em;
 
       @include media($tablet) {
-        padding: 0.75em 2em;
+        padding: 0.5em 1.25em;
+        margin: 0.5em 0;
       }
     }
   }
@@ -144,7 +146,7 @@ header.navigation {
     a {
       color: $navigation-color;
       display: inline-block;
-      font-size: 0.8em;
+      font-size: $base-font-size * 0.9;
       font-weight: 700;
       padding: 1.5em;
       width: 100%;
@@ -316,7 +318,7 @@ header.navigation {
     $search-bar-background: lighten($search-bar-border-color, 10%);
 
     float: left;
-    padding: 0.5em;
+    padding: 0.54em;
     width: 100%;
 
     form {

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Upload show page", :type => :feature do
+RSpec.feature "Upload Search", :type => :feature do
 
   before(:each) do
     created_uploads = create_list(:approved_upload, 35)

@@ -97,6 +97,10 @@ class Upload < ActiveRecord::Base
       Upload.where(perspective: perspectives)
     end
 
+    def perspective_choices
+      Upload.perspectives.except!(:not_applicable)
+    end
+
   end
 
 end

@@ -1,11 +1,10 @@
 <%= form_tag search_index_path, :method => :get do %>
   <%= search_field_tag :search, params[:search], autofocus: true %>
 
-	<%= submit_tag 'Search' %>
-
-  <h2>Filter Search</h2>
+	<button class='icon'>
+	  <i class="fa fa-search"></i>
+	</button>
   <div class="search-tools">
-
 		<div class="filter">
 	    <label class="filter-label">Category</label>
 	    <div class="dropdown">
@@ -34,7 +33,7 @@
 		  <label class="filter-label">Perspective</label>
 		  <div class="dropdown">
 		  	<ol>
-					<% Upload.perspectives.map do |k, v| %>
+					<% Upload.perspective_choices.map do |k, v| %>
 						<li>
 							<%=	check_box_tag "perspective#{v}", v, false, class: "perspective-checkbox" %>
 							<%=	label_tag "perspective#{v}", k.humanize, value: k, class: "perspective-select checkbox-select", id: "perspective#{v}" %>
@@ -43,6 +42,6 @@
 				</ol>
 			</div>
 		</div>
-
 	</div>
+	
 <% end %>
