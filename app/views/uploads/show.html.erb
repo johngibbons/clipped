@@ -1,12 +1,12 @@
 <% present(@upload) do |upload| %>
 
-	<%= content_tag :div, class: "upload-single card #{upload.approval_class}" do -%>
+	<%= content_tag :div, class: "upload-single card gray #{upload.approval_class}" do -%>
 		<%= image_tag upload.src(:large) %>
 	<% end -%>
 
 	<div class="upload-info">
 		<div class="upload-stats card">
-			<h6 class="title">Stats</h6>
+			<h2 class="title">Stats</h2>
 			<div class="single-upload-stats stats">
 		    <ul>
 					<li><%= upload.views %><span>Views</span></li>
@@ -17,7 +17,7 @@
 	  </div>
 
 		<div class="upload-tags card">
-			<h6 class="title">Tags</h6>
+			<h2 class="title">Tags</h2>
 			<div class="tags-list">
 				<div class="tag-items">
 					<%= render upload.tags %>
@@ -31,7 +31,7 @@
 		</div>
 
 		<div class="upload-perspective card">
-			<h6 class="title">Perspective</h6>
+			<h2 class="title">Perspective</h2>
 			<div class="perspective" id="selected-perspective">
 				<%= link_to upload.perspective.humanize, search_index_path(perspective_id: Upload.perspectives[upload.perspective], perspective: upload.perspective), class: "perspective" %>
 			</div>
@@ -43,7 +43,7 @@
 		</div>
 
 		<div class="upload-interaction card">
-			<h6 class="title">Download</h6>
+			<h2 class="title">Download</h2>
 			<%= render partial: "download", locals: {upload: @upload} %>
 			<%= render 'relationships/like_form' if logged_in? %>
 			<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
