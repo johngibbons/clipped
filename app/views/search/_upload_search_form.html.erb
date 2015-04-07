@@ -9,7 +9,7 @@
 	    <label class="filter-label">Category</label>
 	    <div class="dropdown">
 	      <ol>
-					<% Upload.category_choices.map do |k, v| %>
+					<% Upload.categories.map do |k, v| %>
 						<li>
 							<%=	check_box_tag "category_id[]", v, false, class: "category-checkbox", id: "category#{v}" %>
 							<%=	label_tag "category#{v}", k.humanize, value: k, class: "category-select checkbox-select", id: "category#{v}" %>
@@ -23,7 +23,7 @@
 		  <label class="filter-label">Perspective</label>
 		  <div class="dropdown">
 		  	<ol>
-					<% Upload.perspective_choices.map do |k, v| %>
+					<% Upload.perspectives.map do |k, v| %>
 						<li>
 							<%=	check_box_tag "perspective_id[]", v, false, class: "perspective-checkbox", id: "perspective#{v}" %>
 							<%=	label_tag "perspective#{v}", k.humanize, value: k, class: "perspective-select checkbox-select", id: "perspective#{v}" %>

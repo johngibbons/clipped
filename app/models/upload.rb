@@ -98,21 +98,22 @@ class Upload < ActiveRecord::Base
       Upload.all.sort_by(&:weighted_score).reverse!
     end
 
-    def perspective(perspectives = [])
+    def perspective_collection(perspectives = [])
       Upload.where(perspective: perspectives)
     end
 
-    def perspective_choices
-      Upload.perspectives.except!(:not_applicable)
-    end
+    # def perspective_choices
+    #   byebug
+    #   Upload.perspectives.except!(:not_applicable)
+    # end
 
-    def category(categories = [])
+    def category_collection(categories = [])
       Upload.where(category: categories)
     end
 
-    def category_choices
-      Upload.categories.except!(:none)
-    end
+    # def category_choices
+    #   Upload.categories.except!(:uncategorized)
+    # end
 
   end
 
