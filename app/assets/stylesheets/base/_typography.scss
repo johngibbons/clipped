@@ -48,6 +48,10 @@ h2 {
   font-size: $base-font-size;
   text-align: center;
 
+  @include media($tablet) {
+    text-align: left;
+  }
+
   &.section-head {
 
   }

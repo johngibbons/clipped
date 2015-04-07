@@ -6,12 +6,12 @@ class Upload < ActiveRecord::Base
   has_many :likers, through: :liked_relationships
   default_scope -> { order(created_at: :desc) }
   acts_as_ordered_taggable
-  include Filterable
 
   searchable do
     text :tag_list
     boolean :approved
     integer :perspective_id
+    integer :category_id
     time :created_at
   end
   handle_asynchronously :solr_index
@@ -20,6 +20,7 @@ class Upload < ActiveRecord::Base
   validates :user_id, presence: true
 
   enum perspective: [ :not_applicable, :front, :side_front, :side, :side_back, :back, :above, :below ]
+  enum category: [:uncategorized, :people, :animals, :plants, :objects]
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
@@ -47,6 +48,10 @@ class Upload < ActiveRecord::Base
 
   def perspective_id
     Upload.perspectives[self.perspective]
+  end
+
+  def category_id
+    Upload.categories[self.category]
   end
 
   def weighted_score
@@ -99,6 +104,14 @@ class Upload < ActiveRecord::Base
 
     def perspective_choices
       Upload.perspectives.except!(:not_applicable)
+    end
+
+    def category(categories = [])
+      Upload.where(category: categories)
+    end
+
+    def category_choices
+      Upload.categories.except!(:none)
     end
 
   end

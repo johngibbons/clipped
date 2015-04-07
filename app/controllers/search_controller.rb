@@ -5,10 +5,15 @@ class SearchController < ApplicationController
     params[:perspective_id] ||= []
     @search = Upload.search do
       with :approved, true
-      with :perspective_id, params[:perspective_id]
-      fulltext params[:tag]
-      fulltext params[:search] do
-        minimum_match 1
+      facet :perspective_id
+      with :perspective_id, params[:perspective_id] if params[:perspective_id].present?
+      facet :category_id
+      with :category_id, params[:category_id] if params[:category_id].present?
+      fulltext params[:tag] if params[:tag].present?
+      if params[:search].present?
+        fulltext params[:search] do
+          minimum_match 1
+        end
       end
       paginate page: params[:page], per_page: 30
     end

@@ -1,0 +1,7 @@
+<%= form_for @upload, method: :patch, html: { class: "category hidden", id: "update-category-form" }, remote: true do |f| %>
+	<% Upload.categories.map do |k, v| %>
+		<%=	f.radio_button :category, k %>
+		<%=	f.label :category, k.humanize, value: k %>
+	<% end %>
+	<%= f.submit %>
+<% end %>

@@ -16,7 +16,7 @@
 		  </div>
 	  </div>
 
-		<div class="upload-tags card">
+	  <div class="upload-tags card">
 			<h2 class="title">Tags</h2>
 			<div class="tags-list">
 				<div class="tag-items">
@@ -41,6 +41,20 @@
 				<%= link_to 'Edit Perspective', edit_upload_path(upload), class: "js-link", id: "edit-perspective-link", remote: true %>
 			<% end %>
 		</div>
+
+		<div class="upload-category card">
+			<h2 class="title">Category</h2>
+			<div class="category" id="selected-category">
+				<%= link_to upload.category.humanize, search_index_path(category_id: Upload.categories[upload.category], category: upload.category), class: "category" %>
+			</div>
+			<%= render 'category_form' %>
+			<% if policy(upload).update? %>
+				<button id="update-category-btn" class="hidden btn">Update</button>		
+				<%= link_to 'Edit Category', edit_upload_path(upload), class: "js-link", id: "edit-category-link", remote: true %>
+			<% end %>
+		</div>
+
+		  
 
 		<div class="upload-interaction card">
 			<h2 class="title">Download</h2>

@@ -1,6 +1,13 @@
 <% if @uploads %>
 
-	<h6>Images matching: <%= @query.humanize %> (<%= @total_results %>)</h6>
+<section class="uploads-index-filter">
+	<div class="container no-pad">
+		<%= render 'search/upload_search_form' %>
+
+		<h2>Images matching: <%= @query.humanize %> (<%= @total_results %>)</h2>
+	</div>
+</section>
+
 	<div class="flex-container">
 		<%= render @uploads %>
 		<% 6.times do %>
