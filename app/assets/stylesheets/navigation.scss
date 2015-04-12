@@ -37,7 +37,7 @@ header.navigation {
     z-index: 9999;
 
     @include media($desktop) {
-      @include outer-container(em(1088));
+      @include outer-container(em(960));
     }
   }
 
@@ -68,7 +68,7 @@ header.navigation {
     padding-right: 1em;
     text-transform: uppercase;
 
-    @include media($tablet) {
+    @include media($desktop) {
       display: none;
     }
 
@@ -86,14 +86,14 @@ header.navigation {
     min-height: $navigation-height;
     z-index: 9999999;
 
-    @include media($tablet) {
+    @include media($desktop) {
       float: left;
     }
 
     button {
       padding: 1.5em;
 
-      @include media($tablet) {
+      @include media($desktop) {
         padding: 0.5em 1.25em;
         margin: 0.5em 0;
       }
@@ -115,7 +115,7 @@ header.navigation {
       display: block;
     }
 
-    @include media($tablet) {
+    @include media($desktop) {
       display: inline;
       margin: 0;
       padding: 0;
@@ -134,7 +134,7 @@ header.navigation {
     z-index: 9999;
     border-bottom: 1px solid $light-gray;
 
-    @include media($tablet) {
+    @include media($desktop) {
       background: transparent;
       display: inline;
       line-height: $navigation-height;
@@ -152,7 +152,7 @@ header.navigation {
       width: 100%;
       height: 100%;
 
-      @include media($tablet) {
+      @include media($desktop) {
         width: auto;
         height: auto;
         padding: 0;
@@ -177,7 +177,7 @@ header.navigation {
   li.more.nav-link {
     padding-right: 0;
 
-    @include media($tablet) {
+    @include media($desktop) {
       padding-right: $navigation-submenu-padding;
     }
 
@@ -190,15 +190,18 @@ header.navigation {
     }
 
     > a {
-      @include media($tablet) {
+      @include media($desktop) {
         padding-right: 0.6em;
       }
     }
 
     > a:after {
-      @include position(absolute, auto -0.4em auto auto);
       content: '\25BE';
       color: $navigation-color;
+
+      @include media($desktop) {
+        @include position(absolute, auto -0.4em auto auto);
+      }
     }
   }
 
@@ -207,7 +210,7 @@ header.navigation {
     padding-right: 0;
 
     a {
-      @include media($tablet) {
+      @include media($desktop) {
         padding-right: 0.8em;
       }
     }
@@ -216,7 +219,7 @@ header.navigation {
 
       position: relative;
 
-      @include media($tablet) {
+      @include media($desktop) {
         margin-right: $navigation-submenu-padding;
         padding-right: 1.6em;
       }
@@ -234,7 +237,7 @@ header.navigation {
       display: block;
     }
 
-    @include media($tablet) {
+    @include media($desktop) {
       padding-right: 0.8em;
       position: relative;
     }
@@ -244,14 +247,14 @@ header.navigation {
     display: none;
     padding-left: 0;
 
-    @include media($tablet) {
+    @include media($desktop) {
       left: -$navigation-submenu-padding;
       position: absolute;
       top: 1.5em;
     }
 
     .submenu {
-      @include media($tablet) {
+      @include media($desktop) {
         left: $navigation-submenu-width - 0.2em;
         top: 0;
       }
@@ -261,7 +264,7 @@ header.navigation {
       display: block;
       padding-right: 0;
 
-      @include media($tablet) {
+      @include media($desktop) {
         vertical-align: bottom;
 
         &:first-child > a {
@@ -281,7 +284,7 @@ header.navigation {
         display: inline-block;
         width: 100%;
 
-        @include media($tablet) {
+        @include media($desktop) {
                 padding-top: 0.2em;
           background-color: $navigation-background;
           padding-left: $navigation-submenu-padding;
@@ -300,7 +303,7 @@ header.navigation {
     display: block;
     height: $navigation-height;
 
-    @include media($tablet) {
+    @include media($desktop) {
       padding-left: $navigation-padding / 2;
       padding-right: $navigation-padding;
       clear: none;
@@ -337,13 +340,12 @@ header.navigation {
         width: 100%;
         height: 30px;
         float: right;
-        background-color: lighten($lightest-gray, 3%);
 
         &:focus {
           width: 100%;
         }
 
-       @include media($tablet) {
+       @include media($desktop) {
           width: 90%;
           transition: all 0.1s ease-in-out;
 
@@ -374,7 +376,7 @@ header.navigation {
       }
     }
 
-    @include media($tablet) {
+    @include media($desktop) {
       display: inline-block;
       position: relative;
       width: 16em;

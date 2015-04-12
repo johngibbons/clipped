@@ -50,10 +50,8 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_content "NOT APPLICABLE"
       expect(page).to have_content "Edit Perspective"
       click_link "Edit Perspective"
-      expect(page).to have_content "BACK"
-      expect(page).to have_content "SIDE FRONT"
-      page.find('label', text: "ABOVE").click
-      click_button "Update Upload"
+      select "Above", from: "upload_perspective"
+      click_button "Update Perspective"
       expect(page).to have_content "ABOVE"
       expect(page).to_not have_content "SIDE FRONT"
       second_upload = create(:upload, approved: false, perspective: :above)
@@ -104,10 +102,8 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_content "NOT APPLICABLE"
       expect(page).to have_content "Edit Perspective"
       click_link "Edit Perspective"
-      expect(page).to have_content "BACK"
-      expect(page).to have_content "SIDE FRONT"
-      page.find('label', text: "ABOVE").click
-      click_button "Update Upload"
+      select "Above", from: "upload_perspective"
+      click_button "Update Perspective"
       expect(page).to have_content "ABOVE"
       expect(page).to_not have_content "SIDE FRONT"
       second_upload = create(:upload, approved: false, perspective: :above)

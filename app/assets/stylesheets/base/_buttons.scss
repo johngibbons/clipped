@@ -24,7 +24,7 @@ button, .btn {
   width: 100%;
   margin: 1em 0;
 
-  @include media($tablet) {
+  @include media($desktop) {
     width: auto;
     height: auto;
     padding: .75em 2em;

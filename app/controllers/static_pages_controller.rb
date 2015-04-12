@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  layout "uploads_index", only: :home
+  layout "no_container", only: :home
 
 
   def home

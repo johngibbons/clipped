@@ -9,6 +9,8 @@ class Upload < ActiveRecord::Base
 
   searchable do
     text :tag_list
+    text :perspective
+    text :category
     boolean :approved
     integer :perspective_id
     integer :category_id
@@ -102,6 +104,20 @@ class Upload < ActiveRecord::Base
       Upload.where(perspective: perspectives)
     end
 
+    def perspective_array
+      a = Upload.perspectives.map do |k,v|
+        [k.humanize, k]
+      end
+      return a
+    end
+
+    def category_array
+      a = Upload.categories.map do |k,v|
+        [k.humanize, k]
+      end
+      return a
+    end
+
     # def perspective_choices
     #   byebug
     #   Upload.perspectives.except!(:not_applicable)
@@ -109,6 +125,20 @@ class Upload < ActiveRecord::Base
 
     def category_collection(categories = [])
       Upload.where(category: categories)
+    end
+
+    def perspective_name(int)
+      name = Upload.perspectives.map do |key, value|
+        key.humanize
+      end
+      return name[int]
+    end
+
+    def category_name(int)
+      name = Upload.categories.map do |key, value|
+        key.humanize
+      end
+      return name[int]
     end
 
     # def category_choices

@@ -73,7 +73,20 @@
 }
 
 .uploads-index-filter {
-  padding: 3em 0;
+  position: fixed;
+  @include outer-container(100%);
+  margin-top: 95px;
+  border-bottom: $base-border;
+  width: 100%;
+  z-index: 1;
+  background-color: $lightest-gray;
+
+  p {
+    margin-top:0;
+    margin-bottom:0;
+    padding: 0.5em 0 0.5em 1em;
+
+  }
 }
 
 .uploads-index {
@@ -84,4 +97,12 @@
   .container {
     margin-top:0;
   }
+}
+
+.upload-results-num {
+  @include span-columns(4 of 6);
+}
+
+#uploads-search-results {
+  padding-top: 45px;
 }

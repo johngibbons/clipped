@@ -1,0 +1,41 @@
+<%= form_tag search_index_path, :method => :get do %>
+  <div class="dropdown">
+    <div class="dropdown-container">
+	    <p class="dropdown-button">Filter</p>
+      <ul class="dropdown-menu dropdown-select">
+      	<li id="results-filter-heading">
+      		<p>Filter</p>
+      		<a href="javascript:void(0)">Clear all</a>
+      	</li>
+      	<li id="category-filter" class="results-subfilter">
+      		<a href="javascript:void(0)">Category</a>
+      	</li>
+      	<ul class="results-subfilter-items">
+    			<% for row in @search.facet(:category_id).rows %>
+						<li>
+							<% if params[:category_id].blank? %>
+			          <%= link_to Upload.category_name(row.value), :category_id => row.value %> (<%= row.count %>)
+			        <% else %>
+			          <strong><%= Upload.category_name(row.value) %></strong> (<%= link_to "remove", :category_id => nil %>)
+			        <% end %>
+						</li>
+					<% end %>
+    		</ul>
+      	<li id="perspective-filter" class="results-subfilter">
+      		<a href="javascript:void(0)">Perspective</a>
+      	</li>
+      	<ul class="results-subfilter-items">
+    			<% for row in @search.facet(:perspective_id).rows %>
+      			<li>
+      				<% if params[:perspective_id].blank? %>
+				        <%= link_to Upload.perspective_name(row.value), :perspective_id => row.value %> (<%= row.count %>)
+				      <% else %>
+				        <strong><%= Upload.perspective_name(row.value) %></strong> (<%= link_to "remove", :perspective_id => nil %>)
+				      <% end %>
+      			</li>
+					<% end %>
+    		</ul>
+			</ul>
+		</div>
+	</div>
+<% end %>

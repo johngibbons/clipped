@@ -40,7 +40,7 @@ main {
 	}
 
 	@include media($desktop) {
-		@include outer-container(em(1088));
+		@include outer-container(em(960));
 	}
 
 	header {
@@ -63,4 +63,5 @@ aside {
 .flex-container {
   display: flex;
   flex-flow: row wrap;
+  clear: both;
 }

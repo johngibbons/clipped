@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
   def index
     @viewable_uploads = policy_scope(Upload).paginate(page: params[:page])
     @uploads = @viewable_uploads
-    render layout: "uploads_index"
+    render layout: "no_container"
   end
 
   def new
@@ -60,7 +60,7 @@ class UploadsController < ApplicationController
   private
 
     def upload_params
-      params.require(:upload).permit(:image, :direct_upload_url, :tag_list, :perspective)
+      params.require(:upload).permit(:image, :direct_upload_url, :tag_list, :perspective, :category)
     end
 
     def increment_views

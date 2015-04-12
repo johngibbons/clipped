@@ -18,13 +18,17 @@
 	}
 }
 
-//filter
+//home filter
 .search-tools {
   margin-top: 1em;
+  position: relative;
+
+  @include media($tablet) {
+    text-align: left;
+  }
 
 	@include media($desktop) {
 		@include span-columns(6 of 12);
-		text-align: left;
     margin-top: -24px;
 	}
 
@@ -45,7 +49,7 @@
 
   @include clearfix;
 
-  .filter {
+  .search-filter {
     margin-bottom: 1em;
 
     @include media($tablet) {
@@ -106,10 +110,11 @@
       @include media($tablet) {
       	position: absolute;
       	z-index: 1;
+        @include span-columns(4);
       }
 
       @include media($desktop) {
-      	@include span-columns(12 of 48);
+        @include span-columns(6);
       }
     }
 
@@ -152,10 +157,22 @@
 }
 
 
+#home-search-form {
+  position: relative;
+
+  @include media($tablet) {
+
+  }
+
+  @include media($desktop) {
+    float: left;
+    @include span-columns(12 of 24);
+  }
+
+}
+
 .container {
   form {
-    position: relative;
-
     input[type=search] {
       padding: 0.5em;
       font-weight: 700;
@@ -177,12 +194,7 @@
         }
       }
 
-      @include media($tablet) {
-        width: 50%;
-      }
-
       @include media($desktop) {
-        @include span-columns(12 of 24);
         padding: 8px;
       }
     }
@@ -200,10 +212,6 @@
         right: 5px;
         margin-right:0;
 
-        @include media($desktop) {
-          left: 510px;
-        }
-
         .fa {
           transition: all 0.2s ease-in-out;
           color: $lightest-gray;
@@ -219,3 +227,70 @@
   }
 }
 
+// search results filter
+
+.results-filter {
+  @include span-columns(2 of 6);
+  border-top: 1px solid $action-color;
+  border-left: $base-border;
+
+  .dropdown-button:after {
+    content: ' \25BE';
+  }
+
+  li {
+    padding: 0.5em 1em;
+    border-bottom: $base-border;
+  }
+
+  .dropdown-container {
+    position:relative;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position:absolute;
+    right: 0;
+    top: 2.5em;
+    width: 200%;
+    background-color: $white;
+    border: $base-border;
+    border-bottom: none;
+    box-shadow: $card-shadow;
+    z-index: 1;
+  }
+
+  .show-menu {
+    display:block;
+  }
+
+  #results-filter-heading {
+    background-color: $lightest-gray;
+
+    p {
+      display: inline;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    a {
+      display: inline;
+      float: right;
+      font-size: 0.8em;
+      line-height: 0;
+      padding-top: 1em;
+    }
+  }
+
+  .results-subfilter-items{
+    display: none;
+    background-color: $lightest-gray;
+
+    li {
+      a {
+        padding-left: 1em;
+      }
+    }
+  }
+}

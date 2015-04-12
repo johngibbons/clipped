@@ -20,6 +20,7 @@ class SearchController < ApplicationController
       @uploads = @search.results
       @total_results = @search.total
       @query = (params[:search].to_s || "") + (params[:perspective].to_s || "") + (params[:tag].to_s || "")
+      render layout: "no_container"
   end
 
 end

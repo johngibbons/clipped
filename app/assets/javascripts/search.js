@@ -4,7 +4,7 @@ var Filter = (function() {
     this._optionsContainer = this._element.find(this.constructor.optionsContainerSelector);
   }
 
-  Filter.selector = '.filter';
+  Filter.selector = '.search-filter';
   Filter.optionsContainerSelector = '> div';
   Filter.hideOptionsClass = 'hide-options';
 
@@ -108,4 +108,15 @@ var Filter = (function() {
 
 $(function() {
   Filter.enhance();
+});
+
+$(function(){
+  $(".dropdown-button").click(function() {
+    $(".results-subfilter").next().hide();
+    $(".dropdown-menu").slideToggle(100);
+  });
+
+  $(".results-subfilter").click(function() {
+    $(this).next().slideToggle(100);
+  });
 });

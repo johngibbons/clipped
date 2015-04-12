@@ -1,11 +1,13 @@
 <%= form_tag search_index_path, :method => :get do %>
-  <%= search_field_tag :search, params[:search], autofocus: true %>
+	<div id="home-search-form">
+	  <%= search_field_tag :search, params[:search], id: "upload-search" %>
 
-	<button class='icon'>
-	  <i class="fa fa-search"></i>
-	</button>
+		<button id="search-submit" class='icon'>
+		  <i class="fa fa-search"></i>
+		</button>
+	</div>
   <div class="search-tools">
-		<div class="filter">
+		<div id="category-filter" class="search-filter">
 	    <label class="filter-label">Category</label>
 	    <div class="dropdown">
 	      <ol>
@@ -19,7 +21,7 @@
 	    </div>
 	  </div>
 
-	  <div id="perspective-filter" class="filter">
+	  <div id="perspective-filter" class="search-filter">
 		  <label class="filter-label">Perspective</label>
 		  <div class="dropdown">
 		  	<ol>

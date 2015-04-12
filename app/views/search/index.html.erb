@@ -1,23 +1,24 @@
 <% if @uploads %>
 
 <section class="uploads-index-filter">
-	<div class="container no-pad">
-		<%= render 'search/upload_search_form' %>
-
-		<h2>Images matching: <%= @query.humanize %> (<%= @total_results %>)</h2>
-	</div>
+		<p class="upload-results-num"><%= pluralize(@total_results, "Result") %></p>
+    <div class="results-filter">
+      <%= render 'search/upload_results_filter_form' %>
+  	</div>
 </section>
 
-	<div class="flex-container">
-		<%= render @uploads %>
-		<% 6.times do %>
-			<div class="upload"></div>
-		<% end %>
-	</div>
-	<%= will_paginate @uploads%>
+<div class="container">
+  <section id="uploads-search-results" class="flex-container">
+  	<%= render @uploads %>
+  	<% 6.times do %>
+  		<div class="upload"></div>
+  	<% end %>
+  </section>
+  <%= will_paginate @uploads%>
 
-<% else %>
+  <% else %>
 
-	<h6>No results for: <%= @query %></h6>
+  	<h6>No results for: <%= @query %></h6>
 
-<% end %>
+  <% end %>
+</div>
