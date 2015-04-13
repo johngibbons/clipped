@@ -228,19 +228,40 @@
 }
 
 // search results filter
+  .mobile-filter {
+    position: fixed;
+    top: 95px;
+    background-color: $lightest-gray;
+    border-bottom: $base-border;
+    z-index: 1;
 
-.results-filter {
-  @include span-columns(2 of 6);
-  border-top: 1px solid $action-color;
-  border-left: $base-border;
+    @include media($desktop) {
+      border-bottom: none;
+    }
+
+    p {
+      padding: 0.5em 0 0.5em 1em;
+      margin-top:0;
+      margin-bottom:0;
+
+      @include media($tablet) {
+        padding-left: 2em;
+      }
+
+      @include media($desktop) {
+        padding-left: 0;
+      }
+    }
+  }
+
+  .dropdown-button {
+    @include media($desktop) {
+      display: none;
+    }
+  }
 
   .dropdown-button:after {
     content: ' \25BE';
-  }
-
-  li {
-    padding: 0.5em 1em;
-    border-bottom: $base-border;
   }
 
   .dropdown-container {
@@ -258,20 +279,30 @@
     border-bottom: none;
     box-shadow: $card-shadow;
     z-index: 1;
-  }
 
-  .show-menu {
-    display:block;
+    @include media($desktop) {
+      display: block;
+      position: static;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      width: auto;
+    }
   }
 
   #results-filter-heading {
     background-color: $lightest-gray;
 
+    @include media($desktop) {
+      background-color: transparent;
+      border-bottom: $base-border;
+    }
+
     p {
       display: inline;
       font-weight: 700;
       text-transform: uppercase;
-      margin: 0;
+      padding: 0;
     }
 
     a {
@@ -283,9 +314,26 @@
     }
   }
 
+  .results-subfilter {
+    a {
+      @include media($desktop) {
+        color: $base-font-color;
+        cursor: default;
+      }
+    }
+  }
+
   .results-subfilter-items{
     display: none;
     background-color: $lightest-gray;
+
+    @include media($desktop) {
+      display: block;
+      background-color: transparent;
+      font-size: 0.8em;
+      padding-bottom: 1em;
+      border-bottom: $base-border;
+    }
 
     li {
       a {
@@ -293,4 +341,4 @@
       }
     }
   }
-}
+

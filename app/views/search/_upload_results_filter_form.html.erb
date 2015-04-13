@@ -16,7 +16,7 @@
 							<% if params[:category_id].blank? %>
 			          <%= link_to Upload.category_name(row.value), :category_id => row.value %> (<%= row.count %>)
 			        <% else %>
-			          <strong><%= Upload.category_name(row.value) %></strong> (<%= link_to "remove", :category_id => nil %>)
+			          <strong><%= Upload.category_name(row.value) %></strong>(<%= link_to "remove", :category_id => nil %>)
 			        <% end %>
 						</li>
 					<% end %>
