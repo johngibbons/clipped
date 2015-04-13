@@ -7,3 +7,6 @@ $('.tag-items').html("<%= j (render @upload.tags) %>");
 $('#update-perspective-form').addClass('hidden');
 $('#selected-perspective').html("<%= j (link_to @upload.perspective.humanize, uploads_path(perspective: Upload.perspectives[@upload.perspective]), class: 'perspective') %>");
 $('#selected-perspective').removeClass('hidden');
+
+$('#selected-category').html("<%= j (link_to @upload.category.humanize, uploads_path(category: Upload.categories[@upload.category]), class: 'category') %>");
+$("#update-category-form").addClass("hidden");

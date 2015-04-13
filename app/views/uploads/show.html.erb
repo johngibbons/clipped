@@ -25,7 +25,7 @@
 					<%= render 'acts_as_taggable_on/tags/update_form' %>
 			</div>
 			<% if policy(upload).update? %>
-				<button id="update-tags-btn" class="hidden btn">Update</button>		
+				<button id="update-tags-btn" class="hidden update-upload-button btn">Update</button>		
 				<%= link_to 'Edit Tags', edit_upload_path(upload), class: "js-link", id: "edit-tags-link", remote: true %>
 			<% end %>
 		</div>
@@ -37,7 +37,7 @@
 			</div>
 			<%= render 'perspective_form' %>
 			<% if policy(upload).update? %>
-				<button id="update-perspective-btn" class="hidden btn">Update</button>		
+				<button id="update-perspective-btn" class="hidden update-upload-button btn">Update</button>		
 				<%= link_to 'Edit Perspective', edit_upload_path(upload), class: "js-link", id: "edit-perspective-link", remote: true %>
 			<% end %>
 		</div>
@@ -49,7 +49,7 @@
 			</div>
 			<%= render 'category_form' %>
 			<% if policy(upload).update? %>
-				<button id="update-category-btn" class="hidden btn">Update</button>		
+				<button id="update-category-btn" class="hidden btn update-upload-button">Update</button>		
 				<%= link_to 'Edit Category', edit_upload_path(upload), class: "js-link", id: "edit-category-link", remote: true %>
 			<% end %>
 		</div>
