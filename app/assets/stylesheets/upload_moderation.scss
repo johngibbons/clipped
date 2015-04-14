@@ -7,7 +7,11 @@
 }
 
 .unapproved {
-	border: 2px solid lighten($action-color, 40%);
+	border: 1px solid lighten($action-color, 40%);
 	background-color: lighten($action-color, 45%);
 	box-shadow: 0 1px 2px 0 lighten($action-color, 45%);
+
+	&.card.gray {
+		background-color: lighten($action-color, 45%);
+	}
 }

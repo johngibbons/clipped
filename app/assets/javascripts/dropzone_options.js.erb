@@ -8,8 +8,7 @@ $('.uploads.new').ready(function () {
 			var taglist = $(n).find(".tag-data");
 			getTags(taglist);
 		  tags = getTags(taglist.get());
-		  perspective_val = $(n).find( "#x-ignore-perspective" ).val();
-	    $.post( "/uploads", { upload: {direct_upload_url: url, tag_list: tags, perspective: perspective_val} });		
+	    $.post( "/uploads", { upload: {direct_upload_url: url, tag_list: tags } });		
 	  });
 	});
 

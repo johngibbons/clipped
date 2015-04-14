@@ -1,7 +1,7 @@
-<%= form_tag search_index_path, :method => :get do %>
+<% present(@query, QueryPresenter) do |query| %>
   <div class="dropdown">
     <div class="dropdown-container">
-	    <p class="dropdown-button">Filter</p>
+      <p class="dropdown-button">Filter</p>
       <ul class="dropdown-menu dropdown-select">
       	<li id="results-filter-heading">
       		<p>Filter</p>
@@ -12,14 +12,13 @@
       	</li>
       	<ul class="results-subfilter-items">
     			<% for row in @search.facet(:category_id).rows %>
-						<li>
-							<% if params[:category_id].blank? %>
-			          <%= link_to Upload.category_name(row.value), :category_id => row.value %> (<%= row.count %>)
-			        <% else %>
-			          <strong><%= Upload.category_name(row.value) %></strong>(<%= link_to "remove", :category_id => nil %>)
-			        <% end %>
-						</li>
-					<% end %>
+              <li>
+                <%= Upload.category_name(row.value) %><%= link_to "(remove)", params.delete_if {|key, value| key == row.value} %>
+              </li>
+  						<li>
+  		          <%= link_to Upload.category_name(row.value), query.add("category_id", row.value) %> (<%= row.count %>)
+  						</li>
+  				<% end %>
     		</ul>
       	<li id="perspective-filter" class="results-subfilter">
       		<a href="javascript:void(0)">Perspective</a>
@@ -27,15 +26,12 @@
       	<ul class="results-subfilter-items">
     			<% for row in @search.facet(:perspective_id).rows %>
       			<li>
-      				<% if params[:perspective_id].blank? %>
-				        <%= link_to Upload.perspective_name(row.value), :perspective_id => row.value %> (<%= row.count %>)
-				      <% else %>
-				        <strong><%= Upload.perspective_name(row.value) %></strong> (<%= link_to "remove", :perspective_id => nil %>)
-				      <% end %>
+  		        <%= link_to Upload.perspective_name(row.value), params.merge({ :perspective_id => row.value }) %> (<%= row.count %>)
       			</li>
-					<% end %>
+  				<% end %>
     		</ul>
-			</ul>
-		</div>
-	</div>
+  		</ul>
+  	</div>
+  </div>
+
 <% end %>

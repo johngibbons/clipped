@@ -1,26 +1,26 @@
 <div class="full-container">
 
-<% if @uploads %>
+	<% if @uploads %>
 
-<section id="uploads-results-count" class="mobile-filter">
-  <p><%= pluralize(@total_results, "Result") %></p>
-</section>
+	<section id="uploads-results-count" class="mobile-filter">
+	  <p><%= pluralize(@total_results, "Result") %></p>
+	</section>
 
-<section id="uploads-index-filter" class="mobile-filter">
-  <%= render 'search/upload_results_filter_form' %>
-</section>
+	<section id="uploads-index-filter" class="mobile-filter">
+	  <%= render 'search/upload_results_filter_form' %>
+	</section>
 
-<section id="uploads-search-results" class="flex-container">
-	<%= render @uploads %>
-	<% 6.times do %>
-		<div class="upload"></div>
+	<section id="uploads-search-results" class="flex-container">
+		<%= render @uploads %>
+		<% 6.times do %>
+			<div class="upload"></div>
+		<% end %>
+	</section>
+	<%= will_paginate @uploads%>
+
+	<% else %>
+
+		<h6>No results for: <%= @query %></h6>
+
 	<% end %>
-</section>
-<%= will_paginate @uploads%>
-
-<% else %>
-
-	<h6>No results for: <%= @query %></h6>
-
-<% end %>
 </div>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout "uploads_index", only: :show
+  layout "no_container", only: :show
 
   def new
     @user = User.new

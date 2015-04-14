@@ -32,7 +32,7 @@
 
 		<div class="upload-perspective card">
 			<h2 class="title">Perspective</h2>
-			<div class="perspective" id="selected-perspective">
+			<div class="perspective upload-show-attr" id="selected-perspective">
 				<%= link_to upload.perspective.humanize, search_index_path(perspective_id: Upload.perspectives[upload.perspective], perspective: upload.perspective), class: "perspective" %>
 			</div>
 			<%= render 'perspective_form' %>
@@ -44,7 +44,7 @@
 
 		<div class="upload-category card">
 			<h2 class="title">Category</h2>
-			<div class="category" id="selected-category">
+			<div class="category upload-show-attr" id="selected-category">
 				<%= link_to upload.category.humanize, search_index_path(category_id: Upload.categories[upload.category], category: upload.category), class: "category" %>
 			</div>
 			<%= render 'category_form' %>

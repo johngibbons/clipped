@@ -25,18 +25,18 @@ h6 {
   font-family: $heading-font-family;
   font-size: $base-font-size;
   line-height: $heading-line-height;
-  font-weight: 600;
+  font-weight: 500;
   text-rendering: optimizeLegibility;
 }
 
 h1 {
   font-size: $base-font-size * 3;
-  font-weight: 200;
   padding: 1em 0;
-  text-align: center;
 
-  @include media($tablet) {
-    text-align: left;
+  &.cta {
+    font-weight: 300;
+    font-family: $omnes;
+    font-size: $base-font-size * 3;
   }
 }
 
@@ -46,11 +46,7 @@ h2 {
   color: $base-font-color;
   letter-spacing: 2px;
   font-size: $base-font-size;
-  text-align: center;
-
-  @include media($tablet) {
-    text-align: left;
-  }
+  font-weight: 600;
 
   &.section-head {
 

@@ -29,24 +29,30 @@ header.home {
 
 	@include media($tablet) {
 		@include span-columns(8);
-		padding: 8em 0;
+		padding: 3em 0 8em 0;
 	}
 
 	@include media($desktop) {
 		@include span-columns(12);
 	}
 
-	h1 {
+	h1.cta {
+		font-size: 2.2em;
 		text-align: center;
-	  padding: 0;
+	  padding: 0 0 0.5em 0;
 	  margin: 0 0 1em 0;
+	  color: lighten($base-font-color, 30%);
 	}
 
 }
 
-section#home-banner {
+#home-banner {
 	// background: url("entryRender-web.jpg") center center;
 	// background-size: cover;
+	h1 {
+		text-align: center;
+		padding: 2em 0 0 0;
+	}
 }
 
 .home {
