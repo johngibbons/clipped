@@ -1,1 +1,1 @@
-<%= link_to tag.name, tag_path(tag.name), class: "tag" %>
+<%= link_to tag.name, {controller: "search", search: tag.name}, class: "tag" %>

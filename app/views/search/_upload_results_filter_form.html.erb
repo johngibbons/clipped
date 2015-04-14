@@ -1,22 +1,18 @@
-<% present(@query, QueryPresenter) do |query| %>
   <div class="dropdown">
     <div class="dropdown-container">
       <p class="dropdown-button">Filter</p>
       <ul class="dropdown-menu dropdown-select">
       	<li id="results-filter-heading">
       		<p>Filter</p>
-      		<a href="javascript:void(0)">Clear all</a>
+      		<%= link_to "Clear All", query.merge({category_id: nil, perspective_id: nil}) %>
       	</li>
       	<li id="category-filter" class="results-subfilter">
       		<a href="javascript:void(0)">Category</a>
       	</li>
       	<ul class="results-subfilter-items">
     			<% for row in @search.facet(:category_id).rows %>
-              <li>
-                <%= Upload.category_name(row.value) %><%= link_to "(remove)", params.delete_if {|key, value| key == row.value} %>
-              </li>
   						<li>
-  		          <%= link_to Upload.category_name(row.value), query.add("category_id", row.value) %> (<%= row.count %>)
+  		          <%= link_to Upload.category_id_name(row.value), query.toggle("category_id", row.value) %> (<%= row.count %>)
   						</li>
   				<% end %>
     		</ul>
@@ -26,12 +22,10 @@
       	<ul class="results-subfilter-items">
     			<% for row in @search.facet(:perspective_id).rows %>
       			<li>
-  		        <%= link_to Upload.perspective_name(row.value), params.merge({ :perspective_id => row.value }) %> (<%= row.count %>)
+  		        <%= link_to Upload.perspective_id_name(row.value), query.toggle("perspective_id", row.value) %> (<%= row.count %>)
       			</li>
   				<% end %>
     		</ul>
   		</ul>
   	</div>
   </div>
-
-<% end %>

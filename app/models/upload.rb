@@ -127,14 +127,14 @@ class Upload < ActiveRecord::Base
       Upload.where(category: categories)
     end
 
-    def perspective_name(int)
+    def perspective_id_name(int)
       name = Upload.perspectives.map do |key, value|
         key.humanize
       end
       return name[int]
     end
 
-    def category_name(int)
+    def category_id_name(int)
       name = Upload.categories.map do |key, value|
         key.humanize
       end
