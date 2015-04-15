@@ -6,10 +6,11 @@
 
 		<section id="uploads-results-count" class="mobile-filter">
 		  <p><%= raw query.query_text(@total_results) %></p>
+		  <%= render partial: 'upload_results_sort_form', locals: { query: query } %>
 		</section>
 
 		<section id="uploads-index-filter" class="mobile-filter">
-		  <%= render partial: 'search/upload_results_filter_form', locals: { query: query } %>
+		  <%= render partial: 'upload_results_filter_form', locals: { query: query } %>
 		</section>
 
 		<section id="uploads-search-results" class="flex-container">

@@ -1,0 +1,8 @@
+<div id="sort-dropdown">
+	<%= form_tag search_index_path, :method => :get do %>
+		<%= hidden_field_tag "category_id", query[:category_id] if query[:category_id].present? %> 
+		<%= hidden_field_tag "perspective_id", query[:perspective_id] if query[:perspective_id].present? %>
+		<%= hidden_field_tag "search", query[:search] if query[:search].present? %>
+		<p>Sort By:</p> <%= select_tag "sort_uploads", options_for_select(Upload.sort_options, query[:sort_uploads]) %>
+	<% end %>
+</div>

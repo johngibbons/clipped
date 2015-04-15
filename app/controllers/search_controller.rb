@@ -15,6 +15,7 @@ class SearchController < ApplicationController
           minimum_match 1
         end
       end
+      order_by params[:sort_uploads], :desc if params[:sort_uploads].present?
       facet :perspective_id, limit: -1, exclude: perspective_filter
       facet :category_id, limit: -1, exclude: category_filter
       paginate page: params[:page], per_page: 30

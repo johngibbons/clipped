@@ -51,7 +51,7 @@
 }
 
 .upload {
-  flex: 1 1 150px;
+  flex: 1 1 14%;
   margin: 20px 0 0 20px;
   position: relative;
   height: 100%;
@@ -97,6 +97,38 @@
     background-color: transparent;
     box-shadow: $card-shadow;
     padding-left: 4em;
+
+    p {
+      float: left;
+    }
+
+    &:after {
+      content: "";
+      clear: both;
+      display: block;
+    }
+  }
+}
+
+#sort-dropdown {
+  display: none;
+
+  @include media($desktop) {
+    float: right;
+    display: block;
+    width: 15%;
+    margin-right: 3em;
+
+    p {
+      display: inline-block;
+      width: 25%;
+    }
+
+    select {
+      width: 70%;
+      margin: 0.9em 0;
+      display: inline-block;
+    }
   }
 }
 

@@ -120,3 +120,9 @@ $(function(){
     $(this).next().slideToggle(100);
   });
 });
+
+$(function() {
+    $('#sort_uploads').change(function() {
+        this.form.submit();
+    });
+});

@@ -14,6 +14,7 @@ class Upload < ActiveRecord::Base
     boolean :approved
     integer :perspective_id
     integer :category_id
+    double :weighted_score
     time :created_at
   end
   handle_asynchronously :solr_index
@@ -116,6 +117,10 @@ class Upload < ActiveRecord::Base
         [k.humanize, k]
       end
       return a
+    end
+
+    def sort_options
+      {Relevance: "", Newest: "created_at", Popularity: "weighted_score"}
     end
 
     # def perspective_choices
