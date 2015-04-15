@@ -254,6 +254,42 @@
     }
   }
 
+  .filter-checkbox {
+    font-size: 0.8em;
+    vertical-align: baseline;
+    padding-right: 0.5em;
+    color: $white;
+
+    @include media($desktop) {
+      color: $lightest-gray;
+    }
+
+    &.checked {
+      color: $action-color;
+    }
+  }
+
+  .results-count {
+
+  }
+
+  .filters-text {
+    font-weight: 700;
+  }
+
+  .search-text {
+    color: $action-color;
+    font-weight: 700;
+  }
+
+  .selected {
+    font-weight: 700;
+    color: $action-color;
+  }
+
+  .unselected {
+  }
+
   .dropdown-button {
     @include media($desktop) {
       display: none;

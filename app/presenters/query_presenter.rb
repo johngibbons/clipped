@@ -1,27 +1,58 @@
 class QueryPresenter < BasePresenter
 
-  def toggle(param, param_value)
-    @param = param
-    @param_value = param_value.to_s
-    @param_current = get
+  def init(query_name, query_value)
+    @query_name = query_name
+    @query_value = query_value.to_s
+    @current_value = get_current(@query_name)
     #generate copy of current params but don't affect current
-    @param_new = Marshal.load(Marshal.dump(@param_current))
-    if in_params?
-      remove
+    @current_value_copy = Marshal.load(Marshal.dump(@current_value))
+  end
+
+  def toggle
+    if in_params?(@query_value)
+      remove(@query_value)
     else
-      add
+      add(@query_value)
     end
   end
 
   def query_text(total_results)
-    "<span class='results-count'>#{h.pluralize(total_results, 'result')} for </span> <span class='filters-text'>#{param_to_text('category_id')} #{param_to_text('perspective_id')}</span> <span class='search-text'>\"#{@model[:search]}\"</span>"
+    if @model[:search] && @model[:search] != ""
+      "<span class='results-count'>#{h.pluralize(total_results, 'result')} for </span> <span class='filters-text'>#{param_to_text('category_id')} #{param_to_text('perspective_id')}</span> <span class='search-text'>\"#{@model[:search]}\"</span>"
+    else
+      "<span class='results-count'>#{h.pluralize(total_results, 'result')} </span> <span class='filters-text'>#{param_to_text('category_id')} #{param_to_text('perspective_id')}</span>"
+    end
+  end
+
+  def status
+    if in_params?(@query_value)
+      "selected"
+    else
+      "unselected"
+    end
+  end
+
+  def icon
+    if in_params?(@query_value)
+      "filter-checkbox checked fa fa-check-square"
+    else
+      "filter-checkbox unchecked fa fa-square"
+    end
+  end
+
+  def count(value)
+    if in_params?(@query_value)
+      ""
+    else
+      "(#{value})"
+    end
   end
 
   private
 
-    def get
+    def get_current(name)
       # always return an array
-      p = @model["#{@param}"]
+      p = @model["#{name}"]
       if p.is_a? String
         p = [p]
       else
@@ -29,24 +60,23 @@ class QueryPresenter < BasePresenter
       end
     end
 
-    def add
-      @param_new.push(@param_value)
-      @model.merge({ "#{@param}" => @param_new })
+    def add(value)
+      @current_value_copy.push(value)
+      @model.merge({ "#{@query_name}" => @current_value_copy })
     end
 
-    def remove
-      @param_new.delete(@param_value)
-      @model.merge({ "#{@param}" => @param_new })
+    def remove(value)
+      @current_value_copy.delete(value)
+      @model.merge({ "#{@query_name}" => @current_value_copy })
     end
 
-    def in_params?
-      @param_current.include? @param_value
+    def in_params?(value)
+      @current_value.include? value
     end
 
     def param_to_text(param)
-      @param = param
-      @param_current = get
-      names = @param_current.map do |val|
+      values = get_current(param)
+      names = values.map do |val|
         Upload.send("#{param}_name", val.to_i)
       end
       if names.any?

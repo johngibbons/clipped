@@ -22,7 +22,7 @@ class Upload < ActiveRecord::Base
   validates :user_id, presence: true
 
   enum perspective: [ :not_applicable, :front, :side_front, :side, :side_back, :back, :above, :below ]
-  enum category: [:uncategorized, :people, :animals, :plants, :objects]
+  enum category: [:uncategorized, :people, :animals, :plants, :vehicles, :objects]
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)

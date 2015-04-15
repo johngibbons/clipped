@@ -12,7 +12,11 @@
       	<ul class="results-subfilter-items">
     			<% for row in @search.facet(:category_id).rows %>
   						<li>
-  		          <%= link_to Upload.category_id_name(row.value), query.toggle("category_id", row.value) %> (<%= row.count %>)
+                <% query.init("category_id", row.value) %>
+  		          <%= link_to query.toggle, class: query.status do %>
+                <i class="<%= query.icon %>"></i><%=  Upload.category_id_name(row.value) %>
+              <% end %>
+              <%= query.count(row.count) %>
   						</li>
   				<% end %>
     		</ul>
@@ -22,7 +26,11 @@
       	<ul class="results-subfilter-items">
     			<% for row in @search.facet(:perspective_id).rows %>
       			<li>
-  		        <%= link_to Upload.perspective_id_name(row.value), query.toggle("perspective_id", row.value) %> (<%= row.count %>)
+              <% query.init("perspective_id", row.value) %>
+  		        <%= link_to query.toggle, class: query.status do %>
+                <i class="<%= query.icon %>"></i><%=  Upload.perspective_id_name(row.value) %>
+              <% end %>
+              <%= query.count(row.count) %>
       			</li>
   				<% end %>
     		</ul>

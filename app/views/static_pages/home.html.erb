@@ -16,7 +16,7 @@
 	<div class="container">
 		<div id="home-uploads">
 			<h2 class="section-head">Featured</h2>
-			<%= link_to "(browse all)", uploads_path, class: "more-link" %>
+			<%= link_to "(browse all)", search_index_path, class: "more-link" %>
 			<div class="most-popular-uploads flex-container">
 			<% if @most_popular.any? %>
 			  <%= render @most_popular %>
