@@ -8,6 +8,15 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
+
+  searchable do
+    text :name
+    text :email
+    boolean :activated
+    double :weighted_score
+    time :created_at
+  end
+  handle_asynchronously :solr_index
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
@@ -156,6 +165,30 @@ class User < ActiveRecord::Base
       count += upload.downloads
     end
     count
+  end
+
+  def weighted_score
+    total_views = User.sum(total_user_views).to_f
+    total_downloads = Upload.sum(total_user_downloads).to_f
+    total_likes = Upload.sum(total_user_likes).to_f
+
+    views_percent     = total_user_views/total_views
+    downloads_percent = total_user_downloads/total_downloads
+    likes_percent     = total_user_likes/total_likes
+
+    if total_views == 0
+      views_percent = 0
+    end
+
+    if total_downloads == 0
+      downloads_percent = 0
+    end
+
+    if total_likes == 0
+      likes_percent = 0
+    end
+
+    BigDecimal(0.2 * (views_percent) * 100 + 0.5 * (downloads_percent) * 100 + 0.3 * (likes_percent) * 100, 10)
   end
 
   def upload_owner?(upload)

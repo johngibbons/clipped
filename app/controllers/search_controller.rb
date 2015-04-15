@@ -4,12 +4,12 @@ class SearchController < ApplicationController
     #if no perspective, set to empty hash so solr skips
     params[:perspective_id] ||= []
     params[:category_id] ||= []
+    params[:search] = params[:tag] if params[:tag].present?
     
     @search = Upload.search do
       with :approved, true
       perspective_filter = with :perspective_id, params[:perspective_id] if params[:perspective_id].present?
       category_filter = with :category_id, params[:category_id] if params[:category_id].present?
-      fulltext params[:tag] if params[:tag].present?
       if params[:search].present?
         fulltext params[:search] do
           minimum_match 1

@@ -8,8 +8,8 @@
       <ul id="js-navigation-menu" class="navigation-menu show">
         <li class="nav-link more"><a href="javascript:void(0)">Browse</a>
           <ul class="submenu">
-            <li class="nav-link"><%= link_to "Most Popular", search_index_path %></li>
-            <li class="nav-link"><%= link_to "Newest", search_index_path %></li>
+            <li class="nav-link"><%= link_to "Most Popular", controller: "search", action: "index", sort_uploads: "weighted_score" %></li>
+            <li class="nav-link"><%= link_to "Newest", controller: "search", action: "index", sort_uploads: "created_at" %></li>
           </ul>
         </li>
 		    <li class="nav-link"><%= link_to "About", about_path %></li>
