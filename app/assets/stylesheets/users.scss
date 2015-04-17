@@ -120,3 +120,22 @@
     }
   }
 }
+
+#user-sort-tabs {
+	a {
+		padding: 0.5em 1em;
+		background-color: $white;
+		vertical-align: super;
+		position: relative;
+
+		&.active {
+			border: $base-border;
+			border-bottom-color: $white;
+		}
+	}
+}
+
+#users-index-container {
+	padding-top: 3em;
+	border-top: $base-border;
+}

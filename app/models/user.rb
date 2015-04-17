@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
       SecureRandom.urlsafe_base64
     end
 
+    def sort_options
+      { Newest: "created_at", Popularity: "weighted_score" }
+    end
+
   end
 
   def cropping?

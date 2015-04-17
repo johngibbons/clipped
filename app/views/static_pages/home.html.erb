@@ -27,6 +27,7 @@
 <section id="home-users">
 	<div class="container no-pad not-top">
 		<h2 class="section-head">Top Clippers</h2>
+		<%= link_to "(browse all)", users_path(sort_users: "weighted_score"), class: "more-link" %>
 		<div class="users top-clippers-home">
 			<%= render @users %>
 		</div>
