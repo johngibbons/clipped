@@ -1,5 +1,25 @@
-<div class="user-thumb">
-  <%= link_to user do %>
-    <%= image_tag user.avatar.url(:profile), class: "avatar" %>
-  <% end %>
-</div>
+<%= link_to user, class: "user-thumb" do %>
+	<div class="card">
+	    <%= image_tag user.avatar.url(:profile), class: "avatar" %>
+	    <p class="user-thumb-name"><%= user.name %></p>
+
+	    <table class="user-thumb-stats">
+		    <tr>
+			    <td class="stats-label">Uploads: </td>
+			    <td class="stats-val"><%= user.uploads.count %></td>
+		    </tr>
+		    <tr>
+			    <td class="stats-label">Favorited: </td>
+			    <td class="stats-val"><%= user.total_user_likes %></td>
+		    </tr>
+		    <tr>
+			    <td class="stats-label">Downloaded: </td>
+			    <td class="stats-val"><%= user.total_user_downloads %></td>
+		    </tr>
+		    <tr>
+			    <td class="stats-label">Viewed: </td>
+			    <td class="stats-val"><%= user.total_user_views %></td>
+		    </tr>
+	    </table>
+	</div>
+<% end %>

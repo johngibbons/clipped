@@ -66,18 +66,57 @@
 }
 
 .user-thumb {
-	@include span-columns(4 of 4);
+	display: block;
+	position: relative;
+	top: 0;
+	width: 75%;
+	margin: 0 auto;
+	transition: all 0.2s ease-in-out;
+	margin-bottom: $gutter();
+
+	&:hover {
+		top: -7px;
+	}
+
+	.card {
+		text-align: left;
+	}
 
 	img {
 		display: block;
-		margin: 0 auto 2em;
-	}
-
-	@include media($tablet) {
-		@include span-columns(4 of 12);
+		margin: 0 auto 1em;
 	}
 
 	@include media($desktop) {
 		@include span-columns(3 of 15);
 	}
+ 
+  .user-thumb-name {
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .user-thumb-stats {
+    color: $base-font-color;
+
+    td {
+    	margin: 0;
+    	padding: 0;
+    	border-bottom: none;
+
+    	@include media($tablet) {
+	    	font-size: 0.8em;
+    	}
+    }
+
+    .stats-label {
+    	width: 60%;
+    }
+
+    .stats-val {
+    	width: 40%;
+    	text-align: right;
+    	font-weight: 700;
+    }
+  }
 }
