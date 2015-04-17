@@ -8,12 +8,12 @@
   margin-bottom: $gutter;
 
   img {
-    with: auto;
+    width: auto;
     height: auto;
     max-height: 100%;
     max-width: 100%;
     position: absolute;
-    padding: 25px;
+    padding: 1em 1em 4em 1em;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -44,12 +44,6 @@
   }
 }
 
-.upload-show-attr {
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
 .upload {
   flex: 1 1 14%;
   margin: 20px 0 0 20px;
@@ -63,13 +57,51 @@
   }
 }
 
-.upload-interaction {
-  display: inline-block;
-  text-align: center;
+.upload-clipper {
+
+  .media-figure {
+    width: 35%;
+  }
+  .avatar {
+    width: 100%;
+    border: 2px solid $lightest-gray;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .clipper-name {
+    font-weight: 700;
+  }
+}
+
+#upload-show-details-table {
+  td {
+    border-bottom: none;
+    padding: 0;
+  }
+}
+
+.detail-val {
+  font-weight: 700;
+}
+
+#upload-single-interactions {
+  position: absolute;
+  bottom: 0.5em;
+  right: 1em;
+
+  .upload-interaction {
+    display: inline-block;
+  }
 }
 
 .js-link {
   font-size: 0.8em;
+  font-weight: 300;
+  text-transform: none;
 }
 
 .uploads.show {

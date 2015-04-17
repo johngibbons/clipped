@@ -64,3 +64,20 @@
 #cropbox {
 	display:none;
 }
+
+.user-thumb {
+	@include span-columns(4 of 4);
+
+	img {
+		display: block;
+		margin: 0 auto 2em;
+	}
+
+	@include media($tablet) {
+		@include span-columns(4 of 12);
+	}
+
+	@include media($desktop) {
+		@include span-columns(3 of 15);
+	}
+}

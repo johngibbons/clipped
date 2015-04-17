@@ -2,18 +2,25 @@
 
 	<%= content_tag :div, class: "upload-single card gray #{upload.approval_class}" do -%>
 		<%= image_tag upload.src(:large) %>
+		<div id="upload-single-interactions">
+			<%= render 'relationships/like_form' if logged_in? %>
+			<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
+			<%= render partial: 'delete_form', locals: {upload: upload} %>
+	  </div>
 	<% end -%>
 
 	<div class="upload-info">
-		<div class="upload-stats card">
-			<h2 class="title">Stats</h2>
-			<div class="single-upload-stats stats">
-		    <ul>
-					<li><%= upload.views %><span>Views</span></li>
-					<li><span id="downloads"><%= upload.downloads %></span><span>Downloads</span></li>
-					<li><span id="likes"><%= upload.likes_count %></span><span>Likes</span></li>
-		    </ul>
-		  </div>
+		<div class="upload-clipper card">
+			<h2 class="title">Clipper</h2>
+			<div class="media-object">
+				<%= link_to user_path(upload.user), class: "media-figure" do %>
+					<%= image_tag upload.clipper_avatar, class: "avatar" %>
+				<% end %>
+				<div id="upload-clipper-info media-body">
+					<p class="clipper-name"><%= link_to upload.user.name, user_path(upload.user) %></p>
+					<p class="clipper-upload-count"><%= pluralize(upload.user.uploads.count, "upload") %></p>
+				</div>
+			</div>
 	  </div>
 
 	  <div class="upload-tags card">
@@ -30,45 +37,47 @@
 			<% end %>
 		</div>
 
-		<div class="upload-perspective card">
-			<h2 class="title">Perspective</h2>
-			<div class="perspective upload-show-attr" id="selected-perspective">
-				<%= link_to upload.perspective.humanize, search_index_path(perspective_id: Upload.perspectives[upload.perspective], perspective: upload.perspective), class: "perspective" %>
+		<div class="upload-details card">
+			<h2 class="title">Details</h2>
+			<table id="upload-show-details-table">
+				<tbody>
+					<tr>
+						<td>Perspective:</td>
+						<td class="detail-val"><%= link_to upload.perspective.humanize, search_index_path(perspective_id: Upload.perspectives[upload.perspective], perspective: upload.perspective), class: "attr-link" %><%= render 'perspective_form' %>
+						</td>
+					</tr>
+					<tr>
+						<td>Category:</td>
+						<td class="detail-val"><%= link_to upload.category.humanize, search_index_path(category_id: Upload.categories[upload.category], category: upload.category), class: "attr-link" %><%= render 'category_form' %></td>
+					</tr>
+					<tr>
+						<td>Views:</td>
+						<td class="detail-val"><%= upload.views %></td>
+					</tr>
+					<tr>
+						<td>Downloads:</td>
+						<td class="detail-val"><%= upload.downloads %></td>
+					</tr>
+					<tr>
+						<td>Favorited:</td>
+						<td class="detail-val"><%= upload.likes_count %></td>
+					</tr>
+					<tr>
+						<td>Uploaded:</td>
+						<td class="detail-val"><%= time_ago_in_words(upload.created_at) %> ago</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="category upload-show-detail" id="selected-category">
+				<% if policy(upload).update? %>
+					<button id="update-category-btn" class="hidden btn update-upload-button">Update</button>		
+					<%= link_to 'Edit', edit_upload_path(upload), class: "js-link", id: "edit-category-link", remote: true %>
+				<% end %>
 			</div>
-			<%= render 'perspective_form' %>
-			<% if policy(upload).update? %>
-				<button id="update-perspective-btn" class="hidden update-upload-button btn">Update</button>		
-				<%= link_to 'Edit Perspective', edit_upload_path(upload), class: "js-link", id: "edit-perspective-link", remote: true %>
-			<% end %>
 		</div>
 
-		<div class="upload-category card">
-			<h2 class="title">Category</h2>
-			<div class="category upload-show-attr" id="selected-category">
-				<%= link_to upload.category.humanize, search_index_path(category_id: Upload.categories[upload.category], category: upload.category), class: "category" %>
-			</div>
-			<%= render 'category_form' %>
-			<% if policy(upload).update? %>
-				<button id="update-category-btn" class="hidden btn update-upload-button">Update</button>		
-				<%= link_to 'Edit Category', edit_upload_path(upload), class: "js-link", id: "edit-category-link", remote: true %>
-			<% end %>
-		</div>
-
-		  
-
-		<div class="upload-interaction card">
-			<h2 class="title">Download</h2>
+		<div id="upload-download" class="card">
 			<%= render partial: "download", locals: {upload: @upload} %>
-			<%= render 'relationships/like_form' if logged_in? %>
-			<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
-			<% if current_user.admin? %>
-				<%= form_for upload, method: :delete, html: {class: "upload-interaction", data: { confirm: "You sure?" }} do |f| %>
-				  <%= hidden_field_tag :approved, true %>
-					<%= f.button class: "icon" do %>
-						<i class="fa fa-ban fa-lg"></i>
-					<% end %>
-				<% end %>			  
-		  <% end %>
   		</div>
 	</div>
 

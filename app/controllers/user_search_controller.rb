@@ -17,7 +17,7 @@ class UserSearchController < ApplicationController
     end
 
     @users = @user_search.results
-    @total_results = @search.total
+    @total_results = @user_search.total
     # create a deep clone of params for manipulation in view
     @user_query = Marshal.load(Marshal.dump(params))
   end

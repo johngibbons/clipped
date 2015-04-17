@@ -1,4 +1,3 @@
 <%= form_for @upload, method: :patch, html: { class: "perspective edit-upload-form hidden", id: "update-perspective-form" }, remote: true do |f| %>
-	<%= f.select :perspective, options_for_select(Upload.perspective_array) %>
-	<%= f.submit "Update Perspective"%>
+	<%= f.select :perspective, options_for_select(Upload.perspective_array, @upload.perspective) %>
 <% end %>

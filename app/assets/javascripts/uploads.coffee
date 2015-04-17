@@ -1,7 +1,8 @@
 $ ->
   $(".js-link").click ->
+    card = $(@).closest(".card")
     $(@).addClass("hidden")
-    $(@).closest(".card").find(".edit-upload-form").removeClass("hidden")
+    card.find(".edit-upload-form").removeClass("hidden").prev(".attr-link").addClass("hidden")
 
     if $(@).is("#edit-tags-link")
       $(".tags-list").addClass("update")

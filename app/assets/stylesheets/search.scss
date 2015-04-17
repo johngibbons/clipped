@@ -171,58 +171,56 @@
 
 }
 
-.container {
-  form {
-    input[type=search] {
-      padding: 0.5em;
-      font-weight: 700;
-      color: $clipped-pink;
-      position: relative;
-      display: block;
-      position: relative;
-      transition: all 0.2s ease-in-out;
-      margin: 0 auto;
-      box-shadow: none;
-      width: 100%;
-      height: auto;
+#home-search-form {
+  input[type=search] {
+    padding: 0.5em;
+    font-weight: 700;
+    color: $clipped-pink;
+    position: relative;
+    display: block;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    margin: 0 auto;
+    box-shadow: none;
+    width: 100%;
+    height: auto;
 
-      &:focus {
-        + button {
-          .fa {
-            color: $action-color;
-          }
-        }
-      }
-
-      @include media($desktop) {
-        padding: 8px;
-      }
-    }
-
-    input[type=submit] {
-      margin-bottom: 3em;
-    }
-
-    button {
-      &.icon {
-        position: absolute;
-        top: -1.05em;
-        font-size: 1.25em;
-        width: auto;
-        right: 5px;
-        margin-right:0;
-
+    &:focus {
+      + button {
         .fa {
-          transition: all 0.2s ease-in-out;
-          color: $lightest-gray;
+          color: $action-color;
         }
       }
     }
 
-    .mobile-submit {
-      @include media($tablet) {
-        display:none;
+    @include media($desktop) {
+      padding: 8px;
+    }
+  }
+
+  input[type=submit] {
+    margin-bottom: 3em;
+  }
+
+  button {
+    &.icon {
+      position: absolute;
+      top: -1.05em;
+      font-size: 1.25em;
+      width: auto;
+      right: 5px;
+      margin-right:0;
+
+      .fa {
+        transition: all 0.2s ease-in-out;
+        color: $lightest-gray;
       }
+    }
+  }
+
+  .mobile-submit {
+    @include media($tablet) {
+      display:none;
     }
   }
 }

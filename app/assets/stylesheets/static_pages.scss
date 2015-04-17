@@ -57,6 +57,16 @@ header.home {
 
 .home {
 	section {
+		padding:2rem 0;
+
+		.section-head {
+			text-align: center;
+			padding-bottom: 2rem;
+
+			@include media($tablet) {
+				text-align: left;
+			}
+		}
 	}
 
 	.search-filter {
@@ -74,7 +84,7 @@ header.home {
 }
 
 #home-uploads {
-	@include span-columns(4);
+	background-color: $lightest-gray;
 	text-align: center;
 
 	@include media($tablet) {
@@ -84,9 +94,21 @@ header.home {
 	h2 {
 		display: inline-block;
 	}
+
+	.upload {
+		margin: auto;
+		flex: none;
+		margin-bottom: $gutter();
+
+		@include media($tablet) {
+			@include span-columns(1 of 5);
+			@include omega(5n);
+		}
+	}
 }
 
 #home-tags {
+	background-color: $lightest-gray;
 	.container {
 		margin-top: 0;
 	}

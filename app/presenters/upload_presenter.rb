@@ -30,4 +30,9 @@ class UploadPresenter < BasePresenter
     end
   end
 
+  def clipper_avatar
+    user = @model.user
+    user.avatar.url(:profile)
+  end
+
 end

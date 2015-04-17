@@ -1,0 +1,10 @@
+<div id="upload-delete-form" class="upload-interaction">
+	<% if current_user.admin? %>
+		<%= form_for upload, method: :delete, html: {class: "upload-interaction", data: { confirm: "You sure?" }} do |f| %>
+		  <%= hidden_field_tag :approved, true %>
+			<%= f.button class: "icon" do %>
+				<i class="fa fa-ban fa-lg"></i>
+			<% end %>
+		<% end %>			  
+	<% end %>
+</div>

@@ -49,6 +49,10 @@ main {
 	padding-bottom: 0;
 }
 
+.container.not-top {
+	margin-top: 0;
+}
+
 .full-container {
 	@include outer-container(100%);
 }
@@ -64,4 +68,17 @@ aside {
 .flex-container {
   display: flex;
   flex-flow: row wrap;
+}
+
+.media-object {
+	display: flex;
+	align-items: center;
+}
+
+.media-figure {
+	margin-right: 1em;
+}
+
+.media-body {
+	flex: 1;
 }

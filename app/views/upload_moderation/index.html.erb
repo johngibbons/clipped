@@ -1,5 +1,5 @@
 <% if @uploads.any? %>
-  <div class="uploads-moderation">
+  <div class="uploads-moderation flex-container">
     <%= render @uploads %>
   </div>
   <%= will_paginate @uploads%>
