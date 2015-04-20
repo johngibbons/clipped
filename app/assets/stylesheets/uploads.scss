@@ -88,6 +88,12 @@
   font-weight: 700;
 }
 
+#update-details-btn {
+  &.hidden {
+    display: none;
+  }
+}
+
 #upload-single-interactions {
   position: absolute;
   bottom: 0.5em;

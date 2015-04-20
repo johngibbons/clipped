@@ -14,6 +14,7 @@ class UsersController < ApplicationController
         end
       end
       order_by params[:sort_users], :desc if params[:sort_users].present?
+      order_by :created_at, :desc
       paginate page: params[:page], per_page: 30
     end
 

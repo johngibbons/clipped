@@ -1,3 +1,1 @@
-<%= form_for @upload, method: :patch, html: { class: "category edit-upload-form hidden", id: "update-category-form" }, remote: true do |f| %>
-	<%= f.select :category, options_for_select(Upload.category_array, @upload.category) %>
-<% end %>
+<%= f.select :category, options_for_select(Upload.category_array, @upload.category), {}, {class: "hidden edit-upload-form"} %>

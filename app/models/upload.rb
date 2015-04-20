@@ -57,30 +57,6 @@ class Upload < ActiveRecord::Base
     Upload.categories[self.category]
   end
 
-  def weighted_score
-      total_views = Upload.sum(views).to_f
-      total_downloads = Upload.sum(downloads).to_f
-      total_likes = Upload.sum(likes_count).to_f
-
-      views_percent     = views/total_views
-      downloads_percent = downloads/total_downloads
-      likes_percent     = likes_count/total_likes
-
-      if total_views == 0
-        views_percent = 0
-      end
-
-      if total_downloads == 0
-        downloads_percent = 0
-      end
-
-      if total_likes == 0
-        likes_percent = 0
-      end
-
-      score = BigDecimal(0.2 * (views_percent) * 100 + 0.5 * (downloads_percent) * 100 + 0.3 * (likes_percent) * 100, 10)
-  end
-
   def download_url
     s3 = AWS::S3.new
     bucket = s3.buckets[image.bucket_name]
@@ -91,15 +67,20 @@ class Upload < ActiveRecord::Base
     ).to_s
   end
 
+  def weighted_score
+    stats = ModelStatistics.new(self)
+    stats.composite_score_uploads
+  end
+
   class << self
 
     def sorted_by(attribute)
       Upload.all.reorder("#{attribute} DESC")
     end
 
-    def sorted_by_weighted_score
-      Upload.all.sort_by(&:weighted_score).reverse!
-    end
+    # def sorted_by_weighted_score
+    #   Upload.all.sort_by(&:weighted_score).reverse!
+    # end
 
     def perspective_collection(perspectives = [])
       Upload.where(perspective: perspectives)

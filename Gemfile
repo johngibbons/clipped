@@ -57,6 +57,7 @@ gem 'sunspot-rails-tester'
 gem "rack-timeout"
 gem "autoprefixer-rails"
 gem 'jcrop-rails-v2'
+gem 'descriptive-statistics'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -70,6 +71,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.0'
   gem 'database_cleaner', '~> 1.4.0'
+  gem 'faker'
 
 end
 
@@ -82,7 +84,6 @@ group :test do
   gem "capybara-webkit"
   gem "factory_girl_rails", "~> 4.0"
   gem 'launchy', '~> 2.4.3'
-  gem 'faker'
   gem 'vcr', '~> 2.9.3'
   gem 'webmock'
 end
