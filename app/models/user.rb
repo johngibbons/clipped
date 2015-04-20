@@ -172,27 +172,8 @@ class User < ActiveRecord::Base
   end
 
   def weighted_score
-    total_views = User.sum(total_user_views).to_f
-    total_downloads = Upload.sum(total_user_downloads).to_f
-    total_likes = Upload.sum(total_user_likes).to_f
-
-    views_percent     = total_user_views/total_views
-    downloads_percent = total_user_downloads/total_downloads
-    likes_percent     = total_user_likes/total_likes
-
-    if total_views == 0
-      views_percent = 0
-    end
-
-    if total_downloads == 0
-      downloads_percent = 0
-    end
-
-    if total_likes == 0
-      likes_percent = 0
-    end
-
-    BigDecimal(0.2 * (views_percent) * 100 + 0.5 * (downloads_percent) * 100 + 0.3 * (likes_percent) * 100, 10)
+    m = ModelStatistics.new(self)
+    m.composite_score_users
   end
 
   def upload_owner?(upload)

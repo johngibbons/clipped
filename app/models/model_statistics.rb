@@ -13,6 +13,54 @@ class ModelStatistics
     end
   end
 
+  def user_downloaded_vals
+    users = @klass.all
+    users.map do |user|
+      user.total_user_downloads
+    end
+  end
+
+  def user_views_vals
+    users = @klass.all
+    users.map do |user|
+      user.total_user_views
+    end
+  end
+
+  def user_likes_vals
+    users = @klass.all
+    users.map do |user|
+      user.total_user_likes
+    end
+  end
+
+  def user_uploaded_vals
+    users = @klass.all
+    users.map do |user|
+      user.uploads.length
+    end
+  end
+
+  def user_downloads_per_view_vals
+    views = user_views_vals
+    downloads = user_downloaded_vals
+    dpv = downloads.map.with_index do |dl, i|
+      if views[i] == 0
+        0
+      else
+        dl / views[i]
+      end
+    end
+  end
+
+  def user_download_per_view
+    if @model.total_user_views == 0
+      0
+    else
+      @model.total_user_downloads / @model.total_user_views
+    end
+  end
+
   def attr_maximum(attribute)
     sorted = attr_values(attribute).sort.last
   end
@@ -33,7 +81,7 @@ class ModelStatistics
   end
 
   def composite_score_users
-    0.5*self.z_score(@model.uploads.count, attr_values("downloads"))
+    0.4*self.z_score(user_download_per_view, user_downloads_per_view_vals) + 0.3*self.z_score(@model.uploads.length, user_uploaded_vals) + 0.2*self.z_score(@model.total_user_downloads, user_downloaded_vals) + 0.1*self.z_score(@model.total_user_likes, user_likes_vals)
   end
 
   def downloads_per_view
