@@ -13,7 +13,7 @@ class StaticPagesController < ApplicationController
       order_by :created_at, :desc
     end
 
-    @users = @user_search.results.take(10)
+    @users = @user_search.results.take(8)
     @total_results = @user_search.total
   end
 

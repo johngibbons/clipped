@@ -46,7 +46,8 @@
 
 .user-name {
 	font-size: $base-font-size * 2;
-	padding: 0.5em 0;
+	padding: 0.5em 0 0;
+	margin-bottom: 0.25em;
 }
 
 .user-uploads {
@@ -80,7 +81,7 @@
 
 	.card {
 		text-align: left;
-		height: 315px;
+		height: 350px;
 	}
 
 	img {
@@ -89,8 +90,8 @@
 	}
 
 	@include media($desktop) {
-		@include span-columns(3 of 15);
-		@include omega(5n);
+		@include span-columns(4 of 16);
+		@include omega(4n);
 	}
  
   .user-thumb-name {
@@ -121,6 +122,13 @@
     	font-weight: 700;
     }
   }
+}
+
+#user-created-date {
+	color: $medium-gray;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	font-weight: 700;
 }
 
 #user-sort-tabs {

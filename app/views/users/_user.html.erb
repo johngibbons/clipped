@@ -5,6 +5,10 @@
 
 	    <table class="user-thumb-stats">
 		    <tr>
+			    <td class="stats-label">Joined: </td>
+			    <td class="stats-val"><%= user.created_at.strftime("%m/%Y") %></td>
+		    </tr>
+		    <tr>
 			    <td class="stats-label">Uploads: </td>
 			    <td class="stats-val"><%= user.uploads.count %></td>
 		    </tr>

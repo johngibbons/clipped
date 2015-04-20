@@ -4,6 +4,7 @@
     <%= image_tag @user.avatar.url(:profile), class: "avatar" %>
     <h1 class="user-name"><%= @user.name %></h3>
   </div>
+  <p id="user-created-date">Joined: <%= @user.created_at.strftime("%B %Y") %></p>
   <div class="user-stats stats">
     <ul>
       <li><%= @user.uploads.count %><span>Uploads</span></li>
