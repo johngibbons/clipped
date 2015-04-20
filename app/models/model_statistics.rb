@@ -76,22 +76,32 @@ class ModelStatistics
     end
   end
 
+  def downloads_per_view
+    if @model.views == 0
+      0
+    else
+      @model.downloads.to_f / @model.views
+    end
+  end
+
+  def downloads_per_view_array
+    downloads = attr_values("downloads")
+    views = attr_values("views")
+    dpv = downloads.map.with_index do |dl, i|
+      if views[i] == 0
+        0
+      else
+        dl / views[i]
+      end
+    end
+  end
+
   def composite_score_uploads
     0.5*self.z_score(downloads_per_view, downloads_per_view_array) + 0.3*self.z_score(@model.downloads, attr_values("downloads")) + 0.2*self.z_score(@model.likes_count, attr_values("likes_count"))
   end
 
   def composite_score_users
     0.4*self.z_score(user_download_per_view, user_downloads_per_view_vals) + 0.3*self.z_score(@model.uploads.length, user_uploaded_vals) + 0.2*self.z_score(@model.total_user_downloads, user_downloaded_vals) + 0.1*self.z_score(@model.total_user_likes, user_likes_vals)
-  end
-
-  def downloads_per_view
-    @model.downloads.to_f / @model.views
-  end
-
-  def downloads_per_view_array
-    downloads = attr_values("downloads")
-    views = attr_values("views")
-    dpv = downloads.map.with_index {|dl, i| dl / views[i]}
   end
 
   def scaled_value(attribute)
