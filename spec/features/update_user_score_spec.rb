@@ -21,11 +21,4 @@ RSpec.feature "Update User Score", :type => :feature do
     end.to change{upload.reload.user.weighted_score}
   end
 
-  scenario "updates on download" do
-    visit upload_path(upload)
-    expect do
-      click_button "Download"
-    end.to change{upload.reload.downloads}.by(1)
-  end
-
 end

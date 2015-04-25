@@ -48,9 +48,16 @@ class User < ActiveRecord::Base
 
   def avatar_from_url(url)
     avatar_url = URI.parse(url)
-    avatar_url.scheme = 'https'
+    if !avatar_url.scheme
+      avatar_url.scheme = 'https'
+    end
     avatar_url = avatar_url.to_s
     self.avatar = URI.parse(avatar_url)
+  end
+
+  def set_default_avatar(url)
+    self.avatar = URI.parse(url)
+    self.save!
   end
 
   class << self

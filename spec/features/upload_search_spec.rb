@@ -49,10 +49,10 @@ RSpec.feature "Upload Search", :type => :feature do
     find('label', text: "Front").click
     click_button "search-submit"
     expect(page).to_not have_selector('.upload-thumb')
-    find('#category-filter').find('label', text: "ALL").click
-    find('label', text: "Animals").click
-    click_button "search-submit"
-    expect(page).to have_selector(".upload-thumb", count: 2)
+    # find('#category-filter').find('label', text: "ALL").click
+    # find('label', text: "Animals").click
+    # click_button "search-submit"
+    # expect(page).to have_selector(".upload-thumb", count: 2)
   end
 
 end

@@ -25,7 +25,7 @@ FactoryGirl.define do
   factory :upload do
     user
     image { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
-    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/0f3ca9c7e90405ef0554ebe513160c93/BlueSearchResults.png"
+    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/00d510e52fe4dbefa6549369f2d3fece/mountains.jpeg"
 
     factory :approved_upload do
       approved true

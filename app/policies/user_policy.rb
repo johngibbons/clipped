@@ -11,6 +11,10 @@ class UserPolicy < ApplicationPolicy
     @user.activated?
   end
 
+  def edit?
+    current_or_admin
+  end
+
   def update?
     current_or_admin
   end

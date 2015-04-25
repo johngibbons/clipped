@@ -51,11 +51,11 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_content "Edit"
       click_link "Edit"
       select "Above", from: "upload_perspective"
-      click_button "Update Perspective"
-      expect(page).to have_content "ABOVE"
+      click_button "Update"
+      expect(page).to have_content "Above"
       expect(page).to_not have_content "SIDE FRONT"
       second_upload = create(:upload, approved: false, perspective: :above)
-      click_link "Above"
+      click_link "selected-perspective"
       expect(page).to have_selector(".upload-thumb", count: 2)
     end
 
@@ -103,11 +103,11 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_content "Edit"
       click_link "Edit"
       select "Above", from: "upload_perspective"
-      click_button "Update Perspective"
-      expect(page).to have_content "ABOVE"
-      expect(page).to_not have_content "SIDE FRONT"
+      click_button "Update"
+      expect(page).to have_content "Above"
+      expect(page).to_not have_content "Side front"
       second_upload = create(:upload, approved: false, perspective: :above)
-      click_link "Above"
+      click_link "selected-perspective"
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
@@ -149,7 +149,7 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to_not have_content "Side Front"
       second_upload = create(:upload, approved: false, perspective: :above)
       Sunspot.commit
-      click_link "Above"
+      click_link "selected-perspective"
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
