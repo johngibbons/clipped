@@ -147,28 +147,16 @@ class User < ActiveRecord::Base
     liking.include?(upload)
   end
 
-  def total_user_likes
-    count = 0
-    self.uploads.each do |upload|
-      count += upload.likes_count
-    end
-    count
+  def downloads_per_view
+    self.uploads.sum(:downloads / :view)
   end
 
-  def total_user_views
-    count = 0
-    self.uploads.each do |upload|
-      count += upload.views
-    end
-    count
-  end
-
-  def total_user_downloads
-    count = 0
-    self.uploads.each do |upload|
-      count += upload.downloads
-    end
-    count
+  def update_stats
+    self.favorites_count = self.uploads.sum(:likes_count)
+    self.views_count =  self.uploads.sum(:views)
+    self.downloads_count = self.uploads.sum(:downloads)
+    self.save!
+    Sunspot.delay.index self
   end
 
   def weighted_score

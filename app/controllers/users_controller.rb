@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @uploads = UploadPolicy::Scope.new(current_user, @user.uploads).resolve.paginate(page: params[:page])
     authorize @user
+    @user.update_stats
   end
 
   def create

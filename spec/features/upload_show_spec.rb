@@ -47,9 +47,9 @@ RSpec.feature "Upload show page", :type => :feature do
 
     scenario "admin updates upload perspective", :js => true do
       visit upload_path(upload)
-      expect(page).to have_content "NOT APPLICABLE"
-      expect(page).to have_content "Edit Perspective"
-      click_link "Edit Perspective"
+      expect(page).to have_content "Not applicable"
+      expect(page).to have_content "Edit"
+      click_link "Edit"
       select "Above", from: "upload_perspective"
       click_button "Update Perspective"
       expect(page).to have_content "ABOVE"
@@ -99,9 +99,9 @@ RSpec.feature "Upload show page", :type => :feature do
 
     scenario "uploader updates upload perspective", :js => true do
       visit upload_path(upload)
-      expect(page).to have_content "NOT APPLICABLE"
-      expect(page).to have_content "Edit Perspective"
-      click_link "Edit Perspective"
+      expect(page).to have_content "Not applicable"
+      expect(page).to have_content "Edit"
+      click_link "Edit"
       select "Above", from: "upload_perspective"
       click_button "Update Perspective"
       expect(page).to have_content "ABOVE"
@@ -145,7 +145,7 @@ RSpec.feature "Upload show page", :type => :feature do
       upload.save!
       visit upload_path(upload)
       expect(page).to have_content "Above"
-      expect(page).to_not have_content "Edit Perspective"
+      expect(page).to_not have_content "Edit"
       expect(page).to_not have_content "Side Front"
       second_upload = create(:upload, approved: false, perspective: :above)
       Sunspot.commit

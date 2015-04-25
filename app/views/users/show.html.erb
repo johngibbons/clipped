@@ -8,9 +8,9 @@
   <div class="user-stats stats">
     <ul>
       <li><%= @user.uploads.count %><span>Uploads</span></li>
-      <li><%= @user.total_user_views %><span>Views</span></li>
-      <li><%= @user.total_user_downloads %><span>Downloads</span></li>
-      <li><%= @user.total_user_likes %><span>Likes</span></li>
+      <li><%= @user.views_count %><span>Views</span></li>
+      <li><%= @user.downloads_count %><span>Downloads</span></li>
+      <li><%= @user.favorites_count %><span>Favorites</span></li>
     </ul>
   </div>
   <% if current_user?(@user) %>

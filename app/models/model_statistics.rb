@@ -4,6 +4,7 @@ class ModelStatistics
   def initialize(model)
     @model = model
     @klass = model.class
+    @users = User.includes(:uploads)
   end
 
   def attr_values(attribute)
@@ -14,50 +15,38 @@ class ModelStatistics
   end
 
   def user_downloaded_vals
-    users = @klass.all
-    users.map do |user|
-      user.total_user_downloads
-    end
+    User.pluck(:downloads_count)
   end
 
   def user_views_vals
-    users = @klass.all
-    users.map do |user|
-      user.total_user_views
-    end
+    User.pluck(:views_count)
   end
 
   def user_likes_vals
-    users = @klass.all
-    users.map do |user|
-      user.total_user_likes
-    end
+    User.pluck(:favorites_count)
   end
 
   def user_uploaded_vals
-    users = @klass.all
-    users.map do |user|
-      user.uploads.length
+    @users.map do |user|
+      user.uploads.size
     end
   end
 
   def user_downloads_per_view_vals
-    views = user_views_vals
-    downloads = user_downloaded_vals
-    dpv = downloads.map.with_index do |dl, i|
-      if views[i] == 0
+    @users.map do |user|
+      if user.views_count == 0
         0
       else
-        dl / views[i]
+        user.downloads_count.to_f / user.views_count
       end
     end
   end
 
   def user_download_per_view
-    if @model.total_user_views == 0
+    if @model.views_count == 0
       0
     else
-      @model.total_user_downloads / @model.total_user_views
+      @model.downloads_count.to_f / @model.views_count
     end
   end
 
@@ -101,7 +90,7 @@ class ModelStatistics
   end
 
   def composite_score_users
-    0.4*self.z_score(user_download_per_view, user_downloads_per_view_vals) + 0.3*self.z_score(@model.uploads.length, user_uploaded_vals) + 0.2*self.z_score(@model.total_user_downloads, user_downloaded_vals) + 0.1*self.z_score(@model.total_user_likes, user_likes_vals)
+    0.4*self.z_score(user_download_per_view, user_downloads_per_view_vals) + 0.3*self.z_score(@model.uploads.size, user_uploaded_vals) + 0.2*self.z_score(@model.downloads_count, user_downloaded_vals) + 0.1*self.z_score(@model.favorites_count, user_likes_vals)
   end
 
   def scaled_value(attribute)
@@ -117,15 +106,19 @@ class ModelStatistics
   end
 
   def stats(values)
-    DescriptiveStatistics::Stats.new(values)
+    if values
+      DescriptiveStatistics::Stats.new(values)
+    else
+      0
+    end
   end
 
   def z_score(value, values_array)
     stats = stats(values_array)
-    if stats.standard_deviation == 0
-      0
-    else
+    if stats.standard_deviation && stats.standard_deviation != 0
       (value - stats.mean) / stats.standard_deviation
+    else
+      0
     end
   end
 

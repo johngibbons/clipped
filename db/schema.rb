@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407000132) do
+ActiveRecord::Schema.define(version: 20150425164040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,9 @@ ActiveRecord::Schema.define(version: 20150407000132) do
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
+    t.integer  "favorites_count",     default: 0,     null: false
+    t.integer  "downloads_count",     default: 0,     null: false
+    t.integer  "views_count",         default: 0,     null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

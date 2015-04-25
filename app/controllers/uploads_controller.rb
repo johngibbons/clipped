@@ -19,6 +19,7 @@ class UploadsController < ApplicationController
     if @upload.save
       render js: "window.location.href='"+user_path(current_user)+"'"
       ProcessUploads.call(upload: @upload)
+      @upload.user.update_stats
     else
       render json: { error: @upload.errors.full_messages.join(',')}, :status => 400
     end
@@ -46,6 +47,7 @@ class UploadsController < ApplicationController
     @upload = Upload.find(params[:id])
     authorize @upload
     @upload.destroy
+    @upload.user.update_stats
     flash[:success] = "Image successfully deleted"
     redirect_to current_user
   end
@@ -54,6 +56,7 @@ class UploadsController < ApplicationController
      @upload = Upload.find(params[:id])
      @upload.downloads += 1
      @upload.save
+     @upload.user.update_stats
      redirect_to @upload.download_url
   end
 
