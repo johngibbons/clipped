@@ -102,7 +102,13 @@
 		margin: 0 auto 1em;
 	}
 
+	@include media($tablet) {
+		@include span-columns(2 of 8);
+		@include omega(4n);
+	}
+
 	@include media($desktop) {
+		@include omega-reset(4n);
 		@include span-columns(2 of 12);
 		@include omega(6n);
 	}

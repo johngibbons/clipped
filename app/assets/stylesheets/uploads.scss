@@ -68,6 +68,18 @@
   }
 }
 
+.static_pages.home {
+  .upload {
+    @include media($tablet) {
+
+    }
+    @include media($desktop) {
+      @include omega-reset(5n);
+      @include omega(4n);
+    }
+  }
+}
+
 .upload-clipper {
 
   .media-figure {
