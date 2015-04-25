@@ -87,8 +87,9 @@
 }
 
   #uploader-container {
+    width: 95%;
+    margin: 0 auto;
     align-items: center;
-    @include outer-container;
     margin-top: 125px;
 
     @include media($tablet) {
@@ -96,7 +97,7 @@
     }
 
     @include media($desktop) {
-      @include outer-container(95%);
+      
     }
   }
 
@@ -108,11 +109,6 @@
     .btn {
       margin-right: 10px;
     }
-  }
-
-  #upload-previews {
-    display: flex;
-    margin: -20px 0 0 -20px;
   }
 
   #clickable {
@@ -127,11 +123,25 @@
     }
   }
 
+  #upload-previews {
+    @include outer-container(100%);
+  }
+
   .dz-preview {
-    flex: 1 1 200px;
     transition: all, 1s, ease;
     position: relative;
-    margin: 20px 0 0 20px;
+    margin-bottom: 20px;
+
+    @include media($tablet) {
+      @include span-columns(2 of 8);
+      @include omega(4n);
+    }
+
+    @include media($desktop) {
+      @include omega-reset(4n);
+      @include span-columns(2 of 12);
+      @include omega(6n);
+    }
 
     h6 {
       font-size: 0.8em;

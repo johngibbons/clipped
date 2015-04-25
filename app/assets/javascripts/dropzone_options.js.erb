@@ -55,6 +55,7 @@ $('.uploads.new').ready(function () {
 	});
 
 	dropzone.on("addedfile", function(file) {
+		$("#upload-previews").removeClass("flex-container");
 		$("#dropzone-upload-text").hide();
   	$("#uploader-controls").show();
   	$("#save-uploads").prop("disabled", true);
