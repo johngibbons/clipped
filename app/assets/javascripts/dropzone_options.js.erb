@@ -20,9 +20,10 @@ $('.uploads.new').ready(function () {
   	$("#remove-all-uploads").prop("disabled", true);
   });
 
-  $(".dropzone").on("click", ".remove", function() {
-  	console.log("delete");
-	});
+  $("#clickable").on("click", function(e) {
+  	console.log("click");
+  	e.preventDefault();
+  })
 
   var i = 0;
 	var url_location = {};

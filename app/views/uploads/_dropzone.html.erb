@@ -4,7 +4,7 @@
 		max_file_size: 50.megabytes, 
 		key: "uploads/#{SecureRandom.hex}/${filename}" do %>
 
-	 <%= hidden_field_tag  "Content-type", "" %>
+  <%= hidden_field_tag  "Content-type", "" %>
 	<div class="fallback">
 		 <%= file_field_tag 'file', multiple: true %>
 	</div>
@@ -18,7 +18,7 @@
 	<div id="dropzone-upload-text">
 		<div class="dz-message"><h1>Drag files here or</h1></div>
 		<div id="clickable">
-			<button name="x-ignore-tags">Click here to select files</button>
+			<button name="x-ignore-button">Click here to select files</button>
 		</div>
 	</div>
 	<div id="upload-previews" class="flex-container"></div>

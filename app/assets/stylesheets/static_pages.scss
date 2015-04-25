@@ -100,8 +100,8 @@ header.home {
 		margin-bottom: $gutter();
 
 		@include media($tablet) {
-			@include span-columns(1 of 5);
-			@include omega(5n);
+			@include span-columns(3 of 12);
+			@include omega(4n);
 		}
 	}
 }
