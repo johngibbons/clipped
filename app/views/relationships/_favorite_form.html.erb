@@ -1,0 +1,7 @@
+<div id="favorite_form" class="upload-interaction">
+<% if current_user.favoriting?(@upload) %>
+  <%= render 'relationships/unfavorite' %>
+<% else %>
+  <%= render 'relationships/favorite' %>
+<% end %>
+</div>

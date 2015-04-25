@@ -34,8 +34,8 @@ FactoryGirl.define do
   end
   
   factory :relationship do
-    liker_id 1
-    liked_id 2
+    favoriter_id 1
+    favorited_id 2
   end
 
   factory :guest_user do

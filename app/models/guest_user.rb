@@ -51,15 +51,15 @@ class GuestUser
     false
   end
 
-  def like(upload)
-    liker_relationships.none
+  def favorite(upload)
+    favoriter_relationships.none
   end
 
-  def unlike(upload)
-    liker_relationships.none
+  def unfavorite(upload)
+    favoriter_relationships.none
   end
 
-  def liking?(upload)
+  def favoriting?(upload)
     false
   end
 

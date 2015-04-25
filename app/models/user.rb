@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   has_many :uploads, dependent: :destroy
-  has_many :liker_relationships, class_name:  "Relationship",
-                                 foreign_key: "liker_id",
+  has_many :favoriter_relationships, class_name:  "Relationship",
+                                 foreign_key: "favoriter_id",
                                  dependent:   :destroy
-  has_many :liking, through: :liker_relationships, source: :liked
+  has_many :favoriting, through: :favoriter_relationships, source: :favorited
 
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
@@ -135,16 +135,16 @@ class User < ActiveRecord::Base
   end
 
   # Likes an upload.
-  def like(upload)
-    liker_relationships.create(liked_id: upload.id)
+  def favorite(upload)
+    favoriter_relationships.create(favorited_id: upload.id)
   end
 
-  def unlike(upload)
-    liker_relationships.find_by(liked_id: upload.id).destroy
+  def unfavorite(upload)
+    favoriter_relationships.find_by(favorited_id: upload.id).destroy
   end
 
-  def liking?(upload)
-    liking.include?(upload)
+  def favoriting?(upload)
+    favoriting.include?(upload)
   end
 
   def downloads_per_view
@@ -152,7 +152,7 @@ class User < ActiveRecord::Base
   end
 
   def update_stats
-    self.favorites_count = self.uploads.sum(:likes_count)
+    self.favorites_count = self.uploads.sum(:favorites_count)
     self.views_count =  self.uploads.sum(:views)
     self.downloads_count = self.uploads.sum(:downloads)
     self.save!

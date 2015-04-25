@@ -17,9 +17,9 @@ class UploadsController < ApplicationController
     authorize @upload
     SaveImage.call(upload: @upload)
     if @upload.save
+      @upload.user.update_stats
       render js: "window.location.href='"+user_path(current_user)+"'"
       ProcessUploads.call(upload: @upload)
-      @upload.user.update_stats
     else
       render json: { error: @upload.errors.full_messages.join(',')}, :status => 400
     end
@@ -55,7 +55,7 @@ class UploadsController < ApplicationController
   def download
      @upload = Upload.find(params[:id])
      @upload.downloads += 1
-     @upload.save
+     @upload.save!
      @upload.user.update_stats
      redirect_to @upload.download_url
   end
@@ -70,6 +70,7 @@ class UploadsController < ApplicationController
       @upload = Upload.find_by(id: params[:id])
       @upload.views += 1
       @upload.save
+      @upload.user.update_stats
     end
 
     def user_not_authorized

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425164040) do
+ActiveRecord::Schema.define(version: 20150425191129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,15 +33,15 @@ ActiveRecord::Schema.define(version: 20150425164040) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "relationships", force: :cascade do |t|
-    t.integer  "liked_id"
-    t.integer  "liker_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "favorited_id"
+    t.integer  "favoriter_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "relationships", ["liked_id"], name: "index_relationships_on_liked_id", using: :btree
-  add_index "relationships", ["liker_id", "liked_id"], name: "index_relationships_on_liker_id_and_liked_id", unique: true, using: :btree
-  add_index "relationships", ["liker_id"], name: "index_relationships_on_liker_id", using: :btree
+  add_index "relationships", ["favorited_id"], name: "index_relationships_on_favorited_id", using: :btree
+  add_index "relationships", ["favoriter_id", "favorited_id"], name: "index_relationships_on_favoriter_id_and_favorited_id", unique: true, using: :btree
+  add_index "relationships", ["favoriter_id"], name: "index_relationships_on_favoriter_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20150425164040) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "likes_count",        default: 0
+    t.integer  "favorites_count",    default: 0
     t.boolean  "approved",           default: false, null: false
     t.string   "direct_upload_url",                  null: false
     t.boolean  "processed",          default: false, null: false
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20150425164040) do
   add_index "uploads", ["created_at"], name: "index_uploads_on_created_at", using: :btree
   add_index "uploads", ["downloads", "created_at"], name: "index_uploads_on_downloads_and_created_at", using: :btree
   add_index "uploads", ["downloads"], name: "index_uploads_on_downloads", using: :btree
-  add_index "uploads", ["likes_count", "created_at", "views", "downloads"], name: "weighted_score", using: :btree
-  add_index "uploads", ["likes_count"], name: "index_uploads_on_likes_count", using: :btree
+  add_index "uploads", ["favorites_count", "created_at", "views", "downloads"], name: "weighted_score", using: :btree
+  add_index "uploads", ["favorites_count"], name: "index_uploads_on_favorites_count", using: :btree
   add_index "uploads", ["user_id", "created_at"], name: "index_uploads_on_user_id_and_created_at", using: :btree
   add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
   add_index "uploads", ["views", "created_at"], name: "index_uploads_on_views_and_created_at", using: :btree

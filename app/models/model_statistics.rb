@@ -22,7 +22,7 @@ class ModelStatistics
     User.pluck(:views_count)
   end
 
-  def user_likes_vals
+  def user_favorites_vals
     User.pluck(:favorites_count)
   end
 
@@ -86,11 +86,11 @@ class ModelStatistics
   end
 
   def composite_score_uploads
-    0.5*self.z_score(downloads_per_view, downloads_per_view_array) + 0.3*self.z_score(@model.downloads, attr_values("downloads")) + 0.2*self.z_score(@model.likes_count, attr_values("likes_count"))
+    0.5*self.z_score(downloads_per_view, downloads_per_view_array) + 0.3*self.z_score(@model.downloads, attr_values("downloads")) + 0.2*self.z_score(@model.favorites_count, attr_values("favorites_count"))
   end
 
   def composite_score_users
-    0.4*self.z_score(user_download_per_view, user_downloads_per_view_vals) + 0.3*self.z_score(@model.uploads.size, user_uploaded_vals) + 0.2*self.z_score(@model.downloads_count, user_downloaded_vals) + 0.1*self.z_score(@model.favorites_count, user_likes_vals)
+    0.2*self.z_score(user_download_per_view, user_downloads_per_view_vals) + 0.3*self.z_score(@model.uploads.size, user_uploaded_vals) + 0.4*self.z_score(@model.downloads_count, user_downloaded_vals) + 0.1*self.z_score(@model.favorites_count, user_favorites_vals)
   end
 
   def scaled_value(attribute)

@@ -1,2 +1,2 @@
-$("#like_form").html("<%= escape_javascript(render('relationships/like')) %>")
-$("#likes").html("<%= @upload.likers.count %>")
+$("#favorite_form").html("<%= escape_javascript(render('relationships/favorite')) %>")
+$("#favorites_count").html("<%= @upload.favoriters.count %>")

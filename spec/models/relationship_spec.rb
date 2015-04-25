@@ -5,13 +5,13 @@ RSpec.describe Relationship, type: :model do
 
   it { is_expected.to be_valid }
 
-  it "has a liker" do
-    relationship.liker_id = nil
+  it "has a favoriter" do
+    relationship.favoriter_id = nil
     expect(relationship).to be_invalid
   end
 
-  it "has a liked upload" do
-    relationship.liked_id = nil
+  it "has a favorited upload" do
+    relationship.favorited_id = nil
     expect(relationship).to be_invalid
   end
 end

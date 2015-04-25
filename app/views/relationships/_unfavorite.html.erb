@@ -1,0 +1,5 @@
+<%= form_for(current_user.favoriter_relationships.find_by(favorited_id: @upload.id), html: { method: :delete }, remote: true) do |f| %>
+	<%= f.button id: "unfavorite", class: "icon" do %>
+		<i class="fa fa-star fa-lg on"></i>
+	<% end %>
+<% end %>

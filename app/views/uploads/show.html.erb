@@ -3,7 +3,7 @@
 	<%= content_tag :div, class: "upload-single card gray #{upload.approval_class}" do -%>
 		<%= image_tag upload.src(:large) %>
 		<div id="upload-single-interactions">
-			<%= render 'relationships/like_form' if logged_in? %>
+			<%= render 'relationships/favorite_form' if logged_in? %>
 			<%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
 			<%= render partial: 'delete_form', locals: {upload: upload} %>
 	  </div>
@@ -61,7 +61,7 @@
 						</tr>
 						<tr>
 							<td>Favorited:</td>
-							<td class="detail-val"><%= upload.likes_count %></td>
+							<td class="detail-val" id="favorites_count"><%= upload.favorites_count %></td>
 						</tr>
 						<tr>
 							<td>Uploaded:</td>

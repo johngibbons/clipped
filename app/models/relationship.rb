@@ -1,6 +1,6 @@
 class Relationship < ActiveRecord::Base
-  belongs_to :liker, class_name: "User"
-  belongs_to :liked, class_name: "Upload", counter_cache: :likes_count
-  validates :liker_id, presence: true
-  validates :liked_id, presence: true
+  belongs_to :favoriter, class_name: "User"
+  belongs_to :favorited, class_name: "Upload", counter_cache: :favorites_count
+  validates :favoriter_id, presence: true
+  validates :favorited_id, presence: true
 end

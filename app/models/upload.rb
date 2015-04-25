@@ -1,9 +1,9 @@
 class Upload < ActiveRecord::Base
   belongs_to :user
-  has_many :liked_relationships, class_name:  "Relationship",
-                                 foreign_key: "liked_id",
+  has_many :favorited_relationships, class_name:  "Relationship",
+                                 foreign_key: "favorited_id",
                                  dependent:   :destroy
-  has_many :likers, through: :liked_relationships
+  has_many :favoriters, through: :favorited_relationships
   default_scope -> { order(created_at: :desc) }
   acts_as_ordered_taggable
 

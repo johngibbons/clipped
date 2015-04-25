@@ -154,4 +154,40 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#weighted_score" do
+    it "has a higher weighted score when has more downloads" do
+      user.downloads_count = 1
+      user.save!
+      other_user = create(:user)
+      expect(user.weighted_score).to be > other_user.weighted_score
+    end
+
+    it "has a higher weighted score when has more favorites" do
+      user.favorites_count = 1
+      user.save!
+      other_user = create(:user)
+      expect(user.weighted_score).to be > other_user.weighted_score
+    end
+
+    it "has a higher weighted score when has higher downloads per view ratio" do
+      user.downloads_count = 1
+      user.views_count = 5
+      user.save!
+      other_user = create(:user)
+      other_user.downloads_count = 1
+      other_user.views_count = 10
+      expect(user.weighted_score).to be > other_user.weighted_score
+    end
+
+    it "is weighted towards more active users" do
+      user.downloads_count = 500
+      user.views_count = 2000
+      user.save!
+      other_user = create(:user)
+      other_user.downloads_count = 1
+      other_user.views_count = 2
+      expect(user.weighted_score).to be > other_user.weighted_score
+    end
+  end
+
 end

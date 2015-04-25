@@ -32,7 +32,7 @@ rand(3..10).times do
   image =     Faker::Avatar.image
   views =     Faker::Number.number(4)
   downloads = Faker::Number.number(3)
-  likes =     Faker::Number.number(3)
+  favorites =     Faker::Number.number(3)
   direct_upload_url = Faker::Internet.url
 
   users.each { |user| user.uploads.create!( image: image, 
@@ -43,12 +43,12 @@ rand(3..10).times do
                                             processed: true ) }
 end
 
-# # Liking relationships
+# # Favoriting relationships
 # users = User.all
 # uploads = Upload.all
 # user = users.first
-# liked = uploads[2..50]
-# likers = users[3..40]
-# likers.product(liked).collect do |liker, likee|
-#   liker.like(likee)
+# favorited = uploads[2..50]
+# favoriters = users[3..40]
+# favoriters.product(favorited).collect do |favoriter, favoritee|
+#   favoriter.favorite(favoritee)
 # end

@@ -88,14 +88,14 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test "should like and unlike an upload" do
+  test "should favorite and unfavorite an upload" do
     michael = users(:michael)
     upload = uploads(:orange)
-    assert_not michael.liking?(upload)
-    michael.like(upload)
-    assert michael.liking?(upload)
-    assert upload.likers.include?(michael)
-    michael.unlike(upload)
-    assert_not michael.liking?(upload)
+    assert_not michael.favoriting?(upload)
+    michael.favorite(upload)
+    assert michael.favoriting?(upload)
+    assert upload.favoriters.include?(michael)
+    michael.unfavorite(upload)
+    assert_not michael.favoriting?(upload)
   end
 end
