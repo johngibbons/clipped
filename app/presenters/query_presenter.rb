@@ -24,6 +24,14 @@ class QueryPresenter < BasePresenter
     end
   end
 
+  def remove_query
+    if @model[:search] && @model[:search] != ""
+      h.link_to h.search_index_path  do
+          h.raw("<i id='remove-search' class='fa fa-times-circle'></i>")
+      end
+    end
+  end
+
   def status
     if in_params?(@query_value)
       "selected"

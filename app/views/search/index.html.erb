@@ -5,7 +5,10 @@
 		<% if @uploads %>
 
 		<section id="uploads-results-count" class="mobile-filter">
-		  <p><%= raw query.query_text(@total_results) %></p>
+		  <p>
+			  <%= raw query.query_text(@total_results) %>
+			  <%= query.remove_query %>
+		  </p>
 		  <%= render partial: 'upload_results_sort_form', locals: { query: query } %>
 		</section>
 
