@@ -3,8 +3,13 @@ class StaticPagesController < ApplicationController
 
 
   def home
-    @uploads = StaticPagesPolicy::Scope.new(current_user, Upload).resolve
-    @most_popular = @uploads.take(8)
+    @uploads = Upload.search do
+      with :approved, true
+      order_by :weighted_score, :desc
+      order_by :created_at, :desc
+    end
+
+    @most_popular = @uploads.results.take(8)
     @most_used_tags = Upload.where(approved: true).tag_counts.order(taggings_count: :desc).limit(50)
 
     @user_search = User.search do
