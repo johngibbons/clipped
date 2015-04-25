@@ -36,3 +36,11 @@
       background: $light-gray;
     }
   }
+
+  .search.index {
+    .pagination {
+      @include media($desktop) {
+        @include shift(2);
+      }
+    }
+  }

@@ -45,10 +45,21 @@
 }
 
 .upload {
-  flex: 1 1 14%;
-  margin: 20px 0 0 20px;
+  margin: 0 auto;
   position: relative;
   height: 100%;
+  margin-bottom: 1em;
+
+  @include media($tablet) {
+    @include span-columns(2 of 8);
+    @include omega(4n);
+  }
+
+  @include media($desktop) {
+    @include omega-reset(4n);
+    @include span-columns(2 of 10);
+    @include omega(5n);
+  }
 
   img {
     display: block;
@@ -214,7 +225,6 @@
     @include span-columns(10 of 12);
     @include omega();
     margin-top: 0;
-    display: flex;
     padding: 0 3em;
   }
 }
