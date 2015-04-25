@@ -26,13 +26,15 @@
             <% end %>
           </ul>
         </li>
+        <% else %>
+        <li class="nav-link"><%= link_to "Sign Up", signup_path %></li>
       <% end %>
       <% if logged_in? %>
         <%= link_to new_upload_path do %>
           <button>Upload</button>
         <% end %>
       <% else %>
-        <%= link_to signup_path do %>
+        <%= link_to login_path do %>
           <button>Login</button>
         <% end %>
       <% end %>
