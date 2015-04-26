@@ -109,6 +109,13 @@
 		@include span-columns(2 of 12);
 		@include omega(6n);
 	}
+
+	@include media($large) {
+		@include omega-reset(4n);
+		@include omega-reset(6n);
+		@include span-columns(2 of 16);
+		@include omega(8n);
+	}
  
   .user-thumb-name {
     font-weight: 700;

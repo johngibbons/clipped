@@ -20,7 +20,7 @@
             <li class="nav-link"><%= link_to "My Images", current_user %></li>
             <li class="nav-link"><%= link_to "Settings", edit_user_path(current_user) %></li>
             <li class="nav-link"><%= link_to "Log out", logout_path, method: "delete" %></li>
-            <li><%= link_to "All Users", users_path %></li>
+            <li><%= link_to "All Users", users_path(sort_users: "weighted_score") %></li>
             <% if current_user.admin? %>
               <li><%= link_to "Awaiting Approval", upload_moderation_index_path %></li>
             <% end %>
