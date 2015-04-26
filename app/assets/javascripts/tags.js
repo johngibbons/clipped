@@ -15,4 +15,9 @@ $(document).ready(function () {
     $("#update-tags-form").append("<p>ERROR</p>");
   });
 
+  //deleting functionality
+  $(document).on( "click", ".delete-tag", function(e) {
+    e.preventDefault();
+    $(this).parent().remove();
+  });
 });

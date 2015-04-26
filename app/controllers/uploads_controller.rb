@@ -18,6 +18,7 @@ class UploadsController < ApplicationController
     SaveImage.call(upload: @upload)
     if @upload.save
       @upload.user.update_stats
+      flash[:notice] = "Please allow for a day or two before your uploads are approved."
       render js: "window.location.href='"+user_path(current_user)+"'"
       ProcessUploads.call(upload: @upload)
     else

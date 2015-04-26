@@ -99,3 +99,52 @@ select {
   height: 1em;
   vertical-align: baseline;
 }
+
+.tooltip-item {
+  position: relative;
+
+  &:focus,
+  &:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .tooltip {
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    background-color: $white;
+    padding: 1em;
+    border: $base-border;
+    box-shadow: $base-box-shadow;
+    width: 250px;
+    bottom: 1em;
+    left: 0.5em;
+    font-size: 0.8em;
+    line-height: 1.5;
+    color: $base-font-color;
+    visibility: hidden;
+    opacity: 0;
+
+    h4 {
+      margin-top: 0;
+      color: $action-color;
+      font-size: 1em;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  // &:after {
+  //   @include position(absolute, null 0 null 0);
+  //   border: 8px solid transparent;
+  //   bottom: -1.3em;
+  //   color: $white;
+  //   content: '▼';
+  //   font-size: 1.4em;
+  //   margin-left: -8px;
+  //   text-align: center;
+  //   text-shadow: $base-box-shadow;
+  // }
+}
