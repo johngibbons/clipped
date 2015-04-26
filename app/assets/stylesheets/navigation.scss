@@ -96,6 +96,7 @@ header.navigation {
       @include media($desktop) {
         padding: 0.5em 1.25em;
         margin: 0.5em 0;
+        margin-right: 1em;
       }
     }
   }

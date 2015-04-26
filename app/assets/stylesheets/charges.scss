@@ -3,32 +3,66 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #donate-container {
-	padding-top: 2em;
+	padding-top: 4em;
 	@include media($tablet) {
 		@include outer-container(50%);
   }
 }
 
 #chargeForm {
-	width: 50%;
 	margin: 0 auto;
+	margin-top: 4em;
+	padding: 2em;
+	border: $base-border;
+	width: 90%;
+
+	.title {
+		margin: 0;
+		text-align: center;
+	}
+}
+
+#donate-input {
+	border: $base-border;
+	margin-bottom: 2em;
 }
 
 #dollar-sign {
-	font-size: 1.5em;
+	display: inline-block;
 	font-weight: 700;
-	line-height: 2.25;
-	float: left;
+	width: 30%;
+	background-color: $lightest-gray;
+	text-align: right;
+	padding: 1em;
+	border-right: $base-border;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 #amount {
+	display: inline-block;
 	font-size: 1.5em;
 	font-weight: 700;
-	width: 90%;
-	float: right;
+	box-shadow: none;
+	background-color: $white;
+	border: none;
+	color: $action-color;
+	width: 70%;
+	margin: 0;
+	padding: 0;
+	padding-left: 0.5em;
 }
 
 #donateButton {
 	display: block;
 	width: 100%;
+	margin: 0;
+}
+
+.charges.create {
+	h2 {
+		font-size: 2em;
+		margin-top: 5em;
+		text-align: center;
+	}
 }

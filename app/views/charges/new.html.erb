@@ -1,6 +1,6 @@
 
 <div id="donate-container">
-	<p>Thank you so much for deciding to donate to Clipped.  You're helping us pay for servers and the time it takes to keep this community up and running.  With your help, we can keep growing the best database of cutout images in the world.</p>
+	<p>Thank you so much for deciding to donate to <span class="emphasis">Clipped</span>.  You're helping us pay for servers and the time it takes to keep this community up and running.  With your help, we can keep growing the best database of cutout images in the world.</p>
 
 	<p>All of your payment information and credit card details are handled through <%= link_to "Stripe", "https://stripe.com/", target:  "_blank" %>.  We do not see or collect any of your information, and everything is handled throug Stripe's secure servers.  Thanks again!</p>
 
@@ -8,7 +8,9 @@
 	  <script src="https://checkout.stripe.com/checkout.js"></script>
 	  <%= hidden_field_tag 'stripeToken' %>
 	  <%= hidden_field_tag 'stripeEmail' %>
-	  <span id="dollar-sign">$</span><%= number_field_tag 'amount', 5, min: 1 %>
+	  <div id="donate-input">
+		  <span id="dollar-sign">Amount $</span><%= number_field_tag 'amount', 5, min: 1 %>
+	  </div>
 	  <button id="donateButton" class="btn">Donate</button>
 	<% end %>
 </div>
