@@ -5,11 +5,10 @@
 	<p>All of your payment information and credit card details are handled through <%= link_to "Stripe", "https://stripe.com/", target:  "_blank" %>.  We do not see or collect any of your information, and everything is handled throug Stripe's secure servers.  Thanks again!</p>
 
 	<%= form_tag charges_path, id: 'chargeForm' do %>
-	  <script src="https://checkout.stripe.com/checkout.js"></script>
 	  <%= hidden_field_tag 'stripeToken' %>
 	  <%= hidden_field_tag 'stripeEmail' %>
 	  <div id="donate-input">
-		  <span id="dollar-sign">Amount $</span><%= number_field_tag 'amount', 5, min: 1 %>
+		  <span id="dollar-sign">$</span><%= number_field_tag 'amount', 5, min: 1 %>
 	  </div>
 	  <button id="donateButton" class="btn">Donate</button>
 	<% end %>
