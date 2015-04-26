@@ -10,9 +10,12 @@ $max-width: 90%;
 
 $tablet-width: 768px;
 $desktop-width: 1024px;
+$large-screen-width: 1824px;
 
 $tablet: new-breakpoint(min-device-width $tablet-width 8);
 $desktop: new-breakpoint(min-device-width $desktop-width 12);
+$large: new-breakpoint(min-device-width $large-screen-width 16);
+
 
 @mixin omega-reset($nth) {
   &:nth-child(#{$nth}) { margin-right: flex-gutter($grid-columns, $gutter); }

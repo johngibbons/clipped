@@ -39,6 +39,10 @@ header.navigation {
     @include media($desktop) {
       @include outer-container(em(1080));
     }
+
+    @include media($large) {
+      @include outer-container(em(1400));
+    }
   }
 
   .logo {

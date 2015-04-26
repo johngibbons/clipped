@@ -40,6 +40,10 @@ main {
 		@include outer-container(em(1080));
 	}
 
+	@include media($large) {
+		@include outer-container(em(1400));
+	}
+
 	header {
 	  padding: 2em 0;
 	}

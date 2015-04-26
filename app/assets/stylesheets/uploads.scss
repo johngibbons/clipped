@@ -61,6 +61,13 @@
     @include omega(5n);
   }
 
+  @include media($large) {
+    @include omega-reset(4n);
+    @include omega-reset(5n);
+    @include span-columns(2 of 12);
+    @include omega(6n);
+  }
+
   img {
     display: block;
     margin: 0 auto;
@@ -210,6 +217,10 @@
     margin-top: 1em;
   }
 
+  @include media($large) {
+    @include span-columns(4 of 16);
+  }
+
   li {
     padding: 0.5em 1em;
     border-bottom: $base-border;
@@ -236,6 +247,13 @@
 
   @include media($desktop) {
     @include span-columns(10 of 12);
+    @include omega();
+    margin-top: $gutter();
+    padding: 0 3em;
+  }
+
+  @include media($large) {
+    @include span-columns(12 of 16);
     @include omega();
     margin-top: $gutter();
     padding: 0 3em;
