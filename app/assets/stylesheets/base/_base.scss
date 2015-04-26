@@ -37,11 +37,11 @@ main {
 
 	@include media($desktop) {
 		margin-top: 47px;
-		@include outer-container(em(1080));
+		@include outer-container($desktop-container-width);
 	}
 
 	@include media($large) {
-		@include outer-container(em(1400));
+		@include outer-container($large-screen-container-width);
 	}
 
 	header {

@@ -57,15 +57,15 @@
 
   @include media($desktop) {
     @include omega-reset(4n);
-    @include span-columns(2 of 10);
-    @include omega(5n);
+    @include span-columns(2 of 12);
+    @include omega(6n);
   }
 
   @include media($large) {
     @include omega-reset(4n);
-    @include omega-reset(5n);
-    @include span-columns(2 of 12);
-    @include omega(6n);
+    @include omega-reset(6n);
+    @include span-columns(2 of 16);
+    @include omega(8n);
   }
 
   img {
@@ -218,7 +218,7 @@
   }
 
   @include media($large) {
-    @include span-columns(4 of 16);
+    @include span-columns(2 of 16);
   }
 
   li {
@@ -253,7 +253,7 @@
   }
 
   @include media($large) {
-    @include span-columns(12 of 16);
+    @include span-columns(14 of 16);
     @include omega();
     margin-top: $gutter();
     padding: 0 3em;

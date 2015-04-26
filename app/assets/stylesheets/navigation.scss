@@ -37,11 +37,11 @@ header.navigation {
     z-index: 9999;
 
     @include media($desktop) {
-      @include outer-container(em(1080));
+      @include outer-container($desktop-container-width);
     }
 
     @include media($large) {
-      @include outer-container(em(1400));
+      @include outer-container($large-screen-container-width);
     }
   }
 

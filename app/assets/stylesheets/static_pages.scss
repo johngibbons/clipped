@@ -4,9 +4,24 @@
 
 .static_pages {
 	.container {
-		max-width: 800px;
+		@include media($tablet) {
+			max-width: 90%;
+			width: 800px;
+		}
 	}
 }
+
+.static_pages.home {
+	.container {
+		@include media($desktop) {
+			max-width: 90%;
+			width: $desktop-container-width;
+		}
+		@include media($large) {
+			width: $large-screen-container-width;
+		}
+	}
+} 
 
 header.home {
 	text-align: center;
@@ -108,6 +123,19 @@ header.home {
 		@include media($tablet) {
 			@include span-columns(3 of 12);
 			@include omega(4n);
+		}
+
+		@include media($desktop) {
+			@include omega-reset(4n);
+			@include span-columns(2 of 12);
+			@include omega(6n);
+		}
+
+		@include media($large) {
+			@include omega-reset(4n);
+			@include omega-reset(6n);
+			@include span-columns(2 of 16);
+			@include omega(8n);
 		}
 	}
 }
