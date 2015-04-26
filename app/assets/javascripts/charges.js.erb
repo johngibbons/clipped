@@ -1,9 +1,10 @@
 $('.charges.new').ready(function () {
   var handler = StripeCheckout.configure({
     key: "<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>",
-    token: function(token, args) {
-        $("#stripeToken").val() = token.id;                              
-        $("#stripeEmail").val() = token.email;
+    token: function(token) {
+        console.log("submit");
+        $("#stripeToken").val(token.id);                              
+        $("#stripeEmail").val(token.email);
         $("#chargeForm").submit();
       }
   });
