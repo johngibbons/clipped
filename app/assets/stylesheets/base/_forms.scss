@@ -102,6 +102,7 @@ select {
 
 .tooltip-item {
   position: relative;
+  padding-left: 0.25em;
 
   &:focus,
   &:hover .tooltip {

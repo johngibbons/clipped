@@ -34,6 +34,12 @@
 			<% if policy(upload).update? %>
 				<button id="update-tags-btn" class="hidden update-upload-btn btn">Update</button>		
 				<%= link_to 'Edit Tags', edit_upload_path(upload), class: "js-link", id: "edit-tags-link", remote: true %>
+				<i id="tags-tip" class="fa fa-info-circle tooltip-item">
+		  		<div class="tooltip">
+		  			<h4>Tagging Tip:</h4>
+		  			<p>Tags are a critical part in others being able to find your images.  Try to enter in everything you see in the image, and use terms you think would be relevant to search for.</p>
+		  		</div>
+		  	</i>
 			<% end %>
 		</div>
 

@@ -18,11 +18,10 @@
 
 		<section id="uploads-search-results" class="flex-container">
 			<%= render @uploads %>
-			<% 6.times do %>
-				<div class="upload"></div>
-			<% end %>
 		</section>
-		<%= will_paginate @uploads%>
+		<div id="infinite-scrolling">
+			<%= will_paginate @uploads%>
+		</div>
 
 		<% else %>
 

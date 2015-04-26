@@ -1,0 +1,7 @@
+$('.user-uploads').append('<%= j render @uploads %>');
+<% if @uploads.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @uploads %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

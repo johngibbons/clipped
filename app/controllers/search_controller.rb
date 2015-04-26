@@ -25,7 +25,11 @@ class SearchController < ApplicationController
     @total_results = @search.total
     # create a deep clone of params for manipulation in view
     @query = Marshal.load(Marshal.dump(params))
-    render layout: "no_container"
+    
+    respond_to do |format|
+      format.html { render layout: "no_container" }
+      format.js
+    end
   end
 
 end

@@ -22,7 +22,11 @@ class UsersController < ApplicationController
     @total_results = @user_search.total
     # create a deep clone of params for manipulation in view
     @user_query = Marshal.load(Marshal.dump(params))
-    render 'users/index'
+
+    respond_to do |format|
+      format.html { render 'users/index' }
+      format.js
+    end
   end
 
   def show
@@ -30,6 +34,11 @@ class UsersController < ApplicationController
     @uploads = UploadPolicy::Scope.new(current_user, @user.uploads).resolve.paginate(page: params[:page])
     authorize @user
     @user.update_stats
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
