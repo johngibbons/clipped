@@ -37,7 +37,7 @@ main {
 
 	@include media($desktop) {
 		margin-top: 47px;
-		@include outer-container(em(960));
+		@include outer-container(em(1080));
 	}
 
 	header {

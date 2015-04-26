@@ -37,7 +37,7 @@ header.navigation {
     z-index: 9999;
 
     @include media($desktop) {
-      @include outer-container(em(960));
+      @include outer-container(em(1080));
     }
   }
 

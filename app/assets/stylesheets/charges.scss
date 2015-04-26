@@ -1,3 +1,34 @@
 // Place all the styles related to the charges controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#donate-container {
+	padding-top: 2em;
+	@include media($tablet) {
+		@include outer-container(50%);
+  }
+}
+
+#chargeForm {
+	width: 50%;
+	margin: 0 auto;
+}
+
+#dollar-sign {
+	font-size: 1.5em;
+	font-weight: 700;
+	line-height: 2.25;
+	float: left;
+}
+
+#amount {
+	font-size: 1.5em;
+	font-weight: 700;
+	width: 90%;
+	float: right;
+}
+
+#donateButton {
+	display: block;
+	width: 100%;
+}
