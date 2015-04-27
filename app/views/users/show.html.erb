@@ -7,7 +7,7 @@
   <p id="user-created-date">Joined: <%= @user.created_at.strftime("%B %Y") %></p>
   <div class="user-stats stats">
     <ul>
-      <li><%= @user.uploads.count %><span>Uploads</span></li>
+      <li><%= @user.uploads.where(approved: true).count %><span>Uploads</span></li>
       <li><%= @user.views_count %><span>Image Views</span></li>
       <li><%= @user.downloads_count %><span>Downloaded</span></li>
       <li><%= @user.favorites_count %><span>Favorited</span></li>

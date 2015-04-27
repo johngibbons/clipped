@@ -28,7 +28,7 @@ class ModelStatistics
 
   def user_uploaded_vals
     @users.map do |user|
-      user.uploads.size
+      user.uploads.where(approved: true).size
     end
   end
 
@@ -90,7 +90,7 @@ class ModelStatistics
   end
 
   def composite_score_users
-    0.2*self.z_score(user_download_per_view, user_downloads_per_view_vals) + 0.3*self.z_score(@model.uploads.size, user_uploaded_vals) + 0.4*self.z_score(@model.downloads_count, user_downloaded_vals) + 0.1*self.z_score(@model.favorites_count, user_favorites_vals)
+    0.2*self.z_score(user_download_per_view, user_downloads_per_view_vals) + 0.3*self.z_score(@model.uploads.where(approved: true).size, user_uploaded_vals) + 0.4*self.z_score(@model.downloads_count, user_downloaded_vals) + 0.1*self.z_score(@model.favorites_count, user_favorites_vals)
   end
 
   def scaled_value(attribute)
