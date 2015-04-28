@@ -8,7 +8,18 @@ $('.uploads.new').ready(function () {
 			var taglist = $(n).find(".tag-data");
 			getTags(taglist);
 		  tags = getTags(taglist.get());
-	    $.post( "/uploads", { upload: {direct_upload_url: url, tag_list: tags } });		
+		  var uploadId = $(n).find('[name="x-ignore-upload[id]"]').val();
+	    $.ajax({
+			    url: '/uploads/' + uploadId,
+			    type: 'PUT',
+			    dataType: "json",
+			    data: { upload: { tag_list: tags } },
+			    success: function(result) {
+			    	console.log(result);
+			    	var user_id = result["user_id"];
+			      location.href = "/users/" + user_id;
+			    }
+				});	
 	  });
 	});
 
@@ -46,7 +57,7 @@ $('.uploads.new').ready(function () {
 	});
 
 	dropzone.on("removedfile", function(file) {
-		delete url_location[file.id]
+
 	});
 
 	// Update the total progress bar
@@ -61,6 +72,24 @@ $('.uploads.new').ready(function () {
   	$("#save-uploads").prop("disabled", true);
   	$("#remove-all-uploads").prop("disabled", false);
   	$("#uploader-container").removeClass("flex-container");
+  	// Create the remove button
+    var removeButton = Dropzone.createElement("<i class='dz-remove fa fa-minus-circle'></i>");
+    removeButton.addEventListener("click", function(e) {
+      // Remove the file preview.
+      dropzone.removeFile(file);
+    		var uploadId = $(this).parent().find('[name="x-ignore-upload[id]"]').val();
+				$.ajax({
+			    url: '/uploads/' + uploadId,
+			    type: 'DELETE',
+			    dataType: "script",
+			    success: function(result) {
+			        
+			    }
+				});
+    });
+
+    // Add the button to the file preview element.
+    file.previewElement.appendChild(removeButton);
 		file.id = i;
 		file_preview[file.id] = $(file.previewElement);
   	file_preview[file.id].find(".dz-remove").attr("id", file.id);
@@ -79,9 +108,24 @@ $('.uploads.new').ready(function () {
   	$("#save-uploads").prop("disabled", false);
 	});
 
-  dropzone.on("success", function(file, responseText) {
+  dropzone.on("success", function(file, responseText, event) {
   	var direct_url = $(responseText).find("location")[0];
   	var url = $(direct_url).text();
   	url_location[file.id] = url;
+
+    $.ajax({
+		    url: '/uploads',
+		    type: 'POST',
+		    data: {upload: {direct_upload_url: url}},
+		    success: function(result) {
+    	  	// Append the upload id as a hidden input
+			  	// SO https://stackoverflow.com/questions/24592141/dropzonejs-with-rails-deleting-files-from-server
+			  	var elem = document.createElement('input');
+			  	elem.setAttribute("name", "x-ignore-upload[id]");
+			  	elem.setAttribute("value", result["id"]);
+			  	elem.setAttribute("type", "hidden");
+			  	file.previewTemplate.appendChild(elem);
+		    }
+		});		
 	});
 });

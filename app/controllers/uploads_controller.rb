@@ -19,7 +19,7 @@ class UploadsController < ApplicationController
     if @upload.save
       @upload.user.update_stats
       flash[:notice] = "Please allow for a day or two before your uploads are approved."
-      render js: "window.location.href='"+user_path(current_user)+"'"
+      render json: { id: @upload.id,  }, :status => 200
       ProcessUploads.call(upload: @upload)
     else
       render json: { error: @upload.errors.full_messages.join(',')}, :status => 400
@@ -31,8 +31,8 @@ class UploadsController < ApplicationController
     authorize @upload
     if @upload.update(upload_params)
       respond_to do |format|
-        format.html { redirect_to @upload }
         format.js
+        format.json { render json: @upload }
       end
     else
       flash.now[:error] = "There was an issue updating your upload"
@@ -50,7 +50,10 @@ class UploadsController < ApplicationController
     @upload.destroy
     @upload.user.update_stats
     flash[:success] = "Image successfully deleted"
-    redirect_to current_user
+    respond_to do |format|
+      format.html { redirect_to current_user }
+      format.js
+    end
   end
 
   def download
