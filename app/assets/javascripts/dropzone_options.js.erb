@@ -44,7 +44,7 @@ $('.uploads.new').ready(function () {
   var i = 0;
 	var url_location = {};
 	var file_preview = {};
-	var dzThumb = "";
+	var dzThumb = {};
  	// disable auto discover
 	Dropzone.autoDiscover = false;
 
@@ -111,7 +111,7 @@ $('.uploads.new').ready(function () {
 	});
 
 	dropzone.on("thumbnail", function(file, dataURL) {
-		dzThumb = dataURL;
+		dzThumb[file.id] = dataURL;
 	})
 
 	dropzone.on("queuecomplete", function() {
@@ -122,13 +122,13 @@ $('.uploads.new').ready(function () {
   	var direct_url = $(responseText).find("location")[0];
   	var url = $(direct_url).text();
   	url_location[file.id] = url;
-  	console.log(dzThumb);
+  	var tempThumb = dzThumb[file.id];
 
     $.ajax({
 		    url: '/uploads',
 		    type: 'POST',
 		    dataType: "json",
-		    data: {upload: {direct_upload_url: url, dz_thumb: dzThumb}},
+		    data: {upload: {direct_upload_url: url, dz_thumb: tempThumb}},
 		    success: function(result) {
     	  	// Append the upload id as a hidden input
 			  	// SO https://stackoverflow.com/questions/24592141/dropzonejs-with-rails-deleting-files-from-server
