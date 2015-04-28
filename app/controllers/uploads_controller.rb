@@ -19,7 +19,7 @@ class UploadsController < ApplicationController
     if @upload.save
       @upload.user.update_stats
       flash[:notice] = "Please allow for a day or two before your uploads are approved."
-      render json: { id: @upload.id,  }, :status => 200
+      render json: @upload
       ProcessUploads.call(upload: @upload)
     else
       render json: { error: @upload.errors.full_messages.join(',')}, :status => 400

@@ -2,6 +2,8 @@ $('.uploads.new').ready(function () {
 
 	// bind click functionality to future save button
 	$(".dropzone").on("click.save", "#save-uploads", function() {
+		var xhrs = [];
+		var userId = "";
 		$.each( url_location, function( key, url ) {
 			var preview = file_preview[key];
 			n = preview[0];
@@ -9,18 +11,21 @@ $('.uploads.new').ready(function () {
 			getTags(taglist);
 		  tags = getTags(taglist.get());
 		  var uploadId = $(n).find('[name="x-ignore-upload[id]"]').val();
-	    $.ajax({
+		  userId = $(n).find('[name="x-ignore-user[id]"]').val();
+	    var xhr = $.ajax({
 			    url: '/uploads/' + uploadId,
 			    type: 'PUT',
 			    dataType: "json",
 			    data: { upload: { tag_list: tags } },
 			    success: function(result) {
-			    	console.log(result);
-			    	var user_id = result["user_id"];
-			      location.href = "/users/" + user_id;
 			    }
-				});	
+				});
+			xhrs.push(xhr)	
 	  });
+
+	  $.when.apply($, xhrs).done(function(){
+	    window.location.replace("/users/" + userId);
+		})
 	});
 
 	//bind remove all functionality to future remove all button
@@ -57,7 +62,7 @@ $('.uploads.new').ready(function () {
 	});
 
 	dropzone.on("removedfile", function(file) {
-
+		delete url_location[file.id]
 	});
 
 	// Update the total progress bar
@@ -83,7 +88,7 @@ $('.uploads.new').ready(function () {
 			    type: 'DELETE',
 			    dataType: "script",
 			    success: function(result) {
-			        
+		        delete url_location[file.id]
 			    }
 				});
     });
@@ -116,6 +121,7 @@ $('.uploads.new').ready(function () {
     $.ajax({
 		    url: '/uploads',
 		    type: 'POST',
+		    dataType: "json",
 		    data: {upload: {direct_upload_url: url}},
 		    success: function(result) {
     	  	// Append the upload id as a hidden input
@@ -125,6 +131,12 @@ $('.uploads.new').ready(function () {
 			  	elem.setAttribute("value", result["id"]);
 			  	elem.setAttribute("type", "hidden");
 			  	file.previewTemplate.appendChild(elem);
+
+			  	var elem2 = document.createElement('input');
+			  	elem2.setAttribute("name", "x-ignore-user[id]");
+			  	elem2.setAttribute("value", result["user_id"]);
+			  	elem2.setAttribute("type", "hidden");
+			  	file.previewTemplate.appendChild(elem2);
 		    }
 		});		
 	});
