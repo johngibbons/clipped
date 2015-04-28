@@ -37,15 +37,15 @@ class UsersController < ApplicationController
 
     if params[:filter_uploads] == "unapproved"
       @uploads = @uploads.where(approved: false)
-      render "filter.js.erb"
     elsif params[:filter_uploads] == "favorites"
       @uploads = @user.favoriting.paginate(page: params[:page])
-      render "filter.js.erb"
-    elsif params[:filter_uploads] == "approved"
-      @uploads = @uploads.where(approved: true) 
-      render "filter.js.erb"   
     else
       @uploads = @uploads.where(approved: true)
+    end
+
+    if params[:filter_uploads] && !params[:page]
+      render "filter.js.erb"
+    else
       respond_to do |format|
         format.html
         format.js
