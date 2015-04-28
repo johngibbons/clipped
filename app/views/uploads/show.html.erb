@@ -18,7 +18,7 @@
 				<% end %>
 				<div id="upload-clipper-info media-body">
 					<p class="clipper-name"><%= link_to upload.user.name, user_path(upload.user) %></p>
-					<p class="clipper-upload-count"><%= pluralize(upload.user.uploads.count, "upload") %></p>
+					<p class="clipper-upload-count"><%= pluralize(upload.user.approved_uploads_count, "upload") %></p>
 				</div>
 			</div>
 	  </div>

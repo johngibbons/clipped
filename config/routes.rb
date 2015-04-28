@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
-  resources :uploads
+  resources :uploads,             except: [:index]
 
   resources :relationships,       only: [:create, :destroy]
 
@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   resources :user_search,         only: [:index]
 
   resources :charges
+
+  get "uploads"                      => "search#index"
 
   get 'donate'                       => 'charges#new'
 

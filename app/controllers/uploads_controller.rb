@@ -1,12 +1,6 @@
 class UploadsController < ApplicationController
   before_action :increment_views, only: :show
 
-  def index
-    @viewable_uploads = policy_scope(Upload).paginate(page: params[:page])
-    @uploads = @viewable_uploads
-    render layout: "no_container"
-  end
-
   def new
     @upload = current_user.uploads.new
     render layout: "dropzone_uploader"
@@ -67,7 +61,7 @@ class UploadsController < ApplicationController
   private
 
     def upload_params
-      params.require(:upload).permit(:image, :direct_upload_url, :tag_list, :perspective, :category)
+      params.require(:upload).permit(:image, :direct_upload_url, :tag_list, :perspective, :category, :dz_thumb)
     end
 
     def increment_views

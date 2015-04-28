@@ -157,4 +157,14 @@ $('.users.edit').ready(function () {
 
 });
 
+$('.users.show').ready(function () { 
+  $('#user-sort-tabs').on('click', 'a', function(event) {
+    if (!$(this).hasClass("active")) {
+      var tabs = $(this).closest(".tabs");
+      tabs.find(".active").removeClass("active");
+      $(this).addClass("active");
+    }
+  });
+});
+
 

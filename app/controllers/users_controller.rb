@@ -35,9 +35,21 @@ class UsersController < ApplicationController
     authorize @user
     @user.update_stats
 
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:filter_uploads] == "unapproved"
+      @uploads = @uploads.where(approved: false)
+      render "filter.js.erb"
+    elsif params[:filter_uploads] == "favorites"
+      @uploads = @user.favoriting.paginate(page: params[:page])
+      render "filter.js.erb"
+    elsif params[:filter_uploads] == "approved"
+      @uploads = @uploads.where(approved: true) 
+      render "filter.js.erb"   
+    else
+      @uploads = @uploads.where(approved: true)
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 

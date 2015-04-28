@@ -23,3 +23,31 @@ td,
 th {
   vertical-align: middle;
 }
+
+.tabs {
+  a {
+    padding: 0.5em 1em;
+    background-color: $white;
+    vertical-align: super;
+    position: relative;
+
+    &.active {
+      border: $base-border;
+      border-bottom-color: $white;
+    }
+  }
+}
+
+.users.show {
+  .tabs {
+    position: relative;
+    top: -3.6em;
+    a {
+
+      &.active {
+        background-color: $lightest-gray;
+        border-bottom-color: $lightest-gray;
+      }
+    }
+  }
+}

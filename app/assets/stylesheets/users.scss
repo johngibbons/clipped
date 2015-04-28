@@ -16,7 +16,6 @@
 	text-align: center;
 	padding-bottom: 50px;
   background-color: $white;
-  border-bottom: 1px solid $light-gray;
   margin-top: 144px;
 
   @include media($tablet) {
@@ -140,20 +139,6 @@
 	text-transform: uppercase;
 	font-size: 0.8em;
 	font-weight: 700;
-}
-
-#user-sort-tabs {
-	a {
-		padding: 0.5em 1em;
-		background-color: $white;
-		vertical-align: super;
-		position: relative;
-
-		&.active {
-			border: $base-border;
-			border-bottom-color: $white;
-		}
-	}
 }
 
 #users-index-container {

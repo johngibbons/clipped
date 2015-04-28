@@ -159,9 +159,9 @@ class User < ActiveRecord::Base
   end
 
   def update_stats
-    self.favorites_count = self.uploads.sum(:favorites_count)
-    self.views_count =  self.uploads.sum(:views)
-    self.downloads_count = self.uploads.sum(:downloads)
+    self.favorites_count = self.uploads.where(approved: true).sum(:favorites_count)
+    self.views_count =  self.uploads.where(approved: true).sum(:views)
+    self.downloads_count = self.uploads.where(approved: true).sum(:downloads)
     self.save!
     Sunspot.delay.index self
   end
@@ -187,6 +187,10 @@ class User < ActiveRecord::Base
   def disapprove(upload)
     upload.approved = false
     upload.save!
+  end
+
+  def approved_uploads_count
+    self.uploads.where(approved: true).count
   end
 
     #creates and assigns the activation token and digest.

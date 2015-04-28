@@ -20,7 +20,7 @@ class UploadPresenter < BasePresenter
     if @model.processed?
       @model.image(size)
     else
-      @model.direct_upload_url
+      @model.dz_thumb
     end
   end
 

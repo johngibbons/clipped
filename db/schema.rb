@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425191129) do
+ActiveRecord::Schema.define(version: 20150428171439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,18 +67,19 @@ ActiveRecord::Schema.define(version: 20150425191129) do
     t.integer  "user_id"
     t.integer  "views",              default: 0
     t.integer  "downloads",          default: 0
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "favorites_count",    default: 0
-    t.boolean  "approved",           default: false, null: false
-    t.string   "direct_upload_url",                  null: false
-    t.boolean  "processed",          default: false, null: false
-    t.integer  "perspective",        default: 0,     null: false
-    t.integer  "category",           default: 0,     null: false
+    t.boolean  "approved",           default: false,          null: false
+    t.string   "direct_upload_url",                           null: false
+    t.boolean  "processed",          default: false,          null: false
+    t.integer  "perspective",        default: 0,              null: false
+    t.integer  "category",           default: 0,              null: false
+    t.string   "dz_thumb",           default: "/missing.png", null: false
   end
 
   add_index "uploads", ["created_at"], name: "index_uploads_on_created_at", using: :btree
