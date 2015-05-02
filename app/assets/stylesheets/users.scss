@@ -51,6 +51,7 @@
 
 .jcrop-holder {
 	display: none;
+	margin: 0 auto 2em;
 }
 
 #previewHolder {
@@ -144,4 +145,30 @@
 #users-index-container {
 	padding-top: 3em;
 	border-top: $base-border;
+}
+
+#edit-user-avatar {
+	text-align: center;
+	border-bottom: $base-border;
+	margin-bottom: 2em;
+
+	#profile-preview {
+		margin: 0 auto;
+	}
+}
+
+#edit-crop, #submit-crop {
+	display: block;
+	margin: 1em 0;
+}
+
+#user_avatar {
+	margin-bottom: 2em;
+}
+
+#delete-user {
+	font-size: 0.8em;
+	text-transform: uppercase;
+	color: $google-red;
+	font-weight: 600;
 }
