@@ -1,0 +1,18 @@
+<h1>Sign up</h1>
+
+<%= link_to '/auth/google_oauth2' do %>
+  <button class="google">Sign Up With Google</button>
+<% end %>
+
+<%= link_to '/auth/facebook' do %>
+	<button class="facebook">Sign Up With Facebook</button>
+<% end %>
+
+<div class="or-text">
+	<span>or</span>
+</div>
+
+<%= form_for @user, html: {class: "user-form", id: "login-form"} do |f| %>
+	<%= render 'fields', f: f %>
+	<%= f.submit "Create Profile" %>
+<% end %>

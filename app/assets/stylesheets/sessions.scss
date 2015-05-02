@@ -1,3 +1,30 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.gateway-form {
+
+	@include media($tablet) {
+		@include outer-container(35%);
+	}
+
+	button, input[type="submit"] {
+		width: 100%;
+	}
+
+	.or-text {
+		text-align: center;
+		border-bottom: $base-border;
+		margin: 2em 0;
+		width: 100%;
+		line-height: 0;
+		font-weight: 700;
+		font-size: 0.8em;
+		text-transform: uppercase;
+
+		span {
+			padding: 0 1em;
+			background-color: $white;
+		}
+	}
+}

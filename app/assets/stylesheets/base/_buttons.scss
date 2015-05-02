@@ -27,7 +27,6 @@ button, .btn {
   @include media($desktop) {
     width: auto;
     height: auto;
-    padding: .75em 2em;
   }
 
   a {
@@ -52,7 +51,7 @@ button, .btn {
 
 button.google {
   background-color: $google-red;
-  border: 1px solid darken($google-red, 20%);
+  border: 1px solid darken($google-red, 10%);
   box-shadow: 0 1px 2px 0 lighten($google-red, 30%);
 
   &:hover,
@@ -63,7 +62,7 @@ button.google {
 
 button.facebook {
   background-color: $facebook-blue;
-  border: 1px solid darken($facebook-blue, 20%);
+  border: 1px solid darken($facebook-blue, 10%);
   box-shadow: 0 1px 2px 0 lighten($facebook-blue, 30%);
 
   &:hover,

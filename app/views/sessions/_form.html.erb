@@ -1,0 +1,28 @@
+<h1>Log In</h1>
+
+<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+
+<%= link_to '/auth/google_oauth2' do %>
+  <button class="google">Log In With Google</button>
+<% end %>
+
+<%= link_to '/auth/facebook' do %>
+	<button class="facebook">Log In With Facebook</button>
+<% end %>
+
+<div class="or-text">
+	<span>or</span>
+</div>
+
+<%= form_for(:session, url: login_path, html: {class: "user-form", id: "login-form"}) do |f| %>
+	<%= f.label :email %>
+	<%= f.email_field :email %>
+
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+	<%= link_to "forgot?", new_password_reset_path %>
+
+	<%= f.submit "Log In" %>
+<% end %>
+
+<p>Need your activation email resent?  <%= link_to "click here", new_account_activation_path %></p>
