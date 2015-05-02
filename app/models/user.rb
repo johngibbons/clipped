@@ -47,12 +47,16 @@ class User < ActiveRecord::Base
   end
 
   def avatar_from_url(url)
-    avatar_url = URI.parse(url)
-    if !avatar_url.scheme
-      avatar_url.scheme = 'https'
+    if url
+      avatar_url = URI.parse(url)
+      if !avatar_url.scheme
+        avatar_url.scheme = 'https'
+      end
+      avatar_url = avatar_url.to_s
+      self.avatar = URI.parse(avatar_url)
+    else
+      set_default_avatar(view_context.image_url("profile.png"))
     end
-    avatar_url = avatar_url.to_s
-    self.avatar = URI.parse(avatar_url)
   end
 
   def set_default_avatar(url)
