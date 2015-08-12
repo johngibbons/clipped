@@ -19,46 +19,76 @@
 //= require jquery.Jcrop
 //= require_tree .
 
-function formatTags(tag_input_field) {
-	  deleteNextIteration = true;
+$(document).ready(function(){
+  Turbolinks.enableProgressBar();
 
-    $(tag_input_field).on('focusout',function(){    
-      var txt= this.value.replace(/[^a-zA-Z0-9\+\-\.\#\s]/g,''); // allowed characters
-      if(txt) {
-        $(this).before('<span class="temporary tag"><span class="tag-data">'+ txt.toLowerCase() + '</span>' + '<span class="delete-tag fa fa-remove"></span></span>');
-      }
-      this.value="";
-      }).on('keyup',function( e ){
-      	checkEnter(e);
-	      // if: comma,enter (delimit more keyCodes with | pipe)
-	      if(/(188|13)/.test(e.which)) {
-	        $(this).focusout();
-	      }
-	      else if(/^8$/.test(e.which)) {
-	        if(deleteNextIteration) {
-	          $('.tag').last().remove();
-	        }
-	      }
-
-	      if($(this).val().length == 0 ) {
-	        deleteNextIteration = true;
-	      }
-	      else {
-	        deleteNextIteration = false;
-	      }
+  if ($(".modal").length) {
+    $(".modal").each(function(){
+      $(this).find(".modal-state").on("change", function(){
+        if ($(this).is(":checked")) {
+          $(".modal-inner").addClass("animated slideInUp").css("display", "block");
+          $("body").addClass(".modal-open");
+        } else {
+          $("body").removeClass(".modal-open");
+        }
+      });
     });
-  };
 
-  function getTags( tags ) {
-    var a = [];
-    for ( var i = 0; i < tags.length; i++ ) {
-      a.push( tags[ i ].textContent );
-    }
-    return a.join();
+    $(".modal-close, .modal-fade-screen").on("click", function() {
+      $(".modal-inner").removeClass("slideInUp").addClass("slideOutDown");
+      $(".modal-state:checked").prop("checked", false).change();
+      setTimeout(function(){
+        $(".modal-inner").removeClass("slideOutDown").addClass("slideInUp").css("display", "none");
+      }, 300);
+    });
+
+    $(".modal-inner").on("click", function(e) {
+      e.stopPropagation();
+    });
   }
 
-  function checkEnter(e){
-		 e = e || event;
-		 var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
-		 return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
-		}
+});
+
+function formatTags(tag_input_field) {
+  deleteNextIteration = true;
+
+  $(tag_input_field).on('focusout',function(){    
+    var txt= this.value.replace(/[^a-zA-Z0-9\+\-\.\#\s]/g,''); // allowed characters
+    if(txt) {
+      $(this).before('<span class="temporary tag"><span class="tag-data">'+ txt.toLowerCase() + '</span>' + '<span class="delete-tag fa fa-remove"></span></span>');
+    }
+    this.value="";
+  }).on('keyup',function( e ){
+    checkEnter(e);
+    // if: comma,enter (delimit more keyCodes with | pipe)
+    if(/(188|13)/.test(e.which)) {
+      $(this).focusout();
+    }
+    else if(/^8$/.test(e.which)) {
+      if(deleteNextIteration) {
+        $('.tag').last().remove();
+      }
+    }
+
+    if($(this).val().length == 0 ) {
+      deleteNextIteration = true;
+    }
+    else {
+      deleteNextIteration = false;
+    }
+  });
+};
+
+function getTags( tags ) {
+  var a = [];
+  for ( var i = 0; i < tags.length; i++ ) {
+    a.push( tags[ i ].textContent );
+  }
+  return a.join();
+}
+
+function checkEnter(e){
+  e = e || event;
+  var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
+  return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
+}

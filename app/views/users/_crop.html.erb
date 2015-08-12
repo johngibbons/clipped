@@ -1,18 +1,38 @@
-<div id="edit-user-avatar">
-	<%= image_tag @user.avatar.url(:large), :id => "cropbox", data: { ratio: @user.ratio, 
-																																		crop_x: @user.crop_x, 
-																																		crop_y: @user.crop_y,
-																																		crop_w: @user.crop_w,
-																																		crop_h: @user.crop_h,
-																																		large_img_w: @user.avatar_geometry(:large).width,
-																																		large_img_h: @user.avatar_geometry(:large).height,
-																																		large_img_url: @user.avatar.url(:large) } %>
-
-	<div id="profile-preview" style="width: 150px; height: 150px; overflow: hidden;">
-		<%= image_tag @user.avatar.url(:profile), id: "previewHolder", class: "avatar", style: "width: 150px;" %>
-	</div>
-	<%= link_to "Edit Crop", "#", id: "edit-crop" %>
-	<%= link_to "Crop", "#", id: "submit-crop", style: "display:none;" %>
-
-	<%= f.file_field :avatar %>
+<div id="edit-user-avatar" class="modal">
+  <label for="modal-edit-avatar">
+    <div class="modal-trigger">
+      <%= image_tag @user.avatar.url(:profile), id: "profile-avatar", class: "avatar" %>
+      <div class="hover-overlay">
+        <i class="fa fa-camera"></i>
+      </div>
+    </div>
+  </label>
+  <input class="modal-state" id="modal-edit-avatar" type="checkbox" />
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="modal-edit-avatar"></div>
+      <h1>Edit Avatar</h1>
+      <div class="modal-left">
+        <div id="avatar-preview-container">
+          <%= image_tag @user.avatar.url(:profile), id: "avatar-preview", class: "avatar" %>
+        </div>
+        <div id="file-upload">
+          <span>Upload new image</span>
+          <%= a.file_field :avatar, id: "avatar-upload" %>
+        </div>
+        <%= a.submit "Save", id: "submit-crop" %>
+      </div>
+      <div class="modal-right">
+        <%= image_tag @user.avatar.url(:original), :id => "cropbox",
+          data: {
+            width: @user.avatar_original_width,
+            crop_x: @user.crop_x,
+            crop_y: @user.crop_y,
+            crop_w: @user.crop_w,
+            crop_h: @user.crop_h,
+            image_url: @user.avatar.url(:original)
+          } %>
+      </div>
+    </div>
+  </div>
 </div>

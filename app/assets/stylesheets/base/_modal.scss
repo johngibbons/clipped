@@ -1,0 +1,119 @@
+.modal {
+  label {
+  }
+
+  .modal-state {
+    display: none;
+  }
+
+  .modal-fade-screen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.85);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .2s;
+    transition-timing-function: cubic-bezier(.17,.67,.85,1.13);
+    z-index: 99999;
+
+    @include media($desktop) {
+      padding-top: 10em;
+    }
+  }
+
+  .modal-bg {
+    position: absolute;
+    cursor: pointer;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: $white;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      margin: -3px 0 0 -1px;
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      bottom: 0;
+      left: 50%;
+      height: .15em;
+      width: 2rem;
+      transform: rotate(45deg);
+      background-color: $light-gray;
+    }
+
+    &:hover:before,
+    &:hover:after {
+      background-color: darken($light-gray, 10%);
+    }
+
+    &:before {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .modal-inner {
+    position: relative;
+    display: none;
+    top: 0.5em;
+    animation-duration: 0.25s;
+    background-color: $white;
+    border-radius: $base-border-radius;
+    margin-top: 0;
+    margin: auto;
+    max-height: 95%;
+    width: 95%;
+    overflow: auto;
+    padding: $modal-padding;
+
+    @include media($tablet) {
+      max-height: 70%;
+      padding: $modal-padding;
+      width: 60%;
+    }
+
+    @include media($desktop) {
+      width: 50%;
+    }
+
+    h1 {
+      padding: 0;
+      margin: 0;
+    }
+
+    p {
+
+    }
+
+    .modal-left {
+      width: 30%;
+      float: left;
+    }
+
+    .modal-right {
+      width: 70%;
+      float: left;
+    }
+  }
+
+  .modal-state:checked + .modal-fade-screen {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-open {
+    overflow: hidden;
+  }
+}

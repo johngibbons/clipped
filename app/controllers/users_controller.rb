@@ -73,14 +73,19 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     authorize @user
-    if @user.update_attributes(user_params)
-      if @user.cropping?
-        @user.reprocess_avatar
+    respond_to do |format|
+      if @user.update_attributes(user_params)
+        if @user.cropping?
+          @user.reprocess_avatar
+        end
+        format.js {}
+        format.html {
+          flash[:success] = "Profile successfully updated"
+          redirect_to @user
+        }
+      else
+        render 'edit'
       end
-      flash[:success] = "Profile successfully updated"
-      redirect_to @user
-    else
-      render 'edit'
     end
   end
 

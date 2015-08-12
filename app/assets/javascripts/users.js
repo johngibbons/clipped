@@ -1,158 +1,219 @@
-$('.users.edit').ready(function () {
 
-  var ratio = $('#cropbox').data('ratio');
-  var crop_x = $('#cropbox').data('crop-x');
-  var crop_y = $('#cropbox').data('crop-y');
-  var crop_w = $('#cropbox').data('crop-w');
-  var crop_h = $('#cropbox').data('crop-h');
-  crop_x /= ratio;
-  crop_y /= ratio;
-  crop_w /= ratio;
-  crop_h /= ratio;
-  var large_img_w = $('#cropbox').data('large-img-w');
-  var large_img_h = $('#cropbox').data('large-img-h');
-  var large_img_url = $('#cropbox').data('large-img-url');
-  var jcrop_api;
+var profilePicture = {
 
-  $("#edit-crop").click(function() {
-    $("#submit-crop").show();
-    $(this).hide();
-    $("#previewHolder").attr('src', large_img_url);
-    $("#previewHolder").removeClass("avatar");
-    $("#profile-preview").addClass("avatar");
-    $("#profile-preview").css("box-sizing", "content-box");
-    $('#cropbox').Jcrop({
-      onChange: update_crop,
-      onSelect: update_crop,
-      setSelect: [ crop_x, crop_y, crop_x + crop_w, crop_y + crop_h ],
-      aspectRatio: 1
-    }, function() {
-      jcrop_api = this;
+  $cropImage: null,
+  $editLink: null,
+  $submitLink: null,
+  $avatarContainer: null,
+  $avatarImage: null,
+  $input: null,
+  image: {},
+
+  init: function(options) {
+    var self = this;
+
+    //default values
+    self.$cropImage = $("#cropbox");
+    self.$editLink = $(".modal-trigger");
+    self.$submitLink = $("#submit-crop");
+    self.$avatarContainer = $("#avatar-preview-container");
+    self.$avatarImage = $("#avatar-preview");
+    self.$input = $("#avatar-upload");
+
+    //if any options, overwrite defaults
+    $.extend(self, options);
+    self.imageURL = self.$cropImage.data("image-url");
+
+    self.bindHandlers();
+    self.calculateDimensions();
+    self.initiateCrop();
+  },
+
+  bindHandlers: function() {
+    var self = this;
+
+    self.$submitLink.on("click", function(e){
+      self.submitCrop(e);
     });
-    $(".jcrop-holder").show();
-    $("#user_avatar").hide();
-  });
 
-  $("#submit-crop").click(function() {
-    $(this).hide();
-    $(".jcrop-holder").hide();
-    $("#edit-crop").show();
-    jcrop_api.destroy();  
-    $("#user_avatar").show();
-    $("#cropbox").hide();
-  });
+    self.$input.on("change", function() {
+      self.parseURLFromUploaded(this);
+    });
 
-  function update_crop(coords) {
-    console.log(coords);
-    var rx = 150/coords.w;
-    var ry = 150/coords.h;
-    $('#previewHolder').css({
-      width: Math.round(rx * large_img_w) + 'px',
-      height: Math.round(ry * large_img_h) + 'px',
+  },
+
+  calculateDimensions: function() {
+    var self = this;
+
+    self.cropX = self.$cropImage.data("crop-x");
+    self.cropY = self.$cropImage.data("crop-y");
+    self.cropW = self.$cropImage.data("crop-w");
+    self.cropH = self.$cropImage.data("crop-h");
+
+    self.$cropImage.w = self.$cropImage.outerWidth();
+    self.$cropImage.h = self.$cropImage.outerHeight();
+
+    var tempImage = new Image();
+    tempImage.src = self.$cropImage.attr("src");
+    self.$cropImage.nw = tempImage.naturalWidth;
+    self.$cropImage.nh = tempImage.naturalHeight;
+    console.log(self.$cropImage.nw);
+    console.log(self.$cropImage.nh);
+
+    self.$avatarImage.w = self.$avatarImage.outerWidth();
+    self.$avatarImage.h = self.$avatarImage.outerHeight();
+
+    self.$avatarContainer.w = self.$avatarContainer.outerWidth();
+    self.$avatarContainer.h = self.$avatarContainer.outerHeight();
+  },
+
+  initiateCrop: function(e) {
+    var self = this;
+
+      self.$avatarImage.attr("src", self.imageURL).removeClass("avatar");
+      self.$avatarContainer.addClass("avatar").css("box-sizing", "content-box");
+      self.$cropImage.Jcrop({
+        boxWidth: 450,
+        boxHeight: 300,
+        setSelect: [ self.cropX, self.cropY, self.cropX + self.cropW, self.cropY + self.cropH ],
+        onChange: self.updateCrop,
+        onSelect: self.updateCrop,
+        aspectRatio: 1,
+      }, function() {
+        self.jcropApi = this;
+      });
+  },
+
+  updateCrop: function(coords){
+    var self = profilePicture;
+
+    var rx = self.$avatarContainer.w/coords.w;
+    var ry = self.$avatarContainer.h/coords.h;
+
+    console.log("avatarcontainerwidth", self.$avatarContainer.w);
+    console.log("avatarcontainerheight", self.$avatarContainer.h);
+    console.log("coords", coords);
+    console.log("naturalWidth", self.$cropImage.nw);
+    console.log("naturalHeight", self.$cropImage.nh);
+
+    self.$avatarImage.css({
+      width: Math.round(rx * self.$cropImage.nw) + 'px',
+      height: Math.round(ry * self.$cropImage.nh) + 'px',
       marginLeft: '-' + Math.round(rx * coords.x) + 'px',
       marginTop: '-' + Math.round(ry * coords.y) + 'px'
     });
 
-    crop_x = coords.x;
-    crop_y = coords.y;
-    crop_w = coords.w;
-    crop_h = coords.h;
+    self.cropX = coords.x;
+    self.cropY = coords.y;
+    self.cropW = coords.w;
+    self.cropH = coords.h;
 
-    $('#crop_x').val(Math.floor(crop_x * ratio));
-    $('#crop_y').val(Math.floor(crop_y * ratio));
-    $('#crop_w').val(Math.floor(crop_w * ratio));
-    $('#crop_h').val(Math.floor(crop_h * ratio));
-  }
+    $('#crop_x').val(Math.floor(self.cropX));
+    $('#crop_y').val(Math.floor(self.cropY));
+    $('#crop_w').val(Math.floor(self.cropW));
+    $('#crop_h').val(Math.floor(self.cropH));
+  },
 
-  function readURL(input) {
-    if (input.files && input.files[0]) {
+  submitCrop: function(e) {
+    var self = this;
+
+    self.$submitLink.on("ajax:success", function(e, data, status, xhr) {
+      console.log("ajax success");
+      $(".jcrop-holder").hide();
+      self.jcropApi.destroy();
+      self.$cropImage.hide();
+
+      self.calculateDimensions();
+    });
+  },
+
+  parseURLFromUploaded: function(input) {
+    var self = this;
+
+    var file = input.files[0];
+    var fileType = /image.*/;
+
+    if ( file.type.match(fileType) ) {
+
       var reader = new FileReader();
+
       reader.onload = function(e) {
-        var image = new Image();
-        image.src = e.target.result;
+        self.generatePreviewFromUpload(e, reader);
+      }
 
-        image.onload = function() {
-          w = this.width;
-          h = this.height;
-          if (w > h) {
-            var mult = 150 / h;
-            var img_w =  Math.round(mult * w);
-            $('#previewHolder').attr({  
-              height: 150,
-              width: img_w 
-            });
-          }
-          else {
-            var mult = 150 / w;
-            var img_h = Math.round(mult * h);
-            $('#previewHolder').attr({  
-              width: 150,
-              height: img_h
-            });
-          }
-          $('#previewHolder').attr('src', this.src);
-          $('#previewHolder').removeClass("avatar");
-          $('#previewHolder').css({
-            width: "",
-            height: ""
-          });
-          $("#profile-preview").css("box-sizing", "content-box");
-          $('#profile-preview').addClass("avatar");
+      reader.readAsDataURL(file);
 
-          $("#submit-crop").show();
-          $("#edit-crop").hide();
-
-          $("#cropbox").attr('src', this.src);
-          if (w > h) {
-            var mult = 500 / w;
-            var img_h =  Math.round(mult * h);
-            large_img_w = 500;
-            large_img_h = img_h;
-            ratio = w / large_img_w;
-            $('#cropbox').attr('height', img_h);
-            $('#cropbox').attr('width', 500);
-            $('#cropbox').css({
-              width: "",
-              height: ""
-            });
-          }
-          else {
-            var mult = 500 / h;
-            var img_w = Math.round(mult * w);
-            large_img_w = img_w;
-            large_img_h = 500;
-            ratio = w / large_img_w;
-            $('#cropbox').attr('width', img_w);
-            $('#cropbox').attr('height', 500);
-            $('#cropbox').css({
-              width: "",
-              height: ""
-            });
-          }
-
-          $('#cropbox').Jcrop({
-            onChange: update_crop,
-            onSelect: update_crop,
-            setSelect: [0,0,500,500],
-            aspectRatio: 1
-            }, function() {
-              jcrop_api = this;
-            });
-          $(".jcrop-holder").show();
-
-
-          $("#edit-crop").click(function() {
-            $("#previewHolder").attr('src', image.src);
-          });
-        };
-      };
-
-      reader.readAsDataURL(input.files[0]);
+    } else {
+      alert("file must be an image");
     }
-  }
 
-  $("#user_avatar").change(function() {
-    readURL(this);
+  },
+
+  generatePreviewFromUpload: function(e, reader) {
+    var self = this;
+
+    self.newImage = new Image();
+    self.newImage.src = reader.result;
+    self.$cropImage.nw = self.newImage.naturalWidth;
+    self.$cropImage.nh = self.newImage.naturalHeight;
+
+    self.newImage.onload = function() {
+      self.setCropboxImage(this);
+      self.setAvatarPreview(this);
+    };
+  },
+
+  setAvatarPreview: function(image) {
+    var self = this;
+
+    self.$avatarImage.attr('src', image.src).removeClass("avatar");
+
+    if ( w >= h ) {
+      var origToAvatarRatio = self.$avatarImage.h / self.$cropImage.nh;
+      var previewWidth = Math.round( origToAvatarRatio * $self.$cropImage.nw );
+      self.$avatarImage.css({
+        height: self.$avatarImage.h + "px",
+        width: previewWidth + "px"
+      });
+    } else {
+      var origToAvatarRatio = self.$avatarImage.w / self.$cropImage.nw;
+      var previewHeight = Math.round( origToAvatarRatio * self.$cropImage.nh );
+      self.$avatarImage.css({
+        height: previewHeight + "px",
+        width: self.$avatarImage.w + "px"
+      });
+    }
+
+    self.$avatarContainer.css("box-sizing", "content-box").addClass("avatar");
+
+  },
+
+  setCropboxImage: function(image) {
+    var self = this;
+
+    self.$cropImage.w = $(".jcrop-holder").outerWidth();
+    self.$cropImage.h = $(".jcrop-holder").outerHeight();
+
+    self.jcropApi.setImage(image.src, function(){
+      self.jcropApi.setSelect([0, 0, self.$cropImage.nw, self.$cropImage.nh]);
+    });
+  }
+};
+
+
+$(".users.edit").ready(function() {
+
+  $(".modal-trigger").on("click", function(){
+    profilePicture.init();
+  });
+
+  $(".modal-trigger").on("mouseenter", function(){
+    $(".hover-overlay").addClass("animated zoomIn").css("display", "block");
+  }).on("mouseleave", function(){
+    $(".hover-overlay").removeClass("zoomIn").addClass("zoomOut");
+    setTimeout(function(){
+      $(".hover-overlay").removeClass("zoomOut").css("display", "none");
+    }, 300);
   });
 
 });

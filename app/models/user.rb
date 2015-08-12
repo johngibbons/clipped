@@ -97,6 +97,10 @@ class User < ActiveRecord::Base
     self.avatar_geometry(:original).width / self.avatar_geometry(:large).width
   end
 
+  def avatar_original_width
+    self.avatar_geometry(:original).width
+  end
+
   # Activates an account.
   def activate(token)
     if !self || self.activated? || !self.authenticated?(:activation, token)

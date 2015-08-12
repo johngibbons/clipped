@@ -3,120 +3,119 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .avatar {
-	width: 150px;
-	height: auto;
-	border: 5px solid $light-gray;
-	margin-bottom: 25px;
-	border-radius: 100%;
+  width: $avatar-size;
+  height: auto;
+  border: 5px solid $light-gray;
+  margin-bottom: 25px;
+  border-radius: 100%;
 }
 
 .user_profile {
-	display: block;
-	width: 100%;
-	text-align: center;
-	padding-bottom: 50px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 50px;
   background-color: $white;
   margin-top: 144px;
 
   @include media($tablet) {
-  	margin-top: 100px;
+    margin-top: 100px;
   }
 
   h1 {
-  	text-align: center;
+    text-align: center;
   }
 
   .avatar {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	}
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
 
-	.upload-btn {
-		width: 350px;
-		max-width: 90%;
-		padding-top: 1.5em;
-		padding-bottom: 1.5em;
-		margin-top: 25px;
-	}
+  .upload-btn {
+    width: 350px;
+    max-width: 90%;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    margin-top: 25px;
+  }
 
 }
 
 .user-name {
-	font-size: $base-font-size * 2;
-	padding: 0.5em 0 0;
-	margin-bottom: 0.25em;
+  font-size: $base-font-size * 2;
+  padding: 0.5em 0 0;
+  margin-bottom: 0.25em;
 }
 
 .jcrop-holder {
-	display: none;
-	margin: 0 auto 2em;
 }
 
-#previewHolder {
-	max-width: none;
+#avatar-preview {
+  max-width: none;
+  width: $avatar-size;
 }
 
 #cropbox {
-	display:none;
+  max-width: none;
 }
 
 .user-thumb {
-	display: block;
-	width: 75%;
-	margin: 0 auto;
-	margin-bottom: $gutter();
+  display: block;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: $gutter();
 
-	.avatar {
-		width: 100px;
-		background-color: $white;
-	}
+  .avatar {
+    width: $avatar-size;
+    background-color: $white;
+  }
 
-	.card {
-		text-align: left;
-		height: 200px;
-		padding: 1em;
-		overflow: hidden;
+  .card {
+    text-align: left;
+    height: 200px;
+    padding: 1em;
+    overflow: hidden;
 
-		.hover-overlay {
-			opacity: 1;
-			padding: 2em 0 0 2em;
-			left: -100%;
-			transition: all .2s ease;
-			transition-timing-function: cubic-bezier(.17,.67,.85,1.13);
-		}
+    .hover-overlay {
+      opacity: 1;
+      padding: 2em 0 0 2em;
+      left: -100%;
+      transition: all .2s;
+      transition-timing-function: cubic-bezier(.17,.67,.85,1.13);
+    }
 
-		&:hover {
-			.hover-overlay {
-				left: 0;
-			}
-		}
-	}
+    &:hover {
+      .hover-overlay {
+        left: 0;
+      }
+    }
+  }
 
-	img {
-		display: block;
-		margin: 0 auto 1em;
-	}
+  img {
+    display: block;
+    margin: 0 auto 1em;
+  }
 
-	@include media($tablet) {
-		@include span-columns(2 of 8);
-		@include omega(4n);
-	}
+  @include media($tablet) {
+    @include span-columns(2 of 8);
+    @include omega(4n);
+  }
 
-	@include media($desktop) {
-		@include omega-reset(4n);
-		@include span-columns(2 of 12);
-		@include omega(6n);
-	}
+  @include media($desktop) {
+    @include omega-reset(4n);
+    @include span-columns(2 of 12);
+    @include omega(6n);
+  }
 
-	@include media($large) {
-		@include omega-reset(4n);
-		@include omega-reset(6n);
-		@include span-columns(2 of 16);
-		@include omega(8n);
-	}
- 
+  @include media($large) {
+    @include omega-reset(4n);
+    @include omega-reset(6n);
+    @include span-columns(2 of 16);
+    @include omega(8n);
+  }
+
   .user-thumb-name {
     font-weight: 700;
     text-align: center;
@@ -126,49 +125,121 @@
     color: $base-font-color;
 
     .stats-label {
-    	padding-right: 1em;
+      padding-right: 1em;
     }
 
     .stats-val {
-    	font-weight: 700;
+      font-weight: 700;
     }
   }
 }
 
 #user-created-date {
-	color: $medium-gray;
-	text-transform: uppercase;
-	font-size: 0.8em;
-	font-weight: 700;
+  color: $medium-gray;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 700;
 }
 
 #users-index-container {
-	padding-top: 3em;
-	border-top: $base-border;
+  padding-top: 3em;
+  border-top: $base-border;
 }
 
 #edit-user-avatar {
-	text-align: center;
-	border-bottom: $base-border;
-	margin-bottom: 2em;
+  text-align: center;
+  margin-bottom: 2em;
 
-	#profile-preview {
-		margin: 0 auto;
-	}
+  .modal-trigger {
+    position: relative;
+    cursor: pointer;
+    width: $avatar-size;
+    height: $avatar-size;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    .fa {
+      position: absolute;
+      font-size: $base-font-size * 3;
+      color: $white;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hover-overlay {
+      display: none;
+      animation-duration: 0.25s;
+      position: absolute;
+      width: $avatar-size;
+      height: $avatar-size;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 100%;
+    }
+
+  }
+
+  #file-upload {
+
+    @extend .btn;
+    width: 100%;
+    background-color: $lightest-gray;
+    border-color: $light-gray;
+    box-shadow: $base-box-shadow;
+    color: $dark-gray;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    &:hover {
+      background-color: $white;
+      color: $dark-gray;
+    }
+
+    #avatar-upload {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+  }
+
+  #profile-avatar {
+    margin-bottom: 0;
+  }
+
+  .modal-trigger:hover > .hover-overlay {
+    display: block;
+  }
+
+  #avatar-preview-container {
+    margin: 0 auto 1em;
+    width: $avatar-size;
+    height: $avatar-size;
+    overflow: hidden;
+  }
 }
 
 #edit-crop, #submit-crop {
-	display: block;
-	margin: 1em 0;
+  display: block;
+  margin: 1em 0;
 }
 
 #user_avatar {
-	margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 
 #delete-user {
-	font-size: 0.8em;
-	text-transform: uppercase;
-	color: $google-red;
-	font-weight: 600;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: $google-red;
+  font-weight: 600;
 }

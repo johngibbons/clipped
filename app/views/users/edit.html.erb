@@ -2,30 +2,33 @@
 
 <div class="gateway-form">
 
-<h1>Update Your Profile</h1>
+  <h1>Update Your Profile</h1>
 
-	<div class="edit_form">
-		<%= form_for @user, html: {class: "signup-form", id: "edit-user-form"} do |f| %>
-	    <%= render 'shared/error_messages', object: f.object %>
+  <div class="edit_form">
 
-	  	<%= render partial: "crop", locals: {f: f} %>
+    <%= form_for @user, remote: true, html: {class: "signup-form", id: "edit-user-form"} do |a| %>
+      <%= render partial: "crop", locals: {a: a} %>
 
-			<% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
-			  <%= f.hidden_field attribute, :id => attribute %>
-			<% end %>
-			<%= f.label :email %>
-			<%= f.email_field :email %>
+      <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+        <%= a.hidden_field attribute, :id => attribute %>
+      <% end %>
+    <% end %>
 
-			<%= f.label :password %>
-			<%= f.password_field :password %>
+    <%= form_for @user, html: {class: "signup-form", id: "edit-user-form"} do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :email %>
+      <%= f.email_field :email %>
 
-			<%= f.label :password_confirmation, "Password Confirmation" %>
-			<%= f.password_field :password_confirmation %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
 
-			<%= f.submit "Save Changes" %>
-		<% end %>
+      <%= f.label :password_confirmation, "Password Confirmation" %>
+      <%= f.password_field :password_confirmation %>
 
-		<%= link_to "delete account", current_user, method: :delete, data: { confirm: "delete your account?" }, id: "delete-user" %>
+      <%= f.submit "Save Changes" %>
+    <% end %>
 
-	</div>
+    <%= link_to "delete account", current_user, method: :delete, data: { confirm: "delete your account?" }, id: "delete-user" %>
+
+  </div>
 </div>
