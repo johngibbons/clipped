@@ -225,6 +225,7 @@
     width: $avatar-size;
     height: $avatar-size;
     overflow: hidden;
+    box-sizing: content-box;
   }
 }
 

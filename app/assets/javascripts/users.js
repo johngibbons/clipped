@@ -2,8 +2,8 @@
 var profilePicture = {
 
   $cropImage: null,
-  $editLink: null,
   $submitLink: null,
+  $cancelLink: null,
   $avatarContainer: null,
   $avatarImage: null,
   $input: null,
@@ -14,8 +14,8 @@ var profilePicture = {
 
     //default values
     self.$cropImage = $("#cropbox");
-    self.$editLink = $(".modal-trigger");
     self.$submitLink = $("#submit-crop");
+    self.$cancelLink = $(".modal-close, .modal-fade-screen");
     self.$avatarContainer = $("#avatar-preview-container");
     self.$avatarImage = $("#avatar-preview");
     self.$input = $("#avatar-upload");
@@ -36,6 +36,10 @@ var profilePicture = {
       self.submitCrop(e);
     });
 
+    self.$cancelLink.on("click", function(e){
+      self.cancelCrop(e);
+    });
+
     self.$input.on("change", function() {
       self.parseURLFromUploaded(this);
     });
@@ -50,28 +54,21 @@ var profilePicture = {
     self.cropW = self.$cropImage.data("crop-w");
     self.cropH = self.$cropImage.data("crop-h");
 
-    self.$cropImage.w = self.$cropImage.outerWidth();
-    self.$cropImage.h = self.$cropImage.outerHeight();
-
     var tempImage = new Image();
     tempImage.src = self.$cropImage.attr("src");
     self.$cropImage.nw = tempImage.naturalWidth;
     self.$cropImage.nh = tempImage.naturalHeight;
-    console.log(self.$cropImage.nw);
-    console.log(self.$cropImage.nh);
 
-    self.$avatarImage.w = self.$avatarImage.outerWidth();
-    self.$avatarImage.h = self.$avatarImage.outerHeight();
 
-    self.$avatarContainer.w = self.$avatarContainer.outerWidth();
-    self.$avatarContainer.h = self.$avatarContainer.outerHeight();
+    self.$avatarContainer.w = self.$avatarContainer.width();
+    self.$avatarContainer.h = self.$avatarContainer.height();
+    console.log(self.$avatarContainer.w);
+    console.log(self.$avatarContainer.h);
   },
 
   initiateCrop: function(e) {
     var self = this;
 
-      self.$avatarImage.attr("src", self.imageURL).removeClass("avatar");
-      self.$avatarContainer.addClass("avatar").css("box-sizing", "content-box");
       self.$cropImage.Jcrop({
         boxWidth: 450,
         boxHeight: 300,
@@ -90,12 +87,6 @@ var profilePicture = {
     var rx = self.$avatarContainer.w/coords.w;
     var ry = self.$avatarContainer.h/coords.h;
 
-    console.log("avatarcontainerwidth", self.$avatarContainer.w);
-    console.log("avatarcontainerheight", self.$avatarContainer.h);
-    console.log("coords", coords);
-    console.log("naturalWidth", self.$cropImage.nw);
-    console.log("naturalHeight", self.$cropImage.nh);
-
     self.$avatarImage.css({
       width: Math.round(rx * self.$cropImage.nw) + 'px',
       height: Math.round(ry * self.$cropImage.nh) + 'px',
@@ -112,6 +103,45 @@ var profilePicture = {
     $('#crop_y').val(Math.floor(self.cropY));
     $('#crop_w').val(Math.floor(self.cropW));
     $('#crop_h').val(Math.floor(self.cropH));
+
+  },
+
+  parseURLFromUploaded: function(input) {
+    var self = this;
+
+    var file = input.files[0];
+    var fileType = /image.*/;
+
+    if ( file.type.match(fileType) ) {
+
+      var reader = new FileReader();
+
+      reader.onload = function() {
+        self.generatePreviewFromUpload(reader);
+      }
+
+      reader.readAsDataURL(file);
+
+    } else {
+      alert("file must be an image");
+    }
+
+  },
+
+  generatePreviewFromUpload: function(reader) {
+    var self = this;
+
+    var newImage = new Image();
+    newImage.src = reader.result;
+    self.$cropImage.nw = newImage.naturalWidth;
+    self.$cropImage.nh = newImage.naturalHeight;
+
+    newImage.onload = function() {
+      self.jcropApi.setImage(newImage.src, function(){
+        self.jcropApi.setSelect([0, 0, self.$cropImage.nw, self.$cropImage.nh]);
+      });
+      self.$avatarImage.attr('src', newImage.src);
+    };
   },
 
   submitCrop: function(e) {
@@ -127,77 +157,13 @@ var profilePicture = {
     });
   },
 
-  parseURLFromUploaded: function(input) {
+  cancelCrop: function(e) {
     var self = this;
 
-    var file = input.files[0];
-    var fileType = /image.*/;
-
-    if ( file.type.match(fileType) ) {
-
-      var reader = new FileReader();
-
-      reader.onload = function(e) {
-        self.generatePreviewFromUpload(e, reader);
-      }
-
-      reader.readAsDataURL(file);
-
-    } else {
-      alert("file must be an image");
-    }
-
+    self.jcropApi.destroy();
+    self.$avatarImage.attr("src", self.$cropImage.attr("src"));
   },
 
-  generatePreviewFromUpload: function(e, reader) {
-    var self = this;
-
-    self.newImage = new Image();
-    self.newImage.src = reader.result;
-    self.$cropImage.nw = self.newImage.naturalWidth;
-    self.$cropImage.nh = self.newImage.naturalHeight;
-
-    self.newImage.onload = function() {
-      self.setCropboxImage(this);
-      self.setAvatarPreview(this);
-    };
-  },
-
-  setAvatarPreview: function(image) {
-    var self = this;
-
-    self.$avatarImage.attr('src', image.src).removeClass("avatar");
-
-    if ( w >= h ) {
-      var origToAvatarRatio = self.$avatarImage.h / self.$cropImage.nh;
-      var previewWidth = Math.round( origToAvatarRatio * $self.$cropImage.nw );
-      self.$avatarImage.css({
-        height: self.$avatarImage.h + "px",
-        width: previewWidth + "px"
-      });
-    } else {
-      var origToAvatarRatio = self.$avatarImage.w / self.$cropImage.nw;
-      var previewHeight = Math.round( origToAvatarRatio * self.$cropImage.nh );
-      self.$avatarImage.css({
-        height: previewHeight + "px",
-        width: self.$avatarImage.w + "px"
-      });
-    }
-
-    self.$avatarContainer.css("box-sizing", "content-box").addClass("avatar");
-
-  },
-
-  setCropboxImage: function(image) {
-    var self = this;
-
-    self.$cropImage.w = $(".jcrop-holder").outerWidth();
-    self.$cropImage.h = $(".jcrop-holder").outerHeight();
-
-    self.jcropApi.setImage(image.src, function(){
-      self.jcropApi.setSelect([0, 0, self.$cropImage.nw, self.$cropImage.nh]);
-    });
-  }
 };
 
 

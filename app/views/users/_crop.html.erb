@@ -13,8 +13,8 @@
       <div class="modal-close" for="modal-edit-avatar"></div>
       <h1>Edit Avatar</h1>
       <div class="modal-left">
-        <div id="avatar-preview-container">
-          <%= image_tag @user.avatar.url(:profile), id: "avatar-preview", class: "avatar" %>
+        <div id="avatar-preview-container" class="avatar">
+          <%= image_tag @user.avatar.url(:original), id: "avatar-preview" %>
         </div>
         <div id="file-upload">
           <span>Upload new image</span>
