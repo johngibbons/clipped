@@ -26,14 +26,30 @@ th {
 
 .tabs {
   a {
+    display: block;
+    width: 100%;
     padding: 0.5em 1em;
+    text-align: center;
     background-color: $white;
     vertical-align: super;
     position: relative;
 
     &.active {
       border: $base-border;
-      border-bottom-color: $white;
+    }
+
+    @include media($tablet) {
+      display: inline;
+      width: auto;
+      text-align: left;
+      background-color: $white;
+      vertical-align: super;
+      position: relative;
+
+      &.active {
+        border: $base-border;
+        border-bottom-color: $white;
+      }
     }
   }
 }

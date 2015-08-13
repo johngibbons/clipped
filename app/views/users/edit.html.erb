@@ -6,12 +6,8 @@
 
   <div class="edit_form">
 
-    <%= form_for @user, remote: true, html: {class: "signup-form", id: "edit-user-form"} do |a| %>
-      <%= render partial: "crop", locals: {a: a} %>
-
-      <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
-        <%= a.hidden_field attribute, :id => attribute %>
-      <% end %>
+    <%= form_for @user, html: {class: "signup-form", id: "edit-user-form"} do |a| %>
+      <%= render 'crop', a: a %>
     <% end %>
 
     <%= form_for @user, html: {class: "signup-form", id: "edit-user-form"} do |f| %>

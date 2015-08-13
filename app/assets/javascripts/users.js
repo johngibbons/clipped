@@ -3,6 +3,7 @@ var profilePicture = {
 
   $cropImage: null,
   $submitLink: null,
+  $submitForm: null,
   $cancelLink: null,
   $avatarContainer: null,
   $avatarImage: null,
@@ -15,6 +16,7 @@ var profilePicture = {
     //default values
     self.$cropImage = $("#cropbox");
     self.$submitLink = $("#submit-crop");
+    self.$submitForm = $("#edit-user-form");
     self.$cancelLink = $(".modal-close, .modal-fade-screen");
     self.$avatarContainer = $("#avatar-preview-container");
     self.$avatarImage = $("#avatar-preview");
@@ -32,7 +34,7 @@ var profilePicture = {
   bindHandlers: function() {
     var self = this;
 
-    self.$submitLink.on("click", function(e){
+    self.$submitForm.on("submit", function(e){
       self.submitCrop(e);
     });
 
@@ -70,7 +72,7 @@ var profilePicture = {
     var self = this;
 
       self.$cropImage.Jcrop({
-        boxWidth: 450,
+        boxWidth: 330,
         boxHeight: 300,
         setSelect: [ self.cropX, self.cropY, self.cropX + self.cropW, self.cropY + self.cropH ],
         onChange: self.updateCrop,
@@ -147,14 +149,8 @@ var profilePicture = {
   submitCrop: function(e) {
     var self = this;
 
-    self.$submitLink.on("ajax:success", function(e, data, status, xhr) {
-      console.log("ajax success");
-      $(".jcrop-holder").hide();
-      self.jcropApi.destroy();
-      self.$cropImage.hide();
+    $(".modal-saving").show();
 
-      self.calculateDimensions();
-    });
   },
 
   cancelCrop: function(e) {
@@ -167,7 +163,7 @@ var profilePicture = {
 };
 
 
-$(".users.edit").ready(function() {
+$(".users.edit, .users.show").ready(function() {
 
   $(".modal-trigger").on("click", function(){
     profilePicture.init();

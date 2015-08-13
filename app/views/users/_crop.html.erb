@@ -10,8 +10,11 @@
   <input class="modal-state" id="modal-edit-avatar" type="checkbox" />
   <div class="modal-fade-screen">
     <div class="modal-inner">
+      <div class="modal-saving">
+        <p>saving image</p>
+      </div>
       <div class="modal-close" for="modal-edit-avatar"></div>
-      <h1>Edit Avatar</h1>
+      <h2>Edit Profile Picture</h2>
       <div class="modal-left">
         <div id="avatar-preview-container" class="avatar">
           <%= image_tag @user.avatar.url(:original), id: "avatar-preview" %>
@@ -20,6 +23,9 @@
           <span>Upload new image</span>
           <%= a.file_field :avatar, id: "avatar-upload" %>
         </div>
+        <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+          <%= a.hidden_field attribute, :id => attribute %>
+        <% end %>
         <%= a.submit "Save", id: "submit-crop" %>
       </div>
       <div class="modal-right">

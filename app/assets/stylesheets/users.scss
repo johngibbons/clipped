@@ -74,9 +74,11 @@
 
   .card {
     text-align: left;
-    height: 200px;
     padding: 1em;
     overflow: hidden;
+
+    @include media($tablet) {
+    }
 
     .hover-overlay {
       opacity: 1;

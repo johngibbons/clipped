@@ -80,8 +80,13 @@ class UsersController < ApplicationController
         end
         format.js {}
         format.html {
-          flash[:success] = "Profile successfully updated"
-          redirect_to @user
+          if params[:user][:crop_h]
+            flash[:success] = "Profile image successfully updated"
+            redirect_to(request.referrer || @user)
+          else
+            flash[:success] = "Profile successfully updated"
+            redirect_to @user
+          end
         }
       else
         render 'edit'
