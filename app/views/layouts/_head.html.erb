@@ -1,12 +1,14 @@
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= full_title(yield(:title)) %></title>
-	<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Clipped" %>">
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Clipped" %>">
+  <%= favicon_link_tag %>
+  <%= favicon_link_tag 'clipped-icon-apple.png', rel: 'apple-touch-icon', type: 'image/png' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script src="//use.typekit.net/fut5bbc.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
-	<script src="https://checkout.stripe.com/checkout.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
 </head>
