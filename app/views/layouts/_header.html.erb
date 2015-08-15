@@ -1,10 +1,10 @@
 <header class="navigation" role="banner">
   <div class="navigation-wrapper">
-	  <%= link_to root_path, class: "logo" do %>
-		  <%= image_tag "logo-header.png", alt: 'Logo Image' %>
-		<% end %>
-		<a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
-		<nav role="navigation">
+    <%= link_to root_path, class: "logo" do %>
+      <%= image_tag "logo-header.png", alt: 'Logo Image' %>
+    <% end %>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
         <li class="nav-link more"><a href="javascript:void(0)">Browse</a>
           <ul class="submenu">
@@ -12,39 +12,40 @@
             <li class="nav-link"><%= link_to "Newest", controller: "search", action: "index", sort_uploads: "created_at" %></li>
           </ul>
         </li>
-		    <li class="nav-link"><%= link_to "About", about_path %></li>
-		    <li class="nav-link"><%= link_to "Help", help_path %></li>
-         <% if logged_in? %>
-        <li class="nav-link more"><a href="javascript:void(0)">Account</a>
-          <ul class="submenu">
-            <li class="nav-link"><%= link_to "My Images", current_user %></li>
-            <li class="nav-link"><%= link_to "Settings", edit_user_path(current_user) %></li>
-            <li class="nav-link"><%= link_to "Log out", logout_path, method: "delete" %></li>
-            <li><%= link_to "All Users", users_path(sort_users: "weighted_score") %></li>
-            <% if current_user.admin? %>
-              <li><%= link_to "Awaiting Approval", upload_moderation_index_path %></li>
-            <% end %>
-          </ul>
-        </li>
+        <li class="nav-link"><%= link_to "About", about_path %></li>
+        <li class="nav-link"><%= link_to "Help", help_path %></li>
+        <li class="nav-link"><%= link_to "Forum", "http://community.clipped.io" %></li>
+        <% if logged_in? %>
+          <li class="nav-link more"><a href="javascript:void(0)">Account</a>
+            <ul class="submenu">
+              <li class="nav-link"><%= link_to "My Images", current_user %></li>
+              <li class="nav-link"><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li class="nav-link"><%= link_to "Log out", logout_path, method: "delete" %></li>
+              <li><%= link_to "All Users", users_path(sort_users: "weighted_score") %></li>
+              <% if current_user.admin? %>
+                <li><%= link_to "Awaiting Approval", upload_moderation_index_path %></li>
+              <% end %>
+            </ul>
+          </li>
         <% else %>
-        <li class="nav-link"><%= link_to "Sign Up", signup_path %></li>
-      <% end %>
-      <% if logged_in? %>
-        <%= link_to new_upload_path do %>
-          <button>Upload</button>
+          <li class="nav-link"><%= link_to "Sign Up", signup_path %></li>
         <% end %>
-      <% else %>
-        <%= link_to login_path do %>
-          <button>Login</button>
+        <% if logged_in? %>
+          <%= link_to new_upload_path do %>
+            <button>Upload</button>
+          <% end %>
+        <% else %>
+          <%= link_to login_path do %>
+            <button>Login</button>
+          <% end %>
         <% end %>
-      <% end %>
 
-      <%= link_to donate_path do %>
-        <button class="secondary">Donate</button>
-      <% end %>
-		  </ul>
-		</nav>
-		<div class="navigation-tools">
+        <%= link_to donate_path do %>
+          <button class="secondary">Donate</button>
+        <% end %>
+      </ul>
+    </nav>
+    <div class="navigation-tools">
       <div class="search-bar">
         <%= form_tag search_index_path, :method => :get do %>
           <%= search_field_tag :search, params[:search] %>
@@ -59,4 +60,4 @@
 
 <div class="js-menu-screen sliding-menu-fade-screen"></div>
 
-    
+
