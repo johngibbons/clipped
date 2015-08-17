@@ -71,7 +71,7 @@ var uploader = {
       delete self.uploads[file.id];
     });
 
-    self.$dropzoneContainer.on("click.save", self.$saveAllBtn, function(){
+    self.$dropzoneContainer.on("click.save", "save-uploads", function(){
       self.saveAllUploads();
     });
 
