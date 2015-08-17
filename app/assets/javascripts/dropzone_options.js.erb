@@ -1,149 +1,261 @@
-$('.uploads.new').ready(function () {
+var uploader = {
 
-	// bind click functionality to future save button
-	$(".dropzone").on("click.save", "#save-uploads", function() {
-		var xhrs = [];
-		var userId = "";
-		$.each( url_location, function( key, url ) {
-			var preview = file_preview[key];
-			n = preview[0];
-			var taglist = $(n).find(".tag-data");
-			getTags(taglist);
-		  tags = getTags(taglist.get());
-		  var uploadId = $(n).find('[name="x-ignore-upload[id]"]').val();
-		  userId = $(n).find('[name="x-ignore-user[id]"]').val();
-	    var xhr = $.ajax({
-			    url: '/uploads/' + uploadId,
-			    type: 'PUT',
-			    dataType: "json",
-			    data: { upload: { tag_list: tags } },
-			    success: function(result) {
-			    }
-				});
-			xhrs.push(xhr)	
-	  });
+  $dropzoneContainer: null,
+  $uploaderContainer: null,
+  $previewsContainer: null,
 
-	  $.when.apply($, xhrs).done(function(){
-	    window.location.replace("/users/" + userId);
-		})
-	});
+  $instructions: null,
+  $controls: null,
+  $saveAllBtn: null,
+  $removeAllBtn: null,
 
-	//bind remove all functionality to future remove all button
-  $(".dropzone").on("click", "#remove-all-uploads", function() {
-  	dropzone.removeAllFiles(true);
-  	url_location = {};
-  	$("#save-uploads").prop("disabled", true);
-  	$("#remove-all-uploads").prop("disabled", true);
-  });
+  removeBtn: null,
+  dropzone: null,
+  counter: null,
 
-  $("#clickable").on("click", function(e) {
-  	console.log("click");
-  	e.preventDefault();
-  })
+  uploads: [],
+  xhrs: [],
 
-  var i = 0;
-	var url_location = {};
-	var file_preview = {};
-	var dzThumb = {};
- 	// disable auto discover
-	Dropzone.autoDiscover = false;
+  init: function() {
+    var self = this;
 
- 	var dropzone = new Dropzone( ".dropzone", {
-		maxFilesize: 50, // Set the maximum file size to 50 MB
-		maxThumbnailFilesize: 50,
-		paramName: "file", // Rails expects the file upload to be something like model[field_name]
-		addRemoveLinks: false, // Don't show remove links on dropzone itself.
-		acceptedFiles: 'image/*',
-		dictDefaultMessage: "Drag Images or Click Here to Upload",
-		clickable: "#clickable",
-		thumbnailHeight: 210,
-		thumbnailWidth: null,
-		previewTemplate: document.querySelector('#preview-template').innerHTML,
-		previewsContainer: "#upload-previews"
-	});
+    self.$dropzoneContainer = $(".dropzone");
+    self.$uploaderContainer = $("#uploader-container");
+    self.$previewsContainer = $("#upload-previews");
 
-	dropzone.on("removedfile", function(file) {
-		delete url_location[file.id]
-	});
+    self.$instructions = $("#dropzone-upload-text");
+    self.$controls = $("#uploader-controls");
+    self.$saveAllBtn = $("#save-uploads");
+    self.$removeAllBtn = $("#remove-all-uploads");
 
-	// Update the total progress bar
-	dropzone.on("totaluploadprogress", function(progress) {
-	  $('.dz-upload').width = progress + "%";
-	});
+    self.counter = 0;
 
-	dropzone.on("addedfile", function(file) {
-		$("#upload-previews").removeClass("flex-container");
-		$("#dropzone-upload-text").hide();
-  	$("#uploader-controls").show();
-  	$("#save-uploads").prop("disabled", true);
-  	$("#remove-all-uploads").prop("disabled", false);
-  	$("#uploader-container").removeClass("flex-container");
-  	// Create the remove button
-    var removeButton = Dropzone.createElement("<i class='dz-remove fa fa-minus-circle'></i>");
-    removeButton.addEventListener("click", function(e) {
-      // Remove the file preview.
-      dropzone.removeFile(file);
-    		var uploadId = $(this).parent().find('[name="x-ignore-upload[id]"]').val();
-				$.ajax({
-			    url: '/uploads/' + uploadId,
-			    type: 'DELETE',
-			    dataType: "script",
-			    success: function(result) {
-		        delete url_location[file.id]
-			    }
-				});
+    self.dropzone = new Dropzone(".dropzone", {
+      maxFilesize: 50, // Set the maximum file size to 50 MB
+      maxThumbnailFilesize: 50,
+      paramName: "file", // Rails expects the file upload to be something like model[field_name]
+      addRemoveLinks: false, // Don't show remove links on dropzone itself.
+      acceptedFiles: 'image/*',
+      dictDefaultMessage: "Drag Images or Click Here to Upload",
+      clickable: "#clickable",
+      thumbnailHeight: 210,
+      thumbnailWidth: null,
+      previewTemplate: document.querySelector('#preview-template').innerHTML,
+      previewsContainer: "#upload-previews"
     });
 
-    // Add the button to the file preview element.
-    file.previewElement.appendChild(removeButton);
-		file.id = i;
-		file_preview[file.id] = $(file.previewElement);
-  	file_preview[file.id].find(".dz-remove").attr("id", file.id);
-		var file_tag_field = file_preview[file.id].find("#upload_tag_list");
-		file_tag_field.attr("tabindex", file.id+1);
-		formatTags(file_tag_field);
-		i++;
-	});
+    $("#clickable").on("click", function(e) {
+      e.preventDefault();
+    })
 
-	dropzone.on("sending", function(file, xhr, formData) {
-	  // Will send the content type along with the file as POST data.
-	  formData.append("Content-Type", file.type);
-	});
+    self.bindHandlers();
+  },
 
-	dropzone.on("thumbnail", function(file, dataURL) {
-		dzThumb[file.id] = dataURL;
-	})
+  bindHandlers: function() {
+    var self = this;
 
-	dropzone.on("queuecomplete", function() {
-  	$("#save-uploads").prop("disabled", false);
-	});
+    self.dropzone.on("addedfile", function(file) {
+      self.showDropzoneUI();
+      self.generateUpload(file);
+    });
 
-  dropzone.on("success", function(file, responseText, event) {
-  	var direct_url = $(responseText).find("location")[0];
-  	var url = $(direct_url).text();
-  	url_location[file.id] = url;
-  	var tempThumb = dzThumb[file.id];
+    self.dropzone.on("thumbnail", function(file, dataURL) {
+      self.uploads[file.id].thumbImg = dataURL;
+    });
+
+    self.dropzone.on("success", function(file, responseText, event){
+      self.saveUpload(file, responseText, event);
+    });
+
+    self.dropzone.on("removedfile", function(file) {
+      delete self.uploads[file.id];
+    });
+
+    self.$dropzoneContainer.on("click.save", self.$saveAllBtn, function(){
+      self.saveAllUploads();
+    });
+
+    self.$dropzoneContainer.on("click.removeAll", "#remove-all-uploads", function() {
+      self.removeAllUploads();
+    });
+
+    self.dropzone.on("sending", function(file, xhr, formData) {
+    // Will send the content type along with the file as POST data.
+      formData.append("Content-Type", file.type);
+    });
+
+    self.dropzone.on("queuecomplete", function() {
+      self.$saveAllBtn.prop("disabled", false);
+    });
+
+  },
+
+  showDropzoneUI: function() {
+    var self = this;
+
+    self.$previewsContainer.removeClass("flex-container");
+    self.$uploaderContainer.removeClass("flex-container");
+    self.$instructions.hide();
+    self.$controls.show();
+    self.$saveAllBtn.prop("disabled", true);
+    self.$removeAllBtn.prop("disabled", false);
+  },
+
+  generateUpload: function(file) {
+    var self = this;
+
+    file.id = self.counter;
+    self.counter++;
+
+    self.uploads[file.id] = {
+      file: file,
+      $preview: $(file.previewElement),
+    };
+
+    self.generateRemoveIcon(file);
+    self.setTaggingTabIndex(file);
+
+  },
+
+  generateRemoveIcon: function(file) {
+    var self = this;
+
+    var removeBtn = Dropzone.createElement("<i class='dz-remove fa fa-minus-circle'></i>");
+    file.previewElement.appendChild(removeBtn);
+
+    removeBtn.addEventListener("click", function() {
+      self.removeUpload(file, this);
+    });
+  },
+
+  setTaggingTabIndex: function(file) {
+    var self = this;
+
+    var uploadPreview = self.uploads[file.id].$preview;
+
+    uploadPreview.find(".dz-remove").attr("id", file.id);
+
+    var uploadTagField = uploadPreview.find("#upload_tag_list");
+    uploadTagField.attr("tabindex", file.id + 1);
+    formatTags(uploadTagField);
+  },
+
+  removeUpload: function(file, removeBtn) {
+    var self = this;
+
+    //remove from Dropzone instance
+    self.dropzone.removeFile(file);
+
+    //delete model from Database
+    uploadDatabaseID = $(removeBtn).parent().find('[name="x-ignore-upload[id]"]').val();
+    self.deleteFile(file, uploadDatabaseID);
+  },
+
+  deleteFile: function(file, uploadDatabaseID) {
+    var self = this;
 
     $.ajax({
-		    url: '/uploads',
-		    type: 'POST',
-		    dataType: "json",
-		    data: {upload: {direct_upload_url: url, dz_thumb: tempThumb}},
-		    success: function(result) {
-    	  	// Append the upload id as a hidden input
-			  	// SO https://stackoverflow.com/questions/24592141/dropzonejs-with-rails-deleting-files-from-server
-			  	var elem = document.createElement('input');
-			  	elem.setAttribute("name", "x-ignore-upload[id]");
-			  	elem.setAttribute("value", result["id"]);
-			  	elem.setAttribute("type", "hidden");
-			  	file.previewTemplate.appendChild(elem);
+      url: "/uploads/" + uploadDatabaseID,
+      type: "DELETE",
+      dataType: "script",
+      success: function(result) {
+        delete self.uploads[file.id];
+      },
+    });
+  },
 
-			  	var elem2 = document.createElement('input');
-			  	elem2.setAttribute("name", "x-ignore-user[id]");
-			  	elem2.setAttribute("value", result["user_id"]);
-			  	elem2.setAttribute("type", "hidden");
-			  	file.previewTemplate.appendChild(elem2);
-		    }
-		});		
-	});
+  saveUpload: function(file, responseText, event) {
+    var self = this;
+
+    var upload = self.uploads[file.id];
+
+    var directURL = $(responseText).find("location")[0];
+    var url = $(directURL).text();
+
+    upload.url = url;
+
+    $.ajax({
+      url: '/uploads',
+      type: 'POST',
+      dataType: "json",
+      data: { upload: { direct_upload_url: upload.url, dz_thumb: upload.thumbImg } },
+      success: function(result) {
+        upload.databaseID = result["id"];
+        upload.userID = result["user_id"];
+        // Append the upload and user id as hidden inputs
+        // SO https://stackoverflow.com/questions/24592141/dropzonejs-with-rails-deleting-files-from-server
+        var elem = document.createElement('input');
+        elem.setAttribute("name", "x-ignore-upload[id]");
+        elem.setAttribute("value", upload.databaseID);
+        elem.setAttribute("type", "hidden");
+        file.previewTemplate.appendChild(elem);
+
+        var elem2 = document.createElement('input');
+        elem2.setAttribute("name", "x-ignore-user[id]");
+        elem2.setAttribute("value", upload.userID);
+        elem2.setAttribute("type", "hidden");
+        file.previewTemplate.appendChild(elem2);
+      }
+
+    });
+  },
+
+  saveAllUploads: function() {
+    var self = this;
+
+    $.each( self.uploads, function( key, upload ) {
+
+      var tags = [];
+      var $taglist = upload.$preview.find(".tag-data");
+
+      if ( $taglist.length ) {
+        $taglist.each(function(){
+          tags.push( this.text() );
+        });
+
+        var xhr = $.ajax({
+          url: '/uploads/' + upload.databaseID,
+          type: 'PUT',
+          dataType: "json",
+          data: { upload: { tag_list: tags } },
+        });
+
+        self.xhrs.push(xhr);
+
+      }
+
+    });
+
+    if ( self.xhrs.length ) {
+
+      $.when.apply($, self.xhrs).done(function(){
+        window.location.replace("/users/" + self.uploads["0"].userID);
+      });
+
+    } else {
+
+      window.location.replace("/users/" + self.uploads["0"].userID);
+
+    }
+
+  },
+
+  removeAllUploads: function() {
+    var self = this;
+
+    self.dropzone.removeAllFiles(true);
+    self.uploads = [];
+    $saveAllBtn.prop("disabled", true);
+    $removeAllBtn.prop("disabled", true);
+  },
+
+};
+
+$('.uploads.new').ready(function () {
+
+  // disable auto discover
+  Dropzone.autoDiscover = false;
+
+  uploader.init();
+
 });
