@@ -71,7 +71,7 @@ var uploader = {
       delete self.uploads[file.id];
     });
 
-    self.$dropzoneContainer.on("click.save", "save-uploads", function(){
+    self.$dropzoneContainer.on("click.save", "#save-uploads", function(){
       self.saveAllUploads();
     });
 
@@ -182,19 +182,6 @@ var uploader = {
       success: function(result) {
         upload.databaseID = result["id"];
         upload.userID = result["user_id"];
-        // Append the upload and user id as hidden inputs
-        // SO https://stackoverflow.com/questions/24592141/dropzonejs-with-rails-deleting-files-from-server
-        var elem = document.createElement('input');
-        elem.setAttribute("name", "x-ignore-upload[id]");
-        elem.setAttribute("value", upload.databaseID);
-        elem.setAttribute("type", "hidden");
-        file.previewTemplate.appendChild(elem);
-
-        var elem2 = document.createElement('input');
-        elem2.setAttribute("name", "x-ignore-user[id]");
-        elem2.setAttribute("value", upload.userID);
-        elem2.setAttribute("type", "hidden");
-        file.previewTemplate.appendChild(elem2);
       }
 
     });
@@ -202,7 +189,6 @@ var uploader = {
 
   saveAllUploads: function() {
     var self = this;
-    console.log("save all");
 
     $.each( self.uploads, function( key, upload ) {
 
@@ -211,18 +197,22 @@ var uploader = {
 
       if ( $taglist.length ) {
         $taglist.each(function(){
-          tags.push( this.text() );
+          tags.push( $(this).text() );
         });
+
+        tags = tags.join();
 
         var xhr = $.ajax({
           url: '/uploads/' + upload.databaseID,
           type: 'PUT',
           dataType: "json",
           data: { upload: { tag_list: tags } },
+          success: function(){
+            alert("tags pushed:" + tags + " uploads pushed:" + upload.databaseID);
+          },
         });
 
         self.xhrs.push(xhr);
-
       }
 
     });
