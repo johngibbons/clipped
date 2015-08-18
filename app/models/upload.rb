@@ -14,6 +14,9 @@ class Upload < ActiveRecord::Base
     boolean :approved
     integer :perspective_id
     integer :category_id
+    integer :season_id
+    integer :ethnicity_id
+    integer :gender_id
     double :weighted_score
     time :created_at
   end
@@ -24,6 +27,9 @@ class Upload < ActiveRecord::Base
 
   enum perspective: [ :not_applicable, :front, :side_front, :side, :side_back, :back, :above, :below ]
   enum category: [:uncategorized, :people, :animals, :plants, :vehicles, :objects]
+  enum season: [:no_season, :summer, :fall, :winter, :spring]
+  enum ethnicity: [:no_ethnicity, :african_american, :white, :hispanic, :middle_eastern, :asian]
+  enum gender: [:no_gender, :male, :female]
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
@@ -49,12 +55,28 @@ class Upload < ActiveRecord::Base
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] }
   end
 
+  def enum_id(attribute)
+    Upload.send("#{attribute.pluralize}")[self.send("#{attribute}")]
+  end
+
   def perspective_id
-    Upload.perspectives[self.perspective]
+    enum_id("perspective")
   end
 
   def category_id
-    Upload.categories[self.category]
+    enum_id("category")
+  end
+
+  def weather_id
+    enum_id("weather")
+  end
+
+  def gender_id
+    enum_id("gender")
+  end
+
+  def ethnicity_id
+    enum_id("ethnicity")
   end
 
   def download_url
@@ -78,23 +100,8 @@ class Upload < ActiveRecord::Base
       Upload.all.reorder("#{attribute} DESC")
     end
 
-    # def sorted_by_weighted_score
-    #   Upload.all.sort_by(&:weighted_score).reverse!
-    # end
-
-    def perspective_collection(perspectives = [])
-      Upload.where(perspective: perspectives)
-    end
-
-    def perspective_array
-      a = Upload.perspectives.map do |k,v|
-        [k.humanize, k]
-      end
-      return a
-    end
-
-    def category_array
-      a = Upload.categories.map do |k,v|
+    def enum_array(attribute)
+      a = Upload.send("#{attribute.pluralize}").map do |k, v|
         [k.humanize, k]
       end
       return a
@@ -104,32 +111,12 @@ class Upload < ActiveRecord::Base
       {Relevance: "", Newest: "created_at", Popularity: "weighted_score"}
     end
 
-    # def perspective_choices
-    #   byebug
-    #   Upload.perspectives.except!(:not_applicable)
-    # end
-
-    def category_collection(categories = [])
-      Upload.where(category: categories)
-    end
-
-    def perspective_id_name(int)
-      name = Upload.perspectives.map do |key, value|
+    def enum_id_name(attribute, int)
+      name = Upload.send("#{attribute.pluralize}").map do |key, value|
         key.humanize
       end
       return name[int]
     end
-
-    def category_id_name(int)
-      name = Upload.categories.map do |key, value|
-        key.humanize
-      end
-      return name[int]
-    end
-
-    # def category_choices
-    #   Upload.categories.except!(:uncategorized)
-    # end
 
   end
 

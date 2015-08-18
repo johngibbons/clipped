@@ -1,39 +1,53 @@
-  <div class="dropdown">
-    <div class="dropdown-container">
-      <p class="dropdown-button">Filter</p>
-      <ul class="dropdown-menu dropdown-select">
-      	<li id="results-filter-heading">
-      		<p>Filter</p>
-      		<%= link_to "Clear All", query.merge({category_id: nil, perspective_id: nil}) %>
-      	</li>
-      	<li id="category-filter" class="results-subfilter">
-      		<a href="javascript:void(0)">Category</a>
-      	</li>
-      	<ul class="results-subfilter-items">
-    			<% for row in @search.facet(:category_id).rows %>
-  						<li>
-                <% query.init("category_id", row.value) %>
-  		          <%= link_to query.toggle, class: query.status do %>
-                <i class="<%= query.icon %>"></i><%=  Upload.category_id_name(row.value) %>
-              <% end %>
-              <%= query.count(row.count) %>
-  						</li>
-  				<% end %>
-    		</ul>
-      	<li id="perspective-filter" class="results-subfilter">
-      		<a href="javascript:void(0)">Perspective</a>
-      	</li>
-      	<ul class="results-subfilter-items">
-    			<% for row in @search.facet(:perspective_id).rows %>
-      			<li>
-              <% query.init("perspective_id", row.value) %>
-  		        <%= link_to query.toggle, class: query.status do %>
-                <i class="<%= query.icon %>"></i><%=  Upload.perspective_id_name(row.value) %>
-              <% end %>
-              <%= query.count(row.count) %>
-      			</li>
-  				<% end %>
-    		</ul>
-  		</ul>
-  	</div>
+<div class="dropdown">
+  <div class="dropdown-container">
+    <p class="dropdown-button">Filter</p>
+    <ul class="dropdown-menu dropdown-select">
+      <li id="results-filter-heading">
+        <p>Filter</p>
+        <%= link_to "Clear All", query.merge({category_id: nil, perspective_id: nil}) %>
+      </li>
+      <li id="category-filter" class="results-subfilter">
+        <a href="javascript:void(0)">Category</a>
+      </li>
+      <ul class="results-subfilter-items">
+        <% for row in @search.facet(:enum_id("category")).rows %>
+          <li>
+            <% query.init("category_id", row.value) %>
+            <%= link_to query.toggle, class: query.status do %>
+              <i class="<%= query.icon %>"></i><%=  Upload.enum_id_name("category", row.value) %>
+          <% end %>
+          <%= query.count(row.count) %>
+          </li>
+        <% end %>
+      </ul>
+      <li id="perspective-filter" class="results-subfilter">
+        <a href="javascript:void(0)">Perspective</a>
+      </li>
+      <ul class="results-subfilter-items">
+        <% for row in @search.facet(:enum_id("perspective")).rows %>
+          <li>
+            <% query.init("perspective_id", row.value) %>
+            <%= link_to query.toggle, class: query.status do %>
+              <i class="<%= query.icon %>"></i><%=  Upload.enum_id_name("perspective", row.value) %>
+          <% end %>
+          <%= query.count(row.count) %>
+          </li>
+        <% end %>
+      </ul>
+      <li id="gender-filter" class="results-subfilter">
+        <a href="javascript:void(0)">Gender</a>
+      </li>
+      <ul class="results-subfilter-items">
+        <% for row in @search.facet(:enum_id("gender")).rows %>
+          <li>
+            <% query.init("category_id", row.value) %>
+            <%= link_to query.toggle, class: query.status do %>
+              <i class="<%= query.icon %>"></i><%=  Upload.enum_id_name("category", row.value) %>
+          <% end %>
+          <%= query.count(row.count) %>
+          </li>
+        <% end %>
+      </ul>
+    </ul>
   </div>
+</div>
