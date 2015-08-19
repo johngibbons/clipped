@@ -1,39 +1,29 @@
 <%= form_tag search_index_path, :method => :get do %>
-	<div id="home-search-form">
-	  <%= search_field_tag :search, params[:search], id: "upload-search" %>
+  <div id="home-search-form">
+    <%= search_field_tag :search, params[:search], id: "upload-search" %>
 
-		<button id="search-submit" class='icon'>
-		  <i class="fa fa-search"></i>
-		</button>
-	</div>
+    <button id="search-submit" class='icon'>
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+
   <div class="search-tools">
-		<div id="category-filter" class="search-filter">
-	    <label class="filter-label">Category</label>
-	    <div class="dropdown">
-	      <ol>
-					<% Upload.categories.map do |k, v| %>
-						<li>
-							<%=	check_box_tag "category_id[]", v, false, class: "category-checkbox", id: "category#{v}" %>
-							<%=	label_tag "category#{v}", k.humanize, value: k, class: "category-select checkbox-select", id: "category#{v}" %>
-						</li>
-					<% end %>
-				</ol>
-	    </div>
-	  </div>
+    <% ["category", "perspective", "gender", "ethnicity", "season"].each do |attribute| %>
+      <div id=<%= "#{attribute}-filter" %> class="search-filter">
+        <label class="filter-label"><%= attribute %></label>
+        <div class="dropdown">
+          <ol>
+            <% Upload.send("#{attribute.pluralize}").map do |k, v| %>
+              <li>
+                <%=	check_box_tag "#{attribute}_id[]", v, false, class: "#{attribute}-checkbox", id: "#{attribute}#{v}" %>
+                <%=	label_tag "#{attribute}#{v}", k.humanize, value: k, class: "#{attribute}-select checkbox-select", id: "#{attribute}#{v}" %>
+              </li>
+            <% end %>
+          </ol>
+        </div>
+      </div>
+    <% end %>
 
-	  <div id="perspective-filter" class="search-filter">
-		  <label class="filter-label">Perspective</label>
-		  <div class="dropdown">
-		  	<ol>
-					<% Upload.perspectives.map do |k, v| %>
-						<li>
-							<%=	check_box_tag "perspective_id[]", v, false, class: "perspective-checkbox", id: "perspective#{v}" %>
-							<%=	label_tag "perspective#{v}", k.humanize, value: k, class: "perspective-select checkbox-select", id: "perspective#{v}" %>
-						</li>
-					<% end %>
-				</ol>
-			</div>
-		</div>
-	</div>
-	
+  </div>
+
 <% end %>
