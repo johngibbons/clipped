@@ -48,27 +48,13 @@
       <%= form_for @upload, method: :patch, html: { class: "details", id: "update-details-form" }, remote: true do |f| %>
         <table id="upload-show-details-table">
           <tbody>
-            <tr>
-              <td>Perspective:</td>
-              <td class="detail-val"><%= link_to upload.perspective.humanize, search_index_path(perspective_id: Upload.perspectives[upload.perspective], perspective: upload.perspective), id: "selected-perspective", class: "attr-link" %><%= render partial: 'perspective_form', locals: {f: f} %>
-            </td>
-            </tr>
-            <tr>
-              <td>Category:</td>
-              <td class="detail-val"><%= link_to upload.category.humanize, search_index_path(category_id: Upload.categories[upload.category], category: upload.category), id: "selected-category", class: "attr-link" %><%= render partial: 'category_form', locals: {f: f } %></td>
-            </tr>
-            <tr>
-              <td>Gender:</td>
-              <td class="detail-val"><%= link_to upload.gender.humanize, search_index_path(gender_id: Upload.genders[upload.gender], category: upload.gender), id: "selected-gender", class: "attr-link" %><%= render partial: 'gender_form', locals: {f: f } %></td>
-            </tr>
-            <tr>
-              <td>Season:</td>
-              <td class="detail-val"><%= link_to upload.season.humanize, search_index_path(season_id: Upload.seasons[upload.season], category: upload.season), id: "selected-season", class: "attr-link" %><%= render partial: 'season_form', locals: {f: f } %></td>
-            </tr>
-            <tr>
-              <td>Ethnicity:</td>
-              <td class="detail-val"><%= link_to upload.ethnicity.humanize, search_index_path(season_id: Upload.ethnicities[upload.ethnicity], category: upload.ethnicity), id: "selected-ethnicity", class: "attr-link" %><%= render partial: 'ethnicity_form', locals: {f: f } %></td>
-            </tr>
+            <% Upload.enum_list.each do |attribute| %>
+              <tr>
+                <td><%= attribute %>:</td>
+                <td class="detail-val"><%= link_to upload.send("#{attribute}").humanize, search_index_path(attribute.to_sym => Upload.send("#{attribute.pluralize}")[upload.send("#{attribute}")], attribute.to_sym => upload.send("#{attribute}")), id: "selected-#{attribute}", class: "attr-link" %><%= render partial: "#{attribute}_form", locals: {f: f} %>
+              </td>
+              </tr>
+            <% end %>
             <tr>
               <td>Views:</td>
               <td class="detail-val"><%= upload.views %></td>

@@ -1,1 +1,1 @@
-<%= f.select :perspective, options_for_select(Upload.perspective_array, @upload.perspective), {}, {class: "hidden edit-upload-form"} %>
+<%= f.select :perspective, options_for_select(Upload.enum_array("perspective"), @upload.perspective), {}, {class: "hidden edit-upload-form"} %>

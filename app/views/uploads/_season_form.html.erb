@@ -1,1 +1,1 @@
-<%= f.select :season, options_for_select(Upload.season_array, @upload.season), {}, {class: "hidden edit-upload-form"} %>
+<%= f.select :season, options_for_select(Upload.enum_array("season"), @upload.season), {}, {class: "hidden edit-upload-form"} %>

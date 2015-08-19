@@ -29,7 +29,7 @@ class Upload < ActiveRecord::Base
   enum category: [:uncategorized, :people, :animals, :plants, :vehicles, :objects]
   enum season: [:no_season, :summer, :fall, :winter, :spring]
   enum ethnicity: [:no_ethnicity, :african_american, :white, :hispanic, :middle_eastern, :asian]
-  enum gender: [:no_gender, :male, :female]
+  enum gender: [:no_gender, :male, :female, :mixed]
 
   # Store an unescaped version of the escaped URL that Amazon returns from direct upload.
   def direct_upload_url=(escaped_url)
@@ -54,6 +54,7 @@ class Upload < ActiveRecord::Base
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'], 
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] }
   end
+
 
   def enum_id(attribute)
     Upload.send("#{attribute.pluralize}")[self.send("#{attribute}")]
@@ -98,6 +99,10 @@ class Upload < ActiveRecord::Base
 
     def sorted_by(attribute)
       Upload.all.reorder("#{attribute} DESC")
+    end
+
+    def enum_list
+      ["perspective", "category", "season", "gender", "ethnicity"]
     end
 
     def enum_array(attribute)

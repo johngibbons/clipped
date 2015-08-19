@@ -1,1 +1,1 @@
-<%= f.select :gender, options_for_select(Upload.gender_array, @upload.gender), {}, {class: "hidden edit-upload-form"} %>
+<%= f.select :gender, options_for_select(Upload.enum_array("gender"), @upload.gender), {}, {class: "hidden edit-upload-form"} %>

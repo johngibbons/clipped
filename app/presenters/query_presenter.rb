@@ -85,7 +85,7 @@ class QueryPresenter < BasePresenter
     def param_to_text(param)
       values = get_current(param)
       names = values.map do |val|
-        Upload.send("#{param}_name", val.to_i)
+        Upload.enum_id_name("#{param}", val.to_i)
       end
       if names.any?
          names.join(" or ") + " : "

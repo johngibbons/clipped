@@ -4,18 +4,18 @@
 
 
 .index {
-	.uploads-index-header {
-		h1 {
-			font-size: $base-font-size * 1.5;
-			font-weight: 100;
-			padding: 3em 0;
-		}
+  .uploads-index-header {
+    h1 {
+      font-size: $base-font-size * 1.5;
+      font-weight: 100;
+      padding: 3em 0;
+    }
 
-		.query {
-		  color: $action-color;
-		  font-weight: 800;
-		}
-	}
+    .query {
+      color: $action-color;
+      font-weight: 800;
+    }
+  }
 }
 
 #remove-search {
@@ -32,10 +32,10 @@
     text-align: left;
   }
 
-	@include media($desktop) {
-		@include span-columns(6 of 12);
+  @include media($desktop) {
+    @include span-columns(6 of 12);
     margin-top: -24px;
-	}
+  }
 
   ol {
     margin: 0;
@@ -63,7 +63,7 @@
     }
 
     @include media($desktop) {
-    	@include span-columns(3 of 6);
+      @include span-columns(3 of 6);
     }
 
     > div {
@@ -73,7 +73,7 @@
       width: 100%;
 
       @include media($desktop) {
-      	padding-left: 0;
+        padding-left: 0;
       }
 
       &:focus,
@@ -93,28 +93,28 @@
     }
 
     button {
-    	background: transparent;
-    	box-shadow: none;
-    	border: none;
-    	padding: 0;
-    	margin: 0;
-    	color: $medium-gray;
-    	width: auto;
-    	letter-spacing: 0;
-    	text-transform: none;
-    	position: absolute;
-    	top: 0.5em;
-    	right: 0.5em;
-    	font-weight: 300;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      color: $medium-gray;
+      width: auto;
+      letter-spacing: 0;
+      text-transform: none;
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      font-weight: 300;
     }
 
     .dropdown {
       border: $base-border;
-    	border-top: 1px solid $action-color;
+      border-top: 1px solid $action-color;
 
       @include media($tablet) {
-      	position: absolute;
-      	z-index: 1;
+        position: absolute;
+        z-index: 1;
         @include span-columns(4);
       }
 
@@ -132,15 +132,15 @@
     }
 
     .tag {
-    	display: inline-block;
-    	float: none;
-    	font-size: 1em;
-    	background: transparent;
-    	border: none;
-    	margin-bottom: 0;
-    	margin-right: 0;
-    	padding-top: 0;
-    	padding-bottom: 0;
+      display: inline-block;
+      float: none;
+      font-size: 1em;
+      background: transparent;
+      border: none;
+      margin-bottom: 0;
+      margin-right: 0;
+      padding-top: 0;
+      padding-bottom: 0;
 
       &:before {
         content: "#";
@@ -149,14 +149,14 @@
   }
 
   .summary {
-  	padding: 0.75em 3em;
-  	font-weight: 300;
-  	line-height: 1;
-  	text-transform: uppercase;
+    padding: 0.75em 3em;
+    font-weight: 300;
+    line-height: 1;
+    text-transform: uppercase;
 
-  	@include media($tablet) {
-  		padding-left: 1em;
-  	}
+    @include media($tablet) {
+      padding-left: 1em;
+    }
   }
 
 }
@@ -170,8 +170,8 @@
   }
 
   @include media($desktop) {
-    float: left;
-    @include span-columns(12 of 24);
+    width: 50%;
+    margin: 0 auto;
   }
 
 }
@@ -231,153 +231,153 @@
 }
 
 // search results filter
-  .mobile-filter {
-    position: fixed;
-    top: 95px;
-    background-color: $lightest-gray;
-    border-bottom: $base-border;
-    z-index: 1;
+.mobile-filter {
+  position: fixed;
+  top: 95px;
+  background-color: $lightest-gray;
+  border-bottom: $base-border;
+  z-index: 1;
 
-    @include media($desktop) {
-      border-bottom: none;
-    }
-
-    p {
-      padding: 0.5em 0 0.5em 1em;
-      margin-top:0;
-      margin-bottom:0;
-
-      @include media($tablet) {
-        padding-left: 2em;
-      }
-
-      @include media($desktop) {
-        padding-left: 0;
-      }
-    }
-  }
-
-  .filter-checkbox {
-    font-size: 0.8em;
-    vertical-align: baseline;
-    padding-right: 0.5em;
-    color: $white;
-
-    @include media($desktop) {
-      color: $lightest-gray;
-    }
-
-    &.checked {
-      color: $action-color;
-    }
-  }
-
-  .results-count {
-
-  }
-
-  .filters-text {
-    font-weight: 700;
-  }
-
-  .search-text {
-    color: $action-color;
-    font-weight: 700;
-  }
-
-  .selected {
-    font-weight: 700;
-    color: $action-color;
-  }
-
-  .unselected {
-  }
-
-  .dropdown-button {
-    @include media($desktop) {
-      display: none;
-    }
-  }
-
-  .dropdown-button:after {
-    content: ' \25BE';
-  }
-
-  .dropdown-container {
-    position:relative;
-  }
-
-  .dropdown-menu {
-    display: none;
-    position:absolute;
-    right: 0;
-    top: 2.5em;
-    width: 200%;
-    background-color: $white;
-    border: $base-border;
+  @include media($desktop) {
     border-bottom: none;
-    box-shadow: $card-shadow;
-    z-index: 1;
+  }
+
+  p {
+    padding: 0.5em 0 0.5em 1em;
+    margin-top:0;
+    margin-bottom:0;
+
+    @include media($tablet) {
+      padding-left: 2em;
+    }
 
     @include media($desktop) {
-      display: block;
-      position: static;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
-      width: auto;
+      padding-left: 0;
     }
   }
+}
 
-  #results-filter-heading {
-    background-color: $lightest-gray;
+.filter-checkbox {
+  font-size: 0.8em;
+  vertical-align: baseline;
+  padding-right: 0.5em;
+  color: $white;
 
-    @include media($desktop) {
-      background-color: transparent;
-      border-bottom: $base-border;
-    }
-
-    p {
-      display: inline;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 0;
-    }
-
-    a {
-      display: inline;
-      float: right;
-      font-size: 0.8em;
-      line-height: 0;
-      padding-top: 1em;
-    }
+  @include media($desktop) {
+    color: $lightest-gray;
   }
 
-  .results-subfilter {
-    a {
-      @include media($desktop) {
-        color: $base-font-color;
-        cursor: default;
-      }
-    }
+  &.checked {
+    color: $action-color;
   }
+}
 
-  .results-subfilter-items{
+.results-count {
+
+}
+
+.filters-text {
+  font-weight: 700;
+}
+
+.search-text {
+  color: $action-color;
+  font-weight: 700;
+}
+
+.selected {
+  font-weight: 700;
+  color: $action-color;
+}
+
+.unselected {
+}
+
+.dropdown-button {
+  @include media($desktop) {
     display: none;
-    background-color: $lightest-gray;
+  }
+}
 
+.dropdown-button:after {
+  content: ' \25BE';
+}
+
+.dropdown-container {
+  position:relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position:absolute;
+  right: 0;
+  top: 2.5em;
+  width: 200%;
+  background-color: $white;
+  border: $base-border;
+  border-bottom: none;
+  box-shadow: $card-shadow;
+  z-index: 1;
+
+  @include media($desktop) {
+    display: block;
+    position: static;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    width: auto;
+  }
+}
+
+#results-filter-heading {
+  background-color: $lightest-gray;
+
+  @include media($desktop) {
+    background-color: transparent;
+    border-bottom: $base-border;
+  }
+
+  p {
+    display: inline;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0;
+  }
+
+  a {
+    display: inline;
+    float: right;
+    font-size: 0.8em;
+    line-height: 0;
+    padding-top: 1em;
+  }
+}
+
+.results-subfilter {
+  a {
     @include media($desktop) {
-      display: block;
-      background-color: transparent;
-      font-size: 0.8em;
-      padding-bottom: 1em;
-      border-bottom: $base-border;
-    }
-
-    li {
-      a {
-        padding-left: 1em;
-      }
+      color: $base-font-color;
+      cursor: default;
     }
   }
+}
+
+.results-subfilter-items{
+  display: none;
+  background-color: $lightest-gray;
+
+  @include media($desktop) {
+    display: block;
+    background-color: transparent;
+    font-size: 0.8em;
+    padding-bottom: 1em;
+    border-bottom: $base-border;
+  }
+
+  li {
+    a {
+      padding-left: 1em;
+    }
+  }
+}
 

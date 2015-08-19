@@ -7,23 +7,4 @@
     </button>
   </div>
 
-  <div class="search-tools">
-    <% ["category", "perspective", "gender", "ethnicity", "season"].each do |attribute| %>
-      <div id=<%= "#{attribute}-filter" %> class="search-filter">
-        <label class="filter-label"><%= attribute %></label>
-        <div class="dropdown">
-          <ol>
-            <% Upload.send("#{attribute.pluralize}").map do |k, v| %>
-              <li>
-                <%=	check_box_tag "#{attribute}_id[]", v, false, class: "#{attribute}-checkbox", id: "#{attribute}#{v}" %>
-                <%=	label_tag "#{attribute}#{v}", k.humanize, value: k, class: "#{attribute}-select checkbox-select", id: "#{attribute}#{v}" %>
-              </li>
-            <% end %>
-          </ol>
-        </div>
-      </div>
-    <% end %>
-
-  </div>
-
 <% end %>

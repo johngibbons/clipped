@@ -10,6 +10,9 @@ class SearchController < ApplicationController
       with :approved, true
       perspective_filter = with :perspective_id, params[:perspective_id] if params[:perspective_id].present?
       category_filter = with :category_id, params[:category_id] if params[:category_id].present?
+      gender_filter = with :gender_id, params[:gender_id] if params[:gender_id].present?
+      season_filter = with :season_id, params[:season_id] if params[:season_id].present?
+      ethnicity_filter = with :ethnicity_id, params[:ethnicity_id] if params[:ethnicity_id].present?
       if params[:search].present?
         fulltext params[:search] do
           minimum_match 1
@@ -18,6 +21,9 @@ class SearchController < ApplicationController
       order_by params[:sort_uploads], :desc if params[:sort_uploads].present?
       facet :perspective_id, limit: -1, exclude: perspective_filter
       facet :category_id, limit: -1, exclude: category_filter
+      facet :season_id, limit: -1, exclude: season_filter
+      facet :gender_id, limit: -1, exclude: gender_filter
+      facet :ethnicity_id, limit: -1, exclude: ethnicity_filter
       paginate page: params[:page], per_page: 30
     end
 
