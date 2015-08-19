@@ -177,9 +177,15 @@ ActiveRecord::Schema.define(version: 20150818162136) do
     t.integer  "perspective",        default: 0,              null: false
     t.integer  "category",           default: 0,              null: false
     t.string   "dz_thumb",           default: "/missing.png", null: false
+<<<<<<< HEAD
     t.integer  "gender",                                      null: false
     t.integer  "season",                                      null: false
     t.integer  "ethnicity",                                   null: false
+=======
+    t.integer  "gender"
+    t.integer  "season"
+    t.integer  "ethnicity"
+>>>>>>> add-extra-facets
   end
 
   add_index "uploads", ["created_at"], name: "index_uploads_on_created_at", using: :btree

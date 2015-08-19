@@ -55,7 +55,6 @@ class Upload < ActiveRecord::Base
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] }
   end
 
-
   def enum_id(attribute)
     Upload.send("#{attribute.pluralize}")[self.send("#{attribute}")]
   end
