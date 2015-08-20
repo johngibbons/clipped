@@ -89,6 +89,8 @@ var uploader = {
     });
 
     self.dropzone.on("queuecomplete", function() {
+      console.log("complete");
+      console.log("done?", self.uploads.doneSaving);
 
       window.setInterval(function(){
 
