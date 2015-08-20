@@ -47,6 +47,10 @@ $(document).ready(function(){
     });
   }
 
+  $("body").on("click", ".tooltip-item", function(){
+    $(this).find(".tooltip").toggleClass("hidden");
+  });
+
 });
 
 function formatTags(tag_input_field) {

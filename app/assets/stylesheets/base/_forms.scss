@@ -102,12 +102,7 @@ select {
 .tooltip-item {
   position: relative;
   padding-left: 0.25em;
-
-  &:focus,
-  &:hover .tooltip {
-    opacity: 1;
-    visibility: visible;
-  }
+  cursor: pointer;
 
   .tooltip {
     position: absolute;
@@ -122,8 +117,7 @@ select {
     font-size: 0.8em;
     line-height: 1.5;
     color: $base-font-color;
-    visibility: hidden;
-    opacity: 0;
+    z-index: 99999;
 
     h4 {
       margin-top: 0;
