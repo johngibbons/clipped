@@ -158,15 +158,40 @@ var uploader = {
     var upload = self.uploads[file.id];
 
     upload.$preview.on("focusout", function() {
-      $.ajax({
-        url: '/uploads/' + upload.databaseID,
-        type: 'PUT',
-        dataType: "json",
-        data: { upload: { tag_list: tags } },
-        success: function(){
-          console.log("saved tags");
-        },
+      self.grabTags(file);
+      self.putTags(file);
+    });
+  },
+
+  grabTags: function(file) {
+    var self = this;
+
+    var upload = self.uploads[file.id];
+
+    var tags = [];
+    var $taglist = upload.$preview.find(".tag-data");
+
+    if ( $taglist.lenght ) {
+      $taglist.each(function(){
+        tags.push( $(this).text() );
       });
+    }
+
+    upload.tags = tags.join();
+  },
+
+  putTags: function(file) {
+    var self = this;
+
+    var upload = self.uploads[file.id];
+
+    $.ajax({ url: '/uploads/' + upload.databaseID,
+      type: 'PUT',
+      dataType: "json",
+      data: { upload: { tag_list: upload.tags } },
+      success: function(){
+        console.log("saved tags");
+      },
     });
   },
 
