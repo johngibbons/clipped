@@ -34,6 +34,9 @@
 
   <div id="preview-template" class="dropzone-previews" style="display: none;">
     <div class="dz-preview dz-file-preview card">
+      <div class="overlay hidden">
+        <p>saving...</p>
+      </div>
       <div class="dz-image-container">
         <div class="dz-success-mark animated fadeInDown"><i class="fa fa-check-circle-o fa-3x"></i></div>
         <div class="dz-error-mark animated shake"><i class="fa fa-exclamation-circle fa-3x"></i></div>
@@ -45,7 +48,7 @@
         <!-- <div class="dz-filename"><span data-dz-name></span></div>-->	
         <div class="dz-size" data-dz-size></div>
       </div>
-      <div id="dropzone-upload-tags">
+      <div id="dropzone-upload-tags" class="hidden">
         <div>
           <i id="tags-tip" class="fa fa-info-circle tooltip-item">
             <div class="tooltip">
