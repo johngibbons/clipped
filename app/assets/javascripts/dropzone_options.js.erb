@@ -14,6 +14,7 @@ var uploader = {
   counter: null,
 
   uploads: [],
+  user: "",
   xhrs: [],
 
   init: function() {
@@ -27,6 +28,8 @@ var uploader = {
     self.$controls = $("#uploader-controls");
     self.$saveAllBtn = $("#save-uploads");
     self.$removeAllBtn = $("#remove-all-uploads");
+
+    self.user = $("#uploader-container").data("userid");
 
     self.counter = 0;
 
@@ -85,7 +88,6 @@ var uploader = {
     });
 
     self.dropzone.on("queuecomplete", function() {
-      self.$saveAllBtn.prop("disabled", false);
     });
 
   },
@@ -111,6 +113,7 @@ var uploader = {
       file: file,
       $preview: $(file.previewElement),
     };
+
 
     self.generateRemoveIcon(file);
     self.setTaggingTabIndex(file);
@@ -171,6 +174,8 @@ var uploader = {
 
     var directURL = $(responseText).find("location")[0];
     var url = $(directURL).text();
+    self.$saveAllBtn.prop("disabled", true);
+    $("#saving-indicator").removeClass("hidden");
 
     upload.url = url;
 
@@ -181,7 +186,8 @@ var uploader = {
       data: { upload: { direct_upload_url: upload.url, dz_thumb: upload.thumbImg } },
       success: function(result) {
         upload.databaseID = result["id"];
-        upload.userID = result["user_id"];
+        self.$saveAllBtn.prop("disabled", false);
+        $("#saving-indicator").addClass("hidden");
       }
 
     });
@@ -190,7 +196,12 @@ var uploader = {
   saveAllUploads: function() {
     var self = this;
 
+    $(".overlay").removeClass("hidden");
+
     $.each( self.uploads, function( key, upload ) {
+
+      console.log("key: ", key);
+      console.log("upload: ", upload);
 
       var tags = [];
       var $taglist = upload.$preview.find(".tag-data");
@@ -219,12 +230,12 @@ var uploader = {
     if ( self.xhrs.length ) {
 
       $.when.apply($, self.xhrs).done(function(){
-        window.location.replace("/users/" + self.uploads["0"].userID);
+        window.location.replace("/users/" + self.user);
       });
 
     } else {
 
-      window.location.replace("/users/" + self.uploads["0"].userID);
+      window.location.replace("/users/" + self.user);
 
     }
 

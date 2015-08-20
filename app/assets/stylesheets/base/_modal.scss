@@ -80,25 +80,6 @@
 
     .modal-saving {
       display: none;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: rgba(255,255,255,0.9);
-      background-image: url("ajax-loader.gif");
-      background-repeat: no-repeat;
-      background-position: center;
-      z-index: 999999;
-
-      p {
-        position: absolute;
-        top: 55%;
-        width: 100%;
-        text-transform: uppercase;
-        font-weight: 700;
-        letter-spacing: 1px;
-      }
     }
 
     @include media($tablet) {

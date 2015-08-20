@@ -262,3 +262,15 @@
     }
 	}
 }
+
+#saving-indicator {
+  display: inline-block;
+
+  &.hidden {
+    display: none;
+  }
+
+  p {
+    display: inline-block;
+  }
+}

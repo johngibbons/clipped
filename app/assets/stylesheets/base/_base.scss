@@ -17,58 +17,55 @@
 @import "modal";
 
 html, body {
-	font-size: 100%;
+  font-size: 100%;
 }
 
 body {
-	margin: 0;
-	display: flex;
+  margin: 0;
+  display: flex;
   min-height: 100vh;
   flex-direction: column;
 }
 
 main {
-	flex: 1;
+  flex: 1;
 }
 
 .container {
-	@include outer-container;
-	margin-top: 94px;
-	padding-bottom: 6em;
+  @include outer-container;
+  margin-top: 94px;
+  padding-bottom: 6em;
 
-	@include media($desktop) {
-		margin-top: 47px;
-		@include outer-container($desktop-container-width);
-	}
+  @include media($desktop) {
+    margin-top: 47px;
+    @include outer-container($desktop-container-width);
+  }
 
-	@include media($large) {
-		@include outer-container($large-screen-container-width);
-	}
+  @include media($large) {
+    @include outer-container($large-screen-container-width);
+  }
 
-	header {
-	  padding: 2em 0;
-	}
+  header {
+    padding: 2em 0;
+  }
 }
 
 .container.no-pad {
-	padding-bottom: 0;
+  padding-bottom: 0;
 }
 
 .container.not-top {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .full-container {
-	@include outer-container(100%);
+  @include outer-container(100%);
 }
 
 aside {
-	@include span-columns(4);
+  @include span-columns(4);
 }
 
-.hidden {
-	display: none;
-}
 
 .flex-container {
   display: flex;
@@ -76,23 +73,59 @@ aside {
 }
 
 .media-object {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .media-figure {
-	margin-right: 1em;
+  margin-right: 1em;
 }
 
 .media-body {
-	flex: 1;
+  flex: 1;
 }
 
 .emphasis {
-	font-weight: 700;
+  font-weight: 700;
 }
 
 html.turbolinks-progress-bar::before {
   background-color: $clipped-pink !important;
   height: 5px !important;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255,255,255, 0.9);
+  background-image: url("ajax-loader.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 999999;
+
+  p {
+    position: absolute;
+    top: 55%;
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+}
+
+.loading-gif {
+  display: inline-block;
+  background-image: url("ajax-loader.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 16px;
+  height: 16px;
+}
+
+.hidden {
+  display: none;
 }
