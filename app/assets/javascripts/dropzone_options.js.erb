@@ -125,7 +125,6 @@ var uploader = {
 
     self.generateRemoveIcon(file);
     self.setTaggingTabIndex(file);
-    self.bindTaggingUpdate(file);
 
   },
 
@@ -171,13 +170,14 @@ var uploader = {
     var tags = [];
     var $taglist = upload.$preview.find(".tag-data");
 
-    if ( $taglist.lenght ) {
+    if ( $taglist.length ) {
       $taglist.each(function(){
         tags.push( $(this).text() );
       });
     }
 
     upload.tags = tags.join();
+    console.log("tags are: ", upload.tags);
   },
 
   putTags: function(file) {
@@ -185,12 +185,14 @@ var uploader = {
 
     var upload = self.uploads[file.id];
 
+    upload.$preview.find(".overlay").removeClass("hidden");;
+
     $.ajax({ url: '/uploads/' + upload.databaseID,
       type: 'PUT',
       dataType: "json",
       data: { upload: { tag_list: upload.tags } },
       success: function(){
-        console.log("saved tags");
+        upload.$preview.find(".overlay").addClass("hidden");;
       },
     });
   },
@@ -228,6 +230,7 @@ var uploader = {
     var url = $(directURL).text();
     self.$saveAllBtn.prop("disabled", true);
     $("#saving-indicator").removeClass("hidden");
+    upload.$preview.find(".overlay").removeClass("hidden");;
 
     upload.url = url;
 
@@ -240,8 +243,13 @@ var uploader = {
         upload.databaseID = result["id"];
         self.uploads.doneSaving = true;
         $("#saving-indicator").addClass("hidden");
+        upload.$preview.find(".overlay").addClass("hidden");;
+        upload.$preview.find("#dropzone-upload-tags").removeClass("hidden");
+        self.bindTaggingUpdate(file);
+      },
+      error: function(result) {
+        alert(result);
       }
-
     });
   },
 
@@ -249,44 +257,7 @@ var uploader = {
     var self = this;
 
     $(".overlay").removeClass("hidden");
-
-//    $.each( self.uploads, function( key, upload ) {
-//
-//      var tags = [];
-//      var $taglist = upload.$preview.find(".tag-data");
-//
-//      if ( $taglist.length ) {
-//        $taglist.each(function(){
-//          tags.push( $(this).text() );
-//        });
-//
-//        tags = tags.join();
-//
-//        var xhr = $.ajax({
-//          url: '/uploads/' + upload.databaseID,
-//          type: 'PUT',
-//          dataType: "json",
-//          data: { upload: { tag_list: tags } },
-//          success: function(){
-//          },
-//        });
-//
-//        self.xhrs.push(xhr);
-//      }
-//
-//    });
-
-    if ( self.xhrs.length ) {
-
-      $.when.apply($, self.xhrs).done(function(){
-        window.location.replace("/users/" + self.user);
-      });
-
-    } else {
-
-      window.location.replace("/users/" + self.user);
-
-    }
+    window.location.replace("/users/" + self.user);
 
   },
 
