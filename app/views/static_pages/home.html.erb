@@ -1,46 +1,46 @@
 <!-- <header class="home">
-	<h1>Free Cutout Images</h1>
-	<p>The best place to find and share background-free images.</p>
-</header> -->
-<section id="home-banner">
-	<div class="container no-pad">
-		<h1>Free, High Quality, Cutout Images</h1>
-		<div id="home-search">
-			<h1 class="cta">What are you looking for?</h1>
-			<%= render 'search/upload_search_form' %>
-		</div>
-	</div>
-</section>
+  <h1>Free Cutout Images</h1>
+  <p>The best place to find and share background-free images.</p>
+  </header> -->
+  <section id="home-banner">
+    <div class="container no-pad">
+      <h1>Free, High Quality, Cutout Images</h1>
+      <div id="home-search">
+        <h1 class="cta">What are you looking for?</h1>
+        <%= render 'search/upload_search_form' %>
+      </div>
+    </div>
+  </section>
 
-<section id="home-uploads">
-	<div class="container no-pad not-top">
-		<h2 class="section-head">Featured</h2>
-		<%= link_to "(browse all)", search_index_path(sort_uploads: "weighted_score"), class: "more-link" %>
-		<div class="most-popular-uploads">
-			<% if @most_popular.any? %>
-			  <%= render @most_popular %>
-			<% end %>
-		</div>
-	</div>
-</section>
+  <section id="home-uploads">
+    <div class="container no-pad not-top">
+      <h2 class="section-head">Featured</h2>
+      <%= link_to "(browse all)", search_index_path(sort_uploads: "weighted_score"), class: "more-link" %>
+      <div class="most-popular-uploads">
+        <% if @most_popular.any? %>
+          <%= render @most_popular %>
+        <% end %>
+      </div>
+    </div>
+  </section>
 
-<section id="home-users">
-	<div class="container no-pad not-top">
-		<h2 class="section-head">Top Clippers</h2>
-		<%= link_to "(browse all)", users_path(sort_users: "weighted_score"), class: "more-link" %>
-		<div class="users top-clippers-home">
-			<%= render @users %>
-		</div>
-	</div>
-</section>
+  <section id="home-users">
+    <div class="container no-pad not-top">
+      <h2 class="section-head">Top Clippers</h2>
+      <%= link_to "(browse all)", users_path(sort_users: "weighted_score"), class: "more-link" %>
+      <div class="users top-clippers-home">
+        <%= render @users %>
+      </div>
+    </div>
+  </section>
 
-<section id="home-tags">
-	<div class="container not-top">
-		<h2 class="section-head">Most Popular Tags</h2>
-		<div class="tag-items most-popular-home">
-			<% @most_used_tags.each do |tag| %>
-				<%= render partial: "acts_as_taggable_on/tags/tag", locals: {tag: tag} %>
-			<% end %>
-		</div>
-	</div>
-</section>
+  <section id="home-tags">
+    <div class="container not-top">
+      <h2 class="section-head">Most Popular Tags</h2>
+      <div class="tag-items most-popular-home">
+        <% @most_used_tags.each do |tag| %>
+          <%= render partial: "acts_as_taggable_on/tags/tag", locals: {tag: tag} %>
+        <% end %>
+      </div>
+    </div>
+  </section>
