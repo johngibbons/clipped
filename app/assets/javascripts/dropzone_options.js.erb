@@ -184,15 +184,15 @@ var uploader = {
     var self = this;
 
     var upload = self.uploads[file.id];
-
-    upload.$preview.find(".overlay").removeClass("hidden");;
+    var loadingGIF = upload.$preview.find(".loading-gif");
+    loadingGIF.removeClass("hidden");
 
     $.ajax({ url: '/uploads/' + upload.databaseID,
       type: 'PUT',
       dataType: "json",
       data: { upload: { tag_list: upload.tags } },
       success: function(){
-        upload.$preview.find(".overlay").addClass("hidden");;
+        loadingGIF.addClass("hidden");
       },
     });
   },

@@ -17,10 +17,6 @@
     <div id="uploader-controls" class="card" style="display: none;">
       <button type="button" id="save-uploads" name="x-ignore-save" disabled>save</button>
       <button type="button" id="remove-all-uploads" name="x-ignore-remove-all" class="secondary">remove all</button>
-      <div id="saving-indicator" class="hidden">
-        <div class="loading-gif"></div>
-        <p>saving...</p>
-      </div>
     </div>
 
     <div id="dropzone-upload-text">
@@ -57,6 +53,7 @@
             </div>
           </i>
           <h3>Tags:</h3>
+          <div class="loading-gif hidden"></div>
         </div>
         <%= text_field_tag "x-ignore-tags", nil, placeholder: "e.g. boy, walking, beach, etc.", id: "upload_tag_list", onkeypress: "return event.keyCode!=13" %>
       </div>
