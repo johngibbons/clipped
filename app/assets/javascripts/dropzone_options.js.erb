@@ -12,6 +12,7 @@ var uploader = {
   removeBtn: null,
   dropzone: null,
   counter: null,
+  doneSaving: false,
 
   uploads: [],
   user: "",
@@ -88,6 +89,14 @@ var uploader = {
     });
 
     self.dropzone.on("queuecomplete", function() {
+
+      window.setInterval(function(){
+
+        if (self.uploads.doneSaving === true) {
+          self.$saveAllBtn.prop("disabled", false);
+        }
+      }, 1000);
+
     });
 
   },
@@ -113,7 +122,6 @@ var uploader = {
       file: file,
       $preview: $(file.previewElement),
     };
-
 
     self.generateRemoveIcon(file);
     self.setTaggingTabIndex(file);
@@ -186,7 +194,7 @@ var uploader = {
       data: { upload: { direct_upload_url: upload.url, dz_thumb: upload.thumbImg } },
       success: function(result) {
         upload.databaseID = result["id"];
-        self.$saveAllBtn.prop("disabled", false);
+        self.uploads.doneSaving = true;
         $("#saving-indicator").addClass("hidden");
       }
 
@@ -199,9 +207,6 @@ var uploader = {
     $(".overlay").removeClass("hidden");
 
     $.each( self.uploads, function( key, upload ) {
-
-      console.log("key: ", key);
-      console.log("upload: ", upload);
 
       var tags = [];
       var $taglist = upload.$preview.find(".tag-data");
