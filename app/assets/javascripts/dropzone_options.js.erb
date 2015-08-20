@@ -89,8 +89,6 @@ var uploader = {
     });
 
     self.dropzone.on("queuecomplete", function() {
-      console.log("complete");
-      console.log("done?", self.uploads.doneSaving);
 
       window.setInterval(function(){
 
@@ -127,6 +125,7 @@ var uploader = {
 
     self.generateRemoveIcon(file);
     self.setTaggingTabIndex(file);
+    self.bindTaggingUpdate(file);
 
   },
 
@@ -151,6 +150,24 @@ var uploader = {
     var uploadTagField = uploadPreview.find("#upload_tag_list");
     uploadTagField.attr("tabindex", file.id + 1);
     formatTags(uploadTagField);
+  },
+
+  bindTaggingUpdate: function(file) {
+    var self = this;
+
+    var upload = self.uploads[file.id];
+
+    upload.$preview.on("focusout", function() {
+      $.ajax({
+        url: '/uploads/' + upload.databaseID,
+        type: 'PUT',
+        dataType: "json",
+        data: { upload: { tag_list: tags } },
+        success: function(){
+          console.log("saved tags");
+        },
+      });
+    });
   },
 
   removeUpload: function(file, removeBtn) {
@@ -208,31 +225,31 @@ var uploader = {
 
     $(".overlay").removeClass("hidden");
 
-    $.each( self.uploads, function( key, upload ) {
-
-      var tags = [];
-      var $taglist = upload.$preview.find(".tag-data");
-
-      if ( $taglist.length ) {
-        $taglist.each(function(){
-          tags.push( $(this).text() );
-        });
-
-        tags = tags.join();
-
-        var xhr = $.ajax({
-          url: '/uploads/' + upload.databaseID,
-          type: 'PUT',
-          dataType: "json",
-          data: { upload: { tag_list: tags } },
-          success: function(){
-          },
-        });
-
-        self.xhrs.push(xhr);
-      }
-
-    });
+//    $.each( self.uploads, function( key, upload ) {
+//
+//      var tags = [];
+//      var $taglist = upload.$preview.find(".tag-data");
+//
+//      if ( $taglist.length ) {
+//        $taglist.each(function(){
+//          tags.push( $(this).text() );
+//        });
+//
+//        tags = tags.join();
+//
+//        var xhr = $.ajax({
+//          url: '/uploads/' + upload.databaseID,
+//          type: 'PUT',
+//          dataType: "json",
+//          data: { upload: { tag_list: tags } },
+//          success: function(){
+//          },
+//        });
+//
+//        self.xhrs.push(xhr);
+//      }
+//
+//    });
 
     if ( self.xhrs.length ) {
 
