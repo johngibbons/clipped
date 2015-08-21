@@ -2,14 +2,14 @@
 <% count = count || "" %>
 <% if count.blank? %> 
   <% if tag_name.blank? %>
-    <%= link_to tag.name, tag_path(tag.name), class: "tag" %>
+    <%= link_to tag.name, search_index_path({tag_list: [tag.name]}), class: "tag" %>
   <% else %>
-    <%= link_to tag_name, tag_path(tag_name), class: "tag" %>
+    <%= link_to tag_name, search_index_path({tag_list: [tag_name]}), class: "tag" %>
   <% end %>
 <% else %>
   <% if tag_name.blank? %>
-    <%= link_to "#{tag.name} (#{count})", tag_path(tag_name), class: "tag" %>
+    <%= link_to "#{tag.name} (#{count})", search_index_path({tag_list: [tag_name]}), class: "tag" %>
   <% else %>
-    <%= link_to "#{tag_name} (#{count})", tag_path(tag_name), class: "tag" %>
+    <%= link_to "#{tag_name} (#{count})", search_index_path({tag_list: [tag_name]}), class: "tag" %>
   <% end %>
 <% end %>

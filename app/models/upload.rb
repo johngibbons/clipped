@@ -8,7 +8,6 @@ class Upload < ActiveRecord::Base
   acts_as_ordered_taggable
 
   searchable do
-    text :tag_list
     text :perspective
     text :category
     boolean :approved
