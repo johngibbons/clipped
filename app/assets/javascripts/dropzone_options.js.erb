@@ -152,16 +152,15 @@ var uploader = {
   },
 
   bindTaggingUpdate: function(file) {
+
     var self = this;
 
     var upload = self.uploads[file.id];
 
-    if (upload) {
-      upload.$preview.on("focusout", function() {
-        self.grabTags(file);
-        self.putTags(file);
-      });
-    }
+    upload.$preview.on("focusout", function() {
+      self.grabTags(file);
+      self.putTags(file);
+    });
   },
 
   grabTags: function(file) {
@@ -179,7 +178,6 @@ var uploader = {
     }
 
     upload.tags = tags.join();
-    console.log("tags are: ", upload.tags);
   },
 
   putTags: function(file) {
