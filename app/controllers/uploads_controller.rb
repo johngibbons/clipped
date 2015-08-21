@@ -43,9 +43,11 @@ class UploadsController < ApplicationController
     authorize @upload
     @upload.destroy
     @upload.user.update_stats
-    flash[:success] = "Image successfully deleted"
     respond_to do |format|
-      format.html { redirect_to current_user }
+      format.html {
+        flash[:success] = "Image successfully deleted"
+        redirect_to current_user
+      }
       format.js
     end
   end

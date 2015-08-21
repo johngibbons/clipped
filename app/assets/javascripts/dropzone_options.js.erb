@@ -156,10 +156,12 @@ var uploader = {
 
     var upload = self.uploads[file.id];
 
-    upload.$preview.on("focusout", function() {
-      self.grabTags(file);
-      self.putTags(file);
-    });
+    if (upload) {
+      upload.$preview.on("focusout", function() {
+        self.grabTags(file);
+        self.putTags(file);
+      });
+    }
   },
 
   grabTags: function(file) {
@@ -200,25 +202,25 @@ var uploader = {
   removeUpload: function(file, removeBtn) {
     var self = this;
 
+    //delete model from Database
+    self.deleteFile(file);
     //remove from Dropzone instance
     self.dropzone.removeFile(file);
-
-    //delete model from Database
-    uploadDatabaseID = $(removeBtn).parent().find('[name="x-ignore-upload[id]"]').val();
-    self.deleteFile(file, uploadDatabaseID);
   },
 
-  deleteFile: function(file, uploadDatabaseID) {
+  deleteFile: function(file) {
     var self = this;
 
-    $.ajax({
-      url: "/uploads/" + uploadDatabaseID,
-      type: "DELETE",
-      dataType: "script",
-      success: function(result) {
-        delete self.uploads[file.id];
-      },
-    });
+    if ( self.uploads[file.id].databaseID ) {
+      $.ajax({
+        url: "/uploads/" + self.uploads[file.id].databaseID,
+        type: "DELETE",
+        dataType: "script",
+        success: function(result) {
+          delete self.uploads[file.id];
+        },
+      });
+    }
   },
 
   saveUpload: function(file, responseText, event) {
@@ -230,7 +232,8 @@ var uploader = {
     var url = $(directURL).text();
     self.$saveAllBtn.prop("disabled", true);
     $("#saving-indicator").removeClass("hidden");
-    upload.$preview.find(".overlay").removeClass("hidden");;
+    upload.$preview.find(".overlay").removeClass("hidden");
+    upload.$preview.find(".dz-remove").addClass("hidden");
 
     upload.url = url;
 
@@ -245,6 +248,7 @@ var uploader = {
         $("#saving-indicator").addClass("hidden");
         upload.$preview.find(".overlay").addClass("hidden");;
         upload.$preview.find("#dropzone-upload-tags").removeClass("hidden");
+        upload.$preview.find(".dz-remove").removeClass("hidden");
         self.bindTaggingUpdate(file);
       },
       error: function(result) {
@@ -264,10 +268,24 @@ var uploader = {
   removeAllUploads: function() {
     var self = this;
 
-    self.dropzone.removeAllFiles(true);
-    self.uploads = [];
-    $saveAllBtn.prop("disabled", true);
-    $removeAllBtn.prop("disabled", true);
+    $(".overlay").find("p").text("deleting images...");
+    $(".overlay").removeClass("hidden");
+    self.uploads.forEach(function( el, i, arr ){
+      var upload = el;
+
+      $.ajax({
+        url: "/uploads/" + upload.databaseID,
+        type: "DELETE",
+        dataType: "script",
+        success: function(){
+          self.dropzone.removeAllFiles(true);
+          $saveAllBtn.prop("disabled", true);
+          $removeAllBtn.prop("disabled", true);
+          self.uploads = [];
+          $(".overlay").addClass("hidden");
+        }
+      });
+    });
   },
 
 };
