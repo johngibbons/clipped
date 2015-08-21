@@ -8,14 +8,15 @@ class Upload < ActiveRecord::Base
   acts_as_ordered_taggable
 
   searchable do
-    text :perspective
-    text :category
-    boolean :approved
-    integer :perspective_id
-    integer :category_id
+    text :tag_list, stored: true
+    text :perspective, stored: true
+    text :category, stored: true
+    boolean :approved, stored: true
+    integer :perspective_id, stored: true
+    integer :category_id, stored: true
     string :tag_list, multiple: true, stored: true
-    double :weighted_score
-    time :created_at
+    double :weighted_score, stored: true
+    time :created_at, stored: true
   end
   handle_asynchronously :solr_index
   # handle_asynchronously :remove_from_index
