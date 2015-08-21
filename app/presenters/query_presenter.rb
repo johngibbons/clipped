@@ -18,9 +18,9 @@ class QueryPresenter < BasePresenter
 
   def query_text(total_results)
     if @model[:search] && @model[:search] != ""
-      "<span class='results-count'>#{h.pluralize(total_results, 'result')} for </span> <span class='filters-text'>#{param_to_text('category_id')} #{param_to_text('perspective_id')}</span> <span class='search-text'>\"#{@model[:search]}\"</span>"
+      "<span class='results-count'>#{h.pluralize(total_results, 'result')} for </span> <span class='filters-text'>#{param_to_text('category_id')} #{param_to_text('perspective_id')} #{param_to_text('tag_list')}</span> <span class='search-text'>\"#{@model[:search]}\"</span>"
     else
-      "<span class='results-count'>#{h.pluralize(total_results, 'result')} </span> <span class='filters-text'>#{param_to_text('category_id')} #{param_to_text('perspective_id')}</span>"
+      "<span class='results-count'>#{h.pluralize(total_results, 'result')} </span> <span class='filters-text'>#{param_to_text('category_id')} #{param_to_text('perspective_id')} #{param_to_text('tag_list')}</span>"
     end
   end
 
@@ -84,11 +84,17 @@ class QueryPresenter < BasePresenter
 
     def param_to_text(param)
       values = get_current(param)
-      names = values.map do |val|
-        Upload.send("#{param}_name", val.to_i)
+      if param != "tag_list"
+        values = values.map do |val|
+          Upload.send("#{param}_name", val.to_i)
+        end
       end
-      if names.any?
-         names.join(" or ") + " : "
+      if values.any?
+        if param == "tag_list"
+          values.join(" and ") + " : "
+        else
+          values.join(" or ") + " : "
+        end
       else
         ""
       end
