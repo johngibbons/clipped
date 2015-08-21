@@ -198,13 +198,14 @@ var uploader = {
   },
 
   removeUpload: function(file, removeBtn) {
+    console.log("remove");
     var self = this;
 
+    upload = self.uploads[file.id];
     //remove from Dropzone instance
     self.dropzone.removeFile(file);
 
     //delete model from Database
-    uploadDatabaseID = $(removeBtn).parent().find('[name="x-ignore-upload[id]"]').val();
     self.deleteFile(file, uploadDatabaseID);
   },
 
@@ -212,11 +213,11 @@ var uploader = {
     var self = this;
 
     $.ajax({
-      url: "/uploads/" + uploadDatabaseID,
+      url: "/uploads/" + upload.databaseID,
       type: "DELETE",
       dataType: "script",
       success: function(result) {
-        delete self.uploads[file.id];
+        console.log("deleted");
       },
     });
   },
@@ -264,10 +265,24 @@ var uploader = {
   removeAllUploads: function() {
     var self = this;
 
-    self.dropzone.removeAllFiles(true);
-    self.uploads = [];
-    $saveAllBtn.prop("disabled", true);
-    $removeAllBtn.prop("disabled", true);
+    $(".overlay").find("p").text("deleting images...");
+    $(".overlay").removeClass("hidden");
+    self.uploads.forEach(function( el, i, arr ){
+      var upload = el;
+
+      $.ajax({
+        url: "/uploads/" + upload.databaseID,
+        type: "DELETE",
+        dataType: "script",
+        success: function(){
+          self.dropzone.removeAllFiles(true);
+          $saveAllBtn.prop("disabled", true);
+          $removeAllBtn.prop("disabled", true);
+          self.uploads = [];
+          $(".overlay").addClass("hidden");
+        }
+      });
+    });
   },
 
 };
