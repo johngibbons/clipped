@@ -128,4 +128,8 @@ html.turbolinks-progress-bar::before {
 
 .hidden {
   display: none;
+
+  &.fa {
+    display: none;
+  }
 }

@@ -156,10 +156,12 @@ var uploader = {
 
     var upload = self.uploads[file.id];
 
-    upload.$preview.on("focusout", function() {
-      self.grabTags(file);
-      self.putTags(file);
-    });
+    if (upload) {
+      upload.$preview.on("focusout", function() {
+        self.grabTags(file);
+        self.putTags(file);
+      });
+    }
   },
 
   grabTags: function(file) {
@@ -198,28 +200,27 @@ var uploader = {
   },
 
   removeUpload: function(file, removeBtn) {
-    console.log("remove");
     var self = this;
-
-    upload = self.uploads[file.id];
-    //remove from Dropzone instance
-    self.dropzone.removeFile(file);
 
     //delete model from Database
-    self.deleteFile(file, uploadDatabaseID);
+    self.deleteFile(file);
+    //remove from Dropzone instance
+    self.dropzone.removeFile(file);
   },
 
-  deleteFile: function(file, uploadDatabaseID) {
+  deleteFile: function(file) {
     var self = this;
 
-    $.ajax({
-      url: "/uploads/" + upload.databaseID,
-      type: "DELETE",
-      dataType: "script",
-      success: function(result) {
-        console.log("deleted");
-      },
-    });
+    if ( self.uploads[file.id].databaseID ) {
+      $.ajax({
+        url: "/uploads/" + self.uploads[file.id].databaseID,
+        type: "DELETE",
+        dataType: "script",
+        success: function(result) {
+          delete self.uploads[file.id];
+        },
+      });
+    }
   },
 
   saveUpload: function(file, responseText, event) {
@@ -231,7 +232,8 @@ var uploader = {
     var url = $(directURL).text();
     self.$saveAllBtn.prop("disabled", true);
     $("#saving-indicator").removeClass("hidden");
-    upload.$preview.find(".overlay").removeClass("hidden");;
+    upload.$preview.find(".overlay").removeClass("hidden");
+    upload.$preview.find(".dz-remove").addClass("hidden");
 
     upload.url = url;
 
@@ -246,6 +248,7 @@ var uploader = {
         $("#saving-indicator").addClass("hidden");
         upload.$preview.find(".overlay").addClass("hidden");;
         upload.$preview.find("#dropzone-upload-tags").removeClass("hidden");
+        upload.$preview.find(".dz-remove").removeClass("hidden");
         self.bindTaggingUpdate(file);
       },
       error: function(result) {
