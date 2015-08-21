@@ -258,7 +258,8 @@ var uploader = {
   saveAllUploads: function() {
     var self = this;
 
-    $(".overlay").removeClass("hidden");
+    $("#fullscreen-overlay").find("p").text("saving...");
+    $("#fullscreen-overlay").removeClass("hidden");
     window.location.replace("/users/" + self.user);
 
   },
@@ -266,23 +267,36 @@ var uploader = {
   removeAllUploads: function() {
     var self = this;
 
-    $(".overlay").find("p").text("deleting images...");
-    $(".overlay").removeClass("hidden");
+    $("#fullscreen-overlay").find("p").text("deleting...");
+    $("#fullscreen-overlay").removeClass("hidden");
     self.uploads.forEach(function( el, i, arr ){
       var upload = el;
 
-      $.ajax({
-        url: "/uploads/" + upload.databaseID,
-        type: "DELETE",
-        dataType: "script",
-        success: function(){
-          self.dropzone.removeAllFiles(true);
-          $saveAllBtn.prop("disabled", true);
-          $removeAllBtn.prop("disabled", true);
+      if ( upload.databaseID ) {
+        $.ajax({
+          url: "/uploads/" + upload.databaseID,
+          type: "DELETE",
+          dataType: "script",
+          success: function(){
+            self.dropzone.removeAllFiles(true);
+            self.$saveAllBtn.prop("disabled", true);
+            self.$removeAllBtn.prop("disabled", true);
+            self.uploads = [];
+            if ( i === arr.length - 1 ) {
+              $("#fullscreen-overlay").addClass("hidden");
+            }
+          }
+        });
+      } else {
+        if ( i === arr.length - 1 ) {
+          $("#fullscreen-overlay").addClass("hidden");
           self.uploads = [];
-          $(".overlay").addClass("hidden");
+          self.$saveAllBtn.prop("disabled", true);
+          self.$removeAllBtn.prop("disabled", true);
+          self.dropzone.removeAllFiles(true);
         }
-      });
+      }
+
     });
   },
 
