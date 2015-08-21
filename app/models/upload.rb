@@ -14,6 +14,7 @@ class Upload < ActiveRecord::Base
     boolean :approved
     integer :perspective_id
     integer :category_id
+    string :tag_list, multiple: true, stored: true
     double :weighted_score
     time :created_at
   end
