@@ -1,6 +1,15 @@
 <% tag_name = tag_name || "" %>
-<% unless (tag_name.blank?) %>
-  <%= link_to tag_name, tag_path(tag_name), class: "tag" %>
+<% count = count || "" %>
+<% if count.blank? %> 
+  <% if tag_name.blank? %>
+    <%= link_to tag.name, tag_path(tag.name), class: "tag" %>
+  <% else %>
+    <%= link_to tag_name, tag_path(tag_name), class: "tag" %>
+  <% end %>
 <% else %>
-  <%= link_to tag.name, tag_path(tag.name), class: "tag" %>
+  <% if tag_name.blank? %>
+    <%= link_to "#{tag.name} (#{count})", tag_path(tag_name), class: "tag" %>
+  <% else %>
+    <%= link_to "#{tag_name} (#{count})", tag_path(tag_name), class: "tag" %>
+  <% end %>
 <% end %>
