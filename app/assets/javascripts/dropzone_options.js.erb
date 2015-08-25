@@ -225,15 +225,15 @@ var uploader = {
     var self = this;
 
     var upload = self.uploads[file.id];
+    upload.url = $(responseText).find("location")[0].text();
 
-    var directURL = $(responseText).find("location")[0];
-    var url = $(directURL).text();
+    var savingOverlay = upload.$preview.find(".overlay");
+    var deleteIcon = upload.$preview.find(".dz-remove");
+    var tagForm = upload.$preview.find("#dropzone-upload-tags");
+
     self.$saveAllBtn.prop("disabled", true);
-    $("#saving-indicator").removeClass("hidden");
-    upload.$preview.find(".overlay").removeClass("hidden");
-    upload.$preview.find(".dz-remove").addClass("hidden");
-
-    upload.url = url;
+    savingOverlay.removeClass("hidden");
+    deleteIcon.addClass("hidden");
 
     $.ajax({
       url: '/uploads',
@@ -243,14 +243,14 @@ var uploader = {
       success: function(result) {
         upload.databaseID = result["id"];
         self.uploads.doneSaving = true;
-        $("#saving-indicator").addClass("hidden");
-        upload.$preview.find(".overlay").addClass("hidden");;
-        upload.$preview.find("#dropzone-upload-tags").removeClass("hidden");
-        upload.$preview.find(".dz-remove").removeClass("hidden");
+        savingOverlay.addClass("hidden");;
+        tagForm.removeClass("hidden");
+        deleteIcon.removeClass("hidden");
         self.bindTaggingUpdate(file);
       },
       error: function(result) {
-        alert(result);
+        savingOverlay.find("p").text("error - please try again");
+        delete upload;
       }
     });
   },
