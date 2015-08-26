@@ -1,8 +1,8 @@
-<h1>Sample App</h1>
+<%= image_tag attachments['logo-header.png'].url -%>
 
 <p>Hi <%= @user.name %>,</p>
 
 <p>
-Welcome to the Sample App! Click on the link below to activate your account:
+Welcome to Clipped.io! Click on the link below to activate your account:
 </p>
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token, email: @user.email) %>

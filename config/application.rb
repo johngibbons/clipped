@@ -29,6 +29,8 @@ module Clipped
 
     config.active_job.queue_adapter = :delayed_job
 
+    config.action_mailer.default_url_options = { host: "clipped.io" }
+
     config.generators do |g| 
         g.test_framework :rspec, 
             :fixtures => true, 
