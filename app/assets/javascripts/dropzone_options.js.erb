@@ -225,7 +225,7 @@ var uploader = {
     var self = this;
 
     var upload = self.uploads[file.id];
-    upload.url = $(responseText).find("location")[0].text();
+    upload.url = $(responseText).find("location").text();
 
     var savingOverlay = upload.$preview.find(".overlay");
     var deleteIcon = upload.$preview.find(".dz-remove");
