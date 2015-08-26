@@ -83,7 +83,7 @@ RSpec.describe UsersController, type: :controller do
         delete :destroy, id: @user
       end.to change{ User.count }.by(-1)
       expect(flash).to_not be_empty
-      expect(response).to redirect_to(users_url)
+      expect(response).to redirect_to(root_url)
     end
 
     it "allows destroy when self" do
@@ -92,7 +92,7 @@ RSpec.describe UsersController, type: :controller do
         delete :destroy, id: @user
       end.to change { User.count }.by(-1)
       expect(flash).to_not be_empty
-      expect(response).to redirect_to(users_url)
+      expect(response).to redirect_to(root_url)
     end
   end
 end

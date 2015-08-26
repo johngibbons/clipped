@@ -7,10 +7,6 @@ class UploadPolicy < ApplicationPolicy
     @upload = upload
   end
 
-  def update?
-    admin_or_owner?
-  end
-
   def destroy?
     admin_or_owner?
   end

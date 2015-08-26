@@ -35,7 +35,7 @@ module Paperclip
     cmd == 'convert' ? nil : super
   end
 end
- 
+
 class Paperclip::Attachment
   def post_process
   end
@@ -78,47 +78,64 @@ RSpec.configure do |config|
     old_value = Delayed::Worker.delay_jobs
     Delayed::Worker.delay_jobs = true
     Delayed::Job.destroy_all
- 
+
     example.run
- 
+
     Delayed::Worker.delay_jobs = old_value
   end
 
-    config.include Capybara::DSL  
-    Capybara.javascript_driver = :webkit
+  config.include Capybara::DSL
+  Capybara.javascript_driver = :webkit
 
-    # Capybara.default_host = "http://#{DEFAULT_HOST}"
-    # Capybara.server_port = DEFAULT_PORT
-    # Capybara.app_host = "http://#{DEFAULT_HOST}:#{Capybara.server_port}"
+  # Capybara.default_host = "http://#{DEFAULT_HOST}"
+  # Capybara.server_port = DEFAULT_PORT
+  # Capybara.app_host = "http://#{DEFAULT_HOST}:#{Capybara.server_port}"
 
-    #fixes issues with capybara not detecting db changes made during tests
-    config.use_transactional_fixtures = false
+  #fixes issues with capybara not detecting db changes made during tests
+  config.use_transactional_fixtures = false
 
-    config.before :each do
-      if Capybara.current_driver == :rack_test
-        DatabaseCleaner.strategy = :transaction
-      else
-        DatabaseCleaner.strategy = :truncation
-      end
-      DatabaseCleaner.start
+  config.before :each do
+    if Capybara.current_driver == :rack_test
+      DatabaseCleaner.strategy = :transaction
+    else
+      DatabaseCleaner.strategy = :truncation
     end
+    DatabaseCleaner.start
+  end
 
-    config.after do
-      DatabaseCleaner.clean
-    end  
+  config.after do
+    DatabaseCleaner.clean
+  end  
 
-    config.before :each, :js, type: :feature do |example|
-      # page.driver.block_unknown_urls
-      page.driver.browser.block_url("http://use.typekit.net")
-      page.driver.allow_url("testhost.com")
-      page.driver.allow_url("s3-us-west-2.amazonaws.com")
-      page.driver.allow_url("secure.gravatar.com")
-      page.driver.allow_url("raw.githubusercontent.com")
-    end
-  
+  Capybara::Webkit.configure do |config|
+    config.allow_url("testhost.com")
+    config.allow_url("s3-us-west-2.amazonaws.com")
+    config.allow_url("secure.gravatar.com")
+    config.allow_url("raw.githubusercontent.com")
+    config.allow_url("checkout.stripe.com")
+    config.block_url("http://use.typekit.net")
+  end
+
   OmniAuth.config.test_mode = true
 
+  puts "rspec pid: #{Process.pid}"
 
+  trap 'USR1' do
+    threads = Thread.list
+
+    puts
+    puts "=" * 80
+    puts "Received USR1 signal; printing all #{threads.count} thread backtraces."
+
+    threads.each do |thr|
+      description = thr == Thread.main ? "Main thread" : thr.inspect
+      puts
+      puts "#{description} backtrace: "
+      puts thr.backtrace.join("\n")
+    end
+
+    puts "=" * 80
+  end
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

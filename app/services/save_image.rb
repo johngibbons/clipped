@@ -7,10 +7,10 @@ class SaveImage
   # Set attachment attributes from the direct upload
   # @note Retry logic handles S3 "eventual consistency" lag.
   def call
-      @upload.image_file_name     = direct_upload_url_data[:filename]
-      @upload.image_file_size     = direct_upload_attributes.content_length
-      @upload.image_content_type  = direct_upload_attributes.content_type
-      @upload.image_updated_at    = direct_upload_attributes.last_modified
+    @upload.image_file_name     = direct_upload_url_data[:filename]
+    @upload.image_file_size     = direct_upload_attributes.content_length
+    @upload.image_content_type  = direct_upload_attributes.content_type
+    @upload.image_updated_at    = direct_upload_attributes.last_modified
   end
 
   private

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Upload show page", :type => :feature do
 
-  subject(:user) { create(:user) }
+  subject(:non_admin) { create(:user) }
   subject(:upload) { create(:upload, approved: true) }
   subject(:admin) { create(:user, admin: true) }
 

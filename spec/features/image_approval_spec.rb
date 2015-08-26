@@ -6,17 +6,18 @@ RSpec.feature "Image approvals", :type => :feature do
     upload_images_as(@user)
   end
 
-  scenario "non-admin tries to approve images" do
+  scenario "non-admin tries to approve images", js: true do
     log_in(@user)
     visit user_path(@user)
-    click_link("upload-#{Upload.first.id}")
+    click_link("unapproved")
     expect(page).to_not have_css(".approve-btn")
   end
 
-  scenario "admin approves image" do
+  scenario "admin approves image", js: true do
     @admin = create(:admin)
     log_in(@admin)
     visit user_path(@user)
+    click_link("unapproved")
     click_link("upload-#{Upload.first.id}")
     expect(page).to have_button("approve")
     expect(page).to have_css(".unapproved")
