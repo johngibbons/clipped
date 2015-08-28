@@ -65,5 +65,11 @@ RSpec.feature "User logs in", :type => :feature do
     expect(page).to have_content "Account not activated."
     expect(page).to have_content "Log In With"
   end
+
+  scenario "with missing profile avatar" do
+    user_no_avatar = FactoryGirl.create(:user, avatar: "")
+    log_in(user_no_avatar)
+    expect(page).to have_css("#profile-avatar")
+  end
   
 end

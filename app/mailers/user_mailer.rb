@@ -23,6 +23,6 @@ class UserMailer < ApplicationMailer
   private
 
     def add_inline_attachments!
-      attachments.inline["logo-header.png"] = File.read("assets/images/logo-header.png")
+      attachments.inline["logo-header.png"] = File.read("#{Rails.root}/app/assets/images/logo-header.png")
     end
 end

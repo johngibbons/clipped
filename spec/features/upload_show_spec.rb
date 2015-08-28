@@ -33,16 +33,8 @@ RSpec.feature "Upload show page", :type => :feature do
       visit upload_path(upload)
       expect(page).to have_selector(".tag", count: 3)
       expect(page).to have_content "second"
-      Sunspot.commit
       click_link "second"
-      expect(page).to_not have_selector(".upload-thumb")
-    end
-
-    scenario "other user tries to update upload tags but can't" do
-      other_user = create(:user)
-      log_in(other_user)
-      visit upload_path(upload)
-      expect(page).to_not have_content "Edit Tags"
+      expect(page).to have_selector(".search.index")
     end
 
     scenario "admin updates upload perspective", :js => true do
@@ -53,10 +45,7 @@ RSpec.feature "Upload show page", :type => :feature do
       select "Above", from: "upload_perspective"
       click_button "Update"
       expect(page).to have_content "Above"
-      expect(page).to_not have_content "SIDE FRONT"
-      second_upload = create(:upload, approved: false, perspective: :above)
-      click_link "selected-perspective"
-      expect(page).to have_selector(".upload-thumb", count: 2)
+      expect(page).to_not have_content "Not applicable"
     end
 
   end
@@ -64,7 +53,7 @@ RSpec.feature "Upload show page", :type => :feature do
   context "upload owner is logged in" do
 
     before(:each) do
-      owner = user
+      owner = non_admin
       upload.user = owner
       upload.save!
       log_in(owner)
@@ -82,7 +71,7 @@ RSpec.feature "Upload show page", :type => :feature do
      expect(page).to_not have_content("Update")
     end
 
-    scenario "click on tag and see all uploads with that tag", :solr => true do
+    scenario "click on tag and see all uploads with that tag" do
       second_upload = create(:upload, approved: false)
       upload.tag_list = "first, second, third"
       second_upload.tag_list = "second"
@@ -91,10 +80,6 @@ RSpec.feature "Upload show page", :type => :feature do
       visit upload_path(upload)
       expect(page).to have_selector(".tag", count: 3)
       expect(page).to have_content "second"
-      Sunspot.commit
-      click_link "second"
-      expect(page).to have_selector(".search.index")
-      expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
     scenario "uploader updates upload perspective", :js => true do
@@ -105,10 +90,14 @@ RSpec.feature "Upload show page", :type => :feature do
       select "Above", from: "upload_perspective"
       click_button "Update"
       expect(page).to have_content "Above"
-      expect(page).to_not have_content "Side front"
-      second_upload = create(:upload, approved: false, perspective: :above)
-      click_link "selected-perspective"
-      expect(page).to have_selector(".upload-thumb", count: 1)
+      expect(page).to_not have_content "Not applicable"
+    end
+
+    scenario "other user tries to update upload tags but can't" do
+      other_user = create(:user)
+      log_in(other_user)
+      visit upload_path(upload)
+      expect(page).to_not have_content "Edit Tags"
     end
 
   end
@@ -137,6 +126,7 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_content "second"
       Sunspot.commit
       click_link "second"
+      expect(page).to have_selector(".search.index")
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
@@ -150,6 +140,7 @@ RSpec.feature "Upload show page", :type => :feature do
       second_upload = create(:upload, approved: false, perspective: :above)
       Sunspot.commit
       click_link "selected-perspective"
+      expect(page).to have_selector(".search.index")
       expect(page).to have_selector(".upload-thumb", count: 1)
     end
 
@@ -159,15 +150,6 @@ RSpec.feature "Upload show page", :type => :feature do
       # click_link "Download"
     end
 
-  end
-
-  scenario "search for uploads by tag and return all images related to tag" do
-  end
-
-  scenario "show the most popular tags" do
-  end
-
-  scenario "show the most needed tags" do
   end
 
 end

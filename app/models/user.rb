@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, 
                     styles: { profile: { geometry: '300x300#', processors: [:cropper] }, large: '500x500>' },
-                    :default_url => "profile.png",
+                    :default_url => ENV['DEFAULT_AVATAR'],
                     :default_style => :profile,
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
@@ -54,14 +54,10 @@ class User < ActiveRecord::Base
       end
       avatar_url = avatar_url.to_s
       self.avatar = URI.parse(avatar_url)
+      self.save!
     else
-      set_default_avatar(view_context.image_url("profile.png"))
+      avatar_from_url(ENV['DEFAULT_AVATAR'])
     end
-  end
-
-  def set_default_avatar(url)
-    self.avatar = URI.parse(url)
-    self.save!
   end
 
   class << self
@@ -90,7 +86,16 @@ class User < ActiveRecord::Base
   def avatar_geometry(style = :original)
     @geometry ||= {}
     avatar_path = (avatar.options[:storage] == :s3) ? avatar.url(style) : avatar.path(style)
-    @geometry[style] ||= Paperclip::Geometry.from_file(avatar_path)
+    uri = URI(avatar_path)
+    request = Net::HTTP.new uri.host
+    response = request.request_head uri.path
+    a = response.code.to_i
+    if (response.code.to_i == 200)
+      @geometry[style] ||= Paperclip::Geometry.from_file(avatar_path)
+    else
+      self.avatar_from_url()
+      self.avatar_geometry(style)
+    end
   end
 
   def ratio

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def index    
+  def index
     @user_search = User.search do
       with :activated, true
       if params[:user_search].present?
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.delay.set_default_avatar(view_context.image_url("profile.png"))
+      @user.delay.avatar_from_url(ENV['DEFAULT_AVATAR'])
       @user.send_activation_email
       flash[:notice] = "Please check your email to activate your account."
       redirect_to root_url
@@ -89,7 +89,7 @@ class UsersController < ApplicationController
           end
         }
       else
-        render 'edit'
+        format.html { render 'edit' }
       end
     end
   end

@@ -43,7 +43,7 @@ RSpec.feature "Update User", :type => :feature do
     expect(user.reload.password_digest).to eq(pass)
   end
 
-  scenario "User enters no password and updates email only" do
+  scenario "User enters no email and updates password only" do
     pass = user.password_digest
     old_email = user.email
     fill_in "Password", with: "newpassword"

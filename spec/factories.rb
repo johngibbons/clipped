@@ -1,7 +1,9 @@
 include ActionDispatch::TestProcess
 
 FactoryGirl.define do
+
   factory :user do
+
     name Faker::Name.first_name
     avatar { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
     sequence :email do |n|
@@ -23,9 +25,11 @@ FactoryGirl.define do
   end
 
   factory :upload do
+
     user
     image { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
-    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/00d510e52fe4dbefa6549369f2d3fece/Mockup-Home-Page-2.png"
+    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/150820/b70044eb14119fb23cb03e73e81863fe/maed.jpg"
+    dz_thumb { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
 
     factory :approved_upload do
       approved true

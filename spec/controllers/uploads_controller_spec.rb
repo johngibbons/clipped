@@ -60,7 +60,7 @@ RSpec.describe UploadsController, type: :controller do
       upload.save!
       log_in_as(current)
       expect do
-        patch :update, id: upload, upload: { tag_list: "some tag, another tag, a third" }
+        xhr :patch, :update, id: upload, upload: { tag_list: "some tag, another tag, a third" }, format: "json"
       end.to change{ upload.reload.tags.count }.by(3)
     end
 

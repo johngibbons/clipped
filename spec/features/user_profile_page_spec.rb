@@ -21,15 +21,20 @@ RSpec.feature "User profile page", :type => :feature do
 
     click_link("Awaiting Approval (2)")
     expect(page).to have_css(".upload-thumb", count: 2)
-    expect(page).to have_css("Favorites (0)")
+    expect(page).to have_link("Favorites (0)")
 
   end
 
-  scenario "Admin user views other user's profile page" do
+  scenario "Admin user views other user's profile page", js: true do
     @admin = create(:user, admin: true)
     log_in(@admin)
 
     visit user_path(@user)
+    expect(page).to have_link("Uploads (0)")
+    expect(page).to_not have_css(".upload-thumb")
+    expect(page).to have_link("Awaiting Approval (2)")
+
+    click_link("Awaiting Approval (2)")
     expect(page).to have_css(".upload-thumb", count: 2)
   end
 

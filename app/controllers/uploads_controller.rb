@@ -23,14 +23,14 @@ class UploadsController < ApplicationController
   def update
     @upload = Upload.find(params[:id])
     authorize @upload
-    if @upload.update(upload_params)
-      respond_to do |format|
+    respond_to do |format|
+      if @upload.update(upload_params)
         format.js
         format.json { render json: @upload }
+      else
+        flash.now[:error] = "There was an issue updating your upload"
+        format.html { render "show" }
       end
-    else
-      flash.now[:error] = "There was an issue updating your upload"
-      render "show"
     end
   end
 
