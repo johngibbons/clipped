@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.delay.avatar_from_url(ENV['DEFAULT_AVATAR'])
+      @user.delay.avatar_from_url(User::DEFAULT_AVATAR_URL)
       @user.send_activation_email
       flash[:notice] = "Please check your email to activate your account."
       redirect_to root_url

@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
     time :created_at
   end
   handle_asynchronously :solr_index
-  
+
+  DEFAULT_AVATAR_URL = "https://s3-us-west-2.amazonaws.com/entourageappdev/users/avatars/default/profile.png"
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
   validates :name, length: {maximum: 50}
@@ -28,7 +29,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, 
                     styles: { profile: { geometry: '300x300#', processors: [:cropper] }, large: '500x500>' },
-                    :default_url => ENV['DEFAULT_AVATAR'],
+                    :default_url => DEFAULT_AVATAR_URL,
                     :default_style => :profile,
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
@@ -56,7 +57,7 @@ class User < ActiveRecord::Base
       self.avatar = URI.parse(avatar_url)
       self.save!
     else
-      avatar_from_url(ENV['DEFAULT_AVATAR'])
+      avatar_from_url(DEFAULT_AVATAR_URL)
     end
   end
 
