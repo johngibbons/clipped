@@ -1,13 +1,22 @@
 <% present(@upload) do |upload| %>
 
-  <%= content_tag :div, class: "upload-single card gray #{upload.approval_class}" do -%>
-    <%= image_tag upload.src(:large) %>
-    <div id="upload-single-interactions">
-      <span id="favorites-label" class="interaction-stat"><%= upload.favorites_count if logged_in? %></span><%= render 'relationships/favorite_form' if logged_in? %>
-    <%= render 'upload_moderation/moderation_form' if logged_in? && current_user.admin? %>
-    <%= render partial: 'delete_form', locals: {upload: upload} %>
+  <div class="upload-single-left-content">
+    <%= content_tag :div, class: "upload-single-image card gray #{upload.approval_class}" do %>
+      <%= image_tag upload.src(:large) %>
+    <% end %>
+
+    <div class="upload-single-interactions">
+      <div id="favorite-link" class="icon-link">
+        <%= render 'relationships/favorite_form' if logged_in? %>
+      </div>
+      <div id="approve-link" class="icon-link">
+        <%= render 'upload_moderation/moderation_form' if policy(:upload_moderation).update?%>
+      </div>
+      <div id="delete-link" class="icon-link">
+        <%= render partial: 'delete_form', locals: {upload: upload} if policy(@upload).destroy?%>
+      </div>
     </div>
-  <% end -%>
+  </div>
 
   <div class="upload-info">
     <div class="upload-clipper card">
@@ -80,11 +89,11 @@
           <%= link_to 'Edit', edit_upload_path(upload), class: "js-link", id: "edit-category-link", remote: true %>
         <% end %>
       <% end %>
+      <div id="upload-download">
+        <%= render partial: "download", locals: {upload: @upload} %>
+      </div>
     </div>
 
-    <div id="upload-download" class="card">
-      <%= render partial: "download", locals: {upload: @upload} %>
-    </div>
   </div>
 
 <% end %>

@@ -1,6 +1,6 @@
 <%= form_for(current_user.favoriter_relationships.build, remote: true) do |f| %>
   <%= hidden_field_tag :favorited_id, @upload.id %>
-	<%= f.button id: "favorite", class: "icon" do %>
+	<%= f.button id: "favorite", class: "favorite icon", title: "Add To Favorites" do %>
 		<i class="fa fa-star fa-lg off"></i>
 	<% end %>
 <% end %>

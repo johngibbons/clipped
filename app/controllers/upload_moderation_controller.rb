@@ -1,9 +1,8 @@
 class UploadModerationController < ApplicationController
-  before_action :logged_in_user
-  before_action :admin_user
 
   def update
     @upload = Upload.find(params[:id])
+    authorize :upload_moderation, :update?
     if @upload.approved?
       current_user.disapprove(@upload)
     else
@@ -17,6 +16,7 @@ class UploadModerationController < ApplicationController
 
   def index
     @uploads = Upload.where(approved: false).paginate(page: params[:page])
+    authorize :upload_moderation, :index?
   end
 
 end

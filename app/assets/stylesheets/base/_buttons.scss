@@ -84,10 +84,88 @@ button.secondary, .btn.secondary {
   }
 }
 
-button.icon {
+button.search-icon {
   background: transparent;
+  color: $dark-gray;
   border: none;
   box-shadow: none;
   padding: 0;
-  margin-right: 10px;
+
+  .fa {
+    color: $dark-gray;
+  }
+}
+
+button.icon {
+  background: $white;
+  border: 1px solid $light-gray;
+  box-shadow: 0 1px 2px 0 $lightest-gray;
+  color: $dark-gray;
+  transition: $base-transition;
+  margin: 0.25em 0;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+
+  .fa {
+    position: relative;
+    right: -2px;
+    transition: $base-transition;
+    text-align: center;
+    width: 100%;
+  }
+
+  &.approval {
+    &:hover {
+      background-color: lighten($clipped-green, 10%);
+      color: $white;
+      .fa {
+        color: $white;
+      }
+    }
+
+    &.on {
+      background-color: $clipped-green;
+      border: 1px solid darken($clipped-green, 10%);
+      color: darken($clipped-green, 30%);
+
+      .fa.on {
+        color: darken($clipped-green, 30%);
+      }
+    }
+  }
+
+  &.favorite {
+
+    &:hover {
+      background-color: lighten($clipped-yellow, 5%);
+    }
+
+    &.on {
+      background-color: $clipped-yellow;
+      border: 1px solid darken($clipped-yellow, 45%);
+      color: desaturate(darken($clipped-yellow, 50%), 10%);
+
+      .fa.on {
+        color: desaturate(darken($clipped-yellow, 50%), 10%);
+      }
+    }
+  }
+
+  &.delete {
+
+    .fa {
+      color: darken($clipped-red, 10%);
+    }
+
+    &:hover {
+      background-color: lighten($clipped-red, 5%);
+      color: $white;
+
+      .fa {
+        color: $white;
+      }
+    }
+
+  }
 }

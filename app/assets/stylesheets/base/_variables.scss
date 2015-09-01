@@ -40,6 +40,7 @@ $light-pink: lighten($clipped-pink, 20%);
 $clipped-orange: #fbb040;
 $clipped-green: #b8d988;
 $clipped-red:	#fb5555;
+$clipped-yellow: #FFFFCC;
 $google-red: #dd4b39;
 $facebook-blue: #4e69a2;
 
@@ -75,3 +76,6 @@ $avatar-size: 150px;
 
 //Modal
 $modal-padding: 3rem;
+
+//Transitions
+$base-transition: all 0.3s ease;

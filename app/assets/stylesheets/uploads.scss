@@ -1,8 +1,20 @@
 // Place all the styles related to the Uploads controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.upload-single {
+.upload-single-left-content {
+  position: relative;
   @include span-columns(4);
+
+  @include media($tablet) {
+    @include span-columns(5);
+  }
+
+  @include media($desktop) {
+    @include span-columns(8);
+  }
+}
+
+.upload-single-image {
   height: 700px;
   position: relative;
   margin-bottom: $gutter;
@@ -19,13 +31,12 @@
     transform: translate(-50%, -50%);
   }
 
-  @include media($tablet) {
-    @include span-columns(5);
-  }
+}
 
-  @include media($desktop) {
-    @include span-columns(8);
-  }
+.upload-single-interactions {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .upload-info {
@@ -132,16 +143,6 @@
 #update-details-btn {
   &.hidden {
     display: none;
-  }
-}
-
-#upload-single-interactions {
-  position: absolute;
-  top: 0.5em;
-  right: 1em;
-
-  .upload-interaction {
-    display: inline-block;
   }
 }
 
