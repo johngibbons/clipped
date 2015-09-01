@@ -8,6 +8,7 @@ require 'shoulda/matchers'
 require 'capybara/rails'
 require 'database_cleaner'
 require 'aws-sdk'
+require 'webmock/rspec'
 require 'vcr'
 
 

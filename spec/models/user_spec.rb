@@ -10,8 +10,23 @@ RSpec.describe User, type: :model do
     expect(user).to be_invalid
   end
 
+  it "has username" do
+    user.username = ""
+    expect(user).to be_invalid
+  end
+
+  it "has username no less than 3 chars" do
+    user.username = "a" * 2
+    expect(user).to be_invalid
+  end
+
   it "has name no more than 50 chars" do
     user.name = "a" * 51
+    expect(user).to be_invalid
+  end
+
+  it "has username no more than 20 chars" do
+    user.username = "a" * 21
     expect(user).to be_invalid
   end
 
@@ -42,6 +57,12 @@ RSpec.describe User, type: :model do
   it "has a unique email address" do
     user.save
     duplicate_user = FactoryGirl.build(:user, email: user.email.upcase)
+    expect(duplicate_user).to be_invalid
+  end
+
+  it "has a unique username" do
+    user.save
+    duplicate_user = FactoryGirl.build(:user, username: user.username.upcase)
     expect(duplicate_user).to be_invalid
   end
 

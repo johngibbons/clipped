@@ -5,13 +5,21 @@ FactoryGirl.define do
   factory :user do
 
     name Faker::Name.first_name
+
+    sequence :username do |n|
+      "userName_#{n}"
+    end
+
     avatar { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
+
     sequence :email do |n|
       "person#{n}@example.com"
     end
+
     sequence :password do |n|
       "password#{n}"
     end
+
     activated true
 
     factory :admin do

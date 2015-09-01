@@ -1,7 +1,7 @@
 <%= link_to user, class: "user-thumb" do %>
 	<div class="card">
 	    <%= image_tag user.avatar.url(:profile), class: "avatar" %>
-	    <p class="user-thumb-name"><%= user.name %></p>
+	    <p class="user-thumb-name">@<%= user.username %></p>
 
 		<div class="hover-overlay">
 	    <ul class="user-thumb-stats">

@@ -7,7 +7,7 @@ module Omniauth
       'provider' => 'facebook',
       'uid' => '123545',
       'info' => {
-        'email' => 'mockemail@sample.com',
+        'email' => 'mockemailabcdefghijk@sample.com',
         'name' => 'mockuser',
         'image' => 'https://s3-us-west-2.amazonaws.com/entourageappdev/thumb/amanda.jpg'
       },

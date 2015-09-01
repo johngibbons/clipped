@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   searchable do
     text :name
+    text :username
     text :email
     boolean :activated
     double :weighted_score
@@ -20,6 +21,7 @@ class User < ActiveRecord::Base
 
   DEFAULT_AVATAR_URL = "https://s3-us-west-2.amazonaws.com/entourageappdev/users/avatars/default/profile.png"
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  validates :username, presence: true, :length => { :in => 3..20 }, uniqueness: {case_sensitive: false}
   validates :email, presence: true, length: {maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
   validates :name, length: {maximum: 50}
   #allow blank allows for profile update without changing password, password presence is ensured by 'has_secure_password' when signing up
@@ -55,7 +57,6 @@ class User < ActiveRecord::Base
       end
       avatar_url = avatar_url.to_s
       self.avatar = URI.parse(avatar_url)
-      self.save!
     else
       avatar_from_url(DEFAULT_AVATAR_URL)
     end

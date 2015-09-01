@@ -13,7 +13,7 @@ class AuthenticateUser
 
   def error
     if auth_hash || !authenticated?
-      'Invalid email/password combination'
+      'Invalid username or email/password combination'
     elsif !@user.activated?
       "Account not activated.  Check your email for activation link."
     end
