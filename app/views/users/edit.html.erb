@@ -24,7 +24,7 @@
       <%= f.submit "Save Changes" %>
     <% end %>
 
-    <%= link_to "delete account", current_user, method: :delete, data: { confirm: "delete your account?" }, id: "delete-user" %>
+    <%= link_to "delete account", @user, method: :delete, data: { confirm: "delete your account?" }, id: "delete-user" %>
 
   </div>
 </div>

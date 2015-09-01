@@ -97,8 +97,8 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     authorize @user
-    log_out if logged_in?
-    @user.delay.destroy
+    log_out if logged_in?(@user)
+    @user.destroy
     flash[:success] = "User deleted successfully"
     redirect_to root_url
   end

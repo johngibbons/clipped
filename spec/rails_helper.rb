@@ -67,7 +67,7 @@ RSpec.configure do |config|
   config.include ActionDispatch::TestProcess
 
   config.around(:each) do |example|
-    VCR.use_cassette(example.metadata[:full_description]) do
+    VCR.use_cassette(example.metadata[:full_description], match_requests_on: [:path]) do
       example.run
     end
   end
