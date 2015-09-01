@@ -6,57 +6,94 @@ RSpec.feature "User profile page", :type => :feature do
     upload_images_as(@user)
   end 
 
-  scenario "User views own profile page", js: true do
-    log_in(@user)
+  context "Admin is logged in" do
+    before(:example) do
+      @admin = create(:user, admin: true)
+      log_in(@admin)
+      visit user_path(@user)
+    end
 
-    visit user_path(@user)
-    expect(page).to have_link("Uploads (0)")
-    expect(page).to_not have_css(".upload-thumb")
-    expect(page).to have_link("Awaiting Approval (2)")
+    scenario "Admin sees everything", js: true do
+      create(:upload, user: @user, approved: true)
+      visit user_path(@user)
+      expect(page).to have_link("Uploads (1)")
+      expect(page).to have_css(".upload-thumb", count: 1)
+      expect(page).to have_link("Favorites (0)")
+      expect(page).to_not have_css(".upload-btn")
+      expect(page).to have_link("Edit Profile")
+      expect(page).to have_css("#edit-user-avatar")
+      expect(page).to have_link("Awaiting Approval (2)")
 
-    create(:upload, user: @user, approved: true)
-
-    visit user_path(@user)
-    expect(page).to have_link("Uploads (1)")
-
-    click_link("Awaiting Approval (2)")
-    expect(page).to have_css(".upload-thumb", count: 2)
-    expect(page).to have_link("Favorites (0)")
+      click_link("Awaiting Approval (2)")
+      expect(page).to have_css(".upload-thumb", count: 2)
+    end
 
   end
 
-  scenario "Admin user views other user's profile page", js: true do
-    @admin = create(:user, admin: true)
-    log_in(@admin)
+  context "User is logged in" do
 
-    visit user_path(@user)
-    expect(page).to have_link("Uploads (0)")
-    expect(page).to_not have_css(".upload-thumb")
-    expect(page).to have_link("Awaiting Approval (2)")
+    before(:example) do
+      log_in(@user)
+      visit user_path(@user)
+    end
 
-    click_link("Awaiting Approval (2)")
-    expect(page).to have_css(".upload-thumb", count: 2)
+    scenario "User sees everything they should", js: true do
+      expect(page).to have_link("Uploads (0)")
+      expect(page).to_not have_css(".upload-thumb")
+      expect(page).to have_link("Awaiting Approval (2)")
+      create(:upload, user: @user, approved: true)
+      visit user_path(@user)
+      expect(page).to have_link("Uploads (1)")
+      expect(page).to have_css(".upload-thumb", count: 1)
+      expect(page).to have_link("Favorites (0)")
+      expect(page).to have_link("Edit Profile")
+      expect(page).to have_css(".upload-btn")
+      expect(page).to have_css("#edit-user-avatar")
+    end
+
   end
 
-  scenario "Other logged in user views user's profile page (no approved images)" do
-    @other_user = create(:user)
-    log_in(@other_user)
+  context "Other user is logged in" do
 
-    visit user_path(@user)
-    expect(page).to_not have_css(".upload-btn")
-    expect(page).to_not have_link("Awaiting Approval (2)")
-    expect(page).to_not have_link("Favorites (0)")
+    before(:example) do
+      @other_user = create(:user)
+      log_in(@other_user)
+      visit user_path(@user)
+    end
+
+    scenario "Other user sees only what they should" do
+      create(:upload, user: @user, approved: true)
+
+      visit user_path(@user)
+      expect(page).to have_css(".upload-thumb", count: 1)
+      expect(page).to_not have_link("Awaiting Approval (2)")
+      expect(page).to_not have_link("Awaiting Approval (2)")
+      expect(page).to_not have_link("Favorites (0)")
+      expect(page).to_not have_css(".upload-btn")
+      expect(page).to_not have_link("Edit Profile")
+      expect(page).to_not have_css("#edit-user-avatar")
+    end
+
   end
 
-  scenario "Other logged in user views user's profile page (approved images)" do
-    @other_user = create(:user)
-    log_in(@other_user)
+  context "No user is logged in" do
 
-    create(:upload, user: @user, approved: true)
+    before(:example) do
+      visit user_path(@user)
+    end
 
-    visit user_path(@user)
-    expect(page).to have_css(".upload-thumb", count: 1)
-    expect(page).to_not have_link("Awaiting Approval (1)")
+    scenario "Guest user sees only what they should" do
+      create(:upload, user: @user, approved: true)
+
+      visit user_path(@user)
+      expect(page).to have_css(".upload-thumb", count: 1)
+      expect(page).to_not have_link("Awaiting Approval (2)")
+      expect(page).to_not have_link("Awaiting Approval (2)")
+      expect(page).to_not have_link("Favorites (0)")
+      expect(page).to_not have_css(".upload-btn")
+      expect(page).to_not have_link("Edit Profile")
+      expect(page).to_not have_css("#edit-user-avatar")
+    end
   end
 
 end
