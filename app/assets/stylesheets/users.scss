@@ -41,6 +41,17 @@
     margin-top: 25px;
   }
 
+  .edit-link {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: $clipped-green;
+    font-weight: 600;
+
+    &:hover {
+      color: darken($clipped-green, 20%);
+    }
+  }
+
 }
 
 .user-name {
@@ -152,13 +163,15 @@
   text-align: center;
   margin-bottom: 2em;
 
-  .modal-trigger {
+  label {
     position: relative;
-    cursor: pointer;
     width: $avatar-size;
     height: $avatar-size;
     left: 50%;
     transform: translate(-50%, 0);
+  }
+
+  .modal-trigger {
 
     .fa {
       position: absolute;
