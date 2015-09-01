@@ -64,8 +64,6 @@ var profilePicture = {
 
     self.$avatarContainer.w = self.$avatarContainer.width();
     self.$avatarContainer.h = self.$avatarContainer.height();
-    console.log(self.$avatarContainer.w);
-    console.log(self.$avatarContainer.h);
   },
 
   initiateCrop: function(e) {
