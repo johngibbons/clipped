@@ -4,27 +4,36 @@
 
 .gateway-form {
 
-	@include media($tablet) {
-		@include outer-container(35%);
-	}
+  @include media($tablet) {
+    @include outer-container(35%);
+  }
 
-	button, input[type="submit"] {
-		width: 100%;
-	}
+  button, input[type="submit"] {
+    width: 100%;
+  }
 
-	.or-text {
-		text-align: center;
-		border-bottom: $base-border;
-		margin: 2em 0;
-		width: 100%;
-		line-height: 0;
-		font-weight: 700;
-		font-size: 0.8em;
-		text-transform: uppercase;
+  .or-text {
+    text-align: center;
+    border-bottom: $base-border;
+    margin: 2em 0;
+    width: 100%;
+    line-height: 0;
+    font-weight: 700;
+    font-size: 0.8em;
+    text-transform: uppercase;
 
-		span {
-			padding: 0 1em;
-			background-color: $white;
-		}
-	}
+    span {
+      padding: 0 1em;
+      background-color: $white;
+    }
+  }
+
+  label {
+    display: inline-block;
+  }
+
+  #forgot-password-link {
+    display: inline-block;
+    font-size: 0.7em;
+  }
 }

@@ -7,22 +7,22 @@
 <% end %>
 
 <%= link_to '/auth/facebook' do %>
-	<button class="facebook">Log In With Facebook</button>
+  <button class="facebook">Log In With Facebook</button>
 <% end %>
 
 <div class="or-text">
-	<span>or</span>
+  <span>or</span>
 </div>
 
 <%= form_for(:session, url: login_path, html: {class: "user-form", id: "login-form"}) do |f| %>
-	<%= f.label :email %>
-	<%= f.email_field :email %>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
 
-	<%= f.label :password %>
-	<%= f.password_field :password %>
-	<%= link_to "forgot?", new_password_reset_path %>
+  <%= f.label :password %>
+  <%= link_to "forgot?", new_password_reset_path, id: "forgot-password-link" %>
+  <%= f.password_field :password %>
 
-	<%= f.submit "Log In" %>
+  <%= f.submit "Log In" %>
 <% end %>
 
 <p>Need your activation email resent?  <%= link_to "click here", new_account_activation_path %></p>
