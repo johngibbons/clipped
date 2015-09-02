@@ -1,5 +1,4 @@
 class UploadsController < ApplicationController
-  before_action :increment_views, only: :show
 
   def new
     @upload = current_user.uploads.new
@@ -35,6 +34,7 @@ class UploadsController < ApplicationController
   end
 
   def show
+    @upload = Upload.find(params[:id])
     authorize @upload
   end
 
@@ -64,13 +64,6 @@ class UploadsController < ApplicationController
 
     def upload_params
       params.require(:upload).permit(:image, :direct_upload_url, :tag_list, :perspective, :category, :dz_thumb)
-    end
-
-    def increment_views
-      @upload = Upload.find_by(id: params[:id])
-      @upload.views += 1
-      @upload.save
-      @upload.user.update_stats
     end
 
     def user_not_authorized

@@ -5,8 +5,10 @@ class UploadModerationController < ApplicationController
     authorize :upload_moderation, :update?
     if @upload.approved?
       current_user.disapprove(@upload)
+      @upload.user.update_stats
     else
       current_user.approve(@upload)
+      @upload.user.update_stats
     end
     respond_to do |format|
       format.html { redirect_to @upload }

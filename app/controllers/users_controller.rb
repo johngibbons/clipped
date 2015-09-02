@@ -33,7 +33,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @uploads = UploadPolicy::Scope.new(current_user, @user.uploads).resolve.paginate(page: params[:page])
     authorize @user
-    @user.update_stats
 
     if params[:filter_uploads] == "unapproved"
       @uploads = @uploads.where(approved: false)

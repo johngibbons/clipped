@@ -173,11 +173,11 @@ class User < ActiveRecord::Base
 
   def update_stats
     self.favorites_count = self.uploads.where(approved: true).sum(:favorites_count)
-    self.views_count =  self.uploads.where(approved: true).sum(:views)
     self.downloads_count = self.uploads.where(approved: true).sum(:downloads)
     self.save!
     Sunspot.delay.index self
   end
+  handle_asynchronously :update_stats
 
   def weighted_score
     m = ModelStatistics.new(self)
