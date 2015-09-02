@@ -35,6 +35,7 @@ class FindUserToLogin
         user.email = @auth_hash["info"]["email"]
         username = user.email[/[^@]+/]
         username = username[0,20]
+        username = username.gsub(/[^\w]/, '_')
         user.username = username
         user.password = user.password_confirmation = SecureRandom.urlsafe_base64(n=6)
         user.activated = true

@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
   DEFAULT_AVATAR_URL = "https://s3-us-west-2.amazonaws.com/entourageappdev/users/avatars/default/profile.png"
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :username, presence: true, :length => { :in => 3..20 }, uniqueness: {case_sensitive: false}
+  validates :username, presence: true, :length => { :in => 3..20 }, uniqueness: {case_sensitive: false}, format: { with: /\A\w*\z/, :message => 'only letters, numbers, and underscores allowed' }
   validates :email, presence: true, length: {maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
   validates :name, length: {maximum: 50}
   #allow blank allows for profile update without changing password, password presence is ensured by 'has_secure_password' when signing up

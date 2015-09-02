@@ -47,15 +47,10 @@ RSpec.describe UsersController, type: :controller do
     expect(other_user.reload.admin?).to eq(false) 
   end
 
-  # it "allows guest users to view other users" do
-  #   expect(session[:user_id]).to eq(nil)
-  #   expect(current_user).to eq(:guest_user)
-  # end
-
   describe "handles deleting users correctly" do
     before :example do
       @user = user
-    end 
+    end
 
     it "redirects destroy when not logged in" do
       expect(User.count).to eq(1)

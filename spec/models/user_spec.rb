@@ -20,6 +20,20 @@ RSpec.describe User, type: :model do
     expect(user).to be_invalid
   end
 
+  it "has username consisting of only numbers, letters, and underscores" do
+    invalid_usernames = %w[ a#jif AA0@fjio j!olra 9932_$ amanda.tharp ]
+    invalid_usernames.each do |invalid_username|
+      user.username = invalid_username
+      expect(user).to be_invalid
+    end
+
+    valid_usernames = %w[ john_gibbons 123Abc_99 amanda_m_tharp SmA3rt ]
+    valid_usernames.each do |valid_username|
+      user.username = valid_username
+      expect(user).to be_valid
+    end
+  end
+
   it "has name no more than 50 chars" do
     user.name = "a" * 51
     expect(user).to be_invalid
