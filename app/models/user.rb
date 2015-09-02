@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
                                  dependent:   :destroy
   has_many :favoriting, through: :favoriter_relationships, source: :favorited
 
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :activation_token, :reset_token, :avatar_original_width
   before_save   :downcase_email
   before_create :create_activation_digest
 
@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
                     :s3_protocol => 'https',
                     :s3_host_name => "s3-us-west-2.amazonaws.com",
                     :bucket => ENV['AWS_BUCKET']
+
+  after_post_process :save_image_dimensions
 
   validates_attachment  :avatar,
                         :size => { :less_than => 50.megabytes },
@@ -102,10 +104,6 @@ class User < ActiveRecord::Base
 
   def ratio
     self.avatar_geometry(:original).width / self.avatar_geometry(:large).width
-  end
-
-  def avatar_original_width
-    self.avatar_geometry(:original).width
   end
 
   # Activates an account.
@@ -217,11 +215,19 @@ class User < ActiveRecord::Base
   def reprocess_avatar
     avatar.reprocess!
   end
-  
+
   private
     #converts email to all lower-case.
     def downcase_email
       self.email = email.downcase
+    end
+
+    def save_image_dimensions
+      tempfile = avatar.queued_for_write[:original]
+      unless tempfile.nil?
+        geometry = Paperclip::Geometry.from_file(tempfile)
+        self.avatar_original_width = geometry.width.to_i
+      end
     end
 
 end

@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.feature "User profile page", :type => :feature do
-  before(:example) do
+  before do
     @user = create(:user)
     upload_images_as(@user)
-  end 
+  end
 
   context "Admin is logged in" do
-    before(:example) do
+    before do
       @admin = create(:user, admin: true)
       log_in(@admin)
       visit user_path(@user)
@@ -32,7 +32,7 @@ RSpec.feature "User profile page", :type => :feature do
 
   context "User is logged in" do
 
-    before(:example) do
+    before do
       log_in(@user)
       visit user_path(@user)
     end
@@ -55,7 +55,7 @@ RSpec.feature "User profile page", :type => :feature do
 
   context "Other user is logged in" do
 
-    before(:example) do
+    before do
       @other_user = create(:user)
       log_in(@other_user)
       visit user_path(@user)
@@ -78,7 +78,7 @@ RSpec.feature "User profile page", :type => :feature do
 
   context "No user is logged in" do
 
-    before(:example) do
+    before do
       visit user_path(@user)
     end
 

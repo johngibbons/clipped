@@ -62,16 +62,12 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+WebMock.disable_net_connect!(allow_localhost: true)  
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include ActionDispatch::TestProcess
-
-  config.around(:each) do |example|
-    VCR.use_cassette(example.metadata[:full_description], match_requests_on: [:path]) do
-      example.run
-    end
-  end
 
   config.include(Omniauth)
 

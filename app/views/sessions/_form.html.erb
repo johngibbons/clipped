@@ -16,7 +16,7 @@
 
 <%= form_for(:session, url: login_path, html: {class: "user-form", id: "login-form"}) do |f| %>
   <%= f.label :username_or_email %>
-  <%= f.text_field :username %>
+  <%= f.text_field :username_or_email %>
 
   <%= f.label :password %>
   <%= link_to "forgot?", new_password_reset_path, id: "forgot-password-link" %>

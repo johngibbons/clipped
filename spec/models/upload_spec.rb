@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Upload, type: :model do
-  subject(:upload) { build(:upload) }
+  subject(:upload) { create(:upload) }
 
   it { is_expected.to be_valid }
 
@@ -11,8 +11,10 @@ RSpec.describe Upload, type: :model do
   end
 
   it "has associated image" do
-    upload.image = nil
-    expect(upload).to be_invalid
+    VCR.use_cassette("remove_image", match_requests_on: [:host]) do
+      upload.image = nil
+      expect(upload).to be_invalid
+    end
   end
 
   it "is ordered by newest first" do

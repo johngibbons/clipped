@@ -9,24 +9,28 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   it "creates new user using omniauth" do
-    request.env["omniauth.auth"] = mock_auth_hash
-    expect do
-      get :create, :provider => "facebook"
-    end.to change{ User.count }.by(1)
-    user = User.last
-    expect(session[:user_id]).to eq(user.id)
-    expect(response).to redirect_to(user_path(session[:user_id]))
+    VCR.use_cassette('facebook/omniauth', match_requests_on: [:host]) do
+      request.env["omniauth.auth"] = mock_auth_hash
+      expect do
+        get :create, :provider => "facebook"
+      end.to change{ User.count }.by(1)
+      user = User.last
+      expect(session[:user_id]).to eq(user.id)
+      expect(response).to redirect_to(user_path(session[:user_id]))
+    end
   end
 
   it "handles username for duplicate email using omniauth" do
     create(:user, {username: "mockemailabcdefghijk"}) #omniauth uses mockemailabcdefghijk@sample.com
-    request.env["omniauth.auth"] = mock_auth_hash
-    expect do
-      get :create, :provider => "facebook"
-    end.to change{ User.count }.by(1)
-    user = User.last
-    expect(session[:user_id]).to eq(user.id)
-    expect(response).to redirect_to(user_path(session[:user_id]))
+    VCR.use_cassette('facebook/omniauth', match_requests_on: [:host]) do
+      request.env["omniauth.auth"] = mock_auth_hash
+      expect do
+        get :create, :provider => "facebook"
+      end.to change{ User.count }.by(1)
+      user = User.last
+      expect(session[:user_id]).to eq(user.id)
+      expect(response).to redirect_to(user_path(session[:user_id]))
+    end
   end
 
   it "logs in user using email and password" do
@@ -54,15 +58,17 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   it "destroys authentication" do
-    request.env["omniauth.auth"] = mock_auth_hash
-    #log in
-    get :create, :provider => "facebook"
+    VCR.use_cassette('facebook/omniauth', match_requests_on: [:host]) do
+      request.env["omniauth.auth"] = mock_auth_hash
+      #log in
+      get :create, :provider => "facebook"
 
-    user = User.last
-    expect(session[:user_id]).to eq(user.id)
+      user = User.last
+      expect(session[:user_id]).to eq(user.id)
 
-    #log out
-    get :destroy
-    expect(session[:user_id]).to eq(nil)
+      #log out
+      get :destroy
+      expect(session[:user_id]).to eq(nil)
+    end
   end
 end

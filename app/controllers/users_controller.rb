@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     authorize @user
     respond_to do |format|
       if @user.update_attributes(user_params)
-        if @user.cropping?
+        if params[:user][:crop_h]
           @user.reprocess_avatar
         end
         format.js {}
@@ -106,7 +106,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:username, :name, :email, :password, :password_confirmation, :avatar, :crop_x, :crop_y, :crop_w, :crop_h)
+      params.require(:user).permit(:username, :name, :email, :password, :password_confirmation, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :avatar_original_width)
     end
 
 end

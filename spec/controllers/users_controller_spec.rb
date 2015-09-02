@@ -79,20 +79,24 @@ RSpec.describe UsersController, type: :controller do
     it "allows destroy when admin" do
       admin = create(:admin)
       log_in_as(admin)
-      expect do
-        delete :destroy, id: @user
-      end.to change{ User.count }.by(-1)
-      expect(flash).to_not be_empty
-      expect(response).to redirect_to(root_url)
+      VCR.use_cassette('destroy_user', match_requests_on: [:host]) do
+        expect do
+          delete :destroy, id: @user
+        end.to change{ User.count }.by(-1)
+        expect(flash).to_not be_empty
+        expect(response).to redirect_to(root_url)
+      end
     end
 
     it "allows destroy when self" do
       log_in_as(@user)
-      expect do
-        delete :destroy, id: @user
-      end.to change { User.count }.by(-1)
-      expect(flash).to_not be_empty
-      expect(response).to redirect_to(root_url)
+      VCR.use_cassette('destroy_user', match_requests_on: [:host]) do
+        expect do
+          delete :destroy, id: @user
+        end.to change { User.count }.by(-1)
+        expect(flash).to_not be_empty
+        expect(response).to redirect_to(root_url)
+      end
     end
   end
 end

@@ -42,7 +42,6 @@ class FindUserToLogin
         user.avatar_from_url(@auth_hash["info"]["image"])
       end
 
-      byebug
       if new_user.valid?
         new_user.save
       elsif new_user.errors.messages[:username] == ["has already been taken"]

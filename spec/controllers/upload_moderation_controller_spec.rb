@@ -30,7 +30,7 @@ RSpec.describe UploadModerationController, type: :controller do
   it "should redirect when not admin" do
     log_in_as(nonadmin)
     patch :update, id: unapproved, upload: { approved: true }
-    expect(response).to redirect_to root_url
+    expect(response).to redirect_to login_url
     expect(unapproved.approved?).to eq(false) 
   end
 

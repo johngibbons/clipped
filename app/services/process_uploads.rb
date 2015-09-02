@@ -22,12 +22,10 @@ class ProcessUploads
 
     # Final upload processing step
     def transfer_and_cleanup(upload)
-            
       upload.image = URI.parse(URI.escape(@upload.direct_upload_url))
       upload.processed = true
 
       upload.save!
-      
       cloud_storage_service.buckets[ENV["AWS_BUCKET"]].objects[direct_upload_url_data[:path]].delete
     end
     handle_asynchronously :transfer_and_cleanup, :queue => 'image_processing'

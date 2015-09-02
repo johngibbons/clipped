@@ -50,9 +50,11 @@ RSpec.describe UploadsController, type: :controller do
       upload.user = current
       upload.save!
       log_in_as(current)
-      expect do
-        post :create, upload: { direct_upload_url: upload.direct_upload_url }
-      end.to change{ Upload.count }.by(1)
+      VCR.use_cassette('create_upload_from_direct_url', match_requests_on: [:host]) do
+        expect do
+          post :create, upload: { direct_upload_url: upload.direct_upload_url }
+        end.to change{ Upload.count }.by(1)
+      end
     end
 
     it "updates when owner" do
@@ -68,9 +70,11 @@ RSpec.describe UploadsController, type: :controller do
       upload.user = current
       upload.save!
       log_in_as(current)
-      expect do
-        delete :destroy, id: upload
-      end.to change{ Upload.count }.by(-1)
+      VCR.use_cassette('destroy_upload', match_requests_on: [:host]) do
+        expect do
+          delete :destroy, id: upload
+        end.to change{ Upload.count }.by(-1)
+      end
     end
 
     it "destroys when admin" do
@@ -78,9 +82,11 @@ RSpec.describe UploadsController, type: :controller do
       current.save!
       log_in_as(current)
       upload.save!
-      expect do
-        delete :destroy, id: upload
-      end.to change{ Upload.count }.by(-1)    
+      VCR.use_cassette('destroy_upload', match_requests_on: [:host]) do
+        expect do
+          delete :destroy, id: upload
+        end.to change{ Upload.count }.by(-1)    
+      end
     end
     
   end

@@ -10,7 +10,10 @@ FactoryGirl.define do
       "userName_#{n}"
     end
 
-    avatar { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
+    avatar_file_name "test.png"
+    avatar_content_type "image/png"
+    avatar_file_size  "1024"
+    avatar_updated_at Time.now
 
     sequence :email do |n|
       "person#{n}@example.com"
@@ -21,6 +24,10 @@ FactoryGirl.define do
     end
 
     activated true
+
+    factory :uploaded_avatar do
+      avatar { fixture_file_upload(Rails.root.join("spec", "support", "test.png"), "image/png") }
+    end
 
     factory :admin do
       admin true
@@ -35,9 +42,17 @@ FactoryGirl.define do
   factory :upload do
 
     user
-    image { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
-    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/00291554aaed97e66f51c426df76090e/earlyjuly2.jpg"
-    dz_thumb { Rack::Test::UploadedFile.new(Rails.root.join("spec/support/test.png"), 'image/png') }
+    image_file_name "test.png"
+    image_content_type "image/png"
+    image_file_size "1024"
+    image_updated_at Time.now
+    direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/150820/38cf45f9c4ff4da33eec95e5de6f54c1/DSCF5092.png"
+    dz_thumb { fixture_file_upload(Rails.root.join("spec/support/test.png"), 'image/png') }
+
+    factory :uploaded_upload do
+      direct_upload_url "https://s3-us-west-2.amazonaws.com/entourageappdev/uploads/150820/38cf45f9c4ff4da33eec95e5de6f54c1/DSCF5092.png"
+      dz_thumb { fixture_file_upload(Rails.root.join("spec/support/test.png"), 'image/png') }
+    end
 
     factory :approved_upload do
       approved true

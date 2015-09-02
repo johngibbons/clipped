@@ -8,13 +8,12 @@ RSpec.feature "Image favoriting", :type => :feature do
 
   context "user is logged in" do
 
-    before(:example) do
+    before do
       log_in(user)
-    end 
+    end
 
     scenario "user favorites an image" do
       visit upload_path(upload)
-      expect(page).to have_content("Views")
       expect do
         click_button "favorite"
       end.to change{upload.reload.favorites_count}.by(1)
@@ -30,11 +29,12 @@ RSpec.feature "Image favoriting", :type => :feature do
   end
 
   context "user is not logged in" do
+
     scenario "user tries to favorite an image" do
       visit upload_path(upload)
-      expect(page).to have_content("Views")
-      expect(page).to_not have_button("Like")
-      expect(page).to_not have_button("Unfavorite")
+      expect(page).to_not have_button("favorite")
+      expect(page).to_not have_button("unfavorite")
     end
+
   end
 end

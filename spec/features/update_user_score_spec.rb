@@ -6,9 +6,9 @@ RSpec.feature "Update User Score", :type => :feature do
   subject(:other_user) { create(:user) }
   subject(:upload) { create(:upload, approved: true) }
 
-  before(:example) do
+  before do
     log_in(user)
-  end 
+  end
 
   scenario "updates on favorite or unfavorite" do
     visit upload_path(upload)
