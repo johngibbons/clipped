@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   layout "no_container", only: :show
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -30,7 +31,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @uploads = UploadPolicy::Scope.new(current_user, @user.uploads).resolve.paginate(page: params[:page])
     authorize @user
 
@@ -65,12 +65,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     authorize @user
   end
 
   def update
-    @user = User.find(params[:id])
     authorize @user
     respond_to do |format|
       if @user.update_attributes(user_params)
@@ -94,7 +92,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     authorize @user
     log_out if logged_in?
     @user.destroy
@@ -106,6 +103,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:username, :name, :email, :password, :password_confirmation, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :avatar_original_width)
+    end
+
+    def set_user
+      @user = User.find_by_username(params[:id])
     end
 
 end

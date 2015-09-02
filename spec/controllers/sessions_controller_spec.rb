@@ -16,7 +16,7 @@ RSpec.describe SessionsController, type: :controller do
       end.to change{ User.count }.by(1)
       user = User.last
       expect(session[:user_id]).to eq(user.id)
-      expect(response).to redirect_to(user_path(session[:user_id]))
+      expect(response).to redirect_to(user_path(user.username))
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe SessionsController, type: :controller do
       end.to change{ User.count }.by(1)
       user = User.last
       expect(session[:user_id]).to eq(user.id)
-      expect(response).to redirect_to(user_path(session[:user_id]))
+      expect(response).to redirect_to(user_path(user.username))
     end
   end
 
@@ -38,7 +38,7 @@ RSpec.describe SessionsController, type: :controller do
     get :create, session: { username_or_email: user.email,
                             password: user.password }
     expect(session[:user_id]).to eq(user.id)
-    expect(response).to redirect_to(user_path(session[:user_id]))
+    expect(response).to redirect_to(user_path(user.username))
   end
 
   it "logs in user using username and password" do
@@ -46,7 +46,7 @@ RSpec.describe SessionsController, type: :controller do
     get :create, session: { username_or_email: user.username,
                             password: user.password }
     expect(session[:user_id]).to eq(user.id)
-    expect(response).to redirect_to(user_path(session[:user_id]))
+    expect(response).to redirect_to(user_path(user.username))
   end
 
   it "doesn't log in user with incorrect password" do

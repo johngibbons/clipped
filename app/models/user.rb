@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
                     :default_style => :profile,
                     :storage => :s3,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
-                    :s3_protocol => 'https',
+                   :s3_protocol => 'https',
                     :s3_host_name => "s3-us-west-2.amazonaws.com",
                     :bucket => ENV['AWS_BUCKET']
 
@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     { :bucket => ENV['AWS_BUCKET'], 
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'], 
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] }
+  end
+
+  def to_param
+    username
   end
 
   def avatar_from_url(url)

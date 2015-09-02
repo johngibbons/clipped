@@ -12,13 +12,13 @@ RSpec.describe UsersController, type: :controller do
   end
 
   it "redirects edit when not logged in" do
-    get :edit, id: user.id
+    get :edit, id: user.username
     expect(flash).to_not be_empty
     expect(response).to redirect_to(login_url)
   end
 
   it "redirects update when not logged in" do
-    get :update, id: user.id, user: build(:user, email: "sample@example.com")
+    get :update, id: user.username, user: build(:user, email: "sample@example.com")
     expect(flash).to_not be_empty
     expect(response).to redirect_to(login_url)
   end
@@ -26,14 +26,14 @@ RSpec.describe UsersController, type: :controller do
   it "redirects edit when logged in as wrong user" do
     log_in_as(user)
     expect(current_user).to eq(user)
-    get :edit, id: other_user.id
+    get :edit, id: other_user.username
     expect(flash).to_not be_empty
     expect(response).to redirect_to(login_url)
   end
 
   it "redirects update when logged in as wrong user" do
     log_in_as(user)
-    get :update, id: other_user.id, user: { email: other_user.email }
+    get :update, id: other_user.username, user: { email: other_user.email }
     expect(flash).to_not be_empty
     expect(response).to redirect_to(login_url)
   end
