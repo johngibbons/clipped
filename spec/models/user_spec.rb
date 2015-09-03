@@ -225,4 +225,11 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "commenting on an upload" do
+
+    it "has have many comments association" do
+      expect(user).to have_many(:comments)
+    end
+
+  end
 end
