@@ -1,0 +1,12 @@
+<div class="upload-clipper card">
+  <h2 class="title">Clipper</h2>
+  <div class="media-object">
+    <%= link_to user_path(upload.user), class: "media-figure" do %>
+      <%= image_tag upload.clipper_avatar, class: "avatar" %>
+    <% end %>
+    <div id="upload-clipper-info media-body">
+      <p class="clipper-name"><%= link_to "@#{upload.user.username}", user_path(upload.user) %></p>
+      <p class="clipper-upload-count"><%= pluralize(upload.user.approved_uploads_count, "upload") %></p>
+    </div>
+  </div>
+</div>

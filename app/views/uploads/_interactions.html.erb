@@ -1,0 +1,11 @@
+<div class="upload-single-interactions">
+  <div id="favorite-link" class="icon-link">
+    <%= render 'relationships/favorite_form' if logged_in? %>
+  </div>
+  <div id="approve-link" class="icon-link">
+    <%= render 'upload_moderation/moderation_form' if policy(:upload_moderation).update?%>
+  </div>
+  <div id="delete-link" class="icon-link">
+    <%= render partial: 'delete_form', locals: {upload: upload} if policy(@upload).destroy?%>
+  </div>
+</div>

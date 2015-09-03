@@ -1,0 +1,41 @@
+<div class="upload-details card">
+  <h2 class="title">Details</h2>
+  <%= form_for @upload, method: :patch, html: { class: "details", id: "update-details-form" }, remote: true do |f| %>
+    <table id="upload-show-details-table">
+      <tbody>
+        <tr>
+          <td>Perspective:</td>
+          <td class="detail-val"><%= link_to upload.perspective.humanize, search_index_path(perspective_id: Upload.perspectives[upload.perspective], perspective: upload.perspective), id: "selected-perspective", class: "attr-link" %><%= render partial: 'perspective_form', locals: {f: f} %>
+        </td>
+        </tr>
+        <tr>
+          <td>Category:</td>
+          <td class="detail-val"><%= link_to upload.category.humanize, search_index_path(category_id: Upload.categories[upload.category], category: upload.category), id: "selected-category", class: "attr-link" %><%= render partial: 'category_form', locals: {f: f } %></td>
+        </tr>
+        <tr>
+          <td>Views:</td>
+          <td class="detail-val"><%= upload.views %></td>
+        </tr>
+        <tr>
+          <td>Downloads:</td>
+          <td class="detail-val"><%= upload.downloads %></td>
+        </tr>
+        <tr>
+          <td>Favorited:</td>
+          <td class="detail-val" id="favorites_count"><%= upload.favorites_count %></td>
+        </tr>
+        <tr>
+          <td>Uploaded:</td>
+          <td class="detail-val"><%= time_ago_in_words(upload.created_at) %> ago</td>
+        </tr>
+      </tbody>
+    </table>
+    <% if policy(upload).update? %>
+      <%= f.submit "Update", id: "update-details-btn", class: "hidden btn update-upload-btn" %>
+      <%= link_to 'Edit', edit_upload_path(upload), class: "js-link", id: "edit-category-link", remote: true %>
+    <% end %>
+  <% end %>
+  <div id="upload-download">
+    <%= render partial: "download", locals: {upload: @upload} %>
+  </div>
+</div>
