@@ -13,7 +13,7 @@
     <%= file_field_tag 'file', multiple: true %>
   </div>
 
-  <%= content_tag "div", id: "uploader-container", class: "flex-container", data: { userid: current_user.id } do %>
+  <%= content_tag "div", id: "uploader-container", class: "flex-container", data: { userid: current_user.username } do %>
     <div id="uploader-controls" class="card" style="display: none;">
       <button type="button" id="save-uploads" name="x-ignore-save" disabled>save</button>
       <button type="button" id="remove-all-uploads" name="x-ignore-remove-all" class="secondary">remove all</button>

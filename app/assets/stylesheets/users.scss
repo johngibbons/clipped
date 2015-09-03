@@ -133,6 +133,9 @@
   .user-thumb-name {
     font-weight: 700;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: $base-font-size * 0.9;
   }
 
   .user-thumb-stats {
