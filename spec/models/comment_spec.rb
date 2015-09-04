@@ -15,4 +15,20 @@ RSpec.describe Comment, type: :model do
     comment.commentee_id = nil
     expect(comment).to be_invalid
   end
+
+  it "has a text body" do
+    comment.body = nil
+    expect(comment).to be_invalid
+  end
+
+  it "belongs to a commenter" do
+    expect(comment).to belong_to(:commenter).
+    class_name("User")
+  end
+
+  it "belongs to a commentee" do
+    expect(comment).to belong_to(:commentee).
+    class_name("Upload")
+  end
+
 end

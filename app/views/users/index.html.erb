@@ -2,17 +2,17 @@
 <h1>All Clippers</h1>
 
 <div id="user-sort-tabs" class="tabs">
-<% if @user_query[:sort_users] == "created_at" %>
-	<%= link_to "Top Clippers", users_path(sort_users: "weighted_score") %>
-	<%= link_to "Newest Clippers", users_path(sort_users: "created_at"), class: "active" %>
-<% else %>
-	<%= link_to "Top Clippers", users_path(sort_users: "weighted_score"), class: "active" %>
-	<%= link_to "Newest Clippers", users_path(sort_users: "created_at") %>
-<% end %>
+  <% if @user_query[:sort_users] == "created_at" %>
+    <%= link_to "Top Clippers", users_path(sort_users: "weighted_score") %>
+    <%= link_to "Newest Clippers", users_path(sort_users: "created_at"), class: "active" %>
+  <% else %>
+    <%= link_to "Top Clippers", users_path(sort_users: "weighted_score"), class: "active" %>
+    <%= link_to "Newest Clippers", users_path(sort_users: "created_at") %>
+  <% end %>
 </div>
 
 <div id="users-index-container" class="users">
-	<%= render @users %>
+  <%= render @users %>
 </div>
 
 <div id="infinite-scrolling">

@@ -4,6 +4,5 @@ class Comment < ActiveRecord::Base
 
   validates :commenter_id, presence: true
   validates :commentee_id, presence: true
-
-  attr_accessor :body
+  validates :comment_body, presence: true
 end

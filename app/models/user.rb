@@ -233,6 +233,16 @@ class User < ActiveRecord::Base
     avatar.reprocess!
   end
 
+  def commenting_on?(upload)
+    commentees.include?(upload)
+  end
+
+  def comment_on(upload:, comment_body:)
+    comments.build(commentee_id: upload.id) do |comment|
+      comment.comment_body = comment_body
+    end
+  end
+
   private
     #converts email to all lower-case.
     def downcase_email

@@ -86,6 +86,10 @@ class Upload < ActiveRecord::Base
     stats.composite_score_uploads
   end
 
+  def commented_on_by?(user)
+    commenters.include?(user)
+  end
+
   class << self
 
     def sorted_by(attribute)

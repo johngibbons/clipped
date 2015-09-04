@@ -231,5 +231,21 @@ RSpec.describe User, type: :model do
       expect(user).to have_many(:comments)
     end
 
+    it "has have many commenters through comments" do
+      expect(user).to have_many(:commentees).
+      through(:comments).
+      class_name("Upload")
+    end
+
+    it "comments on an upload" do
+      user.save
+      upload = create(:upload)
+      expect(user).to_not be_commenting_on(upload)
+      comment = user.comment_on(upload: upload, body: "Test comment")
+      comment.save!
+      expect(user).to be_commenting_on(upload)
+      expect(comment.body).to eq("Test comment")
+    end
+
   end
 end

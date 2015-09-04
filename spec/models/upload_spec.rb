@@ -43,4 +43,26 @@ RSpec.describe Upload, type: :model do
       expect(upload).to be_valid
     end
   end
+
+  describe "commenting on an upload" do
+
+    it "has have many comments association" do
+      expect(upload).to have_many(:comments)
+    end
+
+    it "has have many commenters through comments" do
+      should have_many(:commenters).
+      through(:comments).
+      class_name("User")
+    end
+
+    it "gets commented on by a user" do
+      user = create(:user)
+      expect(upload).to_not be_commented_on_by(user)
+      comment = user.comment_on(upload: upload, body: "Test comment")
+      comment.save!
+      expect(upload).to be_commented_on_by(user)
+    end
+
+  end
 end

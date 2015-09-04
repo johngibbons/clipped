@@ -1,0 +1,24 @@
+.comments {
+
+  .avatar {
+    border-width: 2px;
+  }
+
+  .details {
+    font-size: $base-font-size * 0.9;
+
+    .username {
+      font-size: $base-font-size * 1.5;
+    }
+  }
+
+  td {
+    padding: 0;
+
+    &:first-child {
+      width: 65px;
+      padding-right: 15px;
+    }
+  }
+
+}
