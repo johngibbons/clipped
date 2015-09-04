@@ -63,6 +63,18 @@ class GuestUser
     false
   end
 
+  def comments
+    Comment.none
+  end
+
+  def comment_on(upload:, body:)
+    comments.none
+  end
+
+  def commenting_on?(upload)
+    false
+  end
+
   def upload_owner?(upload)
     false
   end

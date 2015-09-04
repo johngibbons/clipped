@@ -1,0 +1,22 @@
+<% present(comment) do |comment| %>
+  <div class="comment">
+    <table>
+      <tr>
+        <td>
+          <%= link_to user_path(comment.commenter), class: "media-figure" do %>
+            <%= image_tag comment.commenter_avatar, class: "avatar" %>
+          <% end %>
+        </td>
+        <td>
+          <div class="details">
+            <%= link_to comment.commenter.username, user_path(comment.commenter), class: "username media-figure" %>
+            <span><%= time_ago_in_words(comment.created_at) %> ago</span>
+          </div>
+          <div class="body">
+            <%= comment.comment_body %>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>

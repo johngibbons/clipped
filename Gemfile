@@ -59,6 +59,7 @@ gem "autoprefixer-rails"
 gem 'jcrop-rails-v2'
 gem 'descriptive-statistics'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem "closure_tree"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

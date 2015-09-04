@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   get 'relationships/destroy'
 
+  get 'comments/create'
+
+  get 'comments/destroy'
+
   get 'password_resets/new'
 
   get 'password_resets/edit'
@@ -36,6 +40,8 @@ Rails.application.routes.draw do
   resources :uploads,             except: [:index]
 
   resources :relationships,       only: [:create, :destroy]
+
+  resources :comments,            only: [:create, :destroy]
 
   resources :upload_moderation,   only: [:edit, :update, :destroy, :index]
 

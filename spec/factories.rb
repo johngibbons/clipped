@@ -1,6 +1,8 @@
 include ActionDispatch::TestProcess
 
-FactoryGirl.define do
+FactoryGirl.define do  
+
+
 
   factory :user do
 
@@ -59,10 +61,16 @@ FactoryGirl.define do
     end
 
   end
-  
+
   factory :relationship do
     favoriter_id 1
     favorited_id 2
+  end
+
+  factory :comment do
+    body "MyText"
+    commenter_id 1
+    commentee_id 2
   end
 
   factory :guest_user do

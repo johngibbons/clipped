@@ -1,99 +1,15 @@
 <% present(@upload) do |upload| %>
 
   <div class="upload-single-left-content">
-    <%= content_tag :div, class: "upload-single-image card gray #{upload.approval_class}" do %>
-      <%= image_tag upload.src(:large) %>
-    <% end %>
-
-    <div class="upload-single-interactions">
-      <div id="favorite-link" class="icon-link">
-        <%= render 'relationships/favorite_form' if logged_in? %>
-      </div>
-      <div id="approve-link" class="icon-link">
-        <%= render 'upload_moderation/moderation_form' if policy(:upload_moderation).update?%>
-      </div>
-      <div id="delete-link" class="icon-link">
-        <%= render partial: 'delete_form', locals: {upload: upload} if policy(@upload).destroy?%>
-      </div>
-    </div>
+    <%= render partial: "image", locals: {upload: upload} %>
+    <%= render partial: "interactions", locals: {upload: upload} %>
+    <%= render partial: "comments/comments", locals: {upload: upload} %>
   </div>
 
   <div class="upload-info">
-    <div class="upload-clipper card">
-      <h2 class="title">Clipper</h2>
-      <div class="media-object">
-        <%= link_to user_path(upload.user), class: "media-figure" do %>
-          <%= image_tag upload.clipper_avatar, class: "avatar" %>
-        <% end %>
-        <div id="upload-clipper-info media-body">
-          <p class="clipper-name"><%= link_to "@#{upload.user.username}", user_path(upload.user) %></p>
-          <p class="clipper-upload-count"><%= pluralize(upload.user.approved_uploads_count, "upload") %></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="upload-tags card">
-      <h2 class="title">Tags</h2>
-      <div class="tags-list">
-        <div class="tag-items">
-          <%= render upload.tags %>
-        </div>
-        <%= render 'acts_as_taggable_on/tags/update_form' %>
-      </div>
-      <% if policy(upload).update? %>
-        <button id="update-tags-btn" class="hidden update-upload-btn btn">Update</button>		
-        <%= link_to 'Edit Tags', edit_upload_path(upload), class: "js-link", id: "edit-tags-link", remote: true %>
-        <i id="tags-tip" class="fa fa-info-circle tooltip-item">
-          <div class="tooltip hidden">
-            <h4>Tagging Tip:</h4>
-            <p>Tags are a critical part in others being able to find your images.  Try to enter in everything you see in the image, and use terms you think would be relevant to search for.</p>
-          </div>
-        </i>
-      <% end %>
-    </div>
-
-    <div class="upload-details card">
-      <h2 class="title">Details</h2>
-      <%= form_for @upload, method: :patch, html: { class: "details", id: "update-details-form" }, remote: true do |f| %>
-        <table id="upload-show-details-table">
-          <tbody>
-            <tr>
-              <td>Perspective:</td>
-              <td class="detail-val"><%= link_to upload.perspective.humanize, search_index_path(perspective_id: Upload.perspectives[upload.perspective], perspective: upload.perspective), id: "selected-perspective", class: "attr-link" %><%= render partial: 'perspective_form', locals: {f: f} %>
-            </td>
-            </tr>
-            <tr>
-              <td>Category:</td>
-              <td class="detail-val"><%= link_to upload.category.humanize, search_index_path(category_id: Upload.categories[upload.category], category: upload.category), id: "selected-category", class: "attr-link" %><%= render partial: 'category_form', locals: {f: f } %></td>
-            </tr>
-            <tr>
-              <td>Views:</td>
-              <td class="detail-val"><%= upload.views %></td>
-            </tr>
-            <tr>
-              <td>Downloads:</td>
-              <td class="detail-val"><%= upload.downloads %></td>
-            </tr>
-            <tr>
-              <td>Favorited:</td>
-              <td class="detail-val" id="favorites_count"><%= upload.favorites_count %></td>
-            </tr>
-            <tr>
-              <td>Uploaded:</td>
-              <td class="detail-val"><%= time_ago_in_words(upload.created_at) %> ago</td>
-            </tr>
-          </tbody>
-        </table>
-        <% if policy(upload).update? %>
-          <%= f.submit "Update", id: "update-details-btn", class: "hidden btn update-upload-btn" %>
-          <%= link_to 'Edit', edit_upload_path(upload), class: "js-link", id: "edit-category-link", remote: true %>
-        <% end %>
-      <% end %>
-      <div id="upload-download">
-        <%= render partial: "download", locals: {upload: @upload} %>
-      </div>
-    </div>
-
+    <%= render partial: "clipper_card", locals: {upload: upload} %>
+    <%= render partial: "tags_card", locals: {upload: upload} %>
+    <%= render partial: "details_card", locals: {upload: upload} %>
   </div>
 
 <% end %>

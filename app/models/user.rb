@@ -1,9 +1,22 @@
 class User < ActiveRecord::Base
+
   has_many :uploads, dependent: :destroy
-  has_many :favoriter_relationships, class_name:  "Relationship",
-                                 foreign_key: "favoriter_id",
-                                 dependent:   :destroy
-  has_many :favoriting, through: :favoriter_relationships, source: :favorited
+
+  has_many :favoriter_relationships,
+            class_name:  "Relationship",
+            foreign_key: "favoriter_id",
+            dependent:   :destroy
+
+  has_many :favoriting,
+            through: :favoriter_relationships,
+            source: :favorited
+
+  has_many :comments,
+            foreign_key: "commenter_id",
+            dependent: :destroy
+
+  has_many :commentees,
+            through: :comments
 
   attr_accessor :remember_token, :activation_token, :reset_token, :avatar_original_width
   before_save   :downcase_email
@@ -218,6 +231,16 @@ class User < ActiveRecord::Base
 
   def reprocess_avatar
     avatar.reprocess!
+  end
+
+  def commenting_on?(upload)
+    commentees.include?(upload)
+  end
+
+  def comment_on(upload:, comment_body:)
+    comments.build(commentee_id: upload.id) do |comment|
+      comment.comment_body = comment_body
+    end
   end
 
   private
