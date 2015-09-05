@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150903220718) do
     t.integer  "commentee_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.text     "comment_body"
+    t.text     "body"
   end
 
   add_index "comments", ["commentee_id"], name: "index_comments_on_commentee_id", using: :btree
