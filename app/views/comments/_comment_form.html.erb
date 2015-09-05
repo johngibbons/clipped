@@ -1,16 +1,16 @@
-<table>
-  <tr>
-    <td>
-    <%= form_for(current_user.comments.build, remote: true) do |f| %>
-      <div class="commenter-avatar">
-        <%= image_tag current_user.avatar.url(:profile), class: "avatar" %>
-      </div>
-      <%= f.hidden_field :commentee_id, value: @upload.id %>
-    </td>
-    <td>
-      <%= f.text_field :body, placeholder: "Add a comment..." %>
-      <%= f.submit "Submit Comment" %>
-    <% end %>
-    </td>
-  </tr>
-</table>
+<%= form_for(current_user.comments.build, remote: true) do |f| %>
+  <table>
+    <tr>
+      <td>
+        <div class="commenter-avatar">
+          <%= image_tag current_user.avatar.url(:profile), class: "avatar" %>
+        </div>
+        <%= f.hidden_field :commentee_id, value: @upload.id %>
+      </td>
+      <td>
+        <%= f.text_field :body, placeholder: "Add a comment..." %>
+        <%= f.submit "Submit Comment" %>
+      </td>
+    </tr>
+  </table>
+<% end %>
