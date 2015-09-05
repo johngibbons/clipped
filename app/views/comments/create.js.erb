@@ -1,1 +1,2 @@
 $("<%= escape_javascript(render partial: 'comments/comment', locals: {comment: @comment}) %>").prependTo(".comments-feed");
+$("#comment_body").val("");

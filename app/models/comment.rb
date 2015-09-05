@@ -4,5 +4,5 @@ class Comment < ActiveRecord::Base
 
   validates :commenter_id, presence: true
   validates :commentee_id, presence: true
-  validates :comment_body, presence: true
+  validates :body, presence: true
 end

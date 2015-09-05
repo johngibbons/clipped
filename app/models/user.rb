@@ -237,9 +237,9 @@ class User < ActiveRecord::Base
     commentees.include?(upload)
   end
 
-  def comment_on(upload:, comment_body:)
+  def comment_on(upload:, body:)
     comments.build(commentee_id: upload.id) do |comment|
-      comment.comment_body = comment_body
+      comment.body = body
     end
   end
 
