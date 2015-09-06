@@ -34,7 +34,7 @@ RSpec.describe UploadsController, type: :controller do
 
   context "logged in" do
 
-    before(:each) do
+    before do
       upload.save!
       current.save!
     end

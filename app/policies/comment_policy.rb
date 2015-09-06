@@ -12,7 +12,13 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    logged_in?
+    admin_or_logged_in_and_own?
+  end
+
+  private
+
+  def admin_or_logged_in_and_own?
+    @user.admin? || logged_in? && @user == @comment.commenter
   end
 
 end

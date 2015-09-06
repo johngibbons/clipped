@@ -1,10 +1,14 @@
 .comments {
+  table {
+    margin: 0;
+  }
 
   .avatar {
     border-width: 2px;
   }
 
   .details {
+    padding-bottom: 1em;
     font-size: $base-font-size * 0.9;
 
     .username {
@@ -12,8 +16,18 @@
     }
   }
 
+  .comment {
+    border-bottom: 1px solid $light-gray;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
   td {
-    padding: 0;
+    padding: 1em 0;
+    vertical-align: top;
+    border-bottom: none;
 
     &:first-child {
       width: 65px;
