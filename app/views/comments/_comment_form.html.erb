@@ -6,10 +6,10 @@
           <%= image_tag current_user.avatar.url(:profile), class: "avatar" %>
         </div>
         <%= f.hidden_field :commentee_id, value: @upload.id %>
+        <%= f.hidden_field :parent_id, value: @parent.id if @parent %>
       </td>
       <td>
         <%= f.text_field :body, placeholder: "Add a comment..." %>
-        <%= f.submit "Submit Comment" %>
       </td>
     </tr>
   </table>

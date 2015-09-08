@@ -1,5 +1,5 @@
 <% present(comment) do |comment| %>
-  <div class="comment">
+  <div class="comment" id="comment-<%= comment.id %>">
     <table>
       <tr>
         <td>
@@ -10,10 +10,18 @@
         <td>
           <div class="details">
             <%= link_to comment.commenter.username, user_path(comment.commenter), class: "username media-figure" %>
+            <%= comment.reply_name %>
             <span><%= time_ago_in_words(comment.created_at) %> ago</span>
           </div>
           <div class="body">
             <%= comment.body %>
+          </div>
+          <div class="interactions">
+            <%= link_to 'reply', new_comment_path(id: comment.commentee_id, parent_id: comment.id), remote: true if policy(comment).create? %>
+            <% if policy(comment).destroy? %>
+              | 
+              <%= link_to "delete", comment, remote: true, method: :delete, data: { confirm: "are you sure?" }, class: "delete" %>
+            <% end %>
           </div>
         </td>
       </tr>

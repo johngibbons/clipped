@@ -10,18 +10,39 @@
   .details {
     padding-bottom: 1em;
     font-size: $base-font-size * 0.9;
+    color: $medium-gray;
 
     .username {
-      font-size: $base-font-size * 1.5;
+      font-size: $base-font-size * 1.2;
+      font-weight: 700;
+    }
+
+    .fa {
+      color: $medium-gray;
+    }
+
+    .reply-name {
+      margin-right: 1em;
     }
   }
 
-  .comment {
-    border-bottom: 1px solid $light-gray;
+  .replies {
+    margin-left: 50px;
+  }
 
-    &:last-child {
-      border-bottom: none;
+  .interactions {
+    font-size: $base-font-size * 0.9;
+    padding-top: 1em;
+    color: $medium-gray;
+
+    a {
+      color: $medium-gray;
+
+      &:hover {
+        color: $dark-gray;
+      }
     }
+
   }
 
   td {

@@ -1,9 +1,11 @@
-<div class="upload-comments comments card">
-  <h2 class="title">Comments</h2>
-  <% if policy(Comment.new).create? %>
-    <%= render partial: "comments/comment_form" %>
-  <% end %>
-  <div class="comments-feed">
-    <%= render @comments %>
+<% present(Comment.new) do |comment| %>
+  <div class="upload-comments comments card">
+    <h2 class="title">Comments</h2>
+    <div class="comments-feed">
+    <% if policy(Comment.new).create? %>
+      <%= render partial: 'comments/comment_form', locals: {comment: @comment} %>
+    <% end %>
+      <%= comment.comments_feed @comments %>
+    </div>
   </div>
-</div>
+<% end %>

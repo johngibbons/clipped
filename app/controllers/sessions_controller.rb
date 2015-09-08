@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :store_referral, only: :new
+
   def new
   end
 
@@ -24,6 +26,10 @@ class SessionsController < ApplicationController
 
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  def store_referral
+    session[:referral_url] = request.referrer if request.get?
   end
 
 end

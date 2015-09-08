@@ -1,2 +1,8 @@
-$("<%= escape_javascript(render partial: 'comments/comment', locals: {comment: @comment}) %>").prependTo(".comments-feed");
+<% if @parent %>
+  $("<%= escape_javascript(render partial: 'comments/comment', locals: {comment: @comment}) %>").appendTo("#comment-<%= @parent.id.to_s %> .replies");
+  $(".comment form").remove();
+<% else %>
+  $("<%= escape_javascript(render partial: 'comments/comment', locals: {comment: @comment}) %>").prependTo(".comments-feed");
+  $("#new_comment").remove();
+<% end %>
 $("#comment_body").val("");

@@ -1,8 +1,22 @@
 class CommentsController < ApplicationController
 
+  def new
+    if params[:parent_id]
+      @parent = Comment.find(params[:parent_id])
+    end
+    @comment = Comment.new(parent_id: params[:parent_id])
+    @upload = Upload.find(params[:id])
+  end
+
   def create
+    if params[:comment][:parent_id].to_i > 0
+      @parent = Comment.find(params[:comment].delete(:parent_id))
+      @comment = @parent.children.build(comment_params)
+      @comment.commenter = current_user
+    else
+      @comment = current_user.comments.new(comment_params)
+    end
     @upload = Upload.find(params[:comment][:commentee_id])
-    @comment = current_user.comments.new(comment_params)
     authorize @comment
     respond_to do |format|
       if @comment.save

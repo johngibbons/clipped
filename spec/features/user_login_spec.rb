@@ -80,4 +80,16 @@ RSpec.feature "User logs in", :type => :feature do
     expect(page).to have_css("#profile-avatar")
     expect(page).to have_css(".user_profile")
   end
+
+  scenario "redirects back to previous page after login" do
+    upload = create(:upload, approved: true)
+    visit upload_path(upload)
+    click_link "login"
+    fill_in 'Username or email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Log In'
+    expect(page).to_not have_css(".user_profile")
+    expect(page).to have_content(upload.id)
+  end
+
 end

@@ -23,6 +23,7 @@ button, .btn {
   white-space: nowrap;
   width: 100%;
   margin: 1em 0;
+  outline: none;
 
   @include media($desktop) {
     width: auto;

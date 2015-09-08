@@ -36,7 +36,7 @@ class UploadsController < ApplicationController
   def show
     @upload = Upload.find(params[:id])
     authorize @upload
-    @comments = @upload.comments.order(created_at: :desc)
+    @comments = @upload.comments.hash_tree
   end
 
   def destroy

@@ -1,0 +1,10 @@
+<% if @parent %>
+  $("<div class='replies'></div>").appendTo("#comment-<%= @parent.id.to_s %>")
+  $("<%= escape_javascript(render partial: 'comments/comment_form', locals: {comment: @comment}) %>").appendTo("#comment-<%= @parent.id.to_s %> .replies");
+<% else %>
+  $("<%= escape_javascript(render partial: 'comments/comment_form', locals: {comment: @comment}) %>").prependTo(".comments-feed");
+<% end %>
+
+if ( $(".comments-placeholder").length ) {
+  $(".comments-placeholder").remove();
+}

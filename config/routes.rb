@@ -43,6 +43,8 @@ Rails.application.routes.draw do
 
   resources :comments,            only: [:create, :destroy]
 
+  get '/comments/new/(:parent_id)', to: 'comments#new', as: :new_comment
+
   resources :upload_moderation,   only: [:edit, :update, :destroy, :index]
 
   resources :search,              only: [:index]

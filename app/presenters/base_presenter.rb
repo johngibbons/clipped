@@ -1,8 +1,9 @@
 require 'delegate'
 class BasePresenter < SimpleDelegator
-  def initialize(model, view)
+  def initialize(model, view, user)
     @model = model
     @view = view
+    @user = user
     super(@model)
   end
 
@@ -16,5 +17,9 @@ class BasePresenter < SimpleDelegator
 
   def h
     @view
+  end
+
+  def u
+    @user
   end
 end

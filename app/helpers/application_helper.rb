@@ -10,9 +10,9 @@ module ApplicationHelper
   end
 
 
-  def present(model, presenter_class=nil)
+  def present(model, presenter_class=nil, user=current_user)
     klass = presenter_class || "#{model.class}Presenter".constantize
-    presenter = klass.new(model, self)
+    presenter = klass.new(model, self, user)
     yield(presenter) if block_given?
   end
 
