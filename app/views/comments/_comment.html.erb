@@ -9,7 +9,7 @@
         </td>
         <td>
           <div class="details">
-            <%= link_to comment.commenter.username, user_path(comment.commenter), class: "username media-figure" %>
+            <%= link_to "@#{comment.commenter.username}", user_path(comment.commenter), class: "username media-figure" %>
             <%= comment.reply_name %>
             <span><%= time_ago_in_words(comment.created_at) %> ago</span>
           </div>

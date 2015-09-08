@@ -1,10 +1,10 @@
 <% present(Comment.new) do |comment| %>
   <div class="upload-comments comments card">
-    <h2 class="title">Comments</h2>
-    <div class="comments-feed">
+    <h2 class="title">Comments (<%= content_tag(:span, @upload.comments.count, class: "comments-count") %>)</h2>
     <% if policy(Comment.new).create? %>
-      <%= render partial: 'comments/comment_form', locals: {comment: @comment} %>
+      <%= link_to 'add comment', new_comment_path(id: params[:id], parent_id: nil), remote: true, class: "add-comment" %>
     <% end %>
+    <div class="comments-feed">
       <%= comment.comments_feed @comments %>
     </div>
   </div>

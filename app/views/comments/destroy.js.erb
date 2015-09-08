@@ -1,1 +1,3 @@
+$(".replies[data-parent=<%= j(@comment.id.to_s) %>]").remove();
 $("#comment-<%= j(@comment.id.to_s) %>").remove();
+$(".comments-count").html(<%= @upload.comments.count.to_s %>)

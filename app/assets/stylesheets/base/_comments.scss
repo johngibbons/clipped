@@ -7,6 +7,10 @@
     border-width: 2px;
   }
 
+  .comments-feed {
+    padding-top: 2em;
+  }
+
   .details {
     padding-bottom: 1em;
     font-size: $base-font-size * 0.9;
@@ -56,4 +60,14 @@
     }
   }
 
+  #new_comment {
+    input[type="submit"], button {
+      float: right;
+      padding: 0.5em 0.75em;
+    }
+
+    button {
+      margin-right: 1em;
+    }
+  }
 }

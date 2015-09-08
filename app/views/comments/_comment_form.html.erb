@@ -9,7 +9,9 @@
         <%= f.hidden_field :parent_id, value: @parent.id if @parent %>
       </td>
       <td>
-        <%= f.text_field :body, placeholder: "Add a comment..." %>
+        <%= f.text_area :body, placeholder: "Add a comment..." %>
+      <%= f.submit "submit" %>
+      <%= f.button "cancel", type: "button", class: "secondary cancel" %>
       </td>
     </tr>
   </table>

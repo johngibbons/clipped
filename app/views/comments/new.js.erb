@@ -1,10 +1,35 @@
 <% if @parent %>
-  $("<div class='replies'></div>").appendTo("#comment-<%= @parent.id.to_s %>")
-  $("<%= escape_javascript(render partial: 'comments/comment_form', locals: {comment: @comment}) %>").appendTo("#comment-<%= @parent.id.to_s %> .replies");
+  var $parent_comment = $("#comment-<%= @parent.id.to_s %>");
+
+  if ($parent_comment.find("input#comment_body").length === 0) {
+
+    if ( $parent_comment.find(".replies").length ) {
+
+      var reply = $parent_comment.find(".replies");
+
+    } else {
+
+      var reply = $("<div class='replies'></div>").appendTo("#comment-<%= @parent.id.to_s %>");
+
+    }
+
+      $("<%= escape_javascript(render partial: 'comments/comment_form', locals: {comment: @comment}) %>").prependTo(reply);
+  }
+
 <% else %>
+  $(".add-comment").hide();
+
   $("<%= escape_javascript(render partial: 'comments/comment_form', locals: {comment: @comment}) %>").prependTo(".comments-feed");
+
 <% end %>
 
 if ( $(".comments-placeholder").length ) {
+
   $(".comments-placeholder").remove();
+
 }
+
+$("body").on("click", ".cancel", function(){
+  $(this).closest("form").remove();
+  $(".add-comment").show();
+});
