@@ -2,11 +2,11 @@
 
 <p>New user? <%= link_to "Sign up now!", signup_path %></p>
 
-<%= link_to '/auth/google_oauth2' do %>
+<%= link_to '/auth/google_oauth2', params do %>
   <button class="google">Log In With Google</button>
 <% end %>
 
-<%= link_to '/auth/facebook' do %>
+<%= link_to '/auth/facebook', params do %>
   <button class="facebook">Log In With Facebook</button>
 <% end %>
 
