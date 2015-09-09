@@ -23,7 +23,7 @@ header.navigation {
   $navigation-search-border: none;
   $navigation-active-link-color: transparentize($dark-gray, 0.5);
   $navigation-submenu-padding: 1em;
-  $navigation-submenu-width: 12em;
+  $navigation-submenu-width: 13em;
 
   background-color: $navigation-background;
   border-bottom: 1px solid darken($navigation-background, 5);
@@ -121,7 +121,7 @@ header.navigation {
     }
 
     @include media($desktop) {
-      display: inline;
+      display: inline-block;
       margin: 0;
       padding: 0;
     }
@@ -290,7 +290,7 @@ header.navigation {
         width: 100%;
 
         @include media($desktop) {
-                padding-top: 0.2em;
+          padding-top: 0.2em;
           background-color: $navigation-background;
           padding-left: $navigation-submenu-padding;
           text-align: left;
