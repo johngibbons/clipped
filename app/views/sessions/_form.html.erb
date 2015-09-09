@@ -21,8 +21,6 @@
   <%= f.label :password %>
   <%= link_to "forgot?", new_password_reset_path, id: "forgot-password-link" %>
   <%= f.password_field :password %>
-  <%= f.hidden_field :sso, value: params[:sso] %>
-  <%= f.hidden_field :sig, value: params[:sig] %>
 
   <%= f.submit "Log In" %>
 <% end %>

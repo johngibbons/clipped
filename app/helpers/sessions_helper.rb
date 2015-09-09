@@ -50,6 +50,7 @@ module SessionsHelper
   def log_out
     forget(current_user)
     session.delete(:user_id)
+    session.delete(:sso)
     @current_user = GuestUser.new
   end
 

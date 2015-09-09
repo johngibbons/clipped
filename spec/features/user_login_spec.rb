@@ -89,7 +89,7 @@ RSpec.feature "User logs in", :type => :feature do
     fill_in 'Password', with: user.password
     click_button 'Log In'
     expect(page).to_not have_css(".user_profile")
-    expect(page).to have_css(".upload.single")
+    expect(page).to have_css(".uploads.show")
   end
 
 end
