@@ -19,13 +19,11 @@ Rails.application.routes.draw do
   get     'terms'     =>  'static_pages#terms'
   get     'privacy'   =>  'static_pages#privacy_policy'
 
-
   get     'signup'                   =>  'users#new'
   get     'login'                    =>  'sessions#new'
+  post    'login'                    =>  'sessions#create'
   get     '/auth/:provider/callback' =>  'sessions#create'
   get     '/auth/failure'            =>  'sessions#create'
-
-  post    'login'                    =>  'sessions#create'
   delete  'logout'                   =>  'sessions#destroy'
 
 #  get 'tags/:tag', to: 'search#index', as: :tag
