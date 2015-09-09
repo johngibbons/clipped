@@ -6,7 +6,7 @@
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
-        <li class="nav-link more"><a href="javascript:void(0)">Browse</a>
+        <li class="nav-link more"><%= link_to "Browse", controller: "search", action: "index", sort_uploads: "weighted_score" %> 
           <ul class="submenu">
             <li class="nav-link"><%= link_to "Most Popular", controller: "search", action: "index", sort_uploads: "weighted_score" %></li>
             <li class="nav-link"><%= link_to "Newest", controller: "search", action: "index", sort_uploads: "created_at" %></li>
