@@ -81,7 +81,7 @@ function formatTags(tag_input_field) {
       deleteNextIteration = false;
     }
   });
-};
+}
 
 function getTags( tags ) {
   var a = [];

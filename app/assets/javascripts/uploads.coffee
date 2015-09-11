@@ -14,3 +14,12 @@ $ ->
         element.innerHTML = '<span class="tag-data">'+ tagName + '</span>' + '<span class="delete-tag fa fa-remove"></span>'
       )
 
+    $('img').hide()
+
+    $('img').each( (i) ->
+      if (this.complete)
+        $(this).fadeIn()
+      else
+        $(this).load ->
+          $(this).fadeIn()
+    )
