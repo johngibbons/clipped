@@ -56,24 +56,26 @@ class QueryPresenter < BasePresenter
     end
   end
 
+  def get_current(name)
+    # always return an array
+    p = @model["#{name}"]
+    if p.is_a? String
+      p = [p]
+    else
+      p
+    end
+  end
+
   private
 
-    def get_current(name)
-      # always return an array
-      p = @model["#{name}"]
-      if p.is_a? String
-        p = [p]
-      else
-        p
-      end
-    end
-
     def add(value)
+      @model.delete :page
       @current_value_copy.push(value)
       @model.merge({ "#{@query_name}" => @current_value_copy })
     end
 
     def remove(value)
+      @model.delete :page
       @current_value_copy.delete(value)
       @model.merge({ "#{@query_name}" => @current_value_copy })
     end
