@@ -1,32 +1,32 @@
 <% present(@query, QueryPresenter) do |query| %>
 
-	<div class="full-container">
+  <div class="full-container">
 
-		<% if @uploads %>
+    <% if @uploads %>
 
-		<section id="uploads-results-count" class="mobile-filter">
-		  <p>
-			  <%= raw query.query_text(@total_results) %>
-			  <%= query.remove_query %>
-		  </p>
-		  <%= render partial: 'upload_results_sort_form', locals: { query: query } %>
-		</section>
+      <section id="uploads-results-count" class="mobile-filter">
+        <p>
+        <%= raw query.query_text(@total_results) %>
+        <%= query.remove_query %>
+        </p>
+        <%= render partial: 'upload_results_sort_form', locals: { query: query } %>
+      </section>
 
-		<section id="uploads-index-filter" class="mobile-filter">
-		  <%= render partial: 'upload_results_filter_form', locals: { query: query } %>
-		</section>
+      <section id="uploads-index-filter" class="mobile-filter">
+        <%= render partial: 'upload_results_filter_form', locals: { query: query } %>
+      </section>
 
-		<section id="uploads-search-results" class="flex-container">
-			<%= render @uploads %>
-		</section>
-		<div id="infinite-scrolling">
-			<%= will_paginate @uploads%>
-		</div>
+      <section id="uploads-search-results" class="flex-container">
+        <%= render @uploads %>
+      </section>
+      <div id="infinite-scrolling">
+        <%= will_paginate @uploads%>
+      </div>
 
-		<% else %>
+    <% else %>
 
-			<h6>No results for: <%= @query %></h6>
+      <h6>No results for: <%= @query %></h6>
 
-		<% end %>
-	</div>
+    <% end %>
+  </div>
 <% end %>
