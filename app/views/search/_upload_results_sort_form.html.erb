@@ -1,11 +1,19 @@
 <div id="sort-dropdown">
   <%= form_tag search_index_path, :method => :get do %>
-    <% for category_id in query[:category_id] do %>
-      <%= hidden_field_tag "category_id[]", category_id %> 
-    <% end if query[:category_id].present? %>
-    <% for perspective_id in query[:perspective_id] do %>
-      <%= hidden_field_tag "perspective_id[]", perspective_id %> 
-    <% end if query[:perspective_id].present? %>
+    <% if query[:category_id].present? && query[:category_id].size > 1 %>
+      <% for category_id in query[:category_id] do %>
+        <%= hidden_field_tag "category_id[]", category_id %>
+      <% end %>
+    <% elsif query[:category_id].present? %>
+      <%= hidden_field_tag "category_id[]", category_id %>
+    <% end %>
+    <% if query[:perspective_id].present? && query[:perspective_id].size > 1 %>
+      <% for perspective_id in query[:perspective_id] do %>
+        <%= hidden_field_tag "perspective_id[]", perspective_id %>
+      <% end %>
+    <% elsif query[:perspective_id].present? %>
+      <%= hidden_field_tag "perspective_id[]", perspective_id %>
+    <% end %>
     <% for tag_list in query[:tag_list] do %>
       <%= hidden_field_tag "tag_list[]", tag_list %> 
     <% end if query[:tag_list].present? %>

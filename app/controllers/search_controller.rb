@@ -18,7 +18,7 @@ class SearchController < ApplicationController
       end
 
       order_by params[:sort_uploads], :desc if params[:sort_uploads].present?
-      with(:tag_list).all_of(params[:tag_list])
+      with(:tag_list).all_of(params[:tag_list]) if params[:tag_list].present?
       facet :perspective_id, limit: -1, exclude: perspective_filter
       facet :category_id, limit: -1, exclude: category_filter
       facet :tag_list, limit: 25, sort: :count
