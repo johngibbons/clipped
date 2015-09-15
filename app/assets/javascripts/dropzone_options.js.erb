@@ -187,7 +187,8 @@ var uploader = {
     var loadingGIF = upload.$preview.find(".loading-gif");
     loadingGIF.removeClass("hidden");
 
-    $.ajax({ url: '/uploads/' + upload.databaseID,
+    $.ajax({
+      url: '/uploads/' + upload.databaseID,
       type: 'PUT',
       dataType: "json",
       data: { upload: { tag_list: upload.tags } },

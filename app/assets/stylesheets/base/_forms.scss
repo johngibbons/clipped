@@ -101,8 +101,11 @@ select {
 
 .tooltip-item {
   position: relative;
-  padding-left: 0.25em;
   cursor: pointer;
+
+  &.fa {
+    vertical-align: super;
+  }
 
   .tooltip {
     position: absolute;

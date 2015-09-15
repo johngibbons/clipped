@@ -14,13 +14,15 @@ RSpec.feature "Image approvals", :type => :feature do
   scenario "admin approves image", js: true do
     @admin = create(:admin)
     log_in(@admin)
+    visit user_path(@user)
+    expect(page).to_not have_css(".upload-thumb")
     visit upload_path(Upload.first.id)
     expect(page).to have_button("approve")
     expect(page).to have_css(".unapproved")
     click_button("approve")
     expect(page).to_not have_css(".unapproved")
     visit user_path(@user)
-    expect(page).to have_css(".approved", count: 1)
+    expect(page).to have_css(".upload-thumb", count: 1)
   end
 
 end

@@ -16,6 +16,24 @@ class UploadPresenter < BasePresenter
     end
   end
 
+  def tagged_class
+    unless @model.tags.size > 0
+      " no-tags"
+    end
+  end
+
+  def current_tags
+    if @model.tags.size > 0
+      h.content_tag(:div, class: "tags-thumb") do
+        h.render @model.tags
+      end
+    else
+      h.content_tag(:div, class: "tags-thumb") do
+        h.content_tag(:p, "no tags yet, please add some to be considered for approval", class: "warning")
+      end
+    end
+  end
+
   def src(size)
     if @model.processed?
       @model.image(size)

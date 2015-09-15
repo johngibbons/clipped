@@ -14,6 +14,7 @@ RSpec.feature "User profile page", :type => :feature do
     end
 
     scenario "Admin sees everything", js: true do
+      expect(page).to_not have_css(".upload-thumb")
       create(:upload, user: @user, approved: true)
       visit user_path(@user)
       expect(page).to have_link("Uploads (1)")
@@ -23,9 +24,14 @@ RSpec.feature "User profile page", :type => :feature do
       expect(page).to have_link("Edit Profile")
       expect(page).to have_css("#edit-user-avatar")
       expect(page).to have_link("Awaiting Approval (2)")
+      expect(page).to have_css(".tags-thumb", count: 1)
+      expect(page).to have_css("form.tags-form", count: 1)
 
       click_link("Awaiting Approval (2)")
       expect(page).to have_css(".upload-thumb", count: 2)
+      expect(page).to have_css(".no-tags", count: 2)
+      expect(page).to have_css(".tags-thumb", count: 1)
+      expect(page).to have_css("form.tags-form", count: 1)
     end
 
   end

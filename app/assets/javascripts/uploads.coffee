@@ -14,3 +14,7 @@ $ ->
         element.innerHTML = '<span class="tag-data">'+ tagName + '</span>' + '<span class="delete-tag fa fa-remove"></span>'
       )
 
+  if $(".uploads.show").length
+    tagsEditor = new TagsEditor(".upload-tags")
+    $(".edit-tags").click ->
+      tagsEditor.makeEditable()

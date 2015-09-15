@@ -1,19 +1,97 @@
-$(document).ready(function () {
+var TagsEditor = function (upload) {
+  this.$upload = $(upload);
+  this.$upload.id = this.$upload.data("id");
+  this.$inputField = this.$upload.find("input#upload_tag_list");
+  this.$tags = this.$upload.find(".tag");
 
-  formatTags("#upload_tag_list");
+  this.getTags();
+  this.bindHandlers();
+};
 
-  $('#update-tags-btn').click(function() {
-    $('#update-tags-form').submit();
-  })
+TagsEditor.prototype.getTags = function(){
+  var self = this;
 
-  $("#update-tags-form").on("ajax:before", function(){
-    tags = getTags($(".tag-data").get());
-    $('#update-tags-form').addClass("hidden");
-    $('#upload_tag_list').val(tags);
-    $('.temporary').remove();
-  }).on("ajax:error", function(e, xhr, status, error) {
-    $("#update-tags-form").append("<p>ERROR</p>");
+  var tags = [];
+  self.$tags = self.$upload.find(".tag");
+
+  if ( self.$tags.length ) {
+    self.$tags.each(function(){
+      tags.push( $(this).text() );
+    });
+  }
+
+  self.tagList = tags.join();
+
+};
+
+TagsEditor.prototype.bindHandlers = function(){
+  var self = this;
+
+  self.$inputField.on("keyup", function(e){
+
+    self.checkEnter(e);
+
+    if(/(188|13)/.test(e.which)) {
+      self.$inputField.focusout();
+    } else if(/^8$/.test(e.which)) {
+      if( self.$inputField.val().length === 0 ) {
+        self.$tags.last().remove();
+      }
+    }
+
   });
+
+  self.$inputField.on("focusout", function(){
+    self.updateTags();
+  });
+};
+
+TagsEditor.prototype.checkEnter = function(e){
+  e = e || event;
+  var txtArea = /textarea/i.test((e.target || e.srcElement));
+  return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
+};
+
+TagsEditor.prototype.updateTags = function(){
+  var self = this;
+
+  var loadingGIF = self.$upload.find(".loading-gif");
+  loadingGIF.removeClass("hidden");
+
+  var txt = self.$inputField.val().replace(/[^a-zA-Z0-9\+\-\.\#\s]/g,'');
+
+  if (txt) {
+    self.$inputField.before("<span class='tag'><span class='tag-data'>" + txt.toLowerCase() + "</span>" + "<span class='delete-tag fa fa-remove'></span></span>");
+  }
+
+  self.getTags();
+
+  $.ajax({
+    url: '/uploads/' + self.$upload.id,
+    type: 'PUT',
+    dataType: "json",
+    data: { upload: { tag_list: self.tagList } },
+    success: function(){
+      loadingGIF.addClass("hidden");
+    },
+  });
+
+  self.$inputField.val("");
+};
+
+TagsEditor.prototype.makeEditable = function(){
+  var self = this;
+
+  self.$tags.each(function(i, e) {
+    txt = e.textContent;
+    e.innerHTML = "<span class='tag-txt'>" + txt + "</span>" +
+      "<span class='delete-tag fa fa-remove'></span>";
+  });
+
+  self.$inputField.removeClass("hidden");
+};
+
+$(document).ready(function () {
 
   //deleting functionality
   $(document).on( "click", ".delete-tag", function(e) {

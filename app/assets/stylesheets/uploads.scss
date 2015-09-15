@@ -94,6 +94,12 @@
     margin: 0 auto;
     max-height: 200px;
   }
+
+  .warning {
+    color: $clipped-red;
+    font-size: $base-font-size * 0.9;
+    text-align: center;
+  }
 }
 
 .static_pages.home {
@@ -249,6 +255,16 @@
 
   .container {
     margin-top:0;
+  }
+
+  .upload {
+    padding: 1em;
+    border: $base-border;
+
+    @include media($desktop) {
+      @include span-columns(3 of 12);
+      @include omega(4n);
+    }
   }
 }
 
