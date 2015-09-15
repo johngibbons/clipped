@@ -1,1 +1,2 @@
-<%= f.select :category, options_for_select(Upload.category_array, @upload.category), {}, {class: "hidden edit-upload-form"} %>
+<% upload ||= @upload %>
+<%= f.select :category, options_for_select(Upload.category_array, upload.category), {}, {class: "hidden edit-upload-form"} %>

@@ -12,5 +12,11 @@
       <%= upload.current_tags %>
       <%= render "acts_as_taggable_on/tags/update_form", upload: upload%>
     <% end %>
+    <% if policy(:upload_moderation).update? %>
+      <%= form_for upload, method: :patch, html: { class: "details", id: "update-details-form" }, remote: true do |f| %>
+        <%= render partial: 'uploads/perspective_form', locals: {f: f, upload: upload} %>
+        <%= render partial: 'uploads/category_form', locals: {f: f, upload: upload} %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

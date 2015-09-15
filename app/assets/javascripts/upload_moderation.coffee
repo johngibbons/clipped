@@ -6,3 +6,6 @@
 $ ->
   if $(".upload_moderation.index").length
     setTagsEditors()
+    $(".edit-upload-form").removeClass("hidden")
+    $(".edit-upload-form").on "change", ->
+      $(@).submit()
