@@ -42,9 +42,6 @@
 .upload-info {
   @include span-columns(4);
 
-  .card {
-    margin-bottom: $gutter;
-  }
 
   @include media($tablet) {
     @include span-columns(3);
@@ -163,6 +160,10 @@
   .container {
     padding-top: 2em;
   }
+
+  .card {
+    margin-bottom: $gutter;
+  }
 }
 
 .uploads-search-results-container {
@@ -263,6 +264,7 @@
     border: $base-border;
 
     @include media($desktop) {
+      @include omega-reset(6n);
       @include span-columns(3 of 12);
       @include omega(4n);
     }
