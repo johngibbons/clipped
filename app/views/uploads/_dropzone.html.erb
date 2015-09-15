@@ -45,17 +45,8 @@
         <div class="dz-size" data-dz-size></div>
       </div>
       <div id="dropzone-upload-tags" class="hidden">
-        <div>
-          <i id="tags-tip" class="fa fa-info-circle tooltip-item">
-            <div class="tooltip hidden">
-              <h4>Tagging Tip:</h4>
-              <p>Tags are a critical part in others being able to find your images.  Try to enter in everything you see in the image, and use terms you think would be relevant to search for.</p>
-            </div>
-          </i>
-          <h3>Tags:</h3>
-          <div class="loading-gif hidden"></div>
-        </div>
-        <%= text_field_tag "x-ignore-tags", nil, placeholder: "e.g. boy, walking, beach, etc.", id: "upload_tag_list", onkeypress: "return event.keyCode!=13" %>
+        <div class="tags-container"></div>
+        <%= render partial: "acts_as_taggable_on/tags/update_form" %>
       </div>
 
       <div class="dz-error-message"><span data-dz-errormessage></span></div>
