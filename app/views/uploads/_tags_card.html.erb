@@ -1,11 +1,9 @@
 <div class="upload-tags card" data-id=<%= upload.id %>>
   <h2 class="title">Tags</h2>
-  <div class="tags-list">
-    <div class="tag-items">
-      <%= render upload.tags %>
-    </div>
+  <div class="tags-container">
+    <%= render upload.tags %>
+  </div>
   <% if policy(upload).update? %>
     <%= render 'acts_as_taggable_on/tags/update_form' %>
-  </div>
   <% end %>
 </div>

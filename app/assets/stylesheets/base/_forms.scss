@@ -103,10 +103,6 @@ select {
   position: relative;
   cursor: pointer;
 
-  &.fa {
-    vertical-align: super;
-  }
-
   .tooltip {
     position: absolute;
     transition: all 0.2s ease-in-out;

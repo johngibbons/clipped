@@ -1,7 +1,9 @@
 <% present(upload) do |upload| %>
-  <%= content_tag :div, class: "upload", data: {id: upload.id} do %>
+  <%= content_tag :div, class: "upload #{upload.tagged_class}", data: {id: upload.id} do %>
     <%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
       <%= image_tag upload.src(:thumb), class: "#{upload.processed_class}" %>
     <% end %>
+    <%= upload.current_tags %>
+    <%= render "acts_as_taggable_on/tags/update_form", upload: upload%>
   <% end %>
 <% end %>

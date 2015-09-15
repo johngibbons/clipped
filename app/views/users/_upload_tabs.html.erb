@@ -1,0 +1,7 @@
+<div id="user-sort-tabs" class="tabs">
+  <%= link_to "Uploads (#{@user.approved_uploads_count})", { controller: "users", action: "show", id: @user, filter_uploads: "approved" }, remote: true, class: "active" %>
+  <% if policy(@user).update? %>
+    <%= link_to "Awaiting Approval (#{@user.uploads.where(approved: false).count})", { controller: "users", action: "show", id: @user, filter_uploads: "unapproved" }, remote: true %>
+    <%= link_to "Favorites (#{@user.favoriting.count})", { controller: "users", action: "show", id: @user, filter_uploads: "favorites" }, remote: true  %>
+  <% end %>
+</div>

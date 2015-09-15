@@ -177,18 +177,19 @@ $(".users.edit, .users.show").ready(function() {
 
 });
 
-$('.users.show').ready(function () {
-
+var setTagsEditors = function() {
   if ( $(".upload").length ) {
     var tagsEditors = {};
     $(".upload").each(function(){
       var id = $(this).data("id");
       tagsEditors[id] = new TagsEditor(this);
-      $(this).on("click", ".edit-tags", function(){
-        tagsEditors[id].makeEditable();
-      });
     });
   }
+}
+
+$('.users.show').ready(function () {
+
+  setTagsEditors();
 
   $('#user-sort-tabs').on('click', 'a', function(event) {
     if (!$(this).hasClass("active")) {

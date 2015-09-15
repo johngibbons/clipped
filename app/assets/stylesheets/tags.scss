@@ -37,8 +37,29 @@
   }
 }
 
+.tags-container {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.upload {
+  .tags-container {
+    padding-top: 1em;
+  }
+
+  .edit-tags {
+    margin-bottom: 0;
+  }
+}
+
 .edit-tags {
+  display: inline-block;
   cursor: pointer;
+  color: $action-color;
+  font-size: $base-font-size * 0.9;
 }
 
 .delete-tag {

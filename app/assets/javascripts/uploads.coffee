@@ -16,5 +16,3 @@ $ ->
 
   if $(".uploads.show").length
     tagsEditor = new TagsEditor(".upload-tags")
-    $(".edit-tags").click ->
-      tagsEditor.makeEditable()
