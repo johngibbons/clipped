@@ -1,6 +1,6 @@
 <% if @uploads.any? %>
-  <div class="uploads-moderation flex-container">
-    <%= render @uploads %>
+  <div class="uploads-moderation">
+    <%= render partial: "users/upload", collection: @uploads %>
   </div>
   <%= will_paginate @uploads%>
 <% end %>

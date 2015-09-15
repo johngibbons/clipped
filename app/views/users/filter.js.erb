@@ -1,3 +1,8 @@
 $(".user-uploads").html("<%= j render partial: "upload", collection: @uploads %>");
 setTagsEditors();
 $("#infinite-scrolling").html("<%= j will_paginate @uploads %>");
+<% if @uploads.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @uploads %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

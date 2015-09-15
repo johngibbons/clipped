@@ -3,6 +3,11 @@
     <%= link_to upload, class: "upload-thumb", id: "upload-#{upload.id}" do %>
       <%= image_tag upload.src(:thumb), class: "#{upload.processed_class}" %>
     <% end %>
+    <% if policy(:upload_moderation).update? %>
+      <div id="approve-link" class="icon-link">
+        <%= render 'upload_moderation/moderation_form', upload: upload %>
+      </div>
+    <% end %>
     <% if policy(upload).update? %>
       <%= upload.current_tags %>
       <%= render "acts_as_taggable_on/tags/update_form", upload: upload%>

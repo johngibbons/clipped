@@ -26,12 +26,14 @@ RSpec.feature "User profile page", :type => :feature do
       expect(page).to have_link("Awaiting Approval (2)")
       expect(page).to have_css(".tags-container", count: 1)
       expect(page).to have_css(".edit-tags", count: 1)
+      expect(page).to have_css(".disapprove", count: 1)
 
       click_link("Awaiting Approval (2)")
       expect(page).to have_css(".upload-thumb", count: 2)
       expect(page).to have_css(".no-tags", count: 2)
       expect(page).to have_css(".tags-container", count: 2)
       expect(page).to have_css(".edit-tags", count: 2)
+      expect(page).to have_css(".approve", count: 2)
     end
 
   end
@@ -55,6 +57,16 @@ RSpec.feature "User profile page", :type => :feature do
       expect(page).to have_link("Edit Profile")
       expect(page).to have_css(".upload-btn")
       expect(page).to have_css("#edit-user-avatar")
+      expect(page).to have_css(".tags-container", count: 1)
+      expect(page).to have_css(".edit-tags", count: 1)
+      expect(page).to_not have_css(".disapprove")
+
+      click_link("Awaiting Approval (2)")
+      expect(page).to have_css(".upload-thumb", count: 2)
+      expect(page).to have_css(".no-tags", count: 2)
+      expect(page).to have_css(".tags-container", count: 2)
+      expect(page).to have_css(".edit-tags", count: 2)
+      expect(page).to_not have_css(".approve")
     end
 
   end
@@ -73,11 +85,13 @@ RSpec.feature "User profile page", :type => :feature do
       visit user_path(@user)
       expect(page).to have_css(".upload-thumb", count: 1)
       expect(page).to_not have_link("Awaiting Approval (2)")
-      expect(page).to_not have_link("Awaiting Approval (2)")
       expect(page).to_not have_link("Favorites (0)")
       expect(page).to_not have_css(".upload-btn")
       expect(page).to_not have_link("Edit Profile")
       expect(page).to_not have_css("#edit-user-avatar")
+      expect(page).to_not have_css(".tags-container")
+      expect(page).to_not have_css(".edit-tags")
+      expect(page).to_not have_css(".disapprove")
     end
 
   end
@@ -94,11 +108,13 @@ RSpec.feature "User profile page", :type => :feature do
       visit user_path(@user)
       expect(page).to have_css(".upload-thumb", count: 1)
       expect(page).to_not have_link("Awaiting Approval (2)")
-      expect(page).to_not have_link("Awaiting Approval (2)")
       expect(page).to_not have_link("Favorites (0)")
       expect(page).to_not have_css(".upload-btn")
       expect(page).to_not have_link("Edit Profile")
       expect(page).to_not have_css("#edit-user-avatar")
+      expect(page).to_not have_css(".tags-container")
+      expect(page).to_not have_css(".edit-tags")
+      expect(page).to_not have_css(".disapprove")
     end
   end
 

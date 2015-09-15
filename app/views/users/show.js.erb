@@ -1,4 +1,4 @@
-$('.user-uploads').append('<%= j render partial: "upload", collection: @upload %>');
+$('.user-uploads').append('<%= j render partial: "upload", collection: @uploads %>');
 setTagsEditors();
 <% if @uploads.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @uploads %>');

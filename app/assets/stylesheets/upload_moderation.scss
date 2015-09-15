@@ -11,3 +11,19 @@
     background-color: lighten($action-color, 45%);
   }
 }
+
+.upload_moderation.index {
+  .container {
+    padding-top: $gutter;
+  }
+  .upload {
+    padding: 1em;
+    border: $base-border;
+
+    @include media($desktop) {
+      @include omega-reset(6n);
+      @include span-columns(3 of 12);
+      @include omega(4n);
+    }
+  }
+}

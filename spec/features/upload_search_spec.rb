@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Upload Search", :type => :feature do
 
-  before(:each) do
+  before do
     created_uploads = create_list(:approved_upload, 35)
     @uploads = Upload.all
     @upload1 = @uploads.first

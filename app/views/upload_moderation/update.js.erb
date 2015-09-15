@@ -1,8 +1,21 @@
 <% if @upload.approved? %>
-	$("#moderation_form").html("<%= escape_javascript(render('upload_moderation/disapprove')) %>");
+  if ( $(".upload").length ) {
+    var u = $(".upload[data-id=<%= @upload.id %>]");
+    u.find(".moderation-form").html("<%= escape_javascript(render('upload_moderation/disapprove', upload: @upload)) %>");
+  } else {
+    $(".moderation-form").html("<%= escape_javascript(render('upload_moderation/disapprove', upload: @upload)) %>");
+  }
 <% else %>
-	$("#moderation_form").html("<%= escape_javascript(render('upload_moderation/approve')) %>");
+  if ( $(".upload").length ) {
+    var u = $(".upload[data-id=<%= @upload.id %>]");
+    u.find(".moderation-form").html("<%= escape_javascript(render('upload_moderation/approve', upload: @upload)) %>");
+  } else {
+    $(".moderation-form").html("<%= escape_javascript(render('upload_moderation/approve', upload: @upload)) %>");
+  }
 <% end %>
-	$(".upload-single-image").toggleClass("unapproved");
+
+if ( $(".upload-single-image").length ) {
+  $(".upload-single-image").toggleClass("unapproved");
+}
 
 

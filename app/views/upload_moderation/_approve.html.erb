@@ -1,6 +1,6 @@
-<%= form_for(@upload, url: upload_moderation_path(params[:id]), remote: true) do |f| %>
+<%= form_for(upload, url: upload_moderation_path(upload.id), remote: true) do |f| %>
   <%= hidden_field_tag :approved, true %>
-  <%= f.button id: "approve", class: "approval icon", title: "approve image" do %>
+  <%= f.button class: "approve approval icon", title: "approve image" do %>
     <i class="fa fa-check fa-lg off"></i>
   <% end %>
 <% end %>

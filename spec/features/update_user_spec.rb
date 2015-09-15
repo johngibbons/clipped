@@ -4,7 +4,7 @@ RSpec.feature "Update User", :type => :feature do
 
   subject(:user) { create(:user) }
 
-  before(:each) do
+  before do
     log_in(user)
     visit edit_user_path(user)
   end

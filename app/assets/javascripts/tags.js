@@ -29,6 +29,7 @@ TagsEditor.prototype.getTags = function(){
 
 TagsEditor.prototype.bindHandlers = function(){
   var self = this;
+  var emptyField = true;
 
   self.$editButton.on("click.edit", function(){
     self.makeEditable();
@@ -43,9 +44,12 @@ TagsEditor.prototype.bindHandlers = function(){
       self.$inputField.focusout();
       self.appendTag();
     } else if(/^8$/.test(e.which)) {
-      if( self.$inputField.val().length === 0 ) {
+
+      if ( emptyField === true ) {
         self.$tags.last().remove();
       }
+
+      emptyField = self.$inputField.val().length === 0;
     }
 
   });
