@@ -1,4 +1,5 @@
 $('.user-uploads').append('<%= j render @uploads %>');
+setTagsEditors();
 <% if @uploads.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @uploads %>');
 <% else %>

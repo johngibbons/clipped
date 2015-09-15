@@ -1,305 +1,264 @@
-var uploader = {
+var Uploader = function() {
+  this.$dropzoneContainer = $(".dropzone");
+  this.$uploaderContainer = $("#uploader-container");
+  this.$previewsContainer = $("#upload-previews");
 
-  $dropzoneContainer: null,
-  $uploaderContainer: null,
-  $previewsContainer: null,
+  this.$instructions = $("#dropzone-upload-text");
+  this.$controls = $("#uploader-controls");
+  this.$saveAllBtn = $("#save-uploads");
+  this.$removeAllBtn = $("#remove-all-uploads");
 
-  $instructions: null,
-  $controls: null,
-  $saveAllBtn: null,
-  $removeAllBtn: null,
+  this.user = $("#uploader-container").data("userid");
+  this.uploads = {};
 
-  removeBtn: null,
-  dropzone: null,
-  counter: null,
-  doneSaving: false,
+  this.counter = 0;
 
-  uploads: [],
-  user: "",
-  xhrs: [],
+  this.dropzone = new Dropzone(".dropzone", {
+    maxFilesize: 50, // Set the maximum file size to 50 MB
+    maxThumbnailFilesize: 50,
+    paramName: "file", // Rails expects the file upload to be something like model[field_name]
+    addRemoveLinks: false, // Don't show remove links on dropzone itself.
+    acceptedFiles: 'image/*',
+    dictDefaultMessage: "Drag Images or Click Here to Upload",
+    clickable: "#clickable",
+    thumbnailHeight: 210,
+    thumbnailWidth: null,
+    previewTemplate: document.querySelector('#preview-template').innerHTML,
+    previewsContainer: "#upload-previews"
+  });
 
-  init: function() {
-    var self = this;
+  $("#clickable").on("click", function(e) {
+    e.preventDefault();
+  });
 
-    self.$dropzoneContainer = $(".dropzone");
-    self.$uploaderContainer = $("#uploader-container");
-    self.$previewsContainer = $("#upload-previews");
+  this.bindHandlers();
+};
 
-    self.$instructions = $("#dropzone-upload-text");
-    self.$controls = $("#uploader-controls");
-    self.$saveAllBtn = $("#save-uploads");
-    self.$removeAllBtn = $("#remove-all-uploads");
+Uploader.prototype.bindHandlers = function(){
+  var self = this;
 
-    self.user = $("#uploader-container").data("userid");
+  self.dropzone.on("addedfile", function(file) {
+    self.showDropzoneUI();
+    self.generateUpload(file);
+  });
 
-    self.counter = 0;
+  self.dropzone.on("thumbnail", function(file, dataURL) {
+    self.uploads[file.id].thumbImg = dataURL;
+  });
 
-    self.dropzone = new Dropzone(".dropzone", {
-      maxFilesize: 50, // Set the maximum file size to 50 MB
-      maxThumbnailFilesize: 50,
-      paramName: "file", // Rails expects the file upload to be something like model[field_name]
-      addRemoveLinks: false, // Don't show remove links on dropzone itself.
-      acceptedFiles: 'image/*',
-      dictDefaultMessage: "Drag Images or Click Here to Upload",
-      clickable: "#clickable",
-      thumbnailHeight: 210,
-      thumbnailWidth: null,
-      previewTemplate: document.querySelector('#preview-template').innerHTML,
-      previewsContainer: "#upload-previews"
-    });
+  self.dropzone.on("success", function(file, responseText, event){
+    self.saveUpload(file, responseText, event);
+  });
 
-    $("#clickable").on("click", function(e) {
-      e.preventDefault();
-    })
+  self.dropzone.on("removedfile", function(file) {
+    delete self.uploads[file.id];
+  });
 
-    self.bindHandlers();
-  },
+  self.$dropzoneContainer.on("click.save", "#save-uploads", function(){
+    self.saveAllUploads();
+  });
 
-  bindHandlers: function() {
-    var self = this;
+  self.$dropzoneContainer.on("click.removeAll", "#remove-all-uploads", function() {
+    self.removeAllUploads();
+  });
 
-    self.dropzone.on("addedfile", function(file) {
-      self.showDropzoneUI();
-      self.generateUpload(file);
-    });
+  self.dropzone.on("sending", function(file, xhr, formData) {
+  // Will send the content type along with the file as POST data.
+    formData.append("Content-Type", file.type);
+  });
 
-    self.dropzone.on("thumbnail", function(file, dataURL) {
-      self.uploads[file.id].thumbImg = dataURL;
-    });
+  self.dropzone.on("queuecomplete", function() {
 
-    self.dropzone.on("success", function(file, responseText, event){
-      self.saveUpload(file, responseText, event);
-    });
+    window.setInterval(function(){
 
-    self.dropzone.on("removedfile", function(file) {
-      delete self.uploads[file.id];
-    });
+      if (self.uploads.doneSaving === true) {
+        self.$saveAllBtn.prop("disabled", false);
+      }
+    }, 1000);
 
-    self.$dropzoneContainer.on("click.save", "#save-uploads", function(){
-      self.saveAllUploads();
-    });
+  });
 
-    self.$dropzoneContainer.on("click.removeAll", "#remove-all-uploads", function() {
-      self.removeAllUploads();
-    });
+};
 
-    self.dropzone.on("sending", function(file, xhr, formData) {
-    // Will send the content type along with the file as POST data.
-      formData.append("Content-Type", file.type);
-    });
+Uploader.prototype.showDropzoneUI = function(){
+  var self = this;
 
-    self.dropzone.on("queuecomplete", function() {
+  self.$previewsContainer.removeClass("flex-container");
+  self.$uploaderContainer.removeClass("flex-container");
+  self.$instructions.hide();
+  self.$controls.show();
+  self.$saveAllBtn.prop("disabled", true);
+  self.$removeAllBtn.prop("disabled", false);
+};
 
-      window.setInterval(function(){
+Uploader.prototype.generateUpload = function(){
+  var self = this;
 
-        if (self.uploads.doneSaving === true) {
-          self.$saveAllBtn.prop("disabled", false);
-        }
-      }, 1000);
+  file.id = self.counter;
+  self.counter++;
 
-    });
+  self.uploads[file.id] = {
+    file: file,
+    $preview: $(file.previewElement),
+  };
 
-  },
+  self.generateRemoveIcon(file);
+  self.setTaggingTabIndex(file);
 
-  showDropzoneUI: function() {
-    var self = this;
+};
 
-    self.$previewsContainer.removeClass("flex-container");
-    self.$uploaderContainer.removeClass("flex-container");
-    self.$instructions.hide();
-    self.$controls.show();
-    self.$saveAllBtn.prop("disabled", true);
-    self.$removeAllBtn.prop("disabled", false);
-  },
+Uploader.prototype.generateRemoveIcon = function(file) {
+  var self = this;
 
-  generateUpload: function(file) {
-    var self = this;
+  var removeBtn = Dropzone.createElement("<i class='dz-remove fa fa-minus-circle'></i>");
+  file.previewElement.appendChild(removeBtn);
 
-    file.id = self.counter;
-    self.counter++;
+  removeBtn.addEventListener("click", function() {
+    self.removeUpload(file, this);
+  });
+};
 
-    self.uploads[file.id] = {
-      file: file,
-      $preview: $(file.previewElement),
-    };
+Uploader.prototype.generateUpload = function(file) {
+  var self = this;
 
-    self.generateRemoveIcon(file);
-    self.setTaggingTabIndex(file);
+  file.id = self.counter;
+  self.counter++;
 
-  },
+  self.uploads[file.id] = {
+    file: file,
+    $preview: $(file.previewElement),
+  };
 
-  generateRemoveIcon: function(file) {
-    var self = this;
+  self.generateRemoveIcon(file);
+  self.setTaggingTabIndex(file);
 
-    var removeBtn = Dropzone.createElement("<i class='dz-remove fa fa-minus-circle'></i>");
-    file.previewElement.appendChild(removeBtn);
+};
 
-    removeBtn.addEventListener("click", function() {
-      self.removeUpload(file, this);
-    });
-  },
+Uploader.prototype.generateRemoveIcon = function(file) {
+  var self = this;
 
-  setTaggingTabIndex: function(file) {
-    var self = this;
+  var removeBtn = Dropzone.createElement("<i class='dz-remove fa fa-minus-circle'></i>");
+  file.previewElement.appendChild(removeBtn);
 
-    var uploadPreview = self.uploads[file.id].$preview;
+  removeBtn.addEventListener("click", function() {
+    self.removeUpload(file, this);
+  });
+};
 
-    uploadPreview.find(".dz-remove").attr("id", file.id);
+Uploader.prototype.setTaggingTabIndex = function(file) {
+  var self = this;
 
-    var uploadTagField = uploadPreview.find("#upload_tag_list");
-    uploadTagField.attr("tabindex", file.id + 1);
-    formatTags(uploadTagField);
-  },
+  var uploadPreview = self.uploads[file.id].$preview;
 
-  bindTaggingUpdate: function(file) {
+  uploadPreview.find(".dz-remove").attr("id", file.id);
 
-    var self = this;
+  var uploadTagField = uploadPreview.find("#upload_tag_list");
+  uploadTagField.attr("tabindex", file.id + 1);
+};
 
-    var upload = self.uploads[file.id];
+Uploader.prototype.removeUpload = function(file, removeBtn) {
+  var self = this;
 
-    upload.$preview.on("focusout", function() {
-      self.grabTags(file);
-      self.putTags(file);
-    });
-  },
+  //delete model from Database
+  self.deleteFile(file);
+  //remove from Dropzone instance
+  self.dropzone.removeFile(file);
+};
 
-  grabTags: function(file) {
-    var self = this;
+Uploader.prototype.deleteFile = function(file) {
+  var self = this;
 
-    var upload = self.uploads[file.id];
-
-    var tags = [];
-    var $taglist = upload.$preview.find(".tag-data");
-
-    if ( $taglist.length ) {
-      $taglist.each(function(){
-        tags.push( $(this).text() );
-      });
-    }
-
-    upload.tags = tags.join();
-  },
-
-  putTags: function(file) {
-    var self = this;
-
-    var upload = self.uploads[file.id];
-    var loadingGIF = upload.$preview.find(".loading-gif");
-    loadingGIF.removeClass("hidden");
-
-    $.ajax({ url: '/uploads/' + upload.databaseID,
-      type: 'PUT',
-      dataType: "json",
-      data: { upload: { tag_list: upload.tags } },
-      success: function(){
-        loadingGIF.addClass("hidden");
+  if ( self.uploads[file.id].databaseID ) {
+    $.ajax({
+      url: "/uploads/" + self.uploads[file.id].databaseID,
+      type: "DELETE",
+      dataType: "script",
+      success: function(result) {
+        delete self.uploads[file.id];
       },
     });
-  },
+  }
+};
 
-  removeUpload: function(file, removeBtn) {
-    var self = this;
+Uploader.prototype.saveUpload = function(file, responseText, event) {
+  var self = this;
 
-    //delete model from Database
-    self.deleteFile(file);
-    //remove from Dropzone instance
-    self.dropzone.removeFile(file);
-  },
+  var upload = self.uploads[file.id];
+  upload.url = $(responseText).find("location").text();
 
-  deleteFile: function(file) {
-    var self = this;
+  var savingOverlay = upload.$preview.find(".overlay");
+  var deleteIcon = upload.$preview.find(".dz-remove");
+  var tagForm = upload.$preview.find("#dropzone-upload-tags");
 
-    if ( self.uploads[file.id].databaseID ) {
+  self.$saveAllBtn.prop("disabled", true);
+  savingOverlay.removeClass("hidden");
+  deleteIcon.addClass("hidden");
+
+  $.ajax({
+    url: '/uploads',
+    type: 'POST',
+    dataType: "json",
+    data: { upload: { direct_upload_url: upload.url, dz_thumb: upload.thumbImg } },
+    success: function(result) {
+      upload.databaseID = result["id"];
+      upload.$preview.data("id", upload.databaseID);
+      self.uploads.doneSaving = true;
+      savingOverlay.addClass("hidden");;
+      tagForm.removeClass("hidden");
+      self.tagsEditor = new TagsEditor(upload.$preview);
+      self.tagsEditor.makeEditable();
+      deleteIcon.removeClass("hidden");
+    },
+    error: function(result) {
+      savingOverlay.find("p").text("error - please try again");
+      delete upload;
+    }
+  });
+};
+
+Uploader.prototype.saveAllUploads = function() {
+  var self = this;
+
+  $("#fullscreen-overlay").find("p").text("saving...");
+  $("#fullscreen-overlay").removeClass("hidden");
+  window.location.replace("/users/" + self.user);
+
+};
+
+Uploader.prototype.removeAllUploads = function() {
+  var self = this;
+
+  $("#fullscreen-overlay").find("p").text("deleting...");
+  $("#fullscreen-overlay").removeClass("hidden");
+  self.uploads.forEach(function( el, i, arr ){
+    var upload = el;
+
+    if ( upload.databaseID ) {
       $.ajax({
-        url: "/uploads/" + self.uploads[file.id].databaseID,
+        url: "/uploads/" + upload.databaseID,
         type: "DELETE",
         dataType: "script",
-        success: function(result) {
-          delete self.uploads[file.id];
-        },
-      });
-    }
-  },
-
-  saveUpload: function(file, responseText, event) {
-    var self = this;
-
-    var upload = self.uploads[file.id];
-    upload.url = $(responseText).find("location").text();
-
-    var savingOverlay = upload.$preview.find(".overlay");
-    var deleteIcon = upload.$preview.find(".dz-remove");
-    var tagForm = upload.$preview.find("#dropzone-upload-tags");
-
-    self.$saveAllBtn.prop("disabled", true);
-    savingOverlay.removeClass("hidden");
-    deleteIcon.addClass("hidden");
-
-    $.ajax({
-      url: '/uploads',
-      type: 'POST',
-      dataType: "json",
-      data: { upload: { direct_upload_url: upload.url, dz_thumb: upload.thumbImg } },
-      success: function(result) {
-        upload.databaseID = result["id"];
-        self.uploads.doneSaving = true;
-        savingOverlay.addClass("hidden");;
-        tagForm.removeClass("hidden");
-        deleteIcon.removeClass("hidden");
-        self.bindTaggingUpdate(file);
-      },
-      error: function(result) {
-        savingOverlay.find("p").text("error - please try again");
-        delete upload;
-      }
-    });
-  },
-
-  saveAllUploads: function() {
-    var self = this;
-
-    $("#fullscreen-overlay").find("p").text("saving...");
-    $("#fullscreen-overlay").removeClass("hidden");
-    window.location.replace("/users/" + self.user);
-
-  },
-
-  removeAllUploads: function() {
-    var self = this;
-
-    $("#fullscreen-overlay").find("p").text("deleting...");
-    $("#fullscreen-overlay").removeClass("hidden");
-    self.uploads.forEach(function( el, i, arr ){
-      var upload = el;
-
-      if ( upload.databaseID ) {
-        $.ajax({
-          url: "/uploads/" + upload.databaseID,
-          type: "DELETE",
-          dataType: "script",
-          success: function(){
-            self.dropzone.removeAllFiles(true);
-            self.$saveAllBtn.prop("disabled", true);
-            self.$removeAllBtn.prop("disabled", true);
-            self.uploads = [];
-            if ( i === arr.length - 1 ) {
-              $("#fullscreen-overlay").addClass("hidden");
-            }
-          }
-        });
-      } else {
-        if ( i === arr.length - 1 ) {
-          $("#fullscreen-overlay").addClass("hidden");
-          self.uploads = [];
+        success: function(){
+          self.dropzone.removeAllFiles(true);
           self.$saveAllBtn.prop("disabled", true);
           self.$removeAllBtn.prop("disabled", true);
-          self.dropzone.removeAllFiles(true);
+          self.uploads = [];
+          if ( i === arr.length - 1 ) {
+            $("#fullscreen-overlay").addClass("hidden");
+          }
         }
+      });
+    } else {
+      if ( i === arr.length - 1 ) {
+        $("#fullscreen-overlay").addClass("hidden");
+        self.uploads = [];
+        self.$saveAllBtn.prop("disabled", true);
+        self.$removeAllBtn.prop("disabled", true);
+        self.dropzone.removeAllFiles(true);
       }
+    }
 
-    });
-  },
-
+  });
 };
 
 $('.uploads.new').ready(function () {
@@ -307,6 +266,6 @@ $('.uploads.new').ready(function () {
   // disable auto discover
   Dropzone.autoDiscover = false;
 
-  uploader.init();
+  new Uploader();
 
 });

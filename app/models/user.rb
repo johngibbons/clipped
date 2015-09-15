@@ -71,6 +71,11 @@ class User < ActiveRecord::Base
   def avatar_from_url(url)
     if url
       avatar_url = URI.parse(url)
+      #fix for Google bringing in small image
+      if avatar_url.query == "sz=50"
+        avatar_url.query = "sz=300"
+      end
+
       if !avatar_url.scheme
         avatar_url.scheme = 'https'
       end

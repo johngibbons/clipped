@@ -102,7 +102,7 @@ RSpec.configure do |config|
 
   config.after do
     DatabaseCleaner.clean
-  end  
+  end
 
   Capybara::Webkit.configure do |config|
     config.allow_url("testhost.com")

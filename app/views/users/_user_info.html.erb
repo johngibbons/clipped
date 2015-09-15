@@ -1,0 +1,15 @@
+<div class="user-info">
+  <% if policy(@user).update? %>
+    <%= form_for @user, html: {class: "signup-form", id: "edit-user-form"} do |a| %>
+      <%= render 'crop', a: a %>
+    <% end %>
+  <% else %>
+    <%= image_tag @user.avatar.url(:profile), id: "profile-avatar", class: "avatar" %>
+  <% end %>
+  <h1 class="user-name"><%= @user.name %></h3>
+  <p class="username">@<%= @user.username %></h3>
+  <% if policy(@user).update? %>
+    <%= link_to "Edit Profile", edit_user_path(@user), class: "edit-link" %>
+  <% end %>
+  <p id="user-created-date">Joined: <%= @user.created_at.strftime("%B %Y") %></p>
+</div>

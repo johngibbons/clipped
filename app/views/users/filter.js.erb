@@ -1,3 +1,3 @@
-$(".user-uploads").html("<%= j render @uploads %>");
-
+$(".user-uploads").html("<%= j render partial: "upload", collection: @uploads %>");
+setTagsEditors();
 $("#infinite-scrolling").html("<%= j will_paginate @uploads %>");

@@ -1,27 +1,7 @@
 <% provide(:title, @user.name) %>
 <section class="user_profile">
-  <div class="user-info">
-    <% if policy(@user).update? %>
-      <%= form_for @user, html: {class: "signup-form", id: "edit-user-form"} do |a| %>
-        <%= render 'crop', a: a %>
-      <% end %>
-    <% else %>
-      <%= image_tag @user.avatar.url(:profile), id: "profile-avatar", class: "avatar" %>
-    <% end %>
-    <h1 class="user-name"><%= @user.name %></h3>
-    <p class="username">@<%= @user.username %></h3>
-    <% if policy(@user).update? %>
-      <%= link_to "Edit Profile", edit_user_path(@user), class: "edit-link" %>
-    <% end %>
-  </div>
-  <p id="user-created-date">Joined: <%= @user.created_at.strftime("%B %Y") %></p>
-  <div class="user-stats stats">
-    <ul>
-      <li><%= @user.approved_uploads_count %><span>Uploads</span></li>
-      <li><%= @user.downloads_count %><span>Downloaded</span></li>
-      <li><%= @user.favorites_count %><span>Favorited</span></li>
-    </ul>
-  </div>
+  <%= render "user_info" %>
+  <%= render "user_stats" %>
   <% if current_user?(@user) %>
     <%= link_to new_upload_path do %>
       <button class="upload-btn">Upload</button>
@@ -30,16 +10,10 @@
 </section>
 <section class="uploads-index">
   <div class="container">
-    <div id="user-sort-tabs" class="tabs">
-      <%= link_to "Uploads (#{@user.approved_uploads_count})", { controller: "users", action: "show", id: @user, filter_uploads: "approved" }, remote: true, class: "active" %>
-      <% if policy(@user).update? %>
-        <%= link_to "Awaiting Approval (#{@user.uploads.where(approved: false).count})", { controller: "users", action: "show", id: @user, filter_uploads: "unapproved" }, remote: true %>
-        <%= link_to "Favorites (#{@user.favoriting.count})", { controller: "users", action: "show", id: @user, filter_uploads: "favorites" }, remote: true  %>
-      <% end %>
-    </div>
+    <%= render "upload_tabs" %>
     <div class="user-uploads">
       <% if @user.uploads.any? %>
-        <%= render @uploads %>
+        <%= render partial: "upload", collection: @uploads %>
       <% end %>
     </div>
   </div>
