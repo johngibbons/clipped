@@ -17,11 +17,10 @@ RSpec.feature "Upload show page", :type => :feature do
       expect(page).to have_content "Edit Tags"
       page.find(".edit-tags").click
       expect(page).to have_field "upload_tag_list"
-      fill_in "upload_tag_list", with: "sample tag, another, a third,"
-      page.find(".edit-tags").click
-      expect(page).to have_selector(".tag", count: 3)
+      fill_in "upload_tag_list", with: "sample tag, another, a third"
+      wait_for_ajax
+      expect(page).to have_selector(".tag", count: 2)
       expect(page).to have_content "sample tag"
-      expect(page).to_not have_content("Done")
     end
 
     scenario "click on tag and see all uploads with that tag", solr: true do
@@ -64,11 +63,10 @@ RSpec.feature "Upload show page", :type => :feature do
      expect(page).to have_content "Edit Tags"
      page.find(".edit-tags").click
      expect(page).to have_field "upload_tag_list"
-     fill_in "upload_tag_list", with: "sample tag, another, a third,"
-     page.find(".edit-tags").click
-     expect(page).to have_selector(".tag", count: 3)
+     fill_in "upload_tag_list", with: "sample tag, another, a third"
+     wait_for_ajax
+     expect(page).to have_selector(".tag", count: 2)
      expect(page).to have_content "sample tag"
-     expect(page).to_not have_content("Done")
     end
 
     scenario "uploader updates upload perspective", js: true do

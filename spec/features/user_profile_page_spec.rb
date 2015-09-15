@@ -24,14 +24,14 @@ RSpec.feature "User profile page", :type => :feature do
       expect(page).to have_link("Edit Profile")
       expect(page).to have_css("#edit-user-avatar")
       expect(page).to have_link("Awaiting Approval (2)")
-      expect(page).to have_css(".tags-thumb", count: 1)
-      expect(page).to have_css("form.tags-form", count: 1)
+      expect(page).to have_css(".tags-container", count: 1)
+      expect(page).to have_css(".edit-tags", count: 1)
 
       click_link("Awaiting Approval (2)")
       expect(page).to have_css(".upload-thumb", count: 2)
       expect(page).to have_css(".no-tags", count: 2)
-      expect(page).to have_css(".tags-thumb", count: 1)
-      expect(page).to have_css("form.tags-form", count: 1)
+      expect(page).to have_css(".tags-container", count: 2)
+      expect(page).to have_css(".edit-tags", count: 2)
     end
 
   end
