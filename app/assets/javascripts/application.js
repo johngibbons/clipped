@@ -22,6 +22,17 @@
 $(document).ready(function(){
   Turbolinks.enableProgressBar();
 
+  $('img').hide();
+  $('img').each(function(i) {
+      if (this.complete) {
+          $(this).fadeIn();
+      } else {
+          $(this).load(function() {
+              $(this).fadeIn();
+          });
+      }
+  });
+
   if ($(".modal").length) {
     $(".modal").each(function(){
       $(this).find(".modal-state").on("change", function(){
