@@ -6,6 +6,7 @@ class AccountActivationsController < ApplicationController
     if user.activate(token)
       log_in user
       flash[:success] = "Account activated"
+      User.delay.reindex
       redirect_to user
     else
       flash[:error] = "Invalid activation link"
