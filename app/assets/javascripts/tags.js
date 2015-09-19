@@ -46,10 +46,16 @@ TagsEditor.prototype.bindHandlers = function(){
     } else if(/^8$/.test(e.which)) {
 
       if ( emptyField === true ) {
+        self.getTags();
         self.$tags.last().remove();
       }
+    }
 
-      emptyField = self.$inputField.val().length === 0;
+    if($(this).val().length == 0 ) {
+      emptyField = true;
+    }
+    else {
+      emptyField = false;
     }
 
   });
