@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "User signs up", :type => :request do
   let(:user) { create(:user) }
 
-  it "signs up with valid username email and password" do
+  it "signs up with valid username email and password", solr: true do
     ActionMailer::Base.deliveries = nil
     get signup_path
     expect(response).to render_template(:new)
