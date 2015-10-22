@@ -19,11 +19,17 @@ RSpec.configure do |config|
     Sunspot.session = Sunspot::Rails::StubSessionProxy.new($original_sunspot_session)
   end
 
+  config.after do
+    Sunspot.session = $original_sunspot_session
+  end
+
   config.before :each, :solr => true do
     Sunspot::Rails::Tester.start_original_sunspot_session
     Sunspot.session = $original_sunspot_session
     Sunspot.remove_all!
   end
+
+
 end
 # DEFAULT_HOST = "testhost.com"
 # DEFAULT_PORT = 7171 
@@ -39,6 +45,13 @@ end
 
 class Paperclip::Attachment
   def post_process
+  end
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
   end
 end
 

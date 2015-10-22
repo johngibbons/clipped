@@ -4,7 +4,7 @@ RSpec.describe AccountActivationsController, type: :controller do
   subject(:user) { create(:user, activated: false) }
   subject(:other_user) { create(:user) }
 
-  it "activates authenticated user" do
+  it "activates authenticated user", solr: true do
     expect(user).to_not be_activated
     get :edit, id: user.activation_token, email: user.email
     expect(user.reload).to be_activated
