@@ -84,12 +84,31 @@ RSpec.feature "User logs in", :type => :feature do
   scenario "redirects back to previous page after login" do
     upload = create(:upload, approved: true)
     visit upload_path(upload)
-    click_link "login"
+    save_and_open_page
+    click_link "Login"
     fill_in 'Username or email', with: user.email
     fill_in 'Password', with: user.password
     click_button 'Log In'
     expect(page).to_not have_css(".user_profile")
     expect(page).to have_css(".uploads.show")
+  end
+
+  scenario "redirects back to previous page after login with omniauth" do
+    upload = create(:upload, approved: true)
+    visit upload_path(upload)
+    click_link "Login"
+    OmniAuth.config.mock_auth[:facebook] = {
+      'provider' => 'facebook',
+      'uid' => '123545',
+      'info' => {
+        'email' => user.email,
+        'name' => user.name
+      }
+    }
+    click_link "Log In With Facebook"
+    expect(page).to_not have_css(".user_profile")
+    expect(page).to have_css(".uploads.show")
+    save_and_open_page
   end
 
 end
