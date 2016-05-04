@@ -35,6 +35,7 @@ class UploadsController < ApplicationController
 
   def show
     @upload = Upload.find(params[:id])
+    @upload.views += 1
     authorize @upload
     @comments = @upload.comments.hash_tree
   end
