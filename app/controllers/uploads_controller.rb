@@ -11,6 +11,7 @@ class UploadsController < ApplicationController
     SaveImage.call(upload: @upload)
     if @upload.save
       @upload.user.update_stats
+      UploadModerationMailer.new_upload_email(@upload).deliver_later
       flash[:notice] = "Please allow for a day or two before your uploads are approved."
       render json: @upload
       ProcessUploads.call(upload: @upload)

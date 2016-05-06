@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>New Upload to Moderate!</h1>
+    <p>
+      See the new upload at <%= link_to 'here', upload_url(@upload) %>
+      <%= image_tag @upload.src(:large) %>
+    </p>
+  </body>
+</html>
