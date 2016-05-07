@@ -8,4 +8,10 @@ class UploadModerationMailer < ApplicationMailer
     end
   end
 
+  def upload_approved_email(upload)
+    @upload = upload
+    @user = upload.user
+    mail(to: @user.email, subject: 'Clipped Upload Approved')
+  end
+
 end

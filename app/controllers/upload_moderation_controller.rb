@@ -9,6 +9,7 @@ class UploadModerationController < ApplicationController
     else
       current_user.approve(@upload)
       @upload.user.update_stats
+      UploadModerationMailer.upload_approved_email(@upload).deliver_later
     end
     respond_to do |format|
       format.html { redirect_to @upload }
