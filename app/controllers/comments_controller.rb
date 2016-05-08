@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         CommentsMailer.new_comment_email(current_user, @comment, @upload).deliver_later
-        CommentsMailer.new_reply_email(current_user, @comment, @upload, @parent).deliver_later
+        CommentsMailer.new_reply_email(current_user, @comment, @upload, @parent).deliver_later if @parent
         format.html { redirect_to @upload }
         format.js
       else

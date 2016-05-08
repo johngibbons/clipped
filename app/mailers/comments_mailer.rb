@@ -4,7 +4,6 @@ class CommentsMailer < ApplicationMailer
     @comment = comment
     @upload = upload
     @uploader = @upload.user
-    @parent = parent
     mail(to: @uploader.email, subject: 'New Clipped Comment On Your Upload')
   end
 
