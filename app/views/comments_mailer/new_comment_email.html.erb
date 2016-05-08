@@ -4,9 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>New Uploads Accepted</h1>
+    <h1>Someone Commented on Your Image</h1>
     <p>
-      Congratulations!  Your recent upload to Clipped has been approved.
+      <%= @commenter.username %> commented on your upload:
+      <i><%= @comment.body %></i>
+    </p>
+    <p>
       See it <%= link_to 'here', upload_url(@upload) %>
       <%= image_tag @upload.image(:large) %>
     </p>

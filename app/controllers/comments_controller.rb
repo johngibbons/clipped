@@ -20,6 +20,8 @@ class CommentsController < ApplicationController
     authorize @comment
     respond_to do |format|
       if @comment.save
+        CommentsMailer.new_comment_email(current_user, @comment, @upload)
+        CommentsMailer.new_reply_email(current_user, @comment, @upload, @parent)
         format.html { redirect_to @upload }
         format.js
       else
