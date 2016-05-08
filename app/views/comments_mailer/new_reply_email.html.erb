@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Someone Replied to Your Comment</h1>
-    <p>
-      <%= @commenter.username %> commented on your comment:
-      <i><%= @comment.body %></i>
-    </p>
-    <p>
-      See it <%= link_to 'here', upload_url(@upload) %>
-      <%= image_tag @upload.image(:thumb) %>
-    </p>
-  </body>
-</html>
+<h1>Someone Replied to Your Comment</h1>
+<p>
+  <b><%= @commenter.username %></b> commented on your comment:
+</p>
+<p>
+  <i><%= @comment.body %></i>
+</p>
+<p>
+  See it <%= link_to 'here', upload_url(@upload) %>
+  <%= image_tag @upload.image(:thumb) %>
+</p>

@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>New Uploads Accepted</h1>
-    <p>
-      Congratulations!  Your recent upload to Clipped has been approved.
-      See it <%= link_to 'here', upload_url(@upload) %>
-      <%= image_tag @upload.image(:thumb) %>
-    </p>
-  </body>
-</html>
+<h1>New Uploads Accepted</h1>
+<p>
+  Congratulations!  Your recent upload to Clipped has been approved.
+  See it <%= link_to 'here', upload_url(@upload) %>
+  <%= image_tag @upload.image(:thumb) %>
+</p>
